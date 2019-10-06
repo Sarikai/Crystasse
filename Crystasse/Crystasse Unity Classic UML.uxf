@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>250</y>
+      <w>250</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>Unit : Mono
+--
+_+ Data : UnitData[]_
+- type : int
+- unitID : UnitID
+- healthPoints : byte
+- buildPoints : byte
+- destination : Vec3
+- target : Unit
+(- distance : float)
+- routine : IEnumerator
+--
++ &lt;&lt;UnitID&gt;&gt; : UnitID
++ &lt;&lt;Destination&gt;&gt; : Vec3
++ &lt;&lt;Target&gt;&gt; : Unit
+--
++ Move(Vec3) : void
++ MoveTo(Vec3) : void
+- MoveToRoutine(Vec3) : IEnumerator
++ Attack(Unit) : void
++ Attack(Crystal) : void
++ TakeDamage(byte) : void
++ Build(Bridge) : void
+- Die() : void
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>10</y>
+      <w>290</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Crystal : Mono
+--
+- data : CrystalData
+- health : int
+- unitPrefab : Unit
+- unitsSpawned : List&lt;Unit&gt;
+- enemyDictionary : Dictionary&lt;UnitID, Unit&gt;
+--
++ &lt;&lt;TeamID&gt;&gt; : byte
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>180</y>
+      <w>290</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>StateMachine
+--
+_- instance : StateMachine_
+- currentStates : Dictionary&lt;ulong, State&gt;
+- nextStates : Dictionary&lt;ulong, State&gt;
+- units : Dictionary&lt;ulong, Unit&gt;
+--
++ &lt;&lt;Instance&gt;&gt; : StateMachine
+--
+- Update() : void
++ AddUnit(Unit) : void
++ ChangeState(UnitCommand, ulong) : void
+- AbortState(ulong) : void
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>30</y>
+      <w>220</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>struct CrystalData
+--
++ readonly MaxHealth : int
++ SpawnRate : float
++ readonly MaxUnitSpawned : int
++ IsBase : bool
++ IsSpawning : bool
++ TeamID : byte
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>310</y>
+      <w>120</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>struct UnitID
+--
++ ID : ulong
++ TeamID : byte
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>10</y>
+      <w>190</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>UnitData
+--
+- teamID : byte
+- healthPoints : byte
+- buildPoints : byte
+- attackPoints : byte
+- buildSpeed : float
+- moveSpeed : float
+--
++ &lt;&lt;TeamID&gt;&gt; : byte
++ &lt;&lt;HealthPoints&gt;&gt; : byte
++ &lt;&lt;BuildPoints&gt;&gt; : byte
++ &lt;&lt;AttackPoints&gt;&gt; : byte
++ &lt;&lt;BuildSpeed&gt;&gt; : float
++ &lt;&lt;MoveSpeed&gt;&gt; : float
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>10</y>
+      <w>70</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=1</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0;10.0;270.0;50.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>310</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=1</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>980</x>
+      <y>180</y>
+      <w>200</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>enum UnitCommand
+--
+0  None
+1  Build
+2  Attack
+3  Move
+4  Conquer
+
+bg=green
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>180</y>
+      <w>200</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>State
+--
+# unit : Unit
+# subState : Substates
+--
++ State()
++ State(Unit)
++ StateUpdate() : void
+/# Enter() : void/
+/# Stay() : void/
+/# Exit() : void/
++ Leave() : void
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>980</x>
+      <y>290</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>enum SubStates : byte
+--
+0  Enter
+1  Stay
+2  Exit
+
+bg=green
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>180</y>
+      <w>60</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=4</panel_attributes>
+    <additional_attributes>40.0;10.0;20.0;10.0;20.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>30</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=3</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>380</y>
+      <w>330</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>ConquerState : State
+--
+# unit : Unit
+# subState : Substates
+--
++ ConquerState()
++ ConquerState(Unit)
++ ConquerState(Unit, Crystal)
+# Enter() : void
+# Stay() : void
+# Exit() : void
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>560</y>
+      <w>330</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>IdleState : State
+--
+# unit : Unit
+# subState : Substates
+--
++ IdleState()
++ IdleState(Unit)
+# Enter() : void
+# Stay() : void
+# Exit() : void
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>560</y>
+      <w>340</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>BuildState : State
+--
+# unit : Unit
+# subState : Substates
+--
++ BuildState()
++ BuildState(Unit)
+# Enter() : void
+# Stay() : void
+# Exit() : void
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>380</y>
+      <w>340</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>AttackState : State
+--
+# unit : Unit
+# subState : Substates
+--
++ AttackState()
++ AttackState(Unit)
++ AttackState(Unit, Unit)
+# Enter() : void
+# Stay() : void
+# Exit() : void
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>350</y>
+      <w>60</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+group=4</panel_attributes>
+    <additional_attributes>10.0;220.0;40.0;220.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>350</y>
+      <w>60</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+group=4</panel_attributes>
+    <additional_attributes>40.0;220.0;10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>350</y>
+      <w>60</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+group=4</panel_attributes>
+    <additional_attributes>10.0;40.0;40.0;40.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>350</y>
+      <w>60</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+group=4</panel_attributes>
+    <additional_attributes>40.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
