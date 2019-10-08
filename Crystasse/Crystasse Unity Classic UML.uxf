@@ -393,7 +393,7 @@ group=4</panel_attributes>
       <w>160</w>
       <h>150</h>
     </coordinates>
-    <panel_attributes>Bridge
+    <panel_attributes>Bridge : Mono
 --
 - maxBuildValue : int
 - buildValue : int
