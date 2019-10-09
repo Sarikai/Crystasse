@@ -4,14 +4,15 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>250</y>
+      <x>160</x>
+      <y>240</y>
       <w>250</w>
       <h>360</h>
     </coordinates>
     <panel_attributes>Unit : Mono
 --
 _+ Data : UnitData[]_
+_+ const maxUnitDisplacement : float_
 - type : int
 - unitID : UnitID
 - healthPoints : byte
@@ -39,8 +40,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>10</y>
+      <x>390</x>
+      <y>0</y>
       <w>290</w>
       <h>150</h>
     </coordinates>
@@ -60,8 +61,8 @@ group=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>180</y>
+      <x>440</x>
+      <y>170</y>
       <w>290</w>
       <h>190</h>
     </coordinates>
@@ -84,8 +85,8 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>730</x>
-      <y>30</y>
+      <x>720</x>
+      <y>20</y>
       <w>220</w>
       <h>130</h>
     </coordinates>
@@ -103,8 +104,8 @@ group=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>310</y>
+      <x>0</x>
+      <y>300</y>
       <w>120</w>
       <h>70</h>
     </coordinates>
@@ -118,8 +119,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>10</y>
+      <x>160</x>
+      <y>0</y>
       <w>190</w>
       <h>230</h>
     </coordinates>
@@ -144,8 +145,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>10</y>
+      <x>110</x>
+      <y>0</y>
       <w>70</w>
       <h>290</h>
     </coordinates>
@@ -156,8 +157,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>310</y>
+      <x>110</x>
+      <y>300</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -168,8 +169,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>180</y>
+      <x>970</x>
+      <y>170</y>
       <w>200</w>
       <h>110</h>
     </coordinates>
@@ -188,8 +189,8 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>180</y>
+      <x>760</x>
+      <y>170</y>
       <w>200</w>
       <h>180</h>
     </coordinates>
@@ -211,8 +212,8 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>290</y>
+      <x>970</x>
+      <y>280</y>
       <w>200</w>
       <h>80</h>
     </coordinates>
@@ -229,8 +230,8 @@ group=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>180</y>
+      <x>720</x>
+      <y>170</y>
       <w>60</w>
       <h>70</h>
     </coordinates>
@@ -241,8 +242,8 @@ group=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
-      <y>30</y>
+      <x>670</x>
+      <y>20</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -253,8 +254,8 @@ group=3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>380</y>
+      <x>440</x>
+      <y>370</y>
       <w>330</w>
       <h>170</h>
     </coordinates>
@@ -275,8 +276,8 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>560</y>
+      <x>440</x>
+      <y>550</y>
       <w>330</w>
       <h>150</h>
     </coordinates>
@@ -296,8 +297,8 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>560</y>
+      <x>830</x>
+      <y>550</y>
       <w>340</w>
       <h>150</h>
     </coordinates>
@@ -317,8 +318,8 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>380</y>
+      <x>830</x>
+      <y>370</y>
       <w>340</w>
       <h>170</h>
     </coordinates>
@@ -339,8 +340,8 @@ group=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>770</x>
-      <y>350</y>
+      <x>760</x>
+      <y>340</y>
       <w>60</w>
       <h>240</h>
     </coordinates>
@@ -351,8 +352,8 @@ group=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>350</y>
+      <x>790</x>
+      <y>340</y>
       <w>60</w>
       <h>240</h>
     </coordinates>
@@ -363,8 +364,8 @@ group=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>770</x>
-      <y>350</y>
+      <x>760</x>
+      <y>340</y>
       <w>60</w>
       <h>60</h>
     </coordinates>
@@ -375,8 +376,8 @@ group=4</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>350</y>
+      <x>790</x>
+      <y>340</y>
       <w>60</w>
       <h>60</h>
     </coordinates>
@@ -387,16 +388,18 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1230</x>
-      <y>180</y>
+      <x>1220</x>
+      <y>140</y>
       <w>160</w>
-      <h>120</h>
+      <h>150</h>
     </coordinates>
-    <panel_attributes>Bridge
+    <panel_attributes>Bridge : Mono
 --
 - maxBuildValue : int
 - buildValue : int
+- teamID : byte
 --
++ &lt;&lt;TeamID&gt;&gt; : byte
 + &lt;&lt;PercentDone&gt;&gt; : float
 --
 + Build(byte) : void
@@ -406,21 +409,99 @@ group=4</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1230</x>
-      <y>370</y>
-      <w>270</w>
+      <x>1220</x>
+      <y>310</y>
+      <w>310</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>Map
 --
-- bridges : Dictionary&lt;int, List&lt;int&gt;'&gt;
+- bridges : Dictionary&lt;int, CrystalConnections&gt;
 --
-+ this[int] : List&lt;&gt;
-+ this[int,int] : int
++ &lt;&lt;this[int]&gt;&gt; : List&lt;&gt;
++ &lt;&lt;this[int,int]&gt;&gt; : int
 --
 + Map()
 + AddConnection(int, int) : void
 + AddConnections(int, params int) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1220</x>
+      <y>470</y>
+      <w>160</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>CrystalConnections
+--
+- from : int
+- to : int?[32]
+- areBuilt : int
+--
++ &lt;&lt;this[int]&gt;&gt; : bool
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1220</x>
+      <y>600</y>
+      <w>300</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>InputController : Mono
+--
+- cam : Camera
+- data : SelectionData
+- selectionRoutine : IEnumerator
+--
+--
+- Update() : void
+- BoxSelectionRoutine(Vector3) : IEnumerator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1220</x>
+      <y>760</y>
+      <w>420</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>_Selection_
+--
+_- selected : List&lt;Unit&gt;_
+_+ Data : SelectionData_
+--
+_+ &lt;&lt;Selected&gt;&gt; : Unit[]_
+--
+_+ CastSphereSelection(RaycastHit) : void_
+_+ CastBoxSelection(Vector3, Vector3) : void_
+_- CalCulateBoxParameter(Vector3, Vector3) : (Vector3, Vector3)_
+_- AddSelection(Collider[]) : void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>780</y>
+      <w>170</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>struct SelectionData
+--
++ SelectionRadius : float
++ SelectionLayerID : int
++ SelectionLayer : int
++ PlaneLayerID : int
++ PlaneLayer : int
+--
+- OnValidate() : void
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
