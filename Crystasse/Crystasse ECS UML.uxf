@@ -1,52 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>12</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>312</x>
-      <y>36</y>
-      <w>300</w>
-      <h>456</h>
-    </coordinates>
-    <panel_attributes>Unit : Mono
---
-_+ Data : UnitData[]_
-_+ const maxUnitDisplacement : float_
-- type : int
-- unitID : UnitID
-- healthPoints : byte
-- buildPoints : byte
-- destination : Vec3
-- target : Unit
-(- distance : float)
-- routine : IEnumerator
---
-+ &lt;&lt;UnitID&gt;&gt; : UnitID
-+ &lt;&lt;Destination&gt;&gt; : Vec3
-+ &lt;&lt;Target&gt;&gt; : Unit
---
-+ Move(Vec3) : void
-+ MoveTo(Vec3) : void
-- MoveToRoutine(Vec3) : IEnumerator
-+ Attack(Unit) : void
-+ Attack(Crystal) : void
-+ TakeDamage(byte) : void
-+ Build(Bridge) : void
-- Die() : void
-bg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>624</x>
-      <y>36</y>
-      <w>348</w>
-      <h>180</h>
+      <x>500</x>
+      <y>30</y>
+      <w>290</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Crystal : Mono
 --
+_- stateMachine : StateMachine_
 - id : int
 - data : CrystalData
 - health : int
@@ -62,34 +27,10 @@ group=5</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>228</y>
-      <w>336</w>
-      <h>228</h>
-    </coordinates>
-    <panel_attributes>StateMachine
---
-_- instance : StateMachine_
-- currentStates : Dictionary&lt;ulong, State&gt;
-- nextStates : Dictionary&lt;ulong, State&gt;
-- units : Dictionary&lt;ulong, Unit&gt;
---
-+ &lt;&lt;Instance&gt;&gt; : StateMachine
---
-- Update() : void
-+ AddUnit(Unit) : void
-+ ChangeState(UnitCommand, ulong) : void
-- AbortState(ulong) : void
-bg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>996</x>
-      <y>60</y>
-      <w>264</w>
-      <h>156</h>
+      <x>810</x>
+      <y>50</y>
+      <w>220</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>struct CrystalData
 --
@@ -106,36 +47,10 @@ group=5</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>108</y>
-      <w>144</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>struct UnitID
---
-+ ID : ulong
-+ TeamID : byte
-bg=red</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>252</x>
-      <y>108</y>
-      <w>84</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>660</x>
-      <y>732</y>
-      <w>132</w>
-      <h>132</h>
+      <x>520</x>
+      <y>550</y>
+      <w>110</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>UnitCommand
 --
@@ -151,10 +66,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>804</x>
-      <y>732</y>
-      <w>156</w>
-      <h>96</h>
+      <x>640</x>
+      <y>550</y>
+      <w>130</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>SubStates : byte
 --
@@ -168,10 +83,10 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>60</y>
-      <w>60</w>
-      <h>36</h>
+      <x>780</x>
+      <y>50</y>
+      <w>50</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 bg=pink
@@ -181,10 +96,10 @@ group=5</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1320</x>
-      <y>108</y>
-      <w>192</w>
-      <h>180</h>
+      <x>1070</x>
+      <y>30</y>
+      <w>160</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Bridge : Mono
 --
@@ -203,10 +118,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1320</x>
-      <y>312</y>
-      <w>372</w>
-      <h>156</h>
+      <x>1070</x>
+      <y>200</y>
+      <w>310</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>Map
 --
@@ -223,10 +138,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1320</x>
-      <y>480</y>
-      <w>240</w>
-      <h>168</h>
+      <x>1070</x>
+      <y>340</y>
+      <w>200</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>CrystalConnections
 --
@@ -245,10 +160,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>948</x>
-      <y>888</y>
-      <w>360</w>
-      <h>144</h>
+      <x>190</x>
+      <y>140</y>
+      <w>300</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>InputController : Mono
 --
@@ -263,21 +178,21 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1320</x>
-      <y>672</y>
-      <w>492</w>
-      <h>204</h>
+      <x>1070</x>
+      <y>500</y>
+      <w>410</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>_Selection_
 --
 _- selected : List&lt;Unit&gt;_
 _+ Data : SelectionData_
 --
-_+ &lt;&lt;Selected&gt;&gt; : Unit[]_
+_+ &lt;&lt;Selected&gt;&gt; : int[]_
 --
 _+ CastSphereSelection(RaycastHit) : void_
 _+ CastBoxSelection(Vector3, Vector3) : void_
-_- CalCulateBoxParameter(Vector3, Vector3) : (Vector3, Vector3)_
+_- CalculateBoxParameter(Vector3, Vector3) : (Vector3, Vector3)_
 _- AddSelection(Collider[]) : void_
 bg=pink</panel_attributes>
     <additional_attributes/>
@@ -285,10 +200,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1572</x>
-      <y>480</y>
-      <w>204</w>
-      <h>156</h>
+      <x>1280</x>
+      <y>340</y>
+      <w>170</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>struct SelectionData
 --
@@ -306,99 +221,94 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>504</y>
-      <w>312</w>
-      <h>60</h>
+      <x>220</x>
+      <y>360</y>
+      <w>260</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>AttackPoints : ISharedComponentData
 --
-+ Value : byte</panel_attributes>
++ Value : byte
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>576</y>
-      <w>312</w>
-      <h>60</h>
+      <x>220</x>
+      <y>420</y>
+      <w>260</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>BuildSpeed : ISharedComponentData
 --
-+ Value : byte</panel_attributes>
++ Value : byte
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>648</y>
-      <w>312</w>
-      <h>60</h>
+      <x>220</x>
+      <y>480</y>
+      <w>260</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>MoveSpeed : ISharedComponentData
 --
-+ Value : byte</panel_attributes>
++ Value : byte
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>720</y>
-      <w>312</w>
-      <h>60</h>
+      <x>220</x>
+      <y>540</y>
+      <w>260</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>TeamID : ISharedComponentData
 --
-+ Value : byte</panel_attributes>
++ Value : byte
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>972</y>
-      <w>252</w>
-      <h>60</h>
+      <x>220</x>
+      <y>750</y>
+      <w>210</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>BuildPoints : IComponentData
 --
-+ Value : byte</panel_attributes>
++ Value : byte
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>1044</y>
-      <w>252</w>
-      <h>60</h>
+      <x>220</x>
+      <y>810</y>
+      <w>210</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>HealthPoints : IComponentData
 --
-+ Value : byte</panel_attributes>
++ Value : byte
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>144</x>
-      <y>204</y>
-      <w>120</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>Rotation</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>144</x>
-      <y>240</y>
-      <w>120</w>
-      <h>36</h>
+      <x>280</x>
+      <y>280</y>
+      <w>100</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Translation</panel_attributes>
     <additional_attributes/>
@@ -406,10 +316,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>144</x>
-      <y>276</y>
-      <w>120</w>
-      <h>36</h>
+      <x>280</x>
+      <y>310</y>
+      <w>100</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Scale</panel_attributes>
     <additional_attributes/>
@@ -417,10 +327,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>792</y>
-      <w>312</w>
-      <h>60</h>
+      <x>220</x>
+      <y>600</y>
+      <w>260</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>Target : ISharedComponentData
 --
@@ -430,10 +340,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>660</x>
-      <y>468</y>
-      <w>288</w>
-      <h>120</h>
+      <x>520</x>
+      <y>330</y>
+      <w>240</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>IdleState : State
 --
@@ -446,10 +356,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>864</y>
-      <w>312</w>
-      <h>96</h>
+      <x>220</x>
+      <y>660</y>
+      <w>260</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>StateData : ISharedComponentData
 --
@@ -461,10 +371,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>996</x>
-      <y>324</y>
-      <w>288</w>
-      <h>120</h>
+      <x>800</x>
+      <y>210</y>
+      <w>240</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>State : JobComponentSystem
 --
@@ -475,25 +385,12 @@ bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>996</x>
-      <y>264</y>
-      <w>168</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>States are Updated
-in Group "State"
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>660</x>
-      <y>600</y>
-      <w>288</w>
-      <h>120</h>
+      <x>520</x>
+      <y>440</y>
+      <w>240</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>ConquerState : State
 --
@@ -506,10 +403,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>996</x>
-      <y>468</y>
-      <w>288</w>
-      <h>120</h>
+      <x>800</x>
+      <y>330</y>
+      <w>240</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>AttackState : State
 --
@@ -522,10 +419,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>996</x>
-      <y>600</y>
-      <w>288</w>
-      <h>120</h>
+      <x>800</x>
+      <y>440</y>
+      <w>240</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>BuildState : State
 --
@@ -538,10 +435,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
-      <y>396</y>
-      <w>84</w>
-      <h>240</h>
+      <x>750</x>
+      <y>270</y>
+      <w>70</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;180.0;30.0;180.0;30.0;10.0;50.0;10.0</additional_attributes>
@@ -549,10 +446,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>396</y>
-      <w>60</w>
-      <h>240</h>
+      <x>770</x>
+      <y>270</y>
+      <w>50</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30.0;180.0;10.0;180.0;10.0;10.0;30.0;10.0</additional_attributes>
@@ -560,10 +457,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
-      <y>396</y>
-      <w>84</w>
-      <h>108</h>
+      <x>750</x>
+      <y>270</y>
+      <w>70</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;70.0;30.0;70.0;30.0;10.0;50.0;10.0</additional_attributes>
@@ -571,10 +468,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>396</y>
-      <w>60</w>
-      <h>108</h>
+      <x>770</x>
+      <y>270</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30.0;70.0;10.0;70.0;10.0;10.0;30.0;10.0</additional_attributes>
@@ -582,40 +479,120 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>948</x>
-      <y>240</y>
-      <w>72</w>
-      <h>120</h>
+      <x>750</x>
+      <y>210</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>40.0;80.0;20.0;80.0;20.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>624</x>
-      <y>876</y>
-      <w>300</w>
-      <h>84</h>
+      <x>490</x>
+      <y>670</y>
+      <w>280</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>IsDirty is set to true after Creation or 
-Substate change and will be set to
-false after being handled by
-a system for the first time
+Substate change and will be set to false
+after being handled by the CleanUpSystem
 bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>972</y>
-      <w>312</w>
-      <h>60</h>
+      <x>490</x>
+      <y>750</y>
+      <w>260</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>CleanUpStates : JobComponentSystem
 --
 # OnUpdate(JobHandle) : JobHandle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>730</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>HealthSystem : ComponentSystem
+--
+# OnUpdate() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>610</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>BuildSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>670</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>AttackSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>550</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>MoveSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>210</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>StateMachine : ComponentSystem
+--
+# OnUpdate() : void
++ SwitchState(int, UnitCommand) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>30</y>
+      <w>290</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>_Constants_
+--
+_+ const MAX_UNIT_DISPLACEMENT : float_
+_+ const SELECTIONDATA_PATH : string_
+_+ const CRYSTALDATA_PATH : string_</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
