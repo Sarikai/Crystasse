@@ -278,7 +278,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>220</x>
-      <y>750</y>
+      <y>760</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -292,7 +292,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>220</x>
-      <y>810</y>
+      <y>820</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -334,7 +334,8 @@ bg=pink</panel_attributes>
     </coordinates>
     <panel_attributes>Target : ISharedComponentData
 --
-+ Value : float3</panel_attributes>
++ Value : float3
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -359,13 +360,15 @@ bg=pink</panel_attributes>
       <x>220</x>
       <y>660</y>
       <w>260</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>StateData : ISharedComponentData
 --
 + IsDirty : bool
 + SubState : SubStates
-+ Command : UnitCommand</panel_attributes>
+- cmd : UnitCommand
++ &lt;&lt;Command&gt;&gt; : UnitCommand
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
