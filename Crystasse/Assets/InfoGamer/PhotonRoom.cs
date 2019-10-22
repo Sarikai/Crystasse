@@ -194,7 +194,7 @@ namespace Prototype
                 }
                 else
                 {
-                    RPC_CreatePlayer();
+                    //RPC_CreatePlayer();
                 }
             }
         }
@@ -209,11 +209,11 @@ namespace Prototype
             }
         }
 
-        [PunRPC]
-        private void RPC_CreatePlayer()
-        {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
-        }
+        //[PunRPC]
+        //private void RPC_CreatePlayer()
+        //{
+        //    PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+        //}
         #endregion
     }
 }

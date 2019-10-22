@@ -8,13 +8,25 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PhotonScene.unity
     guid: 6bd058b1667354847936cff710ab59e0
   - enabled: 0
-    path: Assets/PhotonPrefabs/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
+    path: Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
     guid: 98efc37d6307844488eb3e4247dde7e9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Multiplayer.unity
     guid: 028fe14c7bf076147bc79704a79329e1
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: afa23ea2cff382c4c96406cdded9bc5d
+  - enabled: 1
+    path: Assets/Scenes/NetworkMenu.unity
+    guid: 0f1807e1a3c21844a93a8750b0b31ec8
+  - enabled: 1
+    path: Assets/Scenes/StatisticMenu.unity
+    guid: 89a4f9941868af549bc14b6e50af5c42
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 87d3bc5d0c489f54781dbf6105873da5
   m_configObjects: {}

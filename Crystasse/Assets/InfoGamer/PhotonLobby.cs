@@ -14,8 +14,9 @@ namespace Prototype
 
         public GameObject battleButton;
         public GameObject cancelButton;
-        public GameObject menu01;
-        public GameObject menu02;
+
+
+
         #endregion
 
         #region Methods
@@ -27,6 +28,7 @@ namespace Prototype
         private void Start()
         {
             PhotonNetwork.ConnectUsingSettings();
+            rooms[0].CustomProperties
         }
 
         public override void OnConnectedToMaster()
@@ -40,10 +42,8 @@ namespace Prototype
         public void OnBattleButtonClicked()
         {
             PhotonNetwork.JoinRandomRoom();
-            //battleButton.SetActive(false);
-            //cancelButton.SetActive(true);
-            menu01.SetActive(false);
-            menu02.SetActive(true);
+            battleButton.SetActive(false);
+            cancelButton.SetActive(true);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -67,17 +67,19 @@ namespace Prototype
 
         public void OnCancelButtonClicked()
         {
-            //battleButton.SetActive(true);
-            //cancelButton.SetActive(false);
-            menu01.SetActive(true);
-            menu02.SetActive(false);
+            battleButton.SetActive(true);
+            cancelButton.SetActive(false);
             PhotonNetwork.LeaveRoom();
         }
 
         public override void OnJoinedRoom()
         {
+
             Debug.Log("Connected to Room");
+
         }
+
+        //public override void
         #endregion
     }
 }
