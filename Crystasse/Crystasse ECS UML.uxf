@@ -317,7 +317,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>280</x>
-      <y>310</y>
+      <y>320</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -499,7 +499,7 @@ bg=pink</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>IsDirty is set to true after Creation or 
-Substate change and will be set to false
+Command change and will be set to false
 after being handled by the CleanUpSystem
 bg=blue</panel_attributes>
     <additional_attributes/>
@@ -521,7 +521,7 @@ bg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>790</x>
-      <y>730</y>
+      <y>750</y>
       <w>240</w>
       <h>50</h>
     </coordinates>
@@ -534,7 +534,7 @@ bg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>790</x>
-      <y>610</y>
+      <y>630</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -547,7 +547,7 @@ bg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>790</x>
-      <y>670</y>
+      <y>690</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -562,11 +562,12 @@ bg=blue</panel_attributes>
       <x>790</x>
       <y>550</y>
       <w>260</w>
-      <h>50</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>MoveSystem : JobComponentSystem
 --
-# OnUpdate(JobHandle) : JobHandle</panel_attributes>
+# OnUpdate(JobHandle) : JobHandle
++ Move(float3, Translation) : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
