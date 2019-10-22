@@ -1,0 +1,15 @@
+{
+    "name": "Selection",
+    "references": [
+        "GUID:86c2f6a2d0ff5da4c9794c61f0494e14",
+        "GUID:585ccc5b5cc9a2847a9ddae9823893a3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

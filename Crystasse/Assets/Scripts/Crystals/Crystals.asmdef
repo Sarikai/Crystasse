@@ -1,0 +1,14 @@
+{
+    "name": "Crystals",
+    "references": [
+        "GUID:86c2f6a2d0ff5da4c9794c61f0494e14"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

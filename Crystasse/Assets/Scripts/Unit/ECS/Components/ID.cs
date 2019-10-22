@@ -2,7 +2,8 @@
 using Unity.Burst;
 
 [BurstCompile]
-public struct HealthPoints : IComponentData
+
+public struct ID : IComponentData
 {
-    public byte Value;
+    public uint Value;
 }

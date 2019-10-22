@@ -5,13 +5,13 @@
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>30</y>
+      <y>20</y>
       <w>290</w>
       <h>160</h>
     </coordinates>
     <panel_attributes>Crystal : Mono
 --
-_- stateMachine : StateMachine_
+_- lastUnitID : uint_
 - id : int
 - data : CrystalData
 - health : int
@@ -47,12 +47,12 @@ group=5</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>550</y>
+      <x>510</x>
+      <y>750</y>
       <w>110</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>UnitCommand
+    <panel_attributes>States
 --
 0  None
 1  Build
@@ -66,9 +66,9 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>550</y>
-      <w>130</w>
+      <x>630</x>
+      <y>750</y>
+      <w>120</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>SubStates : byte
@@ -96,8 +96,8 @@ group=5</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1070</x>
-      <y>30</y>
+      <x>1100</x>
+      <y>60</y>
       <w>160</w>
       <h>150</h>
     </coordinates>
@@ -118,8 +118,8 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1070</x>
-      <y>200</y>
+      <x>1100</x>
+      <y>220</y>
       <w>310</w>
       <h>130</h>
     </coordinates>
@@ -138,8 +138,8 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1070</x>
-      <y>340</y>
+      <x>1100</x>
+      <y>360</y>
       <w>200</w>
       <h>140</h>
     </coordinates>
@@ -178,10 +178,10 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1070</x>
-      <y>500</y>
+      <x>1100</x>
+      <y>520</y>
       <w>410</w>
-      <h>170</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>_Selection_
 --
@@ -200,8 +200,8 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1280</x>
-      <y>340</y>
+      <x>1310</x>
+      <y>360</y>
       <w>170</w>
       <h>130</h>
     </coordinates>
@@ -226,7 +226,7 @@ bg=pink</panel_attributes>
       <w>260</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>AttackPoints : ISharedComponentData
+    <panel_attributes>AttackPoints : IComponentData
 --
 + Value : byte
 bg=pink</panel_attributes>
@@ -240,7 +240,7 @@ bg=pink</panel_attributes>
       <w>260</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>BuildSpeed : ISharedComponentData
+    <panel_attributes>BuildSpeed : IComponentData
 --
 + Value : byte
 bg=pink</panel_attributes>
@@ -254,7 +254,7 @@ bg=pink</panel_attributes>
       <w>260</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>MoveSpeed : ISharedComponentData
+    <panel_attributes>MoveSpeed : IComponentData
 --
 + Value : byte
 bg=pink</panel_attributes>
@@ -278,7 +278,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>220</x>
-      <y>760</y>
+      <y>740</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -292,7 +292,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>220</x>
-      <y>820</y>
+      <y>800</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -330,198 +330,126 @@ bg=pink</panel_attributes>
       <x>220</x>
       <y>600</y>
       <w>260</w>
-      <h>50</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Target : ISharedComponentData
+    <panel_attributes>Target : IComponentData
 --
-+ Value : float3
++ ID : uint
++ Poisiton : float3
 bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>330</y>
-      <w>240</w>
-      <h>100</h>
+      <x>850</x>
+      <y>370</y>
+      <w>170</w>
+      <h>110</h>
     </coordinates>
-    <panel_attributes>IdleState : State
+    <panel_attributes>IdleJob : IJobForEach
+&lt;Translation, StateData&gt;
 --
-# OnUpdate(JobHandle) : JobHandle
-# Enter() : void
-# Stay() : void
-# Exit() : void</panel_attributes>
++ Execute(int) : void
+- Enter() : void
+- Stay() : void
+- Exit() : void
+group=9</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>220</x>
-      <y>660</y>
+      <y>670</y>
       <w>260</w>
-      <h>90</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>StateData : ISharedComponentData
+    <panel_attributes>StateData : IComponentData
 --
-+ IsDirty : bool
++ State : States
 + SubState : SubStates
-- cmd : UnitCommand
-+ &lt;&lt;Command&gt;&gt; : UnitCommand
 bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>210</y>
-      <w>240</w>
-      <h>100</h>
+      <x>530</x>
+      <y>370</y>
+      <w>200</w>
+      <h>130</h>
     </coordinates>
-    <panel_attributes>State : JobComponentSystem
+    <panel_attributes>ConquerJob : IJobForEach
+&lt;AttackPoints, StateData,
+Translation&gt;
 --
-# OnUpdate(JobHandle) : JobHandle
-# Enter() : void
-# Stay() : void
-# Exit() : void</panel_attributes>
++ Execute(int) : void
+- Enter() : void
+- Stay() : void
+- Exit() : void
+group=6</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>440</y>
-      <w>240</w>
-      <h>100</h>
+      <x>850</x>
+      <y>570</y>
+      <w>180</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes>ConquerState : State
+    <panel_attributes>AttackJob : IJobForEach
+&lt;AttackPoints, StateData,
+Translation, Target,
+MoveSpeed&gt;
 --
-# OnUpdate(JobHandle) : JobHandle
-# Enter() : void
-# Stay() : void
-# Exit() : void</panel_attributes>
++ Range : float
+--
++ Execute(int) : void
+- Enter() : void
+- Stay() : void
+- Exit() : void
+group=7</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>330</y>
-      <w>240</w>
-      <h>100</h>
+      <x>540</x>
+      <y>570</y>
+      <w>190</w>
+      <h>150</h>
     </coordinates>
-    <panel_attributes>AttackState : State
+    <panel_attributes>BuildJob : IJobForEach
+&lt;BuildPoints, StateData,
+Translation, Target&gt;
 --
-# OnUpdate(JobHandle) : JobHandle
-# Enter() : void
-# Stay() : void
-# Exit() : void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>800</x>
-      <y>440</y>
-      <w>240</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>BuildState : State
++ Range : float
 --
-# OnUpdate(JobHandle) : JobHandle
-# Enter() : void
-# Stay() : void
-# Exit() : void</panel_attributes>
++ Execute(int) : void
+- Enter() : void
+- Stay() : void
+- Exit() : void
+group=8</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>270</y>
-      <w>70</w>
-      <h>200</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;180.0;30.0;180.0;30.0;10.0;50.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>770</x>
-      <y>270</y>
+      <x>780</x>
+      <y>280</y>
       <w>50</w>
-      <h>200</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>30.0;180.0;10.0;180.0;10.0;10.0;30.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>750</x>
-      <y>270</y>
-      <w>70</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;30.0;70.0;30.0;10.0;50.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>770</x>
-      <y>270</y>
-      <w>50</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>30.0;70.0;10.0;70.0;10.0;10.0;30.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>750</x>
-      <y>210</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>490</x>
-      <y>670</y>
-      <w>280</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>IsDirty is set to true after Creation or 
-Command change and will be set to false
-after being handled by the CleanUpSystem
-bg=blue</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>750</y>
-      <w>260</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>CleanUpStates : JobComponentSystem
---
-# OnUpdate(JobHandle) : JobHandle</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>790</x>
-      <y>750</y>
+      <x>480</x>
+      <y>870</y>
       <w>240</w>
       <h>50</h>
     </coordinates>
@@ -533,63 +461,36 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>630</y>
-      <w>260</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>BuildSystem : JobComponentSystem
---
-# OnUpdate(JobHandle) : JobHandle</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>790</x>
-      <y>690</y>
-      <w>260</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>AttackSystem : JobComponentSystem
---
-# OnUpdate(JobHandle) : JobHandle</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>790</x>
-      <y>550</y>
+      <x>760</x>
+      <y>750</y>
       <w>260</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>MoveSystem : JobComponentSystem
+    <panel_attributes>_Movement_
 --
-# OnUpdate(JobHandle) : JobHandle
-+ Move(float3, Translation) : void</panel_attributes>
+_+ Move(float3, Translation) : void_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>500</x>
-      <y>210</y>
-      <w>260</w>
+      <x>650</x>
+      <y>220</y>
+      <w>280</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>StateMachine : ComponentSystem
 --
 # OnUpdate() : void
-+ SwitchState(int, UnitCommand) : void</panel_attributes>
+_+ SwitchState(Entity, UnitCommand) : void_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
+      <x>190</x>
       <y>30</y>
-      <w>290</w>
+      <w>300</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>_Constants_
@@ -598,5 +499,121 @@ _+ const MAX_UNIT_DISPLACEMENT : float_
 _+ const SELECTIONDATA_PATH : string_
 _+ const CRYSTALDATA_PATH : string_</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>860</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ID : IComponentData
+--
++ Value : uint
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>870</y>
+      <w>310</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>TargetUpdateSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>520</y>
+      <w>260</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>AttackSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>520</y>
+      <w>260</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>BuildSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle
+group=8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>320</y>
+      <w>240</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>IdleSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>320</y>
+      <w>260</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>ConquerSystem : JobComponentSystem
+--
+# OnUpdate(JobHandle) : JobHandle
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>280</y>
+      <w>50</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;250.0;10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>280</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;50.0;30.0;50.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>280</y>
+      <w>50</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;250.0;30.0;250.0;30.0;10.0</additional_attributes>
   </element>
 </diagram>
