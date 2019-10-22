@@ -14,6 +14,8 @@ namespace Prototype
 
         public GameObject battleButton;
         public GameObject cancelButton;
+        public GameObject menu01;
+        public GameObject menu02;
         #endregion
 
         #region Methods
@@ -38,8 +40,10 @@ namespace Prototype
         public void OnBattleButtonClicked()
         {
             PhotonNetwork.JoinRandomRoom();
-            battleButton.SetActive(false);
-            cancelButton.SetActive(true);
+            //battleButton.SetActive(false);
+            //cancelButton.SetActive(true);
+            menu01.SetActive(false);
+            menu02.SetActive(true);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -63,8 +67,10 @@ namespace Prototype
 
         public void OnCancelButtonClicked()
         {
-            battleButton.SetActive(true);
-            cancelButton.SetActive(false);
+            //battleButton.SetActive(true);
+            //cancelButton.SetActive(false);
+            menu01.SetActive(true);
+            menu02.SetActive(false);
             PhotonNetwork.LeaveRoom();
         }
 
