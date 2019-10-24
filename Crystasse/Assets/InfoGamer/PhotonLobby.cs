@@ -27,8 +27,7 @@ namespace Prototype
 
         private void Start()
         {
-            PhotonNetwork.ConnectUsingSettings();
-            rooms[0].CustomProperties
+            PhotonNetwork.ConnectUsingSettings();           
         }
 
         public override void OnConnectedToMaster()

@@ -153,7 +153,7 @@ namespace Michsky.UI.ModernUIPack
                 isOn = false;
             }
 
-            if(enableTrigger == true && isOn == false)
+            if (enableTrigger == true && isOn == false)
             {
                 triggerObject.SetActive(false);
             }
