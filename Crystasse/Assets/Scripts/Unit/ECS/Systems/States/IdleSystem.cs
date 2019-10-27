@@ -2,21 +2,56 @@
 using Unity.Jobs;
 using Unity.Transforms;
 using Unity.Burst;
+using Unity.Mathematics;
+using UnityEngine;
+using Unity.Collections;
 
+[DisableAutoCreation]
 public class IdleSystem : JobComponentSystem
 {
     [BurstCompile]
-    struct IdleJob : IJobForEach<StateData, Translation>
+    struct IdleJob : IJobForEach<Substate, IdleData, Translation, MoveSpeed>
     {
-        public void Execute(ref StateData c0, ref Translation c1)
+        public float dt;
+
+        public void Execute(ref Substate c0, ref IdleData c1, ref Translation c2, [ReadOnly]ref MoveSpeed c3)
         {
-            throw new System.NotImplementedException();
+            switch(c0.Value)
+            {
+                case SubStates.Enter:
+                    Enter(ref c0);
+                    break;
+                case SubStates.Stay:
+                    Stay(ref c1, ref c2, ref c3);
+                    break;
+                case SubStates.Exit:
+                    break;
+            }
+        }
+
+        private void Enter(ref Substate c0)
+        {
+            c0.Value = SubStates.Stay;
+        }
+        private void Stay(ref IdleData c1, ref Translation c2, [ReadOnly] ref MoveSpeed c3)
+        {
+            bool moveUp = (c1.YDirection == 1f);
+            bool moveDown = (c1.YDirection == -1f);
+
+            if(moveUp)
+                c2.Value.y += math.mul(c3.Value, dt);
+            else if(moveDown)
+                c2.Value.y -= math.mul(c3.Value, dt);
+
+            if(moveUp && c2.Value.y >= Constants.MAX_UNIT_DISPLACEMENT ||
+               moveDown && c2.Value.y <= -Constants.MAX_UNIT_DISPLACEMENT)
+                c1.YDirection *= -1f;
         }
     }
 
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        var job = new IdleJob();
+        var job = new IdleJob() { dt = Time.deltaTime };
 
         return job.Schedule(this, inputDeps);
     }

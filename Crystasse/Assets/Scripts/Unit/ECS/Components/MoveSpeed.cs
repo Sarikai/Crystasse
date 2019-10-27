@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Burst;
 
-[BurstCompile]
+[BurstCompile, System.Serializable]
 public struct MoveSpeed : IComponentData
 {
     public float Value;

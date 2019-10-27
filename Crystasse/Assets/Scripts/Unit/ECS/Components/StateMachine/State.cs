@@ -2,8 +2,7 @@
 using Unity.Burst;
 
 [BurstCompile, System.Serializable]
-
-public struct ID : IComponentData
+public struct State : IComponentData
 {
-    public uint Value;
+    public States Value;
 }

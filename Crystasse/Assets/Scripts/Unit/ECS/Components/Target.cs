@@ -2,7 +2,7 @@
 using Unity.Mathematics;
 using Unity.Burst;
 
-[BurstCompile]
+[BurstCompile, System.Serializable]
 public struct Target : IComponentData
 {
     public uint ID;
