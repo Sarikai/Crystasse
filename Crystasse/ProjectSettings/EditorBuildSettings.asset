@@ -18,6 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer.unity
     guid: 028fe14c7bf076147bc79704a79329e1
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/MainMenu.unity
     guid: afa23ea2cff382c4c96406cdded9bc5d
   - enabled: 1
@@ -30,3 +31,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 87d3bc5d0c489f54781dbf6105873da5
   m_configObjects: {}
+=======
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 250939b580fbb0f4dbe89f09c7e9b221,
+      type: 2}
+>>>>>>> Controller
