@@ -66,8 +66,8 @@ namespace Prototype
         public void OnNewGameButtonClicked()
         {
             PhotonNetwork.JoinRandomRoom();
-            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._NewGameButton);
-            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._AbortButton);
+            //UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._NewGameButton);
+            //UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._AbortButton);
             //battleButton.SetActive(false);
             //cancelButton.SetActive(true);
         }

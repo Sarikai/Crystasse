@@ -17,13 +17,16 @@ namespace Prototype
         public GameObject _NewGameButton;
         [SerializeField]
         public GameObject _JoinServerButton;
-        [SerializeField]
-        public GameObject _AbortButton;
+        //[SerializeField]
+        //public GameObject _AbortButton;
         [SerializeField]
         public GameObject _ExitButton;
 
         public GameObject _MainMenu;
         public GameObject _NetworkMenu;
+        public GameObject _WaitingMenu;
+        public GameObject _LobbyMenu;
+        public GameObject _RoomMenu;
 
         #endregion
 
@@ -53,6 +56,15 @@ namespace Prototype
             SceneManager.LoadScene(1, LoadSceneMode.Single);
             uiManager.Toggle(_MainMenu);
             uiManager.Toggle(_NetworkMenu);
+            uiManager.Toggle(_RoomMenu);
+        }
+
+        public void OnJoinServerButtonClicked()
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            uiManager.Toggle(_MainMenu);
+            uiManager.Toggle(_NetworkMenu);
+            uiManager.Toggle(_LobbyMenu);
         }
         public void Toggle(GameObject objectToToggle)
         {
