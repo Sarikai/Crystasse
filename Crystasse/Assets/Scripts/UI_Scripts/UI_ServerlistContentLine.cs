@@ -50,6 +50,7 @@ namespace Prototype
             _serverName.text = roomInfo.Name;
             _serverConnectedPlayer.text = roomInfo.PlayerCount.ToString();
             _serverMaxPlayer.text = roomInfo.MaxPlayers.ToString();
+            Debug.Log($"Update done!");
         }
         #endregion
     }

@@ -105,6 +105,7 @@ namespace Prototype
 
         public override void OnRoomListUpdate(System.Collections.Generic.List<RoomInfo> roomList)
         {
+            base.OnRoomListUpdate(roomList);
             if (_rooms != null)
             {
                 foreach (RoomInfo room in roomList)
