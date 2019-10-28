@@ -1,8 +1,10 @@
-﻿using Photon.Pun;
+﻿using Boo.Lang;
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using New;
 
 namespace Prototype
 {
@@ -10,12 +12,15 @@ namespace Prototype
     {
         #region Variables / Properties
 
-        public static PUN_Lobby _Lobby;
-        private RoomInfo[] _rooms;
+        public static PUN_Lobby Lobby;
+        //private RoomInfo[] _rooms;
+        private System.Collections.Generic.List<RoomInfo> _rooms;
+        //private UI_Manager _uiManager;
 
         //Nachfolgendes entfernen/ersetzen mit UI_Manager
         public GameObject battleButton;
         public GameObject cancelButton;
+        public ServerSetting mySetting;
 
         #endregion
 
@@ -23,7 +28,21 @@ namespace Prototype
 
         private void Awake()
         {
-            _Lobby = this;
+            if (PUN_Lobby.Lobby == null)
+            {
+                PUN_Lobby.Lobby = this;
+
+            }
+            else
+            {
+                if (PUN_Lobby.Lobby != this)
+                {
+                    Destroy(PUN_Lobby.Lobby.gameObject);
+                    PUN_Lobby.Lobby = this;
+                }
+
+            }
+            DontDestroyOnLoad(this.gameObject);
         }
 
         private void Start()
@@ -31,19 +50,26 @@ namespace Prototype
             PhotonNetwork.ConnectUsingSettings();
         }
 
+        private void Update()
+        {
+            OnRoomListUpdate(_rooms);
+        }
+
         public override void OnConnectedToMaster()
         {
             Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
-            battleButton.SetActive(true);
-            //UI_Manager.ToggleButton();
+            //battleButton.SetActive(true);
+            //UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._NewGameButton);
         }
 
-        public void OnBattleButtonClicked()
+        public void OnNewGameButtonClicked()
         {
             PhotonNetwork.JoinRandomRoom();
-            battleButton.SetActive(false);
-            cancelButton.SetActive(true);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._NewGameButton);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._AbortButton);
+            //battleButton.SetActive(false);
+            //cancelButton.SetActive(true);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -55,7 +81,7 @@ namespace Prototype
         void CreateRoom()
         {
             int randomRoomName = Random.Range(0, 1000);
-            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSetting.maxPlayers };
+            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)ServerSetting.multiplayerSetting.maxPlayers };
             PhotonNetwork.CreateRoom("Room " + randomRoomName, roomOps);
         }
 
@@ -75,6 +101,18 @@ namespace Prototype
         public override void OnJoinedRoom()
         {
             Debug.Log("Connected to Room");
+        }
+
+        public override void OnRoomListUpdate(System.Collections.Generic.List<RoomInfo> roomList)
+        {
+            if (_rooms != null)
+            {
+                foreach (RoomInfo room in roomList)
+                {
+                    UI_ServerlistContentLine newLine = Instantiate(UI_Manager.uiManager?._serverlistContentLine, UI_Manager.uiManager?.GetServerList);
+                    newLine.UpdateContentLine(room);
+                }
+            }
         }
         #endregion
     }

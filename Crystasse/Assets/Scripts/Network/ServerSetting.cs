@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace New
+namespace Prototype
 {
-    public class MultiplayerSettings : MonoBehaviour
+    public class ServerSetting : MonoBehaviour
     {
         #region Variables / Properties
-        public static MultiplayerSettings multiplayerSetting;
+        public static ServerSetting multiplayerSetting;
         public bool delayStart;
         public int maxPlayers;
 
@@ -18,13 +18,13 @@ namespace New
         #region Methods
         private void Awake()
         {
-            if (MultiplayerSettings.multiplayerSetting == null)
+            if (ServerSetting.multiplayerSetting == null)
             {
-                MultiplayerSettings.multiplayerSetting = this;
+                ServerSetting.multiplayerSetting = this;
             }
             else
             {
-                if (MultiplayerSettings.multiplayerSetting != this)
+                if (ServerSetting.multiplayerSetting != this)
                 {
                     Destroy(this.gameObject);
                 }
@@ -34,3 +34,4 @@ namespace New
         #endregion
     }
 }
+

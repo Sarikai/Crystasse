@@ -82,14 +82,14 @@ namespace Prototype
             playersInRoom = photonPlayers.Length;
             myNumberInRoom = playersInRoom;
             PhotonNetwork.NickName = myNumberInRoom.ToString();
-            if (MultiplayerSettings.multiplayerSetting.delayStart)
+            if (ServerSetting.multiplayerSetting.delayStart)
             {
-                Debug.Log($"Display players in room out of max players possible ({playersInRoom} : {MultiplayerSettings.multiplayerSetting.maxPlayers})");
+                Debug.Log($"Display players in room out of max players possible ({playersInRoom} : {ServerSetting.multiplayerSetting.maxPlayers})");
                 if (playersInRoom > 1)
                 {
                     readyToCount = true;
                 }
-                if (playersInRoom == MultiplayerSettings.multiplayerSetting.maxPlayers)
+                if (playersInRoom == ServerSetting.multiplayerSetting.maxPlayers)
                 {
                     readyToStart = true;
                     if (!PhotonNetwork.IsMasterClient)
@@ -110,14 +110,14 @@ namespace Prototype
             Debug.Log("A new Spast joined");
             photonPlayers = PhotonNetwork.PlayerList;
             playersInRoom++;
-            if (MultiplayerSettings.multiplayerSetting.delayStart)
+            if (ServerSetting.multiplayerSetting.delayStart)
             {
-                Debug.Log($"Display players in room out of max players possible ({playersInRoom} : {MultiplayerSettings.multiplayerSetting.maxPlayers})");
+                Debug.Log($"Display players in room out of max players possible ({playersInRoom} : {ServerSetting.multiplayerSetting.maxPlayers})");
                 if (playersInRoom > 1)
                 {
                     readyToCount = true;
                 }
-                if (playersInRoom == MultiplayerSettings.multiplayerSetting.maxPlayers)
+                if (playersInRoom == ServerSetting.multiplayerSetting.maxPlayers)
                 {
                     readyToStart = true;
                     if (!PhotonNetwork.IsMasterClient)
@@ -130,7 +130,7 @@ namespace Prototype
 
         private void Update()
         {
-            if (MultiplayerSettings.multiplayerSetting.delayStart)
+            if (ServerSetting.multiplayerSetting.delayStart)
             {
                 if (playersInRoom == 1)
                 {
@@ -164,12 +164,12 @@ namespace Prototype
             isGameLoaded = true;
             if (!PhotonNetwork.IsMasterClient)
                 return;
-            if (MultiplayerSettings.multiplayerSetting.delayStart)
+            if (ServerSetting.multiplayerSetting.delayStart)
             {
                 PhotonNetwork.CurrentRoom.IsOpen = false;
 
             }
-            PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSetting.multiplayerScene);
+            PhotonNetwork.LoadLevel(ServerSetting.multiplayerSetting.multiplayerScene);
 
         }
 
@@ -185,10 +185,10 @@ namespace Prototype
         void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
         {
             currentScene = scene.buildIndex;
-            if (currentScene == MultiplayerSettings.multiplayerSetting.multiplayerScene)
+            if (currentScene == ServerSetting.multiplayerSetting.multiplayerScene)
             {
                 isGameLoaded = true;
-                if (MultiplayerSettings.multiplayerSetting.delayStart)
+                if (ServerSetting.multiplayerSetting.delayStart)
                 {
                     pv.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
                 }
