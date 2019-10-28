@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Prototype
 {
-	public class MultiplayerSetting : MonoBehaviour
+	public class MultiplayerManager : MonoBehaviour
 	{
 	    #region Variables / Properties
 		
