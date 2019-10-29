@@ -1,8 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Burst;
-using System;
 
-[BurstCompile, Serializable]
+[BurstCompile, System.Serializable]
 public struct AttackPoints : IComponentData
 {
     public byte Value;

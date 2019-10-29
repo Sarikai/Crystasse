@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Map
 {
-    private readonly Dictionary<int, CrystalConnections> _bridges;
+    private readonly Dictionary<int, CrystalConnections> _bridges = null;
 
     public CrystalConnections this[int id]
     {

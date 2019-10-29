@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
+﻿using Unity.Collections;
 using Unity.Transforms;
 using Unity.Mathematics;
+using Unity.Burst;
 
+[BurstCompile]
 public static class TransitionRules
 {
     static TransitionRules()

@@ -10,11 +10,10 @@ public class TestScript : MonoBehaviour
 {
     EntityArchetype _unitArchetype;
     [SerializeField]
-    UnitData _prefab;
-    World _activeWorld;
-    NativeArray<Entity> _entities;
+    UnitData _data = null;
+    World _world = null;
     [SerializeField]
-    int _length = 5, _maxUnits = 5;
+    int _maxUnits = 5, _batchSize = 5;
 
     [SerializeField]
     float _time = 5f;
@@ -23,16 +22,8 @@ public class TestScript : MonoBehaviour
 
     private void Start()
     {
-        _activeWorld = World.Active;
-        _unitArchetype = _activeWorld.EntityManager.CreateArchetype(
-                                                   typeof(ID), typeof(TeamID),
-                                                   typeof(Translation), typeof(Scale), typeof(LocalToWorld),
-                                                   typeof(AttackPoints), typeof(BuildPoints), typeof(HealthPoints),
-                                                   typeof(BuildSpeed), typeof(MoveSpeed),
-                                                   typeof(AttackRange), typeof(BuildRange), typeof(ConquerRange),
-                                                   typeof(State), typeof(Substate), typeof(Target), typeof(RenderMesh), typeof(IdleData));
-
-        _entities = new NativeArray<Entity>(_length, Allocator.Persistent);
+        _world = World.Active;
+        _unitArchetype = UnitData.Archetype;
     }
 
     private void Update()
@@ -41,34 +32,28 @@ public class TestScript : MonoBehaviour
 
         if(_timer >= _time && _maxUnits > 0)
         {
-            _maxUnits--;
+            for(int i = 0; i < _batchSize; i++)
+                AssignDefaultValues(_world.EntityManager.CreateEntity(_unitArchetype));
+            _maxUnits -= _batchSize;
             _timer = 0f;
-            var e = _activeWorld.EntityManager.CreateEntity(_unitArchetype);
-            _entities[_entities.Length - 1] = e;
-            AssignDefaultValues(e);
         }
     }
 
     private void AssignDefaultValues(Entity e)
     {
-        _activeWorld.EntityManager.SetSharedComponentData<TeamID>(e, _prefab.teamID);
-        _activeWorld.EntityManager.SetSharedComponentData<RenderMesh>(e, _prefab.m);
+        _world.EntityManager.SetSharedComponentData<TeamID>(e, _data.teamID);
+        _world.EntityManager.SetSharedComponentData<RenderMesh>(e, _data.m);
 
-        _activeWorld.EntityManager.SetComponentData<ID>(e, _prefab.id);
-        _activeWorld.EntityManager.SetComponentData<Translation>(e, _prefab.t);
-        _activeWorld.EntityManager.SetComponentData<Scale>(e, _prefab.s);
-        _activeWorld.EntityManager.SetComponentData<AttackPoints>(e, _prefab.ap);
-        _activeWorld.EntityManager.SetComponentData<BuildPoints>(e, _prefab.bp);
-        _activeWorld.EntityManager.SetComponentData<HealthPoints>(e, _prefab.hp);
-        _activeWorld.EntityManager.SetComponentData<BuildSpeed>(e, _prefab.bs);
-        _activeWorld.EntityManager.SetComponentData<MoveSpeed>(e, _prefab.ms);
-        _activeWorld.EntityManager.SetComponentData<State>(e, _prefab.sD);
-        _activeWorld.EntityManager.SetComponentData<Target>(e, _prefab.target);
-        _activeWorld.EntityManager.SetComponentData<IdleData>(e, new IdleData() { YDirection = -1f });
-    }
-
-    private void OnDisable()
-    {
-        _entities.Dispose();
+        _world.EntityManager.SetComponentData<ID>(e, _data.id);
+        _world.EntityManager.SetComponentData<Translation>(e, _data.t);
+        _world.EntityManager.SetComponentData<Scale>(e, _data.s);
+        _world.EntityManager.SetComponentData<AttackPoints>(e, _data.ap);
+        _world.EntityManager.SetComponentData<BuildPoints>(e, _data.bp);
+        _world.EntityManager.SetComponentData<HealthPoints>(e, _data.hp);
+        _world.EntityManager.SetComponentData<BuildSpeed>(e, _data.bs);
+        _world.EntityManager.SetComponentData<MoveSpeed>(e, _data.ms);
+        _world.EntityManager.SetComponentData<State>(e, _data.sD);
+        _world.EntityManager.SetComponentData<Target>(e, _data.target);
+        //_world.EntityManager.SetComponentData<IdleData>(e, new IdleData() { YDirection = 1f });
     }
 }

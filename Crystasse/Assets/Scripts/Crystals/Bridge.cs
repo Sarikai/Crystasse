@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bridge : MonoBehaviour
 {
-    private int _maxBuildValue;
-    private int _buildValue;
-    private byte _teamID;
+    private int _maxBuildValue = 0;
+    private int _buildValue = 0;
+    private byte _teamID = 0;
 
     public byte TeamID { get => _teamID; set => _teamID = value; }
     public float PercentDone => _maxBuildValue / _buildValue;

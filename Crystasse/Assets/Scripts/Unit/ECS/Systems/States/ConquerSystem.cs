@@ -4,7 +4,7 @@ using Unity.Burst;
 using Unity.Transforms;
 using Unity.Collections;
 
-[DisableAutoCreation]
+[DisableAutoCreation, BurstCompile, System.Serializable]
 public class ConquerSystem : JobComponentSystem
 {
     [BurstCompile]

@@ -1,7 +1,8 @@
 {
     "name": "Crystals",
     "references": [
-        "GUID:86c2f6a2d0ff5da4c9794c61f0494e14"
+        "GUID:86c2f6a2d0ff5da4c9794c61f0494e14",
+        "GUID:734d92eba21c94caba915361bd5ac177"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

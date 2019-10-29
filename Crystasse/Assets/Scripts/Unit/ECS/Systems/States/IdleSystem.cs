@@ -6,34 +6,15 @@ using Unity.Mathematics;
 using UnityEngine;
 using Unity.Collections;
 
-[DisableAutoCreation]
+[DisableAutoCreation, BurstCompile, System.Serializable]
 public class IdleSystem : JobComponentSystem
 {
     [BurstCompile]
-    struct IdleJob : IJobForEach<Substate, IdleData, Translation, MoveSpeed>
+    struct IdleJob : IJobForEach<IdleData, Translation, MoveSpeed>
     {
         public float dt;
 
-        public void Execute(ref Substate c0, ref IdleData c1, ref Translation c2, [ReadOnly]ref MoveSpeed c3)
-        {
-            switch(c0.Value)
-            {
-                case SubStates.Enter:
-                    Enter(ref c0);
-                    break;
-                case SubStates.Stay:
-                    Stay(ref c1, ref c2, ref c3);
-                    break;
-                case SubStates.Exit:
-                    break;
-            }
-        }
-
-        private void Enter(ref Substate c0)
-        {
-            c0.Value = SubStates.Stay;
-        }
-        private void Stay(ref IdleData c1, ref Translation c2, [ReadOnly] ref MoveSpeed c3)
+        public void Execute(ref IdleData c1, ref Translation c2, [ReadOnly]ref MoveSpeed c3)
         {
             bool moveUp = (c1.YDirection == 1f);
             bool moveDown = (c1.YDirection == -1f);
