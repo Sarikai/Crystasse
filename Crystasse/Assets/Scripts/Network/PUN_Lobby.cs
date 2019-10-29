@@ -105,6 +105,7 @@ namespace Prototype
 
         public override void OnRoomListUpdate(System.Collections.Generic.List<RoomInfo> roomList)
         {
+            Debug.Log($"RoomUpdate called");
             base.OnRoomListUpdate(roomList);
             if (_rooms != null)
             {

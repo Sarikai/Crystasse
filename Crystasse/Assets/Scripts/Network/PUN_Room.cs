@@ -130,11 +130,7 @@ namespace Prototype
             }
         }
 
-        public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
-        {
-            base.OnPlayerPropertiesUpdate(target, changedProps);
-            target.SetCustomProperties(); ;
-        }
+
 
         private void Update()
         {
