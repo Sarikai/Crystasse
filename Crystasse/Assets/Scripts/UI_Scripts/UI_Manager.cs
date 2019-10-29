@@ -8,25 +8,26 @@ namespace Prototype
     public class UI_Manager : MonoBehaviour
     {
         #region Variables / Properties
-        private Transform _serverList;
-        public UI_ServerlistContentLine _serverlistContentLine;
-        public Transform GetServerList { get { return _serverList; } }
+
         public static UI_Manager uiManager;
+        private Transform _serverList;
+        public Transform GetServerList { get { return _serverList; } }
+        public UI_ServerlistContentLine _serverlistContentLine;
 
-        [SerializeField]
-        public GameObject _NewGameButton;
-        [SerializeField]
-        public GameObject _JoinServerButton;
-        //[SerializeField]
-        //public GameObject _AbortButton;
-        [SerializeField]
-        public GameObject _ExitButton;
 
+        //Menus to toggle
         public GameObject _MainMenu;
         public GameObject _NetworkMenu;
         public GameObject _WaitingMenu;
         public GameObject _LobbyMenu;
         public GameObject _RoomMenu;
+
+        //Buttons
+        public GameObject _NewGameButton;
+        public GameObject _JoinServerButton;
+        //public GameObject _AbortButton;
+        public GameObject _ExitAppButton;
+        public KeyCode _EscapeButton = KeyCode.Escape;
 
         #endregion
 
@@ -57,6 +58,7 @@ namespace Prototype
             uiManager.Toggle(_MainMenu);
             uiManager.Toggle(_NetworkMenu);
             uiManager.Toggle(_RoomMenu);
+
         }
 
         public void OnJoinServerButtonClicked()
