@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c030881f8d624d4c9b5b16f8ef11c1b, type: 3}
+  m_Name: UnitData
+  m_EditorClassIdentifier: 
+  id:
+    Value: 0
+  teamID:
+    Value: 1
+  t:
+    Value:
+      x: 0
+      y: 1
+      z: 0
+  s:
+    Value: 1
+  ap:
+    Value: 1
+  bp:
+    Value: 10
+  hp:
+    Value: 1
+  bs:
+    Value: 2
+  ms:
+    Value: 5
+  sD:
+    Value: 0
+  target:
+    ID: 0
+    Value:
+      x: 0
+      y: 0
+      z: 0
+  m:
+    mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    material: {fileID: 2100000, guid: c3f410bc1c8620f47afb53d920d521df, type: 2}
+    subMesh: 0
+    layer: 0
+    castShadows: 1
+    receiveShadows: 1

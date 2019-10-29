@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 public class Crystal : MonoBehaviour
@@ -7,15 +8,19 @@ public class Crystal : MonoBehaviour
     private CrystalData _data;
     private int _id;
     private int _health;
-    private Unit _unitPrefab;
-    //TODO: Make ECS Compatible
-    private List<Unit> _unitsSpawned;
-    private Dictionary<UnitID, Unit> _enemies;
+    private EntityArchetype _unitArchetype;
+    private readonly List<Entity> _unitsSpawned = new List<Entity>();
+    private readonly Dictionary<ID, Entity> _enemies = new Dictionary<ID, Entity>();
 
     public byte TeamID => _data.TeamID;
+    public int Health { get => _health; private set => _health = value; }
+    public int ID { get => _id; private set => _id = value; }
 
-    private void Start()
+    private void Init(CrystalData data, EntityArchetype archetype)
     {
+        _data = data;
+        Health = _data.MaxHealth;
+        _unitArchetype = archetype;
         StartCoroutine(SpawnRoutine());
     }
 
@@ -23,7 +28,7 @@ public class Crystal : MonoBehaviour
     {
         while(_data.IsSpawning && TeamID != 0)
         {
-            Debug.Log("Spawn");
+            _unitsSpawned.Add(World.Active.EntityManager.CreateEntity(_unitArchetype));
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
         }
     }
