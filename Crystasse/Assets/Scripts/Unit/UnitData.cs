@@ -29,7 +29,37 @@ public class UnitData : ScriptableObject
                 typeof(ConquerRange),
                 typeof(State),
                 typeof(Target),
-                typeof(RenderMesh));
+                typeof(RenderMesh),
+                typeof(IdleData));
+        }
+    }
+
+    public static IdleData DefaultIdleData
+    {
+        get
+        {
+            return new IdleData() { YDirection = 1f };
+        }
+    }
+    public static AttackData DefaultAttackData
+    {
+        get
+        {
+            return new AttackData();
+        }
+    }
+    public static ConquerData DefaultConquerData
+    {
+        get
+        {
+            return new ConquerData();
+        }
+    }
+    public static BuildData DefaultBuildData
+    {
+        get
+        {
+            return new BuildData();
         }
     }
 

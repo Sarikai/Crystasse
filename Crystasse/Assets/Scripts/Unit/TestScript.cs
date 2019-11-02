@@ -8,6 +8,9 @@ using Unity.Rendering;
 
 public class TestScript : MonoBehaviour
 {
+    private static TestScript _instance;
+    public static TestScript Instance { get => _instance; private set => _instance = value; }
+
     EntityArchetype _unitArchetype;
     [SerializeField]
     UnitData _data = null;
@@ -19,6 +22,13 @@ public class TestScript : MonoBehaviour
     float _time = 5f;
     float _timer = 5f;
 
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+        else if(Instance != this)
+            Destroy(this);
+    }
 
     private void Start()
     {
@@ -26,9 +36,9 @@ public class TestScript : MonoBehaviour
         _unitArchetype = UnitData.Archetype;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        _timer += Time.deltaTime;
+        _timer += Time.fixedDeltaTime;
 
         if(_timer >= _time && _maxUnits > 0)
         {
@@ -37,6 +47,13 @@ public class TestScript : MonoBehaviour
             _maxUnits -= _batchSize;
             _timer = 0f;
         }
+    }
+
+    public Entity CreateEntity(World world)
+    {
+        var e = world.EntityManager.CreateEntity(_unitArchetype);
+        AssignDefaultValues(e);
+        return e;
     }
 
     private void AssignDefaultValues(Entity e)
@@ -54,6 +71,6 @@ public class TestScript : MonoBehaviour
         _world.EntityManager.SetComponentData<MoveSpeed>(e, _data.ms);
         _world.EntityManager.SetComponentData<State>(e, _data.sD);
         _world.EntityManager.SetComponentData<Target>(e, _data.target);
-        //_world.EntityManager.SetComponentData<IdleData>(e, new IdleData() { YDirection = 1f });
+        _world.EntityManager.SetComponentData<IdleData>(e, UnitData.DefaultIdleData);
     }
 }

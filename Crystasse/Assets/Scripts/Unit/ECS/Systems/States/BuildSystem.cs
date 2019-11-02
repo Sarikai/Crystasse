@@ -3,7 +3,7 @@ using Unity.Jobs;
 using Unity.Burst;
 using Unity.Transforms;
 
-[DisableAutoCreation, BurstCompile, System.Serializable]
+[BurstCompile, System.Serializable]
 public class BuildSystem : JobComponentSystem
 {
     [BurstCompile]

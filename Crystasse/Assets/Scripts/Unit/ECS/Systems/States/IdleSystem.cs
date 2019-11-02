@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Unity.Collections;
 
-[DisableAutoCreation, BurstCompile, System.Serializable]
+[BurstCompile, System.Serializable]
 public class IdleSystem : JobComponentSystem
 {
     [BurstCompile]

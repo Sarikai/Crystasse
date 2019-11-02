@@ -43,7 +43,7 @@ MonoBehaviour:
       z: 0
   m:
     mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-    material: {fileID: 2100000, guid: c3f410bc1c8620f47afb53d920d521df, type: 2}
+    material: {fileID: 2100000, guid: 59c2d0c41470f7341a86a606de11713f, type: 2}
     subMesh: 0
     layer: 0
     castShadows: 1
