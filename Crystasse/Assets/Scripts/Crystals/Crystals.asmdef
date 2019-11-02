@@ -1,0 +1,18 @@
+{
+    "name": "Crystals",
+    "references": [
+        "GUID:86c2f6a2d0ff5da4c9794c61f0494e14",
+        "GUID:734d92eba21c94caba915361bd5ac177",
+        "GUID:585ccc5b5cc9a2847a9ddae9823893a3",
+        "GUID:a5baed0c9693541a5bd947d336ec7659",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
