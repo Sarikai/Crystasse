@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac1de1c93dd8c741b7c6281335a14a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 1
+  _unitData: {fileID: 11400000, guid: 0f0955dfe9c702c4cba046dd240bca8c, type: 2}
+  _time: 0.25
   _timer: 0
 --- !u!136 &2344796
 CapsuleCollider:
@@ -222,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2344794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8465402, y: 7.909449, z: -4.2202744}
+  m_LocalPosition: {x: -7.12, y: 0, z: 5.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -351,7 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac1de1c93dd8c741b7c6281335a14a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 1
+  _unitData: {fileID: 11400000, guid: 0f0955dfe9c702c4cba046dd240bca8c, type: 2}
+  _time: 0.25
   _timer: 0
 --- !u!136 &39098626
 CapsuleCollider:
@@ -421,7 +423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39098624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: 7.909449, z: 26.3}
+  m_LocalPosition: {x: -10.5, y: 0, z: 26.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1059,7 +1061,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac1de1c93dd8c741b7c6281335a14a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 1
+  _unitData: {fileID: 11400000, guid: 0f0955dfe9c702c4cba046dd240bca8c, type: 2}
+  _time: 0.25
   _timer: 0
 --- !u!136 &445554093
 CapsuleCollider:
@@ -1129,7 +1132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445554091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.3, y: 7.909449, z: 31.1}
+  m_LocalPosition: {x: 17.3, y: 0, z: 31.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1264,7 +1267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac1de1c93dd8c741b7c6281335a14a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 1
+  _unitData: {fileID: 11400000, guid: 0f0955dfe9c702c4cba046dd240bca8c, type: 2}
+  _time: 0.25
   _timer: 0
 --- !u!136 &509654980
 CapsuleCollider:
@@ -1334,7 +1338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509654978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.26, y: 7.909449, z: 1.98}
+  m_LocalPosition: {x: 15.26, y: 0, z: 1.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

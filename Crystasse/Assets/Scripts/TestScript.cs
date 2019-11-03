@@ -8,9 +8,6 @@ using Unity.Rendering;
 
 public class TestScript : MonoBehaviour
 {
-    private static TestScript _instance;
-    public static TestScript Instance { get => _instance; private set => _instance = value; }
-
     EntityArchetype _unitArchetype;
     [SerializeField]
     UnitData _data = null;
@@ -21,14 +18,6 @@ public class TestScript : MonoBehaviour
     [SerializeField]
     float _time = 5f;
     float _timer = 5f;
-
-    private void Awake()
-    {
-        if(Instance == null)
-            Instance = this;
-        else if(Instance != this)
-            Destroy(this);
-    }
 
     private void Start()
     {
@@ -43,17 +32,10 @@ public class TestScript : MonoBehaviour
         if(_timer >= _time && _maxUnits > 0)
         {
             for(int i = 0; i < _batchSize; i++)
-                AssignDefaultValues(_world.EntityManager.CreateEntity(_unitArchetype));
+                AssignDefaultValues(EntitySpawnHelper.SpawnEntity(_unitArchetype, _world));
             _maxUnits -= _batchSize;
             _timer = 0f;
         }
-    }
-
-    public Entity CreateEntity(World world)
-    {
-        var e = world.EntityManager.CreateEntity(_unitArchetype);
-        AssignDefaultValues(e);
-        return e;
     }
 
     private void AssignDefaultValues(Entity e)
