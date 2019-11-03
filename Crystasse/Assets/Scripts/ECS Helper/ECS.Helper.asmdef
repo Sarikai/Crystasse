@@ -1,0 +1,17 @@
+{
+    "name": "ECS.Helper",
+    "references": [
+        "GUID:734d92eba21c94caba915361bd5ac177",
+        "GUID:86c2f6a2d0ff5da4c9794c61f0494e14",
+        "GUID:a5baed0c9693541a5bd947d336ec7659",
+        "GUID:7a450cf7ca9694b5a8bfa3fd83ec635a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

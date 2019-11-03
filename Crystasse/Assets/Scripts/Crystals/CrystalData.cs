@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct CrystalData
+internal struct CrystalData
 {
     public readonly int MaxHealth;
     public readonly int MaxUnitSpawned;
