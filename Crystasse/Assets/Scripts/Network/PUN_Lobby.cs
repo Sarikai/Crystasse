@@ -1,10 +1,11 @@
-﻿using Boo.Lang;
-using Photon.Pun;
+﻿using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using New;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Prototype
 {
@@ -13,13 +14,8 @@ namespace Prototype
         #region Variables / Properties
 
         public static PUN_Lobby Lobby;
-        //private RoomInfo[] _rooms;
-        private System.Collections.Generic.List<RoomInfo> _rooms;
+        private List<RoomInfo> _rooms;
         //private UI_Manager _uiManager;
-
-        //Nachfolgendes entfernen/ersetzen mit UI_Manager
-        public GameObject battleButton;
-        public GameObject cancelButton;
         public ServerSetting mySetting;
 
         #endregion
@@ -47,6 +43,7 @@ namespace Prototype
 
         private void Start()
         {
+
             PhotonNetwork.ConnectUsingSettings();
         }
 
@@ -66,12 +63,25 @@ namespace Prototype
         public void OnNewGameButtonClicked()
         {
             PhotonNetwork.JoinRandomRoom();
-            //UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._NewGameButton);
-            //UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._AbortButton);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._MainMenu);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._CreateRoomMenu);
             //battleButton.SetActive(false);
             //cancelButton.SetActive(true);
         }
 
+        public void OnCreateRoomButtonClicked()
+        {
+            PhotonNetwork.JoinRoom(UI_Manager.uiManager._RoomNameInput.ToString());
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._CreateRoomMenu);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._RoomMenu);
+        }
+
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.Log("Tried to join failed, room did not exist");
+            CreateRoom(UI_Manager.uiManager._RoomNameInput.ToString());
+        }
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
             Debug.Log("Tried to join failed, no games available");
@@ -85,6 +95,13 @@ namespace Prototype
             PhotonNetwork.CreateRoom("Room " + randomRoomName, roomOps);
         }
 
+        void CreateRoom(string roomName)
+        {
+            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)ServerSetting.multiplayerSetting.maxPlayers };
+            PhotonNetwork.CreateRoom("Room: " + roomName, roomOps);
+            UI_Manager.uiManager._RoomName.text = roomName;
+        }
+
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
             Debug.Log("Tried to create room failed, name must already exist");
@@ -93,8 +110,6 @@ namespace Prototype
 
         public void OnCancelButtonClicked()
         {
-            battleButton.SetActive(true);
-            cancelButton.SetActive(false);
             PhotonNetwork.LeaveRoom();
         }
 
@@ -103,16 +118,16 @@ namespace Prototype
             Debug.Log("Connected to Room");
         }
 
-        public override void OnRoomListUpdate(System.Collections.Generic.List<RoomInfo> roomList)
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
             Debug.Log($"RoomUpdate called");
-            base.OnRoomListUpdate(roomList);
+            //base.OnRoomListUpdate(roomList);
             if (_rooms != null)
             {
-                foreach (RoomInfo room in roomList)
+                foreach (RoomInfo roomInfo in roomList)
                 {
                     UI_ServerlistContentLine newLine = Instantiate(UI_Manager.uiManager?._serverlistContentLine, UI_Manager.uiManager?.GetServerList);
-                    newLine.UpdateContentLine(room);
+                    newLine.UpdateContentLine(roomInfo);
                 }
             }
         }

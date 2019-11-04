@@ -174,6 +174,8 @@ namespace Prototype
 
             }
             PhotonNetwork.LoadLevel(ServerSetting.multiplayerSetting.multiplayerScene);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager._RoomMenu);
+            UI_Manager.uiManager.Toggle(UI_Manager.uiManager._NetworkMenu);
 
         }
 
@@ -216,7 +218,7 @@ namespace Prototype
         [PunRPC]
         private void RPC_CreatePlayer()
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), transform.position, Quaternion.identity, 0);
         }
         #endregion
     }
