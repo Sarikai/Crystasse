@@ -28,9 +28,10 @@ public class UnitData : ScriptableObject
                 typeof(BuildRange),
                 typeof(ConquerRange),
                 typeof(State),
-                typeof(Target),
+                typeof(TargetPos),
                 typeof(RenderMesh),
-                typeof(IdleData));
+                typeof(IdleData)
+                );
         }
     }
 
@@ -72,8 +73,10 @@ public class UnitData : ScriptableObject
     public Scale s;
 
     public AttackPoints ap;
+    public AttackRange aRange;
 
     public BuildPoints bp;
+    public BuildRange bRange;
 
     public HealthPoints hp;
 
@@ -83,7 +86,7 @@ public class UnitData : ScriptableObject
 
     public State sD;
 
-    public Target target;
+    public TargetPos target;
 
     public RenderMesh m;
 }

@@ -1,14 +1,11 @@
 ﻿using Unity.Entities;
 using Unity.Jobs;
-using Unity.Burst;
-using Unity.Collections;
 
-[BurstCompile, System.Serializable]
-public class BuildSystem : JobComponentSystem
+public class ConquerTransitionSystem : TransitionSystem
 {
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        var job = new BuildJob();
+        var job = new ConquerTransitionJob();
 
         return job.Schedule(this, inputDeps);
     }

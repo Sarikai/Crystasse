@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 internal struct CrystalData
 {
-    public readonly int MaxHealth;
-    public readonly int MaxUnitSpawned;
+    public int MaxHealth;
+    public int MaxUnitSpawned;
 
     public bool IsBase;
     public bool IsSpawning;

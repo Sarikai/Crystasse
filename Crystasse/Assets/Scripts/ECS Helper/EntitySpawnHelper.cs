@@ -32,12 +32,14 @@ public static class EntitySpawnHelper
         world.EntityManager.SetComponentData<Translation>(e, data.t);
         world.EntityManager.SetComponentData<Scale>(e, data.s);
         world.EntityManager.SetComponentData<AttackPoints>(e, data.ap);
+        world.EntityManager.SetComponentData<AttackRange>(e, data.aRange);
         world.EntityManager.SetComponentData<BuildPoints>(e, data.bp);
+        world.EntityManager.SetComponentData<BuildRange>(e, data.bRange);
         world.EntityManager.SetComponentData<HealthPoints>(e, data.hp);
         world.EntityManager.SetComponentData<BuildSpeed>(e, data.bs);
         world.EntityManager.SetComponentData<MoveSpeed>(e, data.ms);
         world.EntityManager.SetComponentData<State>(e, data.sD);
-        world.EntityManager.SetComponentData<Target>(e, data.target);
+        world.EntityManager.SetComponentData<TargetPos>(e, data.target);
         world.EntityManager.SetComponentData<IdleData>(e, UnitData.DefaultIdleData);
     }
 }

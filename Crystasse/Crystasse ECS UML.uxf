@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>490</x>
-      <y>10</y>
+      <y>0</y>
       <w>290</w>
       <h>160</h>
     </coordinates>
@@ -28,7 +28,7 @@ group=5</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>40</y>
+      <y>30</y>
       <w>220</w>
       <h>130</h>
     </coordinates>
@@ -48,7 +48,7 @@ group=5</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>740</y>
+      <y>730</y>
       <w>110</w>
       <h>110</h>
     </coordinates>
@@ -64,27 +64,10 @@ bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>620</x>
-      <y>740</y>
-      <w>120</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>SubStates : byte
---
-0  Enter
-1  Stay
-2  Exit
-
-bg=green</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>40</y>
+      <y>30</y>
       <w>50</w>
       <h>30</h>
     </coordinates>
@@ -97,7 +80,7 @@ group=5</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>50</y>
+      <y>40</y>
       <w>160</w>
       <h>150</h>
     </coordinates>
@@ -119,7 +102,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>210</y>
+      <y>200</y>
       <w>310</w>
       <h>130</h>
     </coordinates>
@@ -139,12 +122,13 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>350</y>
+      <y>340</y>
       <w>200</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>CrystalConnections
 --
+Tree
 - from : int
 - to : int[32]
 - areBuilt : int
@@ -161,7 +145,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>180</x>
-      <y>130</y>
+      <y>120</y>
       <w>300</w>
       <h>120</h>
     </coordinates>
@@ -179,7 +163,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>510</y>
+      <y>500</y>
       <w>410</w>
       <h>160</h>
     </coordinates>
@@ -201,7 +185,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1300</x>
-      <y>350</y>
+      <y>340</y>
       <w>170</w>
       <h>130</h>
     </coordinates>
@@ -222,7 +206,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>350</y>
+      <y>340</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -236,7 +220,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>410</y>
+      <y>400</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -250,7 +234,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>470</y>
+      <y>460</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -264,7 +248,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>530</y>
+      <y>520</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -278,7 +262,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>920</y>
+      <y>910</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -291,8 +275,8 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>500</x>
-      <y>980</y>
+      <x>210</x>
+      <y>960</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -306,7 +290,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>270</x>
-      <y>270</y>
+      <y>260</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -317,7 +301,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>270</x>
-      <y>310</y>
+      <y>300</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -327,23 +311,8 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>590</y>
-      <w>260</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Target : IComponentData
---
-+ ID : uint
-+ Poisiton : float3
-bg=pink</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>840</x>
-      <y>360</y>
+      <y>350</y>
       <w>170</w>
       <h>110</h>
     </coordinates>
@@ -363,7 +332,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>660</y>
+      <y>580</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -376,7 +345,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>520</x>
-      <y>360</y>
+      <y>350</y>
       <w>200</w>
       <h>130</h>
     </coordinates>
@@ -396,7 +365,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>840</x>
-      <y>560</y>
+      <y>550</y>
       <w>180</w>
       <h>160</h>
     </coordinates>
@@ -419,7 +388,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>530</x>
-      <y>560</y>
+      <y>550</y>
       <w>190</w>
       <h>150</h>
     </coordinates>
@@ -441,7 +410,7 @@ bg=pink</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>270</y>
+      <y>260</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -453,7 +422,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>860</y>
+      <y>850</y>
       <w>240</w>
       <h>50</h>
     </coordinates>
@@ -466,7 +435,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>750</x>
-      <y>740</y>
+      <y>730</y>
       <w>260</w>
       <h>60</h>
     </coordinates>
@@ -479,7 +448,7 @@ _+ Move(float3, Translation) : void_</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>640</x>
-      <y>210</y>
+      <y>200</y>
       <w>280</w>
       <h>70</h>
     </coordinates>
@@ -494,7 +463,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>180</x>
-      <y>20</y>
+      <y>10</y>
       <w>300</w>
       <h>100</h>
     </coordinates>
@@ -508,8 +477,8 @@ _+ const CRYSTALDATA_PATH : string_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>500</x>
-      <y>1040</y>
+      <x>210</x>
+      <y>900</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -523,7 +492,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>750</x>
-      <y>860</y>
+      <y>850</y>
       <w>310</w>
       <h>50</h>
     </coordinates>
@@ -536,7 +505,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>510</y>
+      <y>500</y>
       <w>260</w>
       <h>220</h>
     </coordinates>
@@ -551,7 +520,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>510</y>
+      <y>500</y>
       <w>260</w>
       <h>210</h>
     </coordinates>
@@ -566,7 +535,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>310</y>
+      <y>300</y>
       <w>240</w>
       <h>170</h>
     </coordinates>
@@ -581,7 +550,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>310</y>
+      <y>300</y>
       <w>260</w>
       <h>190</h>
     </coordinates>
@@ -596,7 +565,7 @@ bg=pink</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>770</x>
-      <y>270</y>
+      <y>260</y>
       <w>50</w>
       <h>270</h>
     </coordinates>
@@ -608,7 +577,7 @@ bg=pink</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>750</x>
-      <y>270</y>
+      <y>260</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -620,7 +589,7 @@ bg=pink</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>750</x>
-      <y>270</y>
+      <y>260</y>
       <w>50</w>
       <h>270</h>
     </coordinates>
@@ -632,7 +601,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1160</x>
-      <y>800</y>
+      <y>790</y>
       <w>280</w>
       <h>160</h>
     </coordinates>
@@ -652,7 +621,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1140</x>
-      <y>750</y>
+      <y>740</y>
       <w>320</w>
       <h>220</h>
     </coordinates>
@@ -665,20 +634,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>720</y>
-      <w>260</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>Substate : IComponentData
---
-+ Value : SubStates</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>210</x>
-      <y>780</y>
+      <y>640</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -691,36 +647,40 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>840</y>
+      <y>700</y>
       <w>260</w>
-      <h>50</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>AttackData : IComponentData
---</panel_attributes>
+--
++ TargetID : uint
++ TargetPos : float3</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>900</y>
+      <y>780</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>BuildData : IComponentData
---</panel_attributes>
+--
++ ID : BridgeID</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>960</y>
+      <y>840</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>ConquerData : IComponentData
---</panel_attributes>
+--
++ CrystalID : int</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
