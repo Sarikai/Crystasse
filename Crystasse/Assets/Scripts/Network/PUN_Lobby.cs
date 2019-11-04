@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using ExitGames.Client.Photon;
+using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Collections;
@@ -72,6 +73,7 @@ namespace Prototype
         public void OnCreateRoomButtonClicked()
         {
             PhotonNetwork.JoinRoom(UI_Manager.uiManager._RoomNameInput.ToString());
+
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._CreateRoomMenu);
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._RoomMenu);
         }
@@ -100,6 +102,10 @@ namespace Prototype
             RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)ServerSetting.multiplayerSetting.maxPlayers };
             PhotonNetwork.CreateRoom("Room: " + roomName, roomOps);
             UI_Manager.uiManager._RoomName.text = roomName;
+            //RoomInfo newRoomInfo;
+            //Room newRoom;
+            //newRoom.SetCustomProperties(new Hashtable() { id})
+            //_rooms.Add(new RoomInfo( ))
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message)
@@ -120,12 +126,14 @@ namespace Prototype
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-            Debug.Log($"RoomUpdate called");
-            //base.OnRoomListUpdate(roomList);
+            Debug.Log($"RoomUpdate called {_rooms != null}");
+            base.OnRoomListUpdate(roomList);
             if (_rooms != null)
             {
+                Debug.Log($"Rooms not null");
                 foreach (RoomInfo roomInfo in roomList)
                 {
+                    Debug.Log($"{roomInfo.ToString()}");
                     UI_ServerlistContentLine newLine = Instantiate(UI_Manager.uiManager?._serverlistContentLine, UI_Manager.uiManager?.GetServerList);
                     newLine.UpdateContentLine(roomInfo);
                 }

@@ -88,7 +88,8 @@ namespace Prototype
 
         public void OnCreateRoomButtonClicked()
         {
-
+            uiManager.Toggle(_LobbyMenu);
+            uiManager.Toggle(_CreateRoomMenu);
         }
         public void Toggle(GameObject objectToToggle)
         {
@@ -99,6 +100,7 @@ namespace Prototype
         {
             Debug.Log($"Game closing");
         }
+
         public void UpdateServerList()
         {
 

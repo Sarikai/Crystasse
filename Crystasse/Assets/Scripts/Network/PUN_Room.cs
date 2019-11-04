@@ -4,7 +4,6 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -176,7 +175,6 @@ namespace Prototype
             PhotonNetwork.LoadLevel(ServerSetting.multiplayerSetting.multiplayerScene);
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager._RoomMenu);
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager._NetworkMenu);
-
         }
 
         void RestartTimer()
