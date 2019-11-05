@@ -14,10 +14,11 @@ namespace Prototype
     public class UI_ServerlistContentLine : MonoBehaviourPunCallbacks
     {
         #region Variables / Properties
-        TextMeshProUGUI _serverID;
-        TextMeshProUGUI _serverName;
-        TextMeshProUGUI _serverConnectedPlayer;
-        TextMeshProUGUI _serverMaxPlayer;
+        [SerializeField]
+        TextMeshProUGUI _serverID,
+        _serverName,
+         _serverConnectedPlayer,
+         _serverMaxPlayer;
 
         PhotonView _serverlinePV;
 

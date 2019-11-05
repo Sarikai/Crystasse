@@ -48,15 +48,16 @@ namespace Prototype
             PhotonNetwork.ConnectUsingSettings();
         }
 
-        private void Update()
-        {
-            OnRoomListUpdate(_rooms);
-        }
+        //private void Update()
+        //{
+        //    OnRoomListUpdate(_rooms);
+        //}
 
         public override void OnConnectedToMaster()
         {
             Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.JoinLobby();
             //battleButton.SetActive(true);
             //UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._NewGameButton);
         }
@@ -72,7 +73,7 @@ namespace Prototype
 
         public void OnCreateRoomButtonClicked()
         {
-            PhotonNetwork.JoinRoom(UI_Manager.uiManager._RoomNameInput.ToString());
+            PhotonNetwork.JoinRoom(UI_Manager.uiManager._RoomNameInput.text);
 
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._CreateRoomMenu);
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._RoomMenu);
@@ -82,7 +83,7 @@ namespace Prototype
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
             Debug.Log("Tried to join failed, room did not exist");
-            CreateRoom(UI_Manager.uiManager._RoomNameInput.ToString());
+            CreateRoom(UI_Manager.uiManager._RoomNameInput.text);
         }
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
@@ -94,7 +95,8 @@ namespace Prototype
         {
             int randomRoomName = Random.Range(0, 1000);
             RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)ServerSetting.multiplayerSetting.maxPlayers };
-            PhotonNetwork.CreateRoom("Room " + randomRoomName, roomOps);
+            PhotonNetwork.CreateRoom("Room " + randomRoomName, roomOps, TypedLobby.Default);
+
         }
 
         void CreateRoom(string roomName)
@@ -127,8 +129,8 @@ namespace Prototype
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
             Debug.Log($"RoomUpdate called {_rooms != null}");
-            base.OnRoomListUpdate(roomList);
-            if (_rooms != null)
+            //base.OnRoomListUpdate(roomList);
+            if (roomList != null && roomList.Count > 0)
             {
                 Debug.Log($"Rooms not null");
                 foreach (RoomInfo roomInfo in roomList)
@@ -138,6 +140,7 @@ namespace Prototype
                     newLine.UpdateContentLine(roomInfo);
                 }
             }
+
         }
         #endregion
     }
