@@ -7,14 +7,20 @@ using UnityEngine;
 
 namespace PUN_Network
 {
-	public class PUN_RoomSettings : MonoBehaviourPunCallbacks
-	{
-	    #region Variables / Properties
-		
-		#endregion
-		
-		#region Methods
-		
-		#endregion
-	}
+    public struct PUN_RoomSettings
+    {
+        #region Variables / Properties
+
+        public int TimeToStart { get; set; }
+        public int MaxPlayers { get; set; }
+        public bool DelayedStart { get; set; }
+
+
+
+        #endregion
+
+        #region Methods
+
+        #endregion
+    }
 }

@@ -7,14 +7,20 @@ using UnityEngine;
 
 namespace PUN_Network
 {
-	public class PUN_Room : MonoBehaviourPunCallbacks
-	{
-	    #region Variables / Properties
-		
-		#endregion
-		
-		#region Methods
-		
-		#endregion
-	}
+    public class PUN_Room : MonoBehaviourPunCallbacks
+    {
+        #region Variables / Properties
+
+        //Variables
+        PUN_RoomSettings _activeSettings;
+        PUN_RoomSettings _defaultSettings;
+
+        //Properties
+        public PUN_RoomSettings GetRoomActiveSettings { get { return _activeSettings; } }
+        #endregion
+
+        #region Methods
+
+        #endregion
+    }
 }
