@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using CustomUI;
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace PUN_Network
         PUN_Room _localRoom;
         PUN_RoomSettings _defaultRoomSettings;
         UI_Manager _uiManager;
+
+
+        public PUN_Room GetRoom { get { return _localRoom; } }
 
         #endregion
 

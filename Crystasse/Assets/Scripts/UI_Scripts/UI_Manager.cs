@@ -38,17 +38,17 @@ namespace CustomUI
         public GameObject _ButtonStatsToMain;      //Leave statistics to main menu
         public GameObject _ButtonExitApp;          //Close game
 
-        //InputFields for data to check
+        //InputFields for data needed
         [Header("Input Fields")]
         public TextMeshProUGUI _InputPlayerName;
         public TextMeshProUGUI _InputRoomName;
         public TextMeshProUGUI _InputStartTimer;
         public TextMeshProUGUI _InputMaxPlayers;
-        public TextMeshProUGUI _InputMaxKills;
-        public TextMeshProUGUI _Input
+        public TextMeshProUGUI _InputMaxUnits;
+        public TextMeshProUGUI _InputCrystalAmount;
 
-    //TextFields for data to change
-    [Header("Text Fields"))]
+        //TextFields for data to change
+        //[Header("Text Fields"))]
 
 
 
