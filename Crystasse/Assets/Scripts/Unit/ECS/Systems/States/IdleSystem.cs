@@ -4,7 +4,7 @@ using Unity.Burst;
 using UnityEngine;
 using Unity.Collections;
 
-[BurstCompile, System.Serializable]
+[BurstCompile, System.Serializable, UpdateInGroup(typeof(StateSystemGroup))]
 public class IdleSystem : JobComponentSystem
 {
     protected override JobHandle OnUpdate(JobHandle inputDeps)

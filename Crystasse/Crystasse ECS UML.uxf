@@ -276,7 +276,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>960</y>
+      <y>1020</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -332,7 +332,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>580</y>
+      <y>640</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -478,7 +478,7 @@ _+ const CRYSTALDATA_PATH : string_</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>900</y>
+      <y>960</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -634,7 +634,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>640</y>
+      <y>700</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -647,7 +647,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>700</y>
+      <y>760</y>
       <w>260</w>
       <h>70</h>
     </coordinates>
@@ -661,7 +661,7 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>780</y>
+      <y>840</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -674,13 +674,26 @@ bg=pink</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>210</x>
-      <y>840</y>
+      <y>900</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>ConquerData : IComponentData
 --
 + CrystalID : int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>580</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>TargetPos : IComponentData
+--
++ Value : float3</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -2,7 +2,7 @@
 using Unity.Jobs;
 using Unity.Collections;
 
-[/*BurstCompile ,*/ System.Serializable]
+[/*BurstCompile ,*/ System.Serializable, UpdateInGroup(typeof(StateSystemGroup))]
 public class AttackSystem : JobComponentSystem
 {
     public static EntityQueryBuilder query;

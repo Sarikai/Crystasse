@@ -38,7 +38,6 @@ public static class EntitySpawnHelper
         world.EntityManager.SetComponentData<HealthPoints>(e, data.hp);
         world.EntityManager.SetComponentData<BuildSpeed>(e, data.bs);
         world.EntityManager.SetComponentData<MoveSpeed>(e, data.ms);
-        world.EntityManager.SetComponentData<State>(e, data.sD);
         world.EntityManager.SetComponentData<TargetPos>(e, data.target);
         world.EntityManager.SetComponentData<IdleData>(e, UnitData.DefaultIdleData);
     }

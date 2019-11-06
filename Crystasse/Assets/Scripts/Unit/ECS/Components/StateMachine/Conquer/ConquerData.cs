@@ -4,5 +4,5 @@ using Unity.Burst;
 [BurstCompile, System.Serializable]
 public struct ConquerData : IComponentData
 {
-
+    public int ID;
 }
