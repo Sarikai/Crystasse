@@ -35,7 +35,7 @@ namespace PUN_Network
             _serverID.text = "0";
             _serverName.text = "I am a Testserver";
             _serverPlayers.text = "1";
-            _serverMaxPlayers.text = $"{PUN_NetworkManager.NetworkManager.GetRoom.GetRoomActiveSettings.MaxPlayers}";
+            _serverMaxPlayers.text = $"{GameManager.MasterManager.NetworkManager.GetRoom.GetRoomActiveSettings.MaxPlayers}";
         }
 
         public void UpdateServerlistEntry(RoomInfo roomInfo)

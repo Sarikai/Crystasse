@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using ExitGames.Client.Photon;
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,8 +14,6 @@ namespace CustomUI
     {
         #region Variables / Properties
 
-        public static UI_Manager Manager;
-
         //MenusToToggle
         [Header("Menus")]
         public GameObject _MainMenu;               //Main Menu
@@ -23,6 +22,8 @@ namespace CustomUI
         public GameObject _RoomMenu;               //Like a actual game lobby
         public GameObject _RoomSetupMenu;          //"Host" only menu for changing settings like maxplayers or open/close state
         public GameObject _LobbyMenu;              //Menu that shows running rooms
+        public GameObject _IngameMenu;             //Main menu in active game
+        public GameObject _StatsMenu;              //Statistics menu
 
         //ButtonsForFunctions
         [Header("Buttons")]
@@ -40,43 +41,147 @@ namespace CustomUI
 
         //InputFields for data needed
         [Header("Input Fields")]
-        public TextMeshProUGUI _InputPlayerName;
-        public TextMeshProUGUI _InputRoomName;
-        public TextMeshProUGUI _InputStartTimer;
-        public TextMeshProUGUI _InputMaxPlayers;
-        public TextMeshProUGUI _InputMaxUnits;
-        public TextMeshProUGUI _InputCrystalAmount;
+        public TextMeshProUGUI _InputPlayerName;   //Input for a players nickname
+        public TextMeshProUGUI _InputRoomName;     //Input for the name of a custom room
+        public TextMeshProUGUI _InputMaxPlayers;   //Input for maximum players in room
+        public TextMeshProUGUI _InputMaxUnits;     //Input for maximal units --> create dropdown selector for global, per player, per crystal
+        public TextMeshProUGUI _InputCrystalAmount;//Input for crystal amount on map
+        [Range(0, 20)]
+        public TextMeshProUGUI _InputStartTimer;   //Input for delayed start time
 
         //TextFields for data to change
-        //[Header("Text Fields"))]
+        [Header("Data Fields")]
+        public TextMeshProUGUI _RoomName;          //Name of room player has joined
 
-
+        //HUD 
+        [Header("HUD")]
+        public TextMeshProUGUI _PlayerName;        //Name of player
+        public TextMeshProUGUI _CrystalsNeutral;   //All crystals that are neutral
+        public TextMeshProUGUI _CrystalsOwned;     //All crystals the player owns
+        public TextMeshProUGUI _CrystalsEnemy;     //All crystals owned by enemies
+        public TextMeshProUGUI _Population;        //Population player actual has
+        public TextMeshProUGUI _PopulationLimit;   //Players maximal allowed population
+        public TextMeshProUGUI _TimeRunning;       //Shows how long game is up
+        public TextMeshProUGUI _RealTime;          //Shows the real time of reality
+        public TextMeshProUGUI _SelectedUnitAmount;//Shows units selected with selection
 
         #endregion
 
         #region Methods
 
-        private void Awake()
+        //All toggle functions
+        #region Toggles
+
+        public void Toggle(GameObject objectToToggle)
         {
-            UIManagerSingleton();
+            objectToToggle.SetActive(!objectToToggle.activeSelf);
         }
 
-        protected void UIManagerSingleton()
+        public void ToggleMainMenu()
         {
-            if (UI_Manager.Manager == null)
-            {
-                UI_Manager.Manager = this;
-            }
-            else
-            {
-                if (UI_Manager.Manager != this)
-                {
-                    Destroy(UI_Manager.Manager.gameObject);
-                    UI_Manager.Manager = this;
-                }
-            }
-            DontDestroyOnLoad(this.gameObject);
+            Toggle(_MainMenu);
+            RoomOptions roomops = new RoomOptions();
+            Room myroom = new Room("", roomops);
+            myroom.SetCustomProperties(GameManager.MasterManager.NetworkManager.SetRoomSettings());
+
         }
+
+        public void ToggleMultiplayerMenu()
+        {
+            Toggle(_MultiplayerMenu);
+        }
+
+        public void ToggleCreateRoomMenu()
+        {
+            Toggle(_CreateRoomMenu);
+        }
+
+        public void ToggleRoomMenu()
+        {
+            Toggle(_RoomMenu);
+        }
+
+        public void ToggleRoomSetupMenu()
+        {
+            Toggle(_RoomSetupMenu);
+        }
+
+        public void ToggleLobbyMenu()
+        {
+            Toggle(_LobbyMenu);
+        }
+
+        public void ToggleIngameMenu()
+        {
+            Toggle(_IngameMenu);
+        }
+
+        public void ToggleStatsMenu()
+        {
+            Toggle(_StatsMenu);
+        }
+
+        #endregion
+
+        //All Button functions
+        #region Buttons
+
+        public virtual void OnButtonNewGameClicked()
+        {
+
+        }
+
+        public virtual void OnButtonCreateRandomRoomClicked()
+        {
+
+        }
+
+        public virtual void OnButtonCreateCustomRoomClicked()
+        {
+
+        }
+
+        public virtual void OnButtonCreateToMainClicked()
+        {
+
+        }
+
+        public virtual void OnButtonCancelSetupClicked()
+        {
+
+        }
+
+        public virtual void OnButtonJoinLobbyClicked()
+        {
+
+        }
+
+        public virtual void OnButtonLobbyNewGameClicked()
+        {
+
+        }
+
+        public virtual void OnButtonLobbyToMainClicked()
+        {
+
+        }
+
+        public virtual void OnButtonStatsMenuClicked()
+        {
+
+        }
+
+        public virtual void OnButtonStatsToMainClicked()
+        {
+
+        }
+
+        public virtual void OnButtonExitAppClicked()
+        {
+
+        }
+
+        #endregion
 
         #endregion
     }

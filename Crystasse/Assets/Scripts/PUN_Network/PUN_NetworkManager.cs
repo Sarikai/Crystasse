@@ -1,4 +1,5 @@
 ﻿using CustomUI;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -12,7 +13,6 @@ namespace PUN_Network
     public class PUN_NetworkManager : MonoBehaviourPunCallbacks
     {
         #region Variables / Properties
-        public static PUN_NetworkManager NetworkManager;
 
         PUN_Lobby _localLobby;
         PUN_Room _localRoom;
@@ -28,8 +28,6 @@ namespace PUN_Network
 
         private void Awake()
         {
-            NetworkManagerSingleton();
-
             _localLobby = GetComponent<PUN_Lobby>();
             _localRoom = GetComponent<PUN_Room>();
             _defaultRoomSettings = GetComponent<PUN_RoomSettings>();
@@ -40,22 +38,7 @@ namespace PUN_Network
             PhotonNetwork.ConnectUsingSettings();
         }
 
-        protected void NetworkManagerSingleton()
-        {
-            if (PUN_NetworkManager.NetworkManager == null)
-            {
-                PUN_NetworkManager.NetworkManager = this;
-            }
-            else
-            {
-                if (PUN_NetworkManager.NetworkManager != this)
-                {
-                    Destroy(PUN_NetworkManager.NetworkManager.gameObject);
-                    PUN_NetworkManager.NetworkManager = this;
-                }
-            }
-            DontDestroyOnLoad(this.gameObject);
-        }
+
 
         public override void OnConnectedToMaster()
         {
@@ -76,7 +59,7 @@ namespace PUN_Network
         private void CreateRoom()
         {
             int randomRoomNumber = Random.Range(0, 1000);
-            RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)_defaultRoomSettings.MaxPlayers };
+            RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)_defaultRoomSettings.MaxPlayers, PublishUserId = true };
             PhotonNetwork.CreateRoom($"Room: {randomRoomNumber}", roomOptions);
         }
 
@@ -87,6 +70,18 @@ namespace PUN_Network
         private void CreateRoom(string roomName)
         {
 
+        }
+
+        public ExitGames.Client.Photon.Hashtable SetRoomSettings()
+        {
+            ExitGames.Client.Photon.Hashtable customSettings = new ExitGames.Client.Photon.Hashtable()
+            {
+                //{"IsVisible", true },
+                //{"IsOpen", true },
+                //{"MaxPlayers", GameManager.MasterManager.UIManager._InputMaxPlayers }
+            };
+
+            return customSettings;
         }
 
         #endregion
