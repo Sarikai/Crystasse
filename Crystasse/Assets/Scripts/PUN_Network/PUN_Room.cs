@@ -17,6 +17,7 @@ namespace PUN_Network
 
         //Properties
         public PUN_RoomSettings GetRoomActiveSettings { get { return _activeSettings; } }
+
         #endregion
 
         #region Methods

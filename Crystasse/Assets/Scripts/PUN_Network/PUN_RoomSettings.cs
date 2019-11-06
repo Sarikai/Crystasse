@@ -14,8 +14,7 @@ namespace PUN_Network
         public int TimeToStart { get; set; }
         public int MaxPlayers { get; set; }
         public bool DelayedStart { get; set; }
-
-
+        public bool PrivateRoom { get; set; }
 
         #endregion
 
