@@ -25,8 +25,12 @@ MonoBehaviour:
     Value: 1
   ap:
     Value: 1
+  aRange:
+    Value: 3
   bp:
     Value: 10
+  bRange:
+    Value: 3
   hp:
     Value: 1
   bs:
@@ -46,5 +50,5 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 59c2d0c41470f7341a86a606de11713f, type: 2}
     subMesh: 0
     layer: 0
-    castShadows: 1
-    receiveShadows: 1
+    castShadows: 0
+    receiveShadows: 0

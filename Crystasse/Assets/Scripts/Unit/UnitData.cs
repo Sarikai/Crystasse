@@ -16,21 +16,26 @@ public class UnitData : ScriptableObject
             return World.Active.EntityManager.CreateArchetype(
                 typeof(ID),
                 typeof(TeamID),
+
                 typeof(Translation),
                 typeof(Scale),
                 typeof(LocalToWorld),
+
                 typeof(AttackPoints),
                 typeof(BuildPoints),
                 typeof(HealthPoints),
+
                 typeof(BuildSpeed),
                 typeof(MoveSpeed),
+
                 typeof(AttackRange),
                 typeof(BuildRange),
                 typeof(ConquerRange),
-                typeof(State),
-                typeof(Target),
+
+                typeof(TargetPos),
                 typeof(RenderMesh),
-                typeof(IdleData));
+                typeof(IdleData)
+                );
         }
     }
 
@@ -72,8 +77,10 @@ public class UnitData : ScriptableObject
     public Scale s;
 
     public AttackPoints ap;
+    public AttackRange aRange;
 
     public BuildPoints bp;
+    public BuildRange bRange;
 
     public HealthPoints hp;
 
@@ -81,9 +88,7 @@ public class UnitData : ScriptableObject
 
     public MoveSpeed ms;
 
-    public State sD;
-
-    public Target target;
+    public TargetPos target;
 
     public RenderMesh m;
 }

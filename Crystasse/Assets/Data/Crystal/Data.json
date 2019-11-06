@@ -1,6 +1,6 @@
 {
     "MaxHealth": 100,
-    "MaxUnitSpawned": 1000,
+    "MaxUnitSpawned": 5000,
     "IsBase": false,
     "IsSpawning": true,
     "Spawnrate": 0.1,

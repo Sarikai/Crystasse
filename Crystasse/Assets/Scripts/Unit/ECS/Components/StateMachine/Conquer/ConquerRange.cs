@@ -5,4 +5,5 @@ using Unity.Burst;
 public struct ConquerRange : IComponentData
 {
     public float Value;
+    public float SqrValue => Unity.Mathematics.math.mul(Value, Value);
 }

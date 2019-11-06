@@ -23,36 +23,10 @@ public class TestScript : MonoBehaviour
     {
         _world = World.Active;
         _unitArchetype = UnitData.Archetype;
-    }
 
-    private void FixedUpdate()
-    {
-        _timer += Time.fixedDeltaTime;
-
-        if(_timer >= _time && _maxUnits > 0)
-        {
-            for(int i = 0; i < _batchSize; i++)
-                AssignDefaultValues(EntitySpawnHelper.SpawnEntity(_unitArchetype, _world));
-            _maxUnits -= _batchSize;
-            _timer = 0f;
-        }
-    }
-
-    private void AssignDefaultValues(Entity e)
-    {
-        _world.EntityManager.SetSharedComponentData<TeamID>(e, _data.teamID);
-        _world.EntityManager.SetSharedComponentData<RenderMesh>(e, _data.m);
-
-        _world.EntityManager.SetComponentData<ID>(e, _data.id);
-        _world.EntityManager.SetComponentData<Translation>(e, _data.t);
-        _world.EntityManager.SetComponentData<Scale>(e, _data.s);
-        _world.EntityManager.SetComponentData<AttackPoints>(e, _data.ap);
-        _world.EntityManager.SetComponentData<BuildPoints>(e, _data.bp);
-        _world.EntityManager.SetComponentData<HealthPoints>(e, _data.hp);
-        _world.EntityManager.SetComponentData<BuildSpeed>(e, _data.bs);
-        _world.EntityManager.SetComponentData<MoveSpeed>(e, _data.ms);
-        _world.EntityManager.SetComponentData<State>(e, _data.sD);
-        _world.EntityManager.SetComponentData<Target>(e, _data.target);
-        _world.EntityManager.SetComponentData<IdleData>(e, UnitData.DefaultIdleData);
+        var g = new InstancedRenderMeshBatchGroup(
+            _world.EntityManager,
+            _world.GetExistingSystem<RenderMeshSystemV2>(),
+            _world.GetExistingSystem<RenderMeshSystemV2>().EntityQueries[1]);
     }
 }
