@@ -15,7 +15,7 @@ namespace Prototype
     {
         #region Variables / Properties
         [SerializeField]
-        TextMeshProUGUI _serverID,
+        public TextMeshProUGUI _serverID,
         _serverName,
          _serverConnectedPlayer,
          _serverMaxPlayer;
@@ -23,6 +23,11 @@ namespace Prototype
         PhotonView _serverlinePV;
 
         UIGradient iGradient;
+
+        public PUN_Lobby _ConnectedLobby;
+
+
+
         #endregion
 
         #region Methods
@@ -30,6 +35,7 @@ namespace Prototype
         private void Awake()
         {
             _serverlinePV = GetComponent<PhotonView>();
+            _ConnectedLobby = PUN_Lobby.Lobby;
         }
 
         public void UpdateContentLine(int serverID, String serverName, int serverConnectedPlayers, int serverMaxPlayer)
@@ -47,6 +53,11 @@ namespace Prototype
             _serverConnectedPlayer.text = roomInfo.PlayerCount.ToString();
             _serverMaxPlayer.text = roomInfo.MaxPlayers.ToString();
             Debug.Log($"Update done!");
+        }
+
+        public void OnClick()
+        {
+            _ConnectedLobby.OnEntryClicked(this.gameObject);
         }
         #endregion
     }

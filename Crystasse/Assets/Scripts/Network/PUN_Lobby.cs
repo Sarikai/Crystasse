@@ -79,6 +79,12 @@ namespace Prototype
             UI_Manager.uiManager.Toggle(UI_Manager.uiManager?._RoomMenu);
         }
 
+        public void OnEntryClicked(GameObject entryLine)
+        {
+            UI_ServerlistContentLine server = entryLine?.GetComponent<UI_ServerlistContentLine>();
+            PhotonNetwork.JoinRoom(server._serverName.text);
+        }
+
 
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
@@ -102,7 +108,7 @@ namespace Prototype
         void CreateRoom(string roomName)
         {
             RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)ServerSetting.multiplayerSetting.maxPlayers };
-            PhotonNetwork.CreateRoom("Room: " + roomName, roomOps);
+            PhotonNetwork.CreateRoom(roomName, roomOps);
             UI_Manager.uiManager._RoomName.text = roomName;
             //RoomInfo newRoomInfo;
             //Room newRoom;
