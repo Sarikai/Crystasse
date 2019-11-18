@@ -4,5 +4,5 @@ using Unity.Burst;
 [BurstCompile, System.Serializable]
 public struct ID : IComponentData
 {
-    public uint Value;
+    public int Value;
 }

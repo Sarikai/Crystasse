@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
 public class Crystal : MonoBehaviour
 {
+    private static EntityManager _entityManager;
     [SerializeField]
     TextAsset data;
     [SerializeField]
@@ -24,8 +26,25 @@ public class Crystal : MonoBehaviour
     public int Health { get => _health; private set => _health = value; }
     public int ID { get => _id; private set => _id = value; }
 
+    private static EntityArchetype Archetype
+    {
+        get
+        {
+            return _entityManager.CreateArchetype(
+                typeof(CrystalID),
+                typeof(Translation),
+                typeof(LocalToWorld),
+                typeof(Range),
+                typeof(PhysicsCollider)
+                );
+        }
+    }
+
     private void Start()
     {
+        if(_entityManager == null)
+            _entityManager = World.Active.EntityManager;
+
         Init(JsonUtility.FromJson<CrystalData>(data.text), UnitData.Archetype);
         //Init(JsonUtility.FromJson<CrystalData>(File.ReadAllText(string.Concat(Constants.CRYSTALDATA_PATH, "/Data.json"))), UnitData.Archetype);
     }
