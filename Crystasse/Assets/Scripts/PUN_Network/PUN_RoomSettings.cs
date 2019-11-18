@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace PUN_Network
 {
-    public struct PUN_RoomSettings
+    public class PUN_RoomSettings : MonoBehaviour
     {
         #region Variables / Properties
 

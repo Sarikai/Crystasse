@@ -40,14 +40,19 @@ namespace PUN_Network
 
         public void UpdateServerlistEntry(RoomInfo roomInfo)
         {
-
+            _serverID.text = roomInfo.ID.ToString();
+            _serverName.text = roomInfo.Name;
+            _serverPlayers.text = roomInfo.PlayerCount.ToString();
+            _serverMaxPlayers.text = roomInfo.MaxPlayers.ToString();
         }
 
         public void UpdateServerlistEntry(int serverID, string serverName, int players, int maxPlayers)
         {
-
+            _serverID.text = serverID.ToString();
+            _serverName.text = serverName;
+            _serverPlayers.text = players.ToString();
+            _serverMaxPlayers.text = maxPlayers.ToString();
         }
-
 
         #endregion
     }

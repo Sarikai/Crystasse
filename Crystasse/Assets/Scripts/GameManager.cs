@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         GameManagerSingleton();
+        _uiManager = GetComponent<UI_Manager>();
+        _networkManager = GetComponent<PUN_NetworkManager>();
     }
 
     protected void GameManagerSingleton()
