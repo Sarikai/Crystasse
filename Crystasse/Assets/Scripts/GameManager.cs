@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using CustomUI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Prototype
     {
         #region Variables / Properties
         public static GameManager gameManager;
+        public Stats _RunningSessionStats;
         #endregion
 
         #region Methods
@@ -25,6 +27,8 @@ namespace Prototype
                 }
             }
             DontDestroyOnLoad(this.gameObject);
+
+            _RunningSessionStats = new Stats();
         }
         #endregion
     }
