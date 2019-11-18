@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!1 &1439806032897950510
+=======
+--- !u!1 &4167001182235688913
+>>>>>>> PUN-Beta-V2.0
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +12,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 3710759665706508198}
   - component: {fileID: 2541800289835532048}
   - component: {fileID: 5527533754503773494}
   - component: {fileID: 8614597412444352241}
   - component: {fileID: 5589183993729440856}
+=======
+  - component: {fileID: 2150435479853030184}
+>>>>>>> PUN-Beta-V2.0
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -20,20 +28,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!4 &3710759665706508198
+=======
+--- !u!4 &2150435479853030184
+>>>>>>> PUN-Beta-V2.0
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1439806032897950510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 960, y: 820, z: 0}
+=======
+  m_GameObject: {fileID: 4167001182235688913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> PUN-Beta-V2.0
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &2541800289835532048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,3 +146,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
+=======
+>>>>>>> PUN-Beta-V2.0

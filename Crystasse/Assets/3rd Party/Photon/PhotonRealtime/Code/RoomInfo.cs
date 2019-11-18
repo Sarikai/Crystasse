@@ -47,8 +47,11 @@ namespace Photon.Realtime
         /// <summary>Backing field for property.</summary>
         protected int emptyRoomTtl = 0;
 
+<<<<<<< HEAD
         protected int roomID = 0;
 
+=======
+>>>>>>> PUN-Beta-V2.0
         /// <summary>Backing field for property.</summary>
         protected int playerTtl = 0;
 
@@ -67,6 +70,11 @@ namespace Photon.Realtime
         /// <summary>Backing field for property.</summary>
         protected string name;
 
+<<<<<<< HEAD
+=======
+        protected int id;
+
+>>>>>>> PUN-Beta-V2.0
         /// <summary>Backing field for master client id (actorNumber). defined by server in room props and ev leave.</summary>
         public int masterClientId;
 
@@ -84,6 +92,7 @@ namespace Photon.Realtime
             }
         }
 
+<<<<<<< HEAD
         public int ID
         {
             get
@@ -98,6 +107,22 @@ namespace Photon.Realtime
             get
             {
                 return this.name;
+=======
+        /// <summary>The name of a room. Unique identifier for a room/match (per AppId + game-Version).</summary>
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
+        public int ID
+        {
+            get
+            {
+                return this.id;
+>>>>>>> PUN-Beta-V2.0
             }
         }
 

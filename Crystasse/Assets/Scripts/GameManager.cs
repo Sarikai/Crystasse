@@ -1,35 +1,54 @@
+        public Stats _RunningSessionStats;
 ﻿using CustomUI;
+using PUN_Network;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Prototype
+[RequireComponent(typeof(UI_Manager), typeof(PUN_NetworkManager))]
+public class GameManager : MonoBehaviour
 {
-    public class GameManager : MonoBehaviour
-    {
-        #region Variables / Properties
-        public static GameManager gameManager;
-        public Stats _RunningSessionStats;
-        #endregion
+    #region Variables / Properties
 
-        #region Methods
-        private void Awake()
+    //Variables
+    public static GameManager MasterManager;
+    private UI_Manager _uiManager;
+    private PUN_NetworkManager _networkManager;
+
+
+    //Properties
+    public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
+    public PUN_NetworkManager NetworkManager { get { return _networkManager; } set { _networkManager = value; } }
+
+    #endregion
+
+    #region Methods
+
+    private void Awake()
+    {
+        GameManagerSingleton();
+        _uiManager = GetComponent<UI_Manager>();
+        _networkManager = GetComponent<PUN_NetworkManager>();
+    }
+
+    protected void GameManagerSingleton()
+    {
+        if (GameManager.MasterManager == null)
         {
-            if (GameManager.gameManager == null)
+            GameManager.MasterManager = this;
+        }
+        else
+        {
+            if (GameManager.MasterManager != this)
             {
-                GameManager.gameManager = this;
+                Destroy(GameManager.MasterManager.gameObject);
+                GameManager.MasterManager = this;
             }
-            else
-            {
-                if (GameManager.gameManager != this)
-                {
-                    Destroy(this.gameObject);
-                }
-            }
-            DontDestroyOnLoad(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    #endregion
+}
 
             _RunningSessionStats = new Stats();
-        }
-        #endregion
-    }
-}
