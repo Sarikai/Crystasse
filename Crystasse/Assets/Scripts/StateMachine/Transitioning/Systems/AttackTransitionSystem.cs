@@ -7,17 +7,10 @@ using Unity.Physics.Systems;
 [BurstCompile]
 public class AttackTransitionSystem : TransitionSystem
 {
-    BuildPhysicsWorld physicsWorld;
-    protected override void OnCreate()
-    {
-        base.OnCreate();
-
-        physicsWorld = World.Active.GetExistingSystem<BuildPhysicsWorld>();
-    }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         var job = new AttackTransitionJob() { buffer = bufferSystem.CreateCommandBuffer().ToConcurrent() }.Schedule(
-            World.Active.GetExistingSystem<StepPhysicsWorld>().Simulation,
+            StepPhysicsWorld.Simulation,
             ref physicsWorld.PhysicsWorld,
             inputDeps);
 

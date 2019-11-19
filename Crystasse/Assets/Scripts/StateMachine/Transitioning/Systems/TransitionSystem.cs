@@ -2,15 +2,20 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Physics.Systems;
 
 [UpdateInGroup(typeof(StateTransitionSystemGroup)), BurstCompile]
 public abstract class TransitionSystem : JobComponentSystem
 {
+    protected BuildPhysicsWorld physicsWorld;
+    protected StepPhysicsWorld StepPhysicsWorld;
     protected EndSimulationEntityCommandBufferSystem bufferSystem;
     protected override void OnCreate()
     {
         base.OnCreate();
         bufferSystem = World.GetExistingSystem<EndSimulationEntityCommandBufferSystem>();
+        physicsWorld = World.GetOrCreateSystem<BuildPhysicsWorld>();
+        StepPhysicsWorld = World.GetOrCreateSystem<StepPhysicsWorld>();
     }
 
     protected override abstract JobHandle OnUpdate(JobHandle inputDeps);

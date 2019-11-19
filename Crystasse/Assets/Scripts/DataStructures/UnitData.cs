@@ -5,6 +5,7 @@ using Unity.Transforms;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Physics;
+using Unity.Physics.Authoring;
 
 [UnityEngine.CreateAssetMenu(), BurstCompile, System.Serializable]
 public class UnitData : UnityEngine.ScriptableObject
@@ -18,6 +19,7 @@ public class UnitData : UnityEngine.ScriptableObject
                 typeof(TeamID),
 
                 typeof(Translation),
+                typeof(Rotation),
                 typeof(Scale),
                 typeof(LocalToWorld),
 
@@ -26,14 +28,15 @@ public class UnitData : UnityEngine.ScriptableObject
                 typeof(HealthPoints),
 
                 typeof(BuildSpeed),
-                typeof(MoveSpeed),
 
                 typeof(Range),
 
                 typeof(TargetPos),
                 typeof(RenderMesh),
-                //TODO: Change back to IdleData
-                typeof(AttackData)
+                typeof(IdleData),
+                typeof(MoveData),
+                typeof(PhysicsCollider)
+                //typeof(PhysicsVelocity),
                 );
         }
     }
@@ -63,7 +66,7 @@ public class UnitData : UnityEngine.ScriptableObject
 
     public BuildSpeed buildSpeed;
 
-    public MoveSpeed moveSpeed;
+    public MoveData moveData;
 
     public TargetPos target;
 

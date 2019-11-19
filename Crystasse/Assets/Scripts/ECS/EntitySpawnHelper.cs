@@ -1,38 +1,59 @@
 ﻿using Unity.Entities;
 using Unity.Transforms;
 using Unity.Rendering;
+using Unity.Physics;
 
 public static class EntitySpawnHelper
 {
     public static Entity SpawnEntity(EntityArchetype archetype) => World.Active.EntityManager.CreateEntity(archetype);
 
-    public static Entity SpawnEntity(EntityArchetype archetype, World world) => world.EntityManager.CreateEntity(archetype);
+    public static Entity SpawnEntity(EntityArchetype archetype, EntityManager manager) => manager.CreateEntity(archetype);
 
-    public static Entity SpawnEntityWithValues(EntityArchetype archetype, World world, UnitData data)
+    public static Entity SpawnEntityWithValues(EntityArchetype archetype, EntityManager manager, UnitData data)
     {
-        var e = world.EntityManager.CreateEntity(archetype);
+        var e = manager.CreateEntity(archetype);
 
-        AssignDefaultValues(e, world, data);
+        AssignDefaultValues(e, manager, data);
 
         return e;
     }
 
-    private static void AssignDefaultValues(Entity e, World world, UnitData data)
+    public static Entity SpawnEntityWithValues(EntityArchetype archetype, EntityManager manager, CrystalEntityData data)
     {
-        world.EntityManager.SetSharedComponentData<TeamID>(e, data.teamID);
-        world.EntityManager.SetSharedComponentData<RenderMesh>(e, data.renderMesh);
+        var e = manager.CreateEntity(archetype);
 
-        world.EntityManager.SetComponentData<ID>(e, data.ID);
-        world.EntityManager.SetComponentData<Translation>(e, data.translation);
-        world.EntityManager.SetComponentData<Scale>(e, data.scale);
-        world.EntityManager.SetComponentData<AttackPoints>(e, data.attackPoints);
-        world.EntityManager.SetComponentData<Range>(e, data.range);
-        world.EntityManager.SetComponentData<BuildPoints>(e, data.buildPoints);
-        world.EntityManager.SetComponentData<HealthPoints>(e, data.healthPoints);
-        world.EntityManager.SetComponentData<BuildSpeed>(e, data.buildSpeed);
-        world.EntityManager.SetComponentData<MoveSpeed>(e, data.moveSpeed);
-        world.EntityManager.SetComponentData<TargetPos>(e, data.target);
+        AssignDefaultValues(e, manager, data);
+
+        return e;
+    }
+
+    private static void AssignDefaultValues(Entity e, EntityManager manager, CrystalEntityData data)
+    {
+        manager.SetSharedComponentData<TeamID>(e, data.teamID);
+
+        manager.SetComponentData<CrystalID>(e, data.ID);
+        manager.SetComponentData<Translation>(e, data.translation);
+        manager.SetComponentData<Range>(e, data.range);
+        manager.SetComponentData<PhysicsCollider>(e, data.Collider);
+    }
+
+    private static void AssignDefaultValues(Entity e, EntityManager manager, UnitData data)
+    {
+        manager.SetSharedComponentData<TeamID>(e, data.teamID);
+        manager.SetSharedComponentData<RenderMesh>(e, data.renderMesh);
+
+        manager.SetComponentData<ID>(e, data.ID);
+        manager.SetComponentData<Translation>(e, data.translation);
+        manager.SetComponentData<Scale>(e, data.scale);
+        manager.SetComponentData<AttackPoints>(e, data.attackPoints);
+        manager.SetComponentData<Range>(e, data.range);
+        manager.SetComponentData<BuildPoints>(e, data.buildPoints);
+        manager.SetComponentData<HealthPoints>(e, data.healthPoints);
+        manager.SetComponentData<BuildSpeed>(e, data.buildSpeed);
+        manager.SetComponentData<MoveData>(e, data.moveData);
+        manager.SetComponentData<TargetPos>(e, data.target);
         //TODO: IdleData
-        world.EntityManager.SetComponentData<AttackData>(e, UnitData.DefaultAttackData);
+        manager.SetComponentData<IdleData>(e, UnitData.DefaultIdleData);
+        manager.SetComponentData<PhysicsCollider>(e, data.Collider);
     }
 }

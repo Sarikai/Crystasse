@@ -18,6 +18,8 @@ public class Crystal : MonoBehaviour
     private int _health;
     [SerializeField]
     private UnitData _unitData = null;
+    [SerializeField]
+    private CrystalEntityData _crystalEntityData = null;
     private EntityArchetype _unitArchetype;
     private readonly List<Entity> _unitsSpawned = new List<Entity>();
     private readonly Dictionary<ID, Entity> _enemies = new Dictionary<ID, Entity>();
@@ -26,19 +28,6 @@ public class Crystal : MonoBehaviour
     public int Health { get => _health; private set => _health = value; }
     public int ID { get => _id; private set => _id = value; }
 
-    private static EntityArchetype Archetype
-    {
-        get
-        {
-            return _entityManager.CreateArchetype(
-                typeof(CrystalID),
-                typeof(Translation),
-                typeof(LocalToWorld),
-                typeof(Range),
-                typeof(PhysicsCollider)
-                );
-        }
-    }
 
     private void Start()
     {
@@ -49,17 +38,25 @@ public class Crystal : MonoBehaviour
         //Init(JsonUtility.FromJson<CrystalData>(File.ReadAllText(string.Concat(Constants.CRYSTALDATA_PATH, "/Data.json"))), UnitData.Archetype);
     }
 
+    private void Update()
+    {
+        if(_unitsSpawned.Count >= _data.MaxUnitSpawned || TeamID == 0)
+            _data.IsSpawning = false;
+    }
+
     private void Init(CrystalData data, EntityArchetype archetype)
     {
         _data = data;
         Health = _data.MaxHealth;
         _unitArchetype = archetype;
+        EntitySpawnHelper.SpawnEntityWithValues(CrystalEntityData.Archetype, _entityManager, _crystalEntityData);
+        //TODO: PV Comparison (Is this my Crystal?)
         StartCoroutine(SpawnRoutine());
     }
 
     private IEnumerator SpawnRoutine()
     {
-        while(TeamID != 0 && _data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned)
+        while(_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0)
         {
             Spawn(new float3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + (float3)transform.position);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
@@ -68,9 +65,9 @@ public class Crystal : MonoBehaviour
 
     private void Spawn(float3 pos)
     {
-        var e = EntitySpawnHelper.SpawnEntityWithValues(_unitArchetype, World.Active, _unitData);
-        World.Active.EntityManager.SetComponentData(e, new Translation() { Value = pos });
-        World.Active.EntityManager.SetSharedComponentData(e, new TeamID() { Value = TeamID });
+        var e = EntitySpawnHelper.SpawnEntityWithValues(_unitArchetype, _entityManager, _unitData);
+        _entityManager.SetComponentData(e, new Translation() { Value = pos });
+        _entityManager.SetSharedComponentData(e, new TeamID() { Value = TeamID });
 
         _unitsSpawned.Add(e);
     }

@@ -3,9 +3,9 @@ using Unity.Burst;
 using Unity.Transforms;
 
 [BurstCompile]
-internal struct ConquerJob : IJobForEachWithEntity<AttackPoints, ConquerData, Range, LocalToWorld, MoveSpeed>
+internal struct ConquerJob : IJobForEachWithEntity<AttackPoints, ConquerData, LocalToWorld, MoveData>
 {
-    public void Execute(Entity entity, int index, ref AttackPoints c0, ref ConquerData c1, ref Range c2, ref LocalToWorld c4, ref MoveSpeed c5)
+    public void Execute(Entity entity, int index, ref AttackPoints c0, ref ConquerData c1, ref LocalToWorld c4, ref MoveData c5)
     {
         //throw new System.NotImplementedException();
     }

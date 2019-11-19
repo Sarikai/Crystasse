@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using Unity.Physics;
 
 //[BurstCompile]
-unsafe struct AttackJob : IJobForEachWithEntity<AttackPoints, PhysicsCollider, AttackData, MoveSpeed, Range>
+unsafe struct AttackJob : IJobForEachWithEntity<AttackPoints, PhysicsCollider, AttackData, MoveData, Range>
 {
     LocalToWorld _localToWorld;
 
@@ -15,7 +15,7 @@ unsafe struct AttackJob : IJobForEachWithEntity<AttackPoints, PhysicsCollider, A
                 [ReadOnly] ref AttackPoints _attackPoints,
                 ref PhysicsCollider collider,
                 ref AttackData _data,
-                [ReadOnly] ref MoveSpeed _moveSpeed,
+                [ReadOnly] ref MoveData _moveData,
                 [ReadOnly] ref Range _range)
     {
         _localToWorld = World.Active.EntityManager.GetComponentData<LocalToWorld>(entity);
@@ -26,7 +26,7 @@ unsafe struct AttackJob : IJobForEachWithEntity<AttackPoints, PhysicsCollider, A
             return;
 
         if(_data.TargetID > -1)
-            AdvanceOnTarget(AttackSystem.world.EntityManager, entity, _data.TargetPos, _moveSpeed.Value);
+            _moveData.Direction = math.normalize(_data.TargetPos - _localToWorld.Position);
     }
 
     private ColliderCastInput CreateCastInput(ref PhysicsCollider collider)
@@ -85,12 +85,5 @@ unsafe struct AttackJob : IJobForEachWithEntity<AttackPoints, PhysicsCollider, A
 
         TakeDamage(entityManager, enemy, hP, attackPoints);
         TakeDamage(entityManager, entity, entityManager.GetComponentData<HealthPoints>(entity), aP.Value);
-    }
-
-    private void AdvanceOnTarget(EntityManager entityManager, Entity entity, float3 targetPos, float _moveSpeed)
-    {
-        var tempVec = math.mul(new float4(math.normalize(targetPos - _localToWorld.Position), 0f), float4x4.identity);
-        var newPos = _localToWorld.Position + new float3(tempVec.x, tempVec.y, tempVec.z) * _moveSpeed;
-        entityManager.SetComponentData<Translation>(entity, new Translation() { Value = newPos });
     }
 }
