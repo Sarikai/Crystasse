@@ -22,6 +22,7 @@ namespace PUN_Network
         PUN_RoomSettings _defaultRoomSettings;
         PhotonView _photonView;
         UI_Manager _uiManager;
+        GameObject _networkPlayer;
 
         public bool _isGameLoaded;
         public int _currentScene;
@@ -31,6 +32,7 @@ namespace PUN_Network
         public bool startGame;
 
         public PUN_Room GetRoom { get { return _localRoom; } }
+        public GameObject GetNetworkPlayer { get { return _networkPlayer; } }
 
         #endregion
 
@@ -192,7 +194,7 @@ namespace PUN_Network
         [PunRPC]
         private void RPC_CreatePlayer()
         {
-            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), transform.position, Quaternion.identity, 0);
+            this._networkPlayer = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), transform.position, Quaternion.identity, 0);
         }
 
         [PunRPC]
