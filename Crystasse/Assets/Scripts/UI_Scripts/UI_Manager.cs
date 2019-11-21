@@ -38,6 +38,9 @@ namespace CustomUI
         public GameObject _ButtonLobbyNewGame;     //Create a new game from lobby
         public GameObject _ButtonLobbyToMain;      //Leave lobby to main menu
         public GameObject _ButtonStartGame;
+        public GameObject _ButtonRoomToMain;
+        public GameObject _ButtonLeaveRoom;
+        public GameObject _ButtonRoomSettings;
         public GameObject _ButtonStatsMenu;        //Open statistics menu
         public GameObject _ButtonStatsToMain;      //Leave statistics to main menu
         public GameObject _ButtonExitApp;          //Close game
@@ -68,6 +71,18 @@ namespace CustomUI
         public TextMeshProUGUI _TimeRunning;       //Shows how long game is up
         public TextMeshProUGUI _RealTime;          //Shows the real time of reality
         public TextMeshProUGUI _SelectedUnitAmount;//Shows units selected with selection
+
+        //GradientColors
+        [Header("Gradients")]
+        public Gradient _blueGradient;
+        public Gradient _greemGradient;
+        public Gradient _orangeGradient;
+        public Gradient _redGradient;
+        public Gradient _blackGradient;
+
+        //Others
+        [Header("Others")]
+        public GameObject _Background;
 
         #endregion
 
