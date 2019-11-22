@@ -20,23 +20,32 @@ public class Crystal : MonoBehaviour
     private UnitData _unitData = null;
     [SerializeField]
     private CrystalEntityData _crystalEntityData = null;
+    private GameObject _unitPrefab;
     private EntityArchetype _unitArchetype;
-    private readonly List<Entity> _unitsSpawned = new List<Entity>();
-    private readonly Dictionary<ID, Entity> _enemies = new Dictionary<ID, Entity>();
+    //TODO: Save Units instead of Entities
+    private readonly List<Unit> _unitsSpawned = new List<Unit>();
 
     public byte TeamID => _data.TeamID;
     public int Health { get => _health; private set => _health = value; }
     public int ID { get => _id; private set => _id = value; }
 
+    public Unit[] Units => _unitsSpawned.ToArray();
 
-    private void Start()
+
+    public void Init(GameObject prefab)
     {
+        _unitPrefab = prefab;
+
         if(_entityManager == null)
             _entityManager = World.Active.EntityManager;
 
         Init(JsonUtility.FromJson<CrystalData>(data.text), UnitData.Archetype);
-        //Init(JsonUtility.FromJson<CrystalData>(File.ReadAllText(string.Concat(Constants.CRYSTALDATA_PATH, "/Data.json"))), UnitData.Archetype);
     }
+
+    //private void Start()
+    //{
+    //    //Init(JsonUtility.FromJson<CrystalData>(File.ReadAllText(string.Concat(Constants.CRYSTALDATA_PATH, "/Data.json"))), UnitData.Archetype);
+    //}
 
     private void Update()
     {
@@ -69,6 +78,8 @@ public class Crystal : MonoBehaviour
         _entityManager.SetComponentData(e, new Translation() { Value = pos });
         _entityManager.SetSharedComponentData(e, new TeamID() { Value = TeamID });
 
-        _unitsSpawned.Add(e);
+        var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
+
+        _unitsSpawned.Add(unit);
     }
 }
