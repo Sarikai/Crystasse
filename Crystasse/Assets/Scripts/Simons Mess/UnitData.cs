@@ -16,6 +16,6 @@ public class UnitData : ScriptableObject
 
     [Range(0, 255)]
     public byte HealthPoints, AttackPoints, BuildPoints;
-    public float BuildSpeed;
+    public float BuildSpeed, MoveSpeed;
 
 }

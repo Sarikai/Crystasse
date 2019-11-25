@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    public UnitAccess Agent { get; private set; }
-    public UnitAccess Target { get; private set; }
+    public Unit Agent { get; private set; }
+    public Unit Target { get; private set; }
 
-    public AttackState(UnitAccess agent, UnitAccess target)
+    public AttackState(Unit agent, Unit target)
     {
         Type = States.Attack;
         Agent = agent;

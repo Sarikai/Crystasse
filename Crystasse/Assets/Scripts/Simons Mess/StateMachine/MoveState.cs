@@ -7,12 +7,12 @@ using Unity.Mathematics;
 public class MoveState : State
 {
     public float Speed;
-    public TransformAccess Transform;
+    public Transform Transform;
     public float3 Destination;
 
     private float _timer = 0f;
 
-    public MoveState(float speed, TransformAccess transform, float3 destination)
+    public MoveState(float speed, Transform transform, float3 destination)
     {
         Type = States.Move;
         Speed = speed;

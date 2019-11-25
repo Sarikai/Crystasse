@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuildState : State
 {
-    public UnitAccess Agent { get; private set; }
+    public Unit Agent { get; private set; }
     public Bridge Target;
     private float _timer = 0f;
 

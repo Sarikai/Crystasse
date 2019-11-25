@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ConquerState : State
 {
-    public UnitAccess Agent { get; private set; }
+    public Unit Agent { get; private set; }
     public Crystal Target;
 
 

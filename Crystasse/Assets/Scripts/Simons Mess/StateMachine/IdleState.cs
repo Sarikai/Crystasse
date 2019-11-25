@@ -6,13 +6,15 @@ using UnityEngine.Jobs;
 
 public class IdleState : State
 {
-    public TransformAccess Transform;
+    public Transform Transform;
+    private float moveSPeedd;
     private float _timer = 0f;
 
-    public IdleState(TransformAccess transform)
+    public IdleState(Transform transform, float moveSpeed)
     {
         Type = States.Idle;
         Transform = transform;
+        moveSPeedd = moveSpeed;
     }
 
     protected override void Enter()
@@ -28,11 +30,11 @@ public class IdleState : State
 
     protected override void Stay()
     {
-        _timer += Time.deltaTime;
+        _timer += StateMachine.DeltaTime;
 
-        Transform.position += new Vector3(0f, 1f, 0f) * math.sin(_timer);
+        Transform.position += new Vector3(0f, 1f, 0f) * math.sin(_timer) * moveSPeedd * StateMachine.DeltaTime;
 
-        if(_timer >= 2 * math.PI)
+        if(_timer >= 2f * math.PI)
             _timer = 0f;
     }
 }

@@ -5,6 +5,6 @@ using UnityEngine.Jobs;
 
 public abstract class Agent : MonoBehaviour
 {
-    public State CurrentState { get; protected set; }
+    public State CurrentState { get; set; }
 
 }

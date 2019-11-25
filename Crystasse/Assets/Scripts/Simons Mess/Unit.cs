@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 public class Unit : Agent
 {
@@ -13,6 +14,7 @@ public class Unit : Agent
     public byte Health { get; private set; }
     public byte AttackPoints => _data.AttackPoints;
     public byte BuildPoints { get; private set; }
+    public float MoveSpeed => _data.MoveSpeed;
 
     public byte BuildingPoints
     {
@@ -36,6 +38,11 @@ public class Unit : Agent
         BuildPoints = _data.BuildPoints;
     }
 
+    private void Start()
+    {
+        StateMachine.SwitchState(this, new IdleState(transform, _data.MoveSpeed));
+    }
+
     public void UpdateUnit()
     {
         if(!CurrentState.Completed)
@@ -57,5 +64,13 @@ public class Unit : Agent
     public void SwitchState(State state)
     {
         CurrentState = state;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var enemy = other.GetComponent<Unit>();
+
+        if(enemy && enemy.TeamID != TeamID)
+            StateMachine.SwitchState(this, new AttackState(this, enemy));
     }
 }

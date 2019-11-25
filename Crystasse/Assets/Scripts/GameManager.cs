@@ -58,9 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        foreach(var crystal in crystals)
-            if(crystal.Units != null && crystal.Units.Length > 0)
-                JobCreator.CreateUpdateUnitJob(crystal.Units);
+        StateMachine.Update();
     }
 
     #endregion

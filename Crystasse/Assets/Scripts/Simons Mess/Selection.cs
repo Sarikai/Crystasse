@@ -14,7 +14,7 @@ public static class Selection
 
     static Selection()
     {
-        _data = JsonUtility.FromJson<SelectionData>(File.ReadAllText(_path));
+        _data = JsonUtility.FromJson<SelectionData>(File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json"));
     }
 
     private static void AddSelection(Unit[] selection)
@@ -28,8 +28,16 @@ public static class Selection
     public static void CastSphereSelection(RaycastHit hit)
     {
         //TODO: Query for all entities of the Archetype for the units and decide which of them are in range.
+        var hits = Physics.OverlapSphere(hit.point, _data.SelectionRadius, 1 << _data.SelectionLayer);
         Unit[] selected = new Unit[0];
-
+        List<Unit> sel = new List<Unit>();
+        foreach(var coll in hits)
+        {
+            if(coll.GetComponent<Unit>())
+                sel.Add(coll.GetComponent<Unit>());
+        }
+        selected = sel.ToArray();
+        _selected.Clear();
         AddSelection(selected);
     }
 
