@@ -11,10 +11,22 @@ namespace PUN_Network
     {
         #region Variables / Properties
 
-        public int TimeToStart { get; set; }
-        public int MaxPlayers { get; set; }
-        public bool DelayedStart { get; set; }
-        public bool PrivateRoom { get; set; }
+        [SerializeField]
+        private int timeToStart;
+        [SerializeField]
+        private int maxPlayers;
+        [SerializeField]
+        private bool delayedStart;
+        [SerializeField]
+        private bool privateRoom;
+        [SerializeField]
+        private bool autoStart;
+
+        public int TimeToStart { get => timeToStart; set => timeToStart = value; }
+        public int MaxPlayers { get => maxPlayers; set => maxPlayers = value; }
+        public bool DelayedStart { get => delayedStart; set => delayedStart = value; }
+        public bool PrivateRoom { get => privateRoom; set => privateRoom = value; }
+        public bool AutoStart { get => autoStart; set => autoStart = value; }
 
         #endregion
 

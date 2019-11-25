@@ -1,6 +1,7 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using PUN_Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace CustomUI
         [Header("Menus")]
         public GameObject _MainMenu;               //Main Menu
         public GameObject _MultiplayerMenu;        //All Menus that are networking relevant
-        public GameObject _CreateRoomMenu;         //Menu for room creation
+        public GameObject _RoomCreateMenu;         //Menu for room creation
         public GameObject _RoomMenu;               //Like a actual game lobby
         public GameObject _RoomSetupMenu;          //"Host" only menu for changing settings like maxplayers or open/close state
         public GameObject _LobbyMenu;              //Menu that shows running rooms
@@ -57,11 +58,12 @@ namespace CustomUI
         public TextMeshProUGUI _InputCrystalAmount;//Input for crystal amount on map
         //[Range(0, 20)]
         public TextMeshProUGUI _InputStartTimer;   //Input for delayed start time
+        public bool _Autostart;
 
         //TextFields for data to change
         [Header("Data Fields")]
         public TextMeshProUGUI _RoomName;          //Name of room player has joined
-        public GameObject _ServerList;
+        public Transform _ServerList;
 
         //HUD 
         [Header("HUD")]
@@ -86,6 +88,8 @@ namespace CustomUI
         //Others
         [Header("Others")]
         public GameObject _Background;
+        public PUN_ServerlistEntry _serverEntryPrefab;
+        public PUN_PlayerlistEntry _playerEntryPrefab;
 
         #endregion
 
@@ -115,7 +119,7 @@ namespace CustomUI
 
         public void ToggleCreateRoomMenu()
         {
-            Toggle(_CreateRoomMenu);
+            Toggle(_RoomCreateMenu);
         }
 
         public void ToggleRoomMenu()
@@ -126,6 +130,14 @@ namespace CustomUI
         public void ToggleRoomSetupMenu()
         {
             Toggle(_RoomSetupMenu);
+        }
+
+        public void ToggleRoomSetupButtons()
+        {
+            Toggle(_ButtonApplySetup01);
+            Toggle(_ButtonApplySetup02);
+            Toggle(_ButtonCancelSetup01);
+            Toggle(_ButtonCancelSetup02);
         }
 
         public void ToggleLobbyMenu()
@@ -162,12 +174,16 @@ namespace CustomUI
 
         public virtual void OnButtonCreateRandomRoomClicked()
         {
+            ToggleCreateRoomMenu();
+            ToggleRoomMenu();
             GameManager.MasterManager.NetworkManager.CreateRoom();
         }
 
         public virtual void OnButtonCreateCustomRoomClicked()
         {
-            GameManager.MasterManager.NetworkManager.CreateRoom(_InputRoomName.text);
+            ToggleCreateRoomMenu();
+            ToggleRoomMenu();
+            ToggleRoomSetupMenu();
         }
 
         public virtual void OnButtonCreateToMainClicked()
@@ -179,22 +195,28 @@ namespace CustomUI
 
         public virtual void OnButtonCancelSetup01Clicked()
         {
-
+            ToggleRoomSetupMenu();
+            ToggleRoomMenu();
+            ToggleMultiplayerMenu();
+            ToggleMainMenu();
         }
 
         public virtual void OnButtonCancelSetup02Clicked()
         {
-
+            ToggleRoomSetupMenu();
         }
 
         public virtual void OnButtonApplySetup01Clicked()
         {
-
+            GameManager.MasterManager.NetworkManager.CreateRoom(_InputRoomName.text);
+            ToggleRoomSetupButtons();
+            ToggleRoomSetupMenu();
         }
 
         public virtual void OnButtonApplySetup02Clicked()
         {
-
+            GameManager.MasterManager.NetworkManager.UpdateRoomSettings();
+            //GameManager.MasterManager.NetworkManager.OnRoomListUpdate(GameManager.MasterManager.NetworkManager.GetLobby.Rooms);
         }
 
         public virtual void OnButtonJoinLobbyClicked()
@@ -202,6 +224,14 @@ namespace CustomUI
             ToggleMainMenu();
             ToggleMultiplayerMenu();
             ToggleLobbyMenu();
+
+
+
+
+        }
+        public override void OnJoinedLobby()
+        {
+            base.OnJoinedLobby();
         }
 
         public virtual void OnButtonLobbyNewGameClicked()
