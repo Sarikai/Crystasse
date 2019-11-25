@@ -44,15 +44,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 442211909503245626, guid: fbb5290990c17bc4d84ec71e4356b600,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3926864520227432108, guid: fbb5290990c17bc4d84ec71e4356b600,
         type: 3}
       propertyPath: m_Name
       value: Unit Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 442211909503245626, guid: fbb5290990c17bc4d84ec71e4356b600,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8690847587152080359, guid: fbb5290990c17bc4d84ec71e4356b600,
         type: 3}
@@ -109,6 +109,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6034890538538039530, guid: fbb5290990c17bc4d84ec71e4356b600,
+        type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 7985108256419313374}
+    - target: {fileID: 6034890538538039530, guid: fbb5290990c17bc4d84ec71e4356b600,
+        type: 3}
+      propertyPath: _rangeTrigger
+      value: 
+      objectReference: {fileID: 7985108256419313374}
+    - target: {fileID: 8749533807202364170, guid: fbb5290990c17bc4d84ec71e4356b600,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 421725273181481668, guid: fbb5290990c17bc4d84ec71e4356b600,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001336803799442102, guid: fbb5290990c17bc4d84ec71e4356b600,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8058746771724295925, guid: fbb5290990c17bc4d84ec71e4356b600, type: 3}
     - {fileID: 3820768957577399549, guid: fbb5290990c17bc4d84ec71e4356b600, type: 3}
@@ -122,6 +147,12 @@ GameObject:
 --- !u!4 &8007484625397657651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8690847587152080359, guid: fbb5290990c17bc4d84ec71e4356b600,
+    type: 3}
+  m_PrefabInstance: {fileID: 1710342026877738452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &7985108256419313374 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 8749533807202364170, guid: fbb5290990c17bc4d84ec71e4356b600,
     type: 3}
   m_PrefabInstance: {fileID: 1710342026877738452}
   m_PrefabAsset: {fileID: 0}

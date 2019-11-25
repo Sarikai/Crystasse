@@ -8,6 +8,8 @@ public class Unit : Agent
     private static int _lastID = 0;
     [SerializeField]
     private UnitData _data;
+    [SerializeField]
+    private SphereCollider _collider, _rangeTrigger;
 
     public int ID { get; private set; }
     public byte TeamID => _data.TeamID;
@@ -36,6 +38,7 @@ public class Unit : Agent
 
         Health = _data.HealthPoints;
         BuildPoints = _data.BuildPoints;
+        _rangeTrigger.radius = _data.Range;
     }
 
     private void Start()
