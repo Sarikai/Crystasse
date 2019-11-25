@@ -3,5 +3,6 @@
     Idle,
     Build,
     Attack,
-    Conquer
+    Conquer,
+    Move
 }

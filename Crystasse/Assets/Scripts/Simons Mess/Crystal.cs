@@ -16,6 +16,7 @@ public class Crystal : MonoBehaviourPun
     private int _health;
     [SerializeField]
     private UnitData _unitData = null;
+    [SerializeField]
     private GameObject _unitPrefab;
     //TODO: Save Units instead of Entities
     private readonly List<Unit> _unitsSpawned = new List<Unit>();
@@ -37,6 +38,10 @@ public class Crystal : MonoBehaviourPun
 
     public Unit[] Units => _unitsSpawned.ToArray();
 
+    public void Init()
+    {
+        Init(JsonUtility.FromJson<CrystalData>(data.text));
+    }
 
     public void Init(GameObject prefab)
     {
@@ -50,11 +55,11 @@ public class Crystal : MonoBehaviourPun
     //    //Init(JsonUtility.FromJson<CrystalData>(File.ReadAllText(string.Concat(Constants.CRYSTALDATA_PATH, "/Data.json"))));
     //}
 
-    private void Update()
-    {
-        if(_unitsSpawned.Count >= _data.MaxUnitSpawned || TeamID == 0)
-            _data.IsSpawning = false;
-    }
+    //private void Update()
+    //{
+    //    if(_unitsSpawned.Count >= _data.MaxUnitSpawned || TeamID == 0)
+    //        _data.IsSpawning = false;
+    //}
 
     private void Init(CrystalData data)
     {

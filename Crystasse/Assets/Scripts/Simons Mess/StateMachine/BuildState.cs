@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class BuildState : State
 {
-    public Unit Agent;
+    public UnitAccess Agent { get; private set; }
     public Bridge Target;
     private float _timer = 0f;
 
-    public BuildState(Unit agent, Bridge target)
-    {
-        Agent = agent ?? throw new ArgumentNullException(nameof(agent));
-        Target = target ?? throw new ArgumentNullException(nameof(target));
-    }
 
     protected override void Enter()
     {

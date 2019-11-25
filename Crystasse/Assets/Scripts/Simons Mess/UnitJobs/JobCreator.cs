@@ -5,8 +5,8 @@ using UnityEngine;
 
 public static class JobCreator
 {
-    public static JobHandle CreateUpdateUnitJob(Unit[] units)
+    public static void CreateUpdateUnitJob(Unit[] units)
     {
-        return new UpdateUnitJob() { Units = units }.Schedule(units.Length, units.Length);
+        //return new UpdateUnitJob() { Units = units }.Schedule(units.Length, units.Length);
     }
 }

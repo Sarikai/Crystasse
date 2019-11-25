@@ -11,6 +11,7 @@ public class IdleState : State
 
     public IdleState(TransformAccess transform)
     {
+        Type = States.Idle;
         Transform = transform;
     }
 

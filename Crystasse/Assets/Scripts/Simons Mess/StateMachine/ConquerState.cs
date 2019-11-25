@@ -5,14 +5,9 @@ using UnityEngine;
 
 public class ConquerState : State
 {
-    public Unit Agent;
+    public UnitAccess Agent { get; private set; }
     public Crystal Target;
 
-    public ConquerState(Unit agent, Crystal target)
-    {
-        Agent = agent ?? throw new ArgumentNullException(nameof(agent));
-        Target = target ?? throw new ArgumentNullException(nameof(target));
-    }
 
     protected override void Enter()
     {

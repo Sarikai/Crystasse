@@ -25,6 +25,8 @@ public class Unit : Agent
         }
     }
 
+    public float BuildSpeed => _data.BuildSpeed;
+
     private void Awake()
     {
         ID = _lastID;

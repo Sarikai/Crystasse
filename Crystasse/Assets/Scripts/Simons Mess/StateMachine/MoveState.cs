@@ -14,6 +14,7 @@ public class MoveState : State
 
     public MoveState(float speed, TransformAccess transform, float3 destination)
     {
+        Type = States.Move;
         Speed = speed;
         Transform = transform;
         Destination = destination;

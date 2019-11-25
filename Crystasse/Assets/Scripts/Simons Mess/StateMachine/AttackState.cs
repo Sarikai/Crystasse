@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    public Unit Agent;
-    public Unit Target;
+    public UnitAccess Agent { get; private set; }
+    public UnitAccess Target { get; private set; }
 
-    public AttackState(Unit agent, Unit target)
+    public AttackState(UnitAccess agent, UnitAccess target)
     {
-        Agent = agent ?? throw new ArgumentNullException(nameof(agent));
-        Target = target ?? throw new ArgumentNullException(nameof(target));
+        Type = States.Attack;
+        Agent = agent;
+        Target = target;
     }
 
     protected override void Enter()

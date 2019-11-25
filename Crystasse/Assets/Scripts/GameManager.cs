@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     private UI_Manager _uiManager;
     private PUN_NetworkManager _networkManager;
 
+    public Crystal[] crystals;
+
 
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
@@ -32,19 +34,33 @@ public class GameManager : MonoBehaviour
 
     protected void GameManagerSingleton()
     {
-        if (GameManager.MasterManager == null)
+        if(GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if (GameManager.MasterManager != this)
+            if(GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
             }
         }
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Start()
+    {
+        if(crystals != null)
+            foreach(var crystal in crystals)
+                crystal.Init();
+    }
+
+    private void Update()
+    {
+        foreach(var crystal in crystals)
+            if(crystal.Units != null && crystal.Units.Length > 0)
+                JobCreator.CreateUpdateUnitJob(crystal.Units);
     }
 
     #endregion

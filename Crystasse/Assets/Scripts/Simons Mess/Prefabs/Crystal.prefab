@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b8b08b0ecab164594573041b874b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 4900000, guid: 57391f0c948ef704eb152017f9aa6242, type: 3}
   _data:
     MaxHealth: 0
     MaxUnitSpawned: 0
@@ -56,6 +56,8 @@ MonoBehaviour:
     TeamID: 0
     Range: 0
   _unitData: {fileID: 11400000, guid: b198c5b4685df40479e6201dce1fb52b, type: 2}
+  _unitPrefab: {fileID: 3926864520227432108, guid: fbb5290990c17bc4d84ec71e4356b600,
+    type: 3}
 --- !u!33 &7725932269572338000
 MeshFilter:
   m_ObjectHideFlags: 0
