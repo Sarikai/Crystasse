@@ -4,7 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.UI.Michsky.UI.ModernUIPack;
 
 namespace PUN_Network
 {
@@ -20,7 +21,11 @@ namespace PUN_Network
         bool _playerReady;
         [SerializeField]
         int _playerTeam;
+        [SerializeField]
+        int _myID = 1;
 
+        [SerializeField]
+        UIGradient _entryGradient;
         [SerializeField]
         Gradient _playerReadyGradient;
         [SerializeField]
@@ -29,6 +34,11 @@ namespace PUN_Network
         #endregion
 
         #region Methods
+
+        private void Awake()
+        {
+            _entryGradient = this.GetComponent<UIGradient>();
+        }
 
         public virtual void UpdatePlayerlistEntry()
         {
@@ -45,7 +55,22 @@ namespace PUN_Network
 
         public void UpdatePlayerlistEntry(int playerID, string playerName, int players, int maxPlayers)
         {
-        
+
+        }
+
+        public void OnPlayerEntryClicked()
+        {
+            if (_playerID.text == _myID.ToString())
+            {
+                _playerReady = !_playerReady;
+            }
+            switch (_playerReady)
+            {
+                case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
+                case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+
+            }
+
         }
 
         #endregion

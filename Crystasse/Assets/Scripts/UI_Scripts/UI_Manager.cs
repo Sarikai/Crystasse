@@ -33,7 +33,10 @@ namespace CustomUI
         public GameObject _ButtonCreateRandomRoom; //Creates a room with random name and default settings
         public GameObject _ButtonCreateCustomRoom; //Shows room menu and opens room setup menu
         public GameObject _ButtonCreateToMain;     //Button Back to main Menu
-        public GameObject _ButtonCancelSetup;      //Cancels custom room setup
+        public GameObject _ButtonCancelSetup01;    //Cancels custom room setup
+        public GameObject _ButtonCancelSetup02;    //Cancels room settings setup
+        public GameObject _ButtonApplySetup01;     //Applies custom room setup
+        public GameObject _ButtonApplySetup02;     //Applies room settings setup
         public GameObject _ButtonJoinLobby;        //Open up lobby menu to see running rooms
         public GameObject _ButtonLobbyNewGame;     //Create a new game from lobby
         public GameObject _ButtonLobbyToMain;      //Leave lobby to main menu
@@ -174,7 +177,22 @@ namespace CustomUI
             ToggleMainMenu();
         }
 
-        public virtual void OnButtonCancelSetupClicked()
+        public virtual void OnButtonCancelSetup01Clicked()
+        {
+
+        }
+
+        public virtual void OnButtonCancelSetup02Clicked()
+        {
+
+        }
+
+        public virtual void OnButtonApplySetup01Clicked()
+        {
+
+        }
+
+        public virtual void OnButtonApplySetup02Clicked()
         {
 
         }
@@ -202,6 +220,15 @@ namespace CustomUI
         {
 
         }
+
+        public virtual void OnButtonRoomToMainClicked()
+        {
+
+        }
+
+        public virtual void OnButtonRoomLeaveClicked() { }
+
+        public virtual void OnButtonRoomSettingsClicked() { }
 
         public virtual void OnButtonStartGameClicked()
         {
