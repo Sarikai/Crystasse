@@ -56,7 +56,7 @@ namespace PUN_Network
 
         public void OnEntryClicked()
         {
-            GameManager.MasterManager.NetworkManager.JoinRoom(_serverName.text);
+            GameManager.MasterManager.UIManager.OnButtonJoinRoomClicked(_serverName.text);
         }
 
         #endregion

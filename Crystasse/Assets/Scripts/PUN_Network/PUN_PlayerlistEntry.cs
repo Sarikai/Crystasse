@@ -38,6 +38,10 @@ namespace PUN_Network
         private void Awake()
         {
             _entryGradient = this.GetComponent<UIGradient>();
+            if (int.TryParse(GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId, out int userID))
+            {
+                _myID = userID;
+            }
         }
 
         public virtual void UpdatePlayerlistEntry()
@@ -50,7 +54,10 @@ namespace PUN_Network
 
         public void UpdatePlayerlistEntry(Player player)
         {
-
+            _playerID.text = player.UserId;
+            _playerName.text = player.NickName;
+            _playerReady = false;
+            _playerTeam = 0;
         }
 
         public void UpdatePlayerlistEntry(int playerID, string playerName, int players, int maxPlayers)
@@ -68,7 +75,6 @@ namespace PUN_Network
             {
                 case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
                 case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-
             }
 
         }

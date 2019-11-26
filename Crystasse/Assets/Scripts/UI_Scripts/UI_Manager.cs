@@ -64,6 +64,7 @@ namespace CustomUI
         [Header("Data Fields")]
         public TextMeshProUGUI _RoomName;          //Name of room player has joined
         public Transform _ServerList;
+        public Transform _PlayerList;
 
         //HUD 
         [Header("HUD")]
@@ -221,14 +222,12 @@ namespace CustomUI
 
         public virtual void OnButtonJoinLobbyClicked()
         {
+            GameManager.MasterManager.NetworkManager.JoinDefaultLobby();
             ToggleMainMenu();
             ToggleMultiplayerMenu();
             ToggleLobbyMenu();
-
-
-
-
         }
+
         public override void OnJoinedLobby()
         {
             base.OnJoinedLobby();
@@ -236,7 +235,8 @@ namespace CustomUI
 
         public virtual void OnButtonLobbyNewGameClicked()
         {
-
+            ToggleLobbyMenu();
+            ToggleCreateRoomMenu();
         }
 
         public virtual void OnButtonLobbyToMainClicked()
@@ -248,17 +248,31 @@ namespace CustomUI
 
         public virtual void OnButtonJoinRoomClicked(String roomName)
         {
-
+            GameManager.MasterManager.NetworkManager.JoinRoom(roomName);
+            ToggleLobbyMenu();
+            ToggleRoomMenu();
         }
 
         public virtual void OnButtonRoomToMainClicked()
         {
-
+            GameManager.MasterManager.NetworkManager.LeaveRoom();
+            ToggleRoomMenu();
+            ToggleMultiplayerMenu();
+            ToggleMainMenu();
         }
 
-        public virtual void OnButtonRoomLeaveClicked() { }
+        public virtual void OnButtonRoomLeaveClicked()
+        {
+            GameManager.MasterManager.NetworkManager.LeaveRoom();
+            GameManager.MasterManager.NetworkManager.JoinDefaultLobby();
+            ToggleRoomMenu();
+            ToggleLobbyMenu();
+        }
 
-        public virtual void OnButtonRoomSettingsClicked() { }
+        public virtual void OnButtonRoomSettingsClicked()
+        {
+            ToggleRoomSetupMenu();
+        }
 
         public virtual void OnButtonStartGameClicked()
         {
@@ -277,7 +291,8 @@ namespace CustomUI
 
         public virtual void OnButtonExitAppClicked()
         {
-
+            Application.Quit();
+            Debug.Log("App Quit");
         }
 
         #endregion

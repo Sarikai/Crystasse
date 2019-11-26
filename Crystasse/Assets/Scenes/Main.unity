@@ -126,6 +126,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6522640843784873806}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &323681307 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6522640843521304957, guid: 5bfb8007cb282844e854b25388730ffc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6522640843784873806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1336138815 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6522640842262041164, guid: 5bfb8007cb282844e854b25388730ffc,
@@ -251,6 +257,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6522640843001627560, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522640843001627561, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: maxPlayers
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522640843001627561, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: autoStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6522640843001627565, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -355,11 +376,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6522640843001627560, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: viewIdField
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6522640842242492292, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
@@ -503,6 +519,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7529104264644827262, guid: cc7f4009d9004734dacf9de9353755c7,
         type: 3}
+    - target: {fileID: 6522640843001627556, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _PlayerList
+      value: 
+      objectReference: {fileID: 323681307}
     - target: {fileID: 6522640843129513169, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: m_Name
@@ -573,16 +594,6 @@ PrefabInstance:
       propertyPath: _defaultSettings
       value: 
       objectReference: {fileID: 1605118060}
-    - target: {fileID: 6522640843001627561, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: maxPlayers
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6522640843001627561, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: autoStart
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6522640843001627563, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: _photonView
@@ -592,6 +603,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: ENAPPLED
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522640842262041167, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: m_Name
+      value: ServerListContent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522640843521304956, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerListContent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}

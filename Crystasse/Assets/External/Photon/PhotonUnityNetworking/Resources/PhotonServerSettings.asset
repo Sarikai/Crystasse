@@ -34,5 +34,7 @@ MonoBehaviour:
   - RPC_CreatePlayer
   - RPC_StartGame
   - SpawnUnit
+  - AddPlayerEntry
+  - RPC_AddPlayerEntry
   DisableAutoOpenWizard: 1
   ShowSettings: 1

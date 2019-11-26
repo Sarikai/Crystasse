@@ -19,6 +19,7 @@ namespace PUN_Network
 
         PUN_Lobby _localLobby;
         PUN_Room _localRoom;
+        Player _localPlayer;
         PUN_RoomSettings _defaultRoomSettings;
         PhotonView _photonView;
         UI_Manager _uiManager;
@@ -34,6 +35,7 @@ namespace PUN_Network
         public PUN_Room GetRoom { get { return _localRoom; } }
         public PUN_Lobby GetLobby { get { return _localLobby; } }
         public GameObject GetNetworkPlayer { get { return _networkPlayer; } }
+        public Player GetLocalPlayer { get { return _localPlayer; } }
 
         #endregion
 
@@ -62,7 +64,8 @@ namespace PUN_Network
             base.OnConnectedToMaster();
             Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
-            PhotonNetwork.JoinLobby();
+            _localPlayer = PhotonNetwork.LocalPlayer;
+            //JoinLobby();
         }
 
         public override void OnEnable()
@@ -90,6 +93,11 @@ namespace PUN_Network
         }
 
         #region LobbyMethods
+
+        public void JoinDefaultLobby()
+        {
+            PhotonNetwork.JoinLobby(TypedLobby.Default);
+        }
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
@@ -148,9 +156,9 @@ namespace PUN_Network
         {
             base.OnCreatedRoom();
             Debug.Log($"Created Room");
-            _localRoom.Room = PhotonNetwork.CurrentRoom;
-            _uiManager._RoomName.text = _localRoom.Room.Name;
-            Debug.Log($"Changed Roomname");
+            //_localRoom.Room = PhotonNetwork.CurrentRoom;
+            //_uiManager._RoomName.text = _localRoom.Room.Name;
+            //Debug.Log($"Changed Roomname");
         }
 
         public void JoinRoom()
@@ -166,8 +174,9 @@ namespace PUN_Network
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
+            _localRoom.Room = PhotonNetwork.CurrentRoom;
+            _uiManager._RoomName.text = _localRoom.Room.Name;
             Debug.Log($"Joined Room");
-
             if (_localRoom != null)
             {
                 _localRoom.Players = _localRoom.UpdatePlayers();
@@ -197,6 +206,8 @@ namespace PUN_Network
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
+            Debug.Log($"Called PlayerEnteredRoom");
+            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer);
             Debug.Log($"A new player entered: {newPlayer.NickName}");
             if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
             {
@@ -210,6 +221,14 @@ namespace PUN_Network
                     return;
                 PhotonNetwork.CurrentRoom.IsOpen = true;
             }
+
+
+        }
+
+        public void LeaveRoom()
+        {
+            PhotonNetwork.LeaveRoom();
+            _localRoom.Room = null;
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -261,12 +280,15 @@ namespace PUN_Network
 
         }
 
+        [PunRPC]
+        public void RPC_AddPlayerEntry()
+        {
+            PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
+            newLine.UpdatePlayerlistEntry(_localPlayer);
+        }
+
         #endregion
 
-        #region Button-Overrides
-
-
-        #endregion
 
         #endregion
     }
