@@ -8,6 +8,11 @@ public class ConquerState : State
     public Unit Agent { get; private set; }
     public Crystal Target;
 
+    public ConquerState(Unit agent, Crystal target)
+    {
+        Agent = agent;
+        Target = target;
+    }
 
     protected override void Enter()
     {

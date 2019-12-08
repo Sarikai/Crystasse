@@ -12,14 +12,14 @@ public class InputManager : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            if(Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+            if(Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000, Selection.PlaneLayer))
             {
                 Selection.CastSphereSelection(hit);
             }
         }
         if(Input.GetMouseButtonDown(1) && Selection.Selected != null && Selection.Selected.Length > 0)
         {
-            if(Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+            if(Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000, Selection.PlaneLayer))
                 foreach(var unit in Selection.Selected)
                 {
                     StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit.transform, hit.point));

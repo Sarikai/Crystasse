@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Jobs;
-using Unity.Jobs;
 
 public static class StateMachine
 {
-    public static float DeltaTime { get; private set; }
     private static readonly List<AttackState> _attackStates = new List<AttackState>();
     private static readonly List<BuildState> _buildStates = new List<BuildState>();
     private static readonly List<ConquerState> _conquerStates = new List<ConquerState>();
@@ -19,20 +16,9 @@ public static class StateMachine
     public static List<IdleState> IdleStates => _idleStates;
     public static List<MoveState> MoveStates => _moveStates;
 
-    public static JobHandle AttackJob { get; private set; }
-    public static JobHandle BuildJob { get; private set; }
-    public static JobHandle ConquerJob { get; private set; }
-    public static JobHandle IdleJob { get; private set; }
-    private static TransformAccessArray AccessArray = new TransformAccessArray();
-    public static JobHandle MoveJob { get; private set; }
-
     public static void Update()
     {
-        DeltaTime = Time.deltaTime;
-
         UpdateStates();
-
-        //ScheduleJobs();
     }
 
     private static void UpdateStates()
@@ -49,36 +35,17 @@ public static class StateMachine
             state.UpdateState();
     }
 
-    private static void ScheduleJobs()
-    {
-        WaitOnJobs();
-        AttackJob = new AttackStatesJob().Schedule(AttackStates.Count, AttackStates.Count);
-        BuildJob = new BuildStatesJob().Schedule(BuildStates.Count, BuildStates.Count);
-        ConquerJob = new ConquerStatesJob().Schedule(ConquerStates.Count, ConquerStates.Count);
-        IdleJob = new IdleStatesJob().Schedule(AccessArray);
-        MoveJob = new MoveStatesJob().Schedule(MoveStates.Count, MoveStates.Count);
-    }
-
-    private static void WaitOnJobs()
-    {
-        AttackJob.Complete();
-        BuildJob.Complete();
-        ConquerJob.Complete();
-        IdleJob.Complete();
-        MoveJob.Complete();
-    }
-
     public static void SwitchState(Agent agent, State newState)
     {
+        if(agent == null)
+            return;
         if(agent.CurrentState != null)
             RemoveState(agent.CurrentState);
         agent.CurrentState = newState;
         AddState(newState);
-        //if(newState.Type == States.Idle)
-        //    AccessArray.SetTransforms(new Transform[1] { agent.transform });
     }
 
-    private static void RemoveState(State state)
+    public static void RemoveState(State state)
     {
         switch(state.Type)
         {
@@ -110,7 +77,7 @@ public static class StateMachine
         }
     }
 
-    private static void AddState(State state)
+    public static void AddState(State state)
     {
         switch(state.Type)
         {

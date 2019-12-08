@@ -18,7 +18,6 @@ public class Crystal : MonoBehaviourPun
     private UnitData _unitData = null;
     [SerializeField]
     private GameObject _unitPrefab;
-    //TODO: Save Units instead of Entities
     private readonly List<Unit> _unitsSpawned = new List<Unit>();
 
     public byte TeamID => _data.TeamID;
@@ -99,6 +98,15 @@ public class Crystal : MonoBehaviourPun
                 Health = _data.MaxHealth;
                 _data.TeamID = team;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Unit>()?.TeamID != TeamID)
+        {
+            var unit = other.GetComponent<Unit>();
+            StateMachine.SwitchState(unit, new ConquerState(unit, this));
         }
     }
 }

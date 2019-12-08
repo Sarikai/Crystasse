@@ -24,14 +24,15 @@ public struct SelectionData
 
         SetSelectionLayer(selectionLayerID);
     }
-    public SelectionData(float radius, int selectionLayerID, int planeLayerID)
+    [Newtonsoft.Json.JsonConstructor]
+    public SelectionData(float SelectionRadius, int _selectionLayer, int _planeLayer)
     {
-        SelectionRadius = radius;
-        _selectionLayer = default;
-        _planeLayer = default;
+        this.SelectionRadius = SelectionRadius;
+        this._selectionLayer = default;
+        this._planeLayer = default;
 
-        SetSelectionLayer(selectionLayerID);
-        SetPlaneLayer(planeLayerID);
+        SetSelectionLayer(_selectionLayer);
+        SetPlaneLayer(_planeLayer);
     }
 
     public int SelectionLayer

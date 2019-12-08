@@ -9,7 +9,7 @@ public class Unit : Agent
     [SerializeField]
     private UnitData _data;
     [SerializeField]
-    private SphereCollider _collider, _rangeTrigger;
+    private SphereCollider /*_collider,*/ _attackTrigger;
 
     public int ID { get; private set; }
     public byte TeamID => _data.TeamID;
@@ -38,7 +38,7 @@ public class Unit : Agent
 
         Health = _data.HealthPoints;
         BuildPoints = _data.BuildPoints;
-        _rangeTrigger.radius = _data.Range;
+        _attackTrigger.radius = _data.Range;
     }
 
     private void Start()
@@ -60,6 +60,7 @@ public class Unit : Agent
             Health -= value;
     }
 
+    [Photon.Pun.PunRPC]
     private void Die()
     {
         Destroy(gameObject);
@@ -69,11 +70,4 @@ public class Unit : Agent
         CurrentState = state;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var enemy = other.GetComponent<Unit>();
-
-        if(enemy && enemy.TeamID != TeamID)
-            StateMachine.SwitchState(this, new AttackState(this, enemy));
-    }
 }
