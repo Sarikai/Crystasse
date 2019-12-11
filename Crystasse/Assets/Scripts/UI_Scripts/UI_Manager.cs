@@ -295,6 +295,11 @@ namespace CustomUI
             Debug.Log("App Quit");
         }
 
+        public virtual void HUD_Update()
+        {
+
+        }
+
         #endregion
 
         #endregion
