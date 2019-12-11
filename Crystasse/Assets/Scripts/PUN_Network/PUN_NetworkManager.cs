@@ -44,7 +44,8 @@ namespace PUN_Network
 
         private void Awake()
         {
-            PhotonNetwork.OfflineMode = true;
+            Debug.Log("CalledAwake");
+            //PhotonNetwork.OfflineMode = true;
             _uiManager = GameManager.MasterManager.UIManager;
             _localLobby = GetComponent<PUN_Lobby>();
             _localRoom = GetComponent<PUN_Room>();
