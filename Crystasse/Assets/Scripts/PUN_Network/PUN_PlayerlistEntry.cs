@@ -92,12 +92,12 @@ namespace PUN_Network
             if (_entryView.IsMine)
             {
                 _playerReady = !_playerReady;
-                //switch (_playerReady)
-                //{
-                //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-                //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-                //}
-                photonView.RPC("RPC_ChangeReady", RpcTarget.AllBuffered);
+                switch (_playerReady)
+                {
+                    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
+                    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+                }
+                photonView.RPC("RPC_ChangeReady", RpcTarget.OthersBuffered);
             }
 
         }
