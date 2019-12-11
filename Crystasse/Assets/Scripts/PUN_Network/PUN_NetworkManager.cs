@@ -65,6 +65,7 @@ namespace PUN_Network
             Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
             _localPlayer = PhotonNetwork.LocalPlayer;
+            Debug.Log($"Local player ID: {_localPlayer.UserId}");
             //JoinLobby();
         }
 
@@ -156,6 +157,8 @@ namespace PUN_Network
         {
             base.OnCreatedRoom();
             Debug.Log($"Created Room");
+
+            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
             //_localRoom.Room = PhotonNetwork.CurrentRoom;
             //_uiManager._RoomName.text = _localRoom.Room.Name;
             //Debug.Log($"Changed Roomname");
@@ -183,6 +186,7 @@ namespace PUN_Network
                 _localRoom.PlayersInRoom = _localRoom.Players.Length;
                 _localRoom.MyNumberInRoom = _localRoom.PlayersInRoom;
                 PhotonNetwork.NickName = _localRoom.MyNumberInRoom.ToString();
+                //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
             }
 
             if (startGame == true)
@@ -207,7 +211,7 @@ namespace PUN_Network
         {
             base.OnPlayerEnteredRoom(newPlayer);
             Debug.Log($"Called PlayerEnteredRoom");
-            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer);
+            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
             Debug.Log($"A new player entered: {newPlayer.NickName}");
             if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
             {
@@ -221,8 +225,6 @@ namespace PUN_Network
                     return;
                 PhotonNetwork.CurrentRoom.IsOpen = true;
             }
-
-
         }
 
         public void LeaveRoom()
@@ -281,10 +283,10 @@ namespace PUN_Network
         }
 
         [PunRPC]
-        public void RPC_AddPlayerEntry()
+        public void RPC_AddPlayerEntry(Player newPlayer)
         {
             PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
-            newLine.UpdatePlayerlistEntry(_localPlayer);
+            newLine.UpdatePlayerlistEntry(newPlayer);
         }
 
         #endregion

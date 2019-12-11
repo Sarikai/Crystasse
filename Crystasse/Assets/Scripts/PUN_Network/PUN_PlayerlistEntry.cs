@@ -9,6 +9,8 @@ using UnityEngine.UI.Michsky.UI.ModernUIPack;
 
 namespace PUN_Network
 {
+
+    [RequireComponent(typeof(PhotonView))]
     public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks
     {
         #region Variables / Properties
@@ -22,7 +24,7 @@ namespace PUN_Network
         [SerializeField]
         int _playerTeam;
         [SerializeField]
-        int _myID = 1;
+        string _myID = "";
 
         [SerializeField]
         UIGradient _entryGradient;
@@ -30,6 +32,8 @@ namespace PUN_Network
         Gradient _playerReadyGradient;
         [SerializeField]
         Gradient _playerNotReadyGradient;
+        [SerializeField]
+        public PhotonView _entryView;
 
         #endregion
 
@@ -38,14 +42,16 @@ namespace PUN_Network
         private void Awake()
         {
             _entryGradient = this.GetComponent<UIGradient>();
-            if (int.TryParse(GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId, out int userID))
-            {
-                _myID = userID;
-            }
+            //if (int.TryParse(GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId, out int userID))
+            //{
+            //    _myID = userID;
+            //    Debug.Log($"Parse ok");
+            //}
         }
 
         public virtual void UpdatePlayerlistEntry()
         {
+            _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _playerID.text = "0";
             _playerName.text = "I am a testplayer";
             _playerReady = false;
@@ -54,6 +60,11 @@ namespace PUN_Network
 
         public void UpdatePlayerlistEntry(Player player)
         {
+            _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
+            _entryView = GetComponent<PhotonView>();
+            _entryView.TransferOwnership(player);
+
+            //Debug.Log($"Update Entry ID: {player.UserId}");
             _playerID.text = player.UserId;
             _playerName.text = player.NickName;
             _playerReady = false;
@@ -67,17 +78,35 @@ namespace PUN_Network
 
         public void OnPlayerEntryClicked()
         {
-            if (_playerID.text == _myID.ToString())
+            Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()}");
+            //if (_playerID.text == _myID.ToString())
+            //{
+            //    Debug.Log($"Equals");
+            //    _playerReady = !_playerReady;
+            //}
+            //switch (_playerReady)
+            //{
+            //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
+            //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+            //}
+            if (_entryView.IsMine)
             {
                 _playerReady = !_playerReady;
-            }
-            switch (_playerReady)
-            {
-                case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-                case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+                switch (_playerReady)
+                {
+                    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
+                    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+                }
             }
 
         }
+
+        [PunRPC]
+        public void RPC_ChangeReady()
+        {
+
+        }
+
 
         #endregion
     }

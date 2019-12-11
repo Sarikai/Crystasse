@@ -1,4 +1,5 @@
 ﻿using CustomUI;
+using Photon.Pun;
 using PUN_Network;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ public class GameManager : MonoBehaviour
     public static GameManager MasterManager;
     private UI_Manager _uiManager;
     private PUN_NetworkManager _networkManager;
+    private PhotonView _mainView;
 
 
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
     public PUN_NetworkManager NetworkManager { get { return _networkManager; } set { _networkManager = value; } }
+    public PhotonView MainView { get { return _mainView; } set { _mainView = value; } }
 
     #endregion
 
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
         GameManagerSingleton();
         _uiManager = GetComponent<UI_Manager>();
         _networkManager = GetComponent<PUN_NetworkManager>();
+        _mainView = GetComponent<PhotonView>();
     }
 
     protected void GameManagerSingleton()
