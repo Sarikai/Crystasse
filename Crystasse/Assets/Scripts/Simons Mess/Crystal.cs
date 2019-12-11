@@ -39,7 +39,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         get => _health; private set
         {
             _health = value;
-            if(_health <= 0)
+            if (_health <= 0)
             {
                 _data.TeamID = 0;
                 _health = 0;
@@ -75,7 +75,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Init()
     {
-        if(_data.IsBase)
+        if (_data.IsBase)
             //TODO: In GM als Base eintragen
             ;
         Health = _data.MaxHealth;
@@ -92,17 +92,17 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void UpdateCrystal()
     {
-        if(_unitsInRange.Count >= Constants.UNITCOUNT_FOR_UPGRADE)
+        if (_unitsInRange.Count >= Constants.UNITCOUNT_FOR_UPGRADE)
         {
             isUpgraded = 1;
-            for(int i = 0; i < _unitsInRange.Count; i++)
+            for (int i = 0; i < _unitsInRange.Count; i++)
                 _unitsInRange[i].TakeDamage(_unitsInRange[i].Health);
         }
     }
 
     private IEnumerator SpawnRoutine()
     {
-        while(_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
+        while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
         {
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             _crystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
@@ -121,21 +121,21 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     public void Conquer(byte value, byte team)
     {
         Debug.Log("Conquer: " + value + " TID: " + team);
-        if(TeamID != 0)
+        if (TeamID != 0)
             Health -= value;
         else
         {
             Health += value;
-            if(Health >= _data.MaxHealth)
+            if (Health >= _data.MaxHealth)
             {
                 Health = _data.MaxHealth;
                 _data.TeamID = team;
-                if(OnConquered != null)
+                if (OnConquered != null)
                     OnConquered.Invoke();
             }
         }
 
-        if(Health <= 0)
+        if (Health <= 0)
         {
             _data.TeamID = 0;
             _randomMesh.InstantiateMesh();
@@ -146,9 +146,9 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         var unit = other.GetComponent<Unit>();
 
-        if(unit != null)
+        if (unit != null)
         {
-            if(unit.TeamID == TeamID)
+            if (unit.TeamID == TeamID)
                 _unitsInRange.Add(unit);
             else
                 StateMachine.SwitchState(unit, new ConquerState(unit, this));
@@ -158,24 +158,43 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private void OnTriggerStay(Collider other)
     {
         var unit = other.GetComponent<Unit>();
-        if(unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
+        if (unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
             StateMachine.SwitchState(unit, new ConquerState(unit, this));
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.GetComponent<Unit>()?.TeamID == TeamID)
+        if (other.GetComponent<Unit>()?.TeamID == TeamID)
             _unitsInRange.Remove(other.GetComponent<Unit>());
     }
 
     private void OnValidate()
     {
-        if(data != null)
+        if (data != null)
             _data = JsonUtility.FromJson<CrystalData>(data.text);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         //throw new NotImplementedException();
+    }
+
+    void CrystalNeutralized()
+    {
+
+    }
+
+    void CrystalConqueredSelf()
+    {
+
+        GameManager.MasterManager.UIManager._crystalNeutral--;
+        GameManager.MasterManager.UIManager._crystalOwned++;
+
+    }
+
+    void CrystalConqueredEnemy()
+    {
+        GameManager.MasterManager.UIManager._crystalNeutral--;
+        GameManager.MasterManager.UIManager._crystalEnemy++;
     }
 }
