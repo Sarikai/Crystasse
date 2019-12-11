@@ -119,15 +119,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private void Spawn(Vector3 pos)
     {
         var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
-        _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _ownerPlayer, unit);
+        _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, unit);
         _unitsSpawned.Add(unit);
     }
 
 
     [PunRPC]
-    public void RPC_SetUnitView(Player player, Unit unit)
+    public void RPC_SetUnitView(Unit unit)
     {
-        unit._view.TransferOwnership(player);
+        unit._view.TransferOwnership(_ownerPlayer);
     }
 
     public void Conquer(byte value, byte team)
