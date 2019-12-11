@@ -12,6 +12,8 @@ public class Unit : Agent
     private byte id;
     [SerializeField]
     private SphereCollider /*_collider,*/ _attackTrigger;
+    [SerializeField]
+    private Photon.Pun.PhotonView _view;
 
     public int ID { get; private set; }
     public byte TeamID => _data.TeamID;
@@ -39,6 +41,8 @@ public class Unit : Agent
         ID = _lastID;
         _lastID++;
 
+        _view = GetComponent<Photon.Pun.PhotonView>();
+        _view.ViewID = 1100 + ID;
         Health = _data.HealthPoints;
         BuildPoints = _data.BuildPoints;
         _attackTrigger.radius = _data.Range;
