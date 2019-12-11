@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: _crystalView
       value: 
       objectReference: {fileID: 7717026167758056234}
+    - target: {fileID: 8403968820767463745, guid: e5456bd2c02854240b18b56c98b4f320,
+        type: 3}
+      propertyPath: _viewID
+      value: 106
+      objectReference: {fileID: 0}
     - target: {fileID: 6624521478759293363, guid: e5456bd2c02854240b18b56c98b4f320,
         type: 3}
       propertyPath: m_Radius

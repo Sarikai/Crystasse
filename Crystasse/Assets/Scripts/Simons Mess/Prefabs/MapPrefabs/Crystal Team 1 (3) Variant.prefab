@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: _crystalView
       value: 
       objectReference: {fileID: 839222161107855546}
+    - target: {fileID: 8403968820767463745, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: _viewID
+      value: 102
+      objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
       propertyPath: m_LocalPosition.x
