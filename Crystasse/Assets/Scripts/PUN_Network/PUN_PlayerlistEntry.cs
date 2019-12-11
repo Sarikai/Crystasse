@@ -62,7 +62,7 @@ namespace PUN_Network
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
-            _entryView.ViewID = GameManager.MasterManager.NetworkManager.GetRoom.MyNumberInRoom;
+            _entryView.ViewID = 999 - GameManager.MasterManager.NetworkManager.GetRoom.MyNumberInRoom;
             _entryView.TransferOwnership(player);
 
             //Debug.Log($"Update Entry ID: {player.UserId}");
@@ -98,7 +98,7 @@ namespace PUN_Network
                     case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
                     case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
                 }
-                photonView.RPC("RPC_ChangeReady", RpcTarget.OthersBuffered);
+                photonView.RPC("RPC_ChangeReady", RpcTarget.AllBufferedViaServer);
             }
 
         }
