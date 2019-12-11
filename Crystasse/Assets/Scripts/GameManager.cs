@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public Crystal[] crystals;
     public List<GameObject> ObjectsToDestroy { get; private set; }
+    [SerializeField]
     private bool doUpdate = false;
 
     //Properties

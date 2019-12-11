@@ -34,6 +34,8 @@ public class Map : ScriptableObject
                 list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
         }
 
+        list.AddRange(bases);
+
         return list.ToArray();
     }
 }
