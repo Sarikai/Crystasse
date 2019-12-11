@@ -53,10 +53,10 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public CrystalData Data => _data;
 
-    //private void Awake()
-    //{
-    //    SetCrystalView(GameManager.MasterManager.NetworkManager.GetLocalPlayer);
-    //}
+    private void Awake()
+    {
+        _crystalView.ViewID = _viewID;
+    }
 
 
 
