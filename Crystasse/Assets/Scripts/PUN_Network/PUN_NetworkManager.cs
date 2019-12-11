@@ -99,6 +99,7 @@ namespace PUN_Network
             {
                 _isGameLoaded = true;
                 GameManager.MasterManager.LoadMap();
+                _uiManager.Toggle(_uiManager._Background);
                 //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
             }
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Crystal))]
 public class InstantiateRandomMesh : MonoBehaviour
 {
+    [SerializeField]
     Crystal _crystal;
     [SerializeField]
     Material[] _teamMaterials = null;
