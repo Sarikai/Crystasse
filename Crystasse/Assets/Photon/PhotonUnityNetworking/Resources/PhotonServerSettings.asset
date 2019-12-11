@@ -28,6 +28,15 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
-  DisableAutoOpenWizard: 0
+  RpcList:
+  - ClickRpc
+  - DestroyRpc
+  - Die
+  - RPC_AddPlayerEntry
+  - RPC_ChangeReady
+  - RPC_CreatePlayer
+  - RPC_StartGame
+  - Spawn
+  - SpawnUnit
+  DisableAutoOpenWizard: 1
   ShowSettings: 0

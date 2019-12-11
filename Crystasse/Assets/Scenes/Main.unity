@@ -599,6 +599,11 @@ PrefabInstance:
       propertyPath: _photonView
       value: 
       objectReference: {fileID: 1605118059}
+    - target: {fileID: 6522640843001627563, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _levelScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6522640842565004985, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: m_Text

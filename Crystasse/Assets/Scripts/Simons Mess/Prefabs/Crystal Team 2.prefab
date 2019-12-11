@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8403968820767463745}
   - component: {fileID: 6624521478759293363}
   - component: {fileID: -5072787464663263645}
+  - component: {fileID: 2360442531369677106}
   m_Layer: 10
   m_Name: Crystal Team 2
   m_TagString: Untagged
@@ -53,11 +54,10 @@ MonoBehaviour:
     MaxUnitSpawned: 1
     IsBase: 0
     IsSpawning: 1
-    SpawnRate: 0.5
+    SpawnRate: 3
     TeamID: 2
-    Range: 15
-  _health: 0
-  _unitData: {fileID: 11400000, guid: f7982a4b35d09a9439e4413afaa0ac8a, type: 2}
+    Range: 5
+  _health: -336
 --- !u!135 &6624521478759293363
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -93,3 +93,25 @@ MonoBehaviour:
   - {fileID: -927199367670048503, guid: 78f0c363befdb5e4aa2a225be5e9e723, type: 3}
   - {fileID: -927199367670048503, guid: a078aec1828671346b9080dbed975aa3, type: 3}
   - {fileID: -927199367670048503, guid: ad8db36a553f84e4a99ce8e17e172c1b, type: 3}
+--- !u!114 &2360442531369677106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724363642623189626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

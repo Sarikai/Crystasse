@@ -274,6 +274,7 @@ namespace PUN_Network
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
+            photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, _localRoom.Players);
         }
 
         [PunRPC]
@@ -287,6 +288,18 @@ namespace PUN_Network
         {
             PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
             newLine.UpdatePlayerlistEntry(newPlayer);
+        }
+
+        [PunRPC]
+        public void RPC_SetCrystalViews(Player[] players)
+        {
+            Crystal randomCrystal;
+            foreach (Player player in players)
+            {
+                randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
+                randomCrystal.SetCrystalView(player);
+                GameManager.MasterManager.bases.Remove(randomCrystal);
+            }
         }
 
         #endregion

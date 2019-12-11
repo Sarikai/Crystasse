@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private UI_Manager _uiManager;
     private PUN_NetworkManager _networkManager;
     private PhotonView _mainView;
+    public List<Crystal> bases;
 
     public Crystal[] crystals;
     public List<GameObject> ObjectsToDestroy { get; private set; }
@@ -40,13 +41,13 @@ public class GameManager : MonoBehaviour
 
     protected void GameManagerSingleton()
     {
-        if(GameManager.MasterManager == null)
+        if (GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if(GameManager.MasterManager != this)
+            if (GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -57,8 +58,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if(crystals != null)
-            foreach(var crystal in crystals)
+        if (crystals != null)
+            foreach (var crystal in crystals)
                 crystal.Init();
     }
 
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         StateMachine.Update();
 
-        foreach(var c in crystals)
+        foreach (var c in crystals)
             c.UpdateCrystal();
     }
 
