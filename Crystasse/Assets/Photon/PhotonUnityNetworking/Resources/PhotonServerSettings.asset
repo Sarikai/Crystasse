@@ -39,5 +39,6 @@ MonoBehaviour:
   - Spawn
   - SpawnUnit
   - RPC_SetCrystalViews
+  - RPC_SetUnitView
   DisableAutoOpenWizard: 1
   ShowSettings: 1
