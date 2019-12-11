@@ -284,17 +284,17 @@ namespace PUN_Network
         public void RPC_StartGame()
         {
             _isGameLoaded = true;
-            if (!PhotonNetwork.IsMasterClient)
-                return;
-            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(_levelScene);
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
-            foreach (Player player in _localRoom.Players)
-            {
-                Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
-            }
+            if (!PhotonNetwork.IsMasterClient)
+                return;
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            //foreach (Player player in _localRoom.Players)
+            //{
+            //    Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
+            //}
             photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, _localRoom.Players);
         }
 
