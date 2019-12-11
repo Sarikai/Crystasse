@@ -110,7 +110,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             _crystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
-            _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _ownerPlayer, _unitsSpawned[_unitsSpawned.Count - 1]);
+            _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _ownerPlayer, _unitsSpawned[_unitsSpawned.Count <= 0 ? 0 : _unitsSpawned.Count - 1]);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
         }
     }
