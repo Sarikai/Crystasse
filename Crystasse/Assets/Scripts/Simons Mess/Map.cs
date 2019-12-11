@@ -25,11 +25,13 @@ public class Map : ScriptableObject
 
         foreach(var c in _team1)
         {
-            list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
+            if(_bases[0] != c && _bases[1] != c)
+                list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
         }
         foreach(var c in _team2)
         {
-            list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
+            if(_bases[0] != c && _bases[1] != c)
+                list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
         }
 
         return list.ToArray();
