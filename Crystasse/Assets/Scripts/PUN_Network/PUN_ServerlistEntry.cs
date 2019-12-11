@@ -54,6 +54,11 @@ namespace PUN_Network
             _serverMaxPlayers.text = maxPlayers.ToString();
         }
 
+        public void OnEntryClicked()
+        {
+            GameManager.MasterManager.UIManager.OnButtonJoinRoomClicked(_serverName.text);
+        }
+
         #endregion
     }
 }

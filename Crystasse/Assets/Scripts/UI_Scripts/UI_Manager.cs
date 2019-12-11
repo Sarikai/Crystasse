@@ -1,6 +1,7 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using PUN_Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace CustomUI
         [Header("Menus")]
         public GameObject _MainMenu;               //Main Menu
         public GameObject _MultiplayerMenu;        //All Menus that are networking relevant
-        public GameObject _CreateRoomMenu;         //Menu for room creation
+        public GameObject _RoomCreateMenu;         //Menu for room creation
         public GameObject _RoomMenu;               //Like a actual game lobby
         public GameObject _RoomSetupMenu;          //"Host" only menu for changing settings like maxplayers or open/close state
         public GameObject _LobbyMenu;              //Menu that shows running rooms
@@ -33,7 +34,10 @@ namespace CustomUI
         public GameObject _ButtonCreateRandomRoom; //Creates a room with random name and default settings
         public GameObject _ButtonCreateCustomRoom; //Shows room menu and opens room setup menu
         public GameObject _ButtonCreateToMain;     //Button Back to main Menu
-        public GameObject _ButtonCancelSetup;      //Cancels custom room setup
+        public GameObject _ButtonCancelSetup01;    //Cancels custom room setup
+        public GameObject _ButtonCancelSetup02;    //Cancels room settings setup
+        public GameObject _ButtonApplySetup01;     //Applies custom room setup
+        public GameObject _ButtonApplySetup02;     //Applies room settings setup
         public GameObject _ButtonJoinLobby;        //Open up lobby menu to see running rooms
         public GameObject _ButtonLobbyNewGame;     //Create a new game from lobby
         public GameObject _ButtonLobbyToMain;      //Leave lobby to main menu
@@ -54,11 +58,13 @@ namespace CustomUI
         public TextMeshProUGUI _InputCrystalAmount;//Input for crystal amount on map
         //[Range(0, 20)]
         public TextMeshProUGUI _InputStartTimer;   //Input for delayed start time
+        public bool _Autostart;
 
         //TextFields for data to change
         [Header("Data Fields")]
         public TextMeshProUGUI _RoomName;          //Name of room player has joined
-        public GameObject _ServerList;
+        public Transform _ServerList;
+        public Transform _PlayerList;
 
         //HUD 
         [Header("HUD")]
@@ -83,6 +89,8 @@ namespace CustomUI
         //Others
         [Header("Others")]
         public GameObject _Background;
+        public PUN_ServerlistEntry _serverEntryPrefab;
+        public PUN_PlayerlistEntry _playerEntryPrefab;
 
         #endregion
 
@@ -112,7 +120,7 @@ namespace CustomUI
 
         public void ToggleCreateRoomMenu()
         {
-            Toggle(_CreateRoomMenu);
+            Toggle(_RoomCreateMenu);
         }
 
         public void ToggleRoomMenu()
@@ -123,6 +131,14 @@ namespace CustomUI
         public void ToggleRoomSetupMenu()
         {
             Toggle(_RoomSetupMenu);
+        }
+
+        public void ToggleRoomSetupButtons()
+        {
+            Toggle(_ButtonApplySetup01);
+            Toggle(_ButtonApplySetup02);
+            Toggle(_ButtonCancelSetup01);
+            Toggle(_ButtonCancelSetup02);
         }
 
         public void ToggleLobbyMenu()
@@ -159,12 +175,16 @@ namespace CustomUI
 
         public virtual void OnButtonCreateRandomRoomClicked()
         {
+            ToggleCreateRoomMenu();
+            ToggleRoomMenu();
             GameManager.MasterManager.NetworkManager.CreateRoom();
         }
 
         public virtual void OnButtonCreateCustomRoomClicked()
         {
-            GameManager.MasterManager.NetworkManager.CreateRoom(_InputRoomName.text);
+            ToggleCreateRoomMenu();
+            ToggleRoomMenu();
+            ToggleRoomSetupMenu();
         }
 
         public virtual void OnButtonCreateToMainClicked()
@@ -174,21 +194,49 @@ namespace CustomUI
             ToggleMainMenu();
         }
 
-        public virtual void OnButtonCancelSetupClicked()
+        public virtual void OnButtonCancelSetup01Clicked()
         {
+            ToggleRoomSetupMenu();
+            ToggleRoomMenu();
+            ToggleMultiplayerMenu();
+            ToggleMainMenu();
+        }
 
+        public virtual void OnButtonCancelSetup02Clicked()
+        {
+            ToggleRoomSetupMenu();
+        }
+
+        public virtual void OnButtonApplySetup01Clicked()
+        {
+            GameManager.MasterManager.NetworkManager.CreateRoom(_InputRoomName.text);
+            ToggleRoomSetupButtons();
+            ToggleRoomSetupMenu();
+        }
+
+        public virtual void OnButtonApplySetup02Clicked()
+        {
+            GameManager.MasterManager.NetworkManager.UpdateRoomSettings();
+            //GameManager.MasterManager.NetworkManager.OnRoomListUpdate(GameManager.MasterManager.NetworkManager.GetLobby.Rooms);
         }
 
         public virtual void OnButtonJoinLobbyClicked()
         {
+            GameManager.MasterManager.NetworkManager.JoinDefaultLobby();
             ToggleMainMenu();
             ToggleMultiplayerMenu();
             ToggleLobbyMenu();
         }
 
+        public override void OnJoinedLobby()
+        {
+            base.OnJoinedLobby();
+        }
+
         public virtual void OnButtonLobbyNewGameClicked()
         {
-
+            ToggleLobbyMenu();
+            ToggleCreateRoomMenu();
         }
 
         public virtual void OnButtonLobbyToMainClicked()
@@ -200,7 +248,30 @@ namespace CustomUI
 
         public virtual void OnButtonJoinRoomClicked(String roomName)
         {
+            GameManager.MasterManager.NetworkManager.JoinRoom(roomName);
+            ToggleLobbyMenu();
+            ToggleRoomMenu();
+        }
 
+        public virtual void OnButtonRoomToMainClicked()
+        {
+            GameManager.MasterManager.NetworkManager.LeaveRoom();
+            ToggleRoomMenu();
+            ToggleMultiplayerMenu();
+            ToggleMainMenu();
+        }
+
+        public virtual void OnButtonRoomLeaveClicked()
+        {
+            GameManager.MasterManager.NetworkManager.LeaveRoom();
+            GameManager.MasterManager.NetworkManager.JoinDefaultLobby();
+            ToggleRoomMenu();
+            ToggleLobbyMenu();
+        }
+
+        public virtual void OnButtonRoomSettingsClicked()
+        {
+            ToggleRoomSetupMenu();
         }
 
         public virtual void OnButtonStartGameClicked()
@@ -220,7 +291,8 @@ namespace CustomUI
 
         public virtual void OnButtonExitAppClicked()
         {
-
+            Application.Quit();
+            Debug.Log("App Quit");
         }
 
         #endregion

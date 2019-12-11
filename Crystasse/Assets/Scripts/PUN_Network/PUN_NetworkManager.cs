@@ -19,6 +19,7 @@ namespace PUN_Network
 
         PUN_Lobby _localLobby;
         PUN_Room _localRoom;
+        Player _localPlayer;
         PUN_RoomSettings _defaultRoomSettings;
         PhotonView _photonView;
         UI_Manager _uiManager;
@@ -32,7 +33,9 @@ namespace PUN_Network
         public bool startGame;
 
         public PUN_Room GetRoom { get { return _localRoom; } }
+        public PUN_Lobby GetLobby { get { return _localLobby; } }
         public GameObject GetNetworkPlayer { get { return _networkPlayer; } }
+        public Player GetLocalPlayer { get { return _localPlayer; } }
 
         #endregion
 
@@ -40,6 +43,8 @@ namespace PUN_Network
 
         private void Awake()
         {
+            PhotonNetwork.OfflineMode = true;
+            _uiManager = GameManager.MasterManager.UIManager;
             _localLobby = GetComponent<PUN_Lobby>();
             _localRoom = GetComponent<PUN_Room>();
             _defaultRoomSettings = GetComponent<PUN_RoomSettings>();
@@ -48,6 +53,7 @@ namespace PUN_Network
 
         private void Start()
         {
+            PhotonNetwork.OfflineMode = false;
             PhotonNetwork.ConnectUsingSettings();
         }
 
@@ -58,7 +64,9 @@ namespace PUN_Network
             base.OnConnectedToMaster();
             Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
-            PhotonNetwork.JoinLobby();
+            _localPlayer = PhotonNetwork.LocalPlayer;
+            Debug.Log($"Local player ID: {_localPlayer.UserId}");
+            //JoinLobby();
         }
 
         public override void OnEnable()
@@ -87,7 +95,27 @@ namespace PUN_Network
 
         #region LobbyMethods
 
+        public void JoinDefaultLobby()
+        {
+            PhotonNetwork.JoinLobby(TypedLobby.Default);
+        }
 
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}");
+            //base.OnRoomListUpdate(roomList);
+            if (roomList != null && roomList.Count > 0)
+            {
+                Debug.Log($"Rooms not null");
+                foreach (RoomInfo roomInfo in roomList)
+                {
+                    Debug.Log($"{roomInfo.ToString()}");
+                    PUN_ServerlistEntry newLine = Instantiate(_uiManager?._serverEntryPrefab, _uiManager?._ServerList);
+                    newLine.UpdateServerlistEntry(roomInfo);
+                }
+            }
+
+        }
 
         #endregion
 
@@ -100,7 +128,7 @@ namespace PUN_Network
         {
             int randomRoomNumber = Random.Range(0, 1000);
             RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)_defaultRoomSettings.MaxPlayers, PublishUserId = true };
-            PhotonNetwork.CreateRoom($"Room: {randomRoomNumber}", roomOptions);
+            PhotonNetwork.CreateRoom($"Room: {randomRoomNumber}", roomOptions, TypedLobby.Default);
         }
 
         /// <summary>
@@ -110,7 +138,7 @@ namespace PUN_Network
         public void CreateRoom(string roomName)
         {
             RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)_defaultRoomSettings.MaxPlayers, PublishUserId = true };
-            PhotonNetwork.CreateRoom(roomName, roomOps);
+            PhotonNetwork.CreateRoom(roomName, roomOps, TypedLobby.Default);
         }
 
         public ExitGames.Client.Photon.Hashtable SetRoomSettings()
@@ -129,17 +157,38 @@ namespace PUN_Network
         {
             base.OnCreatedRoom();
             Debug.Log($"Created Room");
+
+            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
+            //_localRoom.Room = PhotonNetwork.CurrentRoom;
+            //_uiManager._RoomName.text = _localRoom.Room.Name;
+            //Debug.Log($"Changed Roomname");
+        }
+
+        public void JoinRoom()
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
+
+        public void JoinRoom(string roomName)
+        {
+            PhotonNetwork.JoinRoom(roomName);
         }
 
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
+            _localRoom.Room = PhotonNetwork.CurrentRoom;
+            _uiManager._RoomName.text = _localRoom.Room.Name;
             Debug.Log($"Joined Room");
+            if (_localRoom != null)
+            {
+                _localRoom.Players = _localRoom.UpdatePlayers();
+                _localRoom.PlayersInRoom = _localRoom.Players.Length;
+                _localRoom.MyNumberInRoom = _localRoom.PlayersInRoom;
+                PhotonNetwork.NickName = _localRoom.MyNumberInRoom.ToString();
+                //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
+            }
 
-            _localRoom.UpdatePlayers();
-            _localRoom.PlayersInRoom = _localRoom.GetPlayers.Length;
-            _localRoom.MyNumberInRoom = _localRoom.PlayersInRoom;
-            PhotonNetwork.NickName = _localRoom.MyNumberInRoom.ToString();
             if (startGame == true)
             {
                 photonView.RPC("RPC_StartGame", RpcTarget.AllViaServer);
@@ -161,6 +210,8 @@ namespace PUN_Network
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
+            Debug.Log($"Called PlayerEnteredRoom");
+            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
             Debug.Log($"A new player entered: {newPlayer.NickName}");
             if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
             {
@@ -176,6 +227,12 @@ namespace PUN_Network
             }
         }
 
+        public void LeaveRoom()
+        {
+            PhotonNetwork.LeaveRoom();
+            _localRoom.Room = null;
+        }
+
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
             base.OnPlayerLeftRoom(otherPlayer);
@@ -185,6 +242,15 @@ namespace PUN_Network
         public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
         {
             base.OnRoomPropertiesUpdate(propertiesThatChanged);
+        }
+
+        public void UpdateRoomSettings()
+        {
+            if (byte.TryParse(_uiManager._InputMaxPlayers.text, out byte maxPlayers))
+            {
+                _localRoom.Room.MaxPlayers = maxPlayers;
+            }
+
         }
 
         #endregion
@@ -216,12 +282,15 @@ namespace PUN_Network
 
         }
 
+        [PunRPC]
+        public void RPC_AddPlayerEntry(Player newPlayer)
+        {
+            PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
+            newLine.UpdatePlayerlistEntry(newPlayer);
+        }
+
         #endregion
 
-        #region Button-Overrides
-
-
-        #endregion
 
         #endregion
     }

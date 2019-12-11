@@ -34,7 +34,13 @@ MonoBehaviour:
   - RPC_CreatePlayer
   - RPC_StartGame
   - SpawnUnit
+<<<<<<< HEAD
   - Spawn
   - Die
+=======
+  - AddPlayerEntry
+  - RPC_AddPlayerEntry
+  - RPC_ChangeReady
+>>>>>>> PUN-Beta-V2.0
   DisableAutoOpenWizard: 1
   ShowSettings: 1
