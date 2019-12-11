@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal Team 1 (1) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8403968820767463745, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,6 +71,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6624521478759293363, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_Radius
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -232202647835457040, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
