@@ -25,7 +25,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     //[SerializeField]
     //private UnitData _unitData = null;
     private GameObject _unitPrefab;
-    private readonly List<Unit> _unitsSpawned = new List<Unit>();
+    private List<Unit> _unitsSpawned = new List<Unit>();
     [SerializeField]
     private PhotonView _crystalView;
     [SerializeField]
@@ -189,7 +189,17 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //throw new NotImplementedException();
+        if(stream.IsWriting)
+        {
+            stream.SendNext(Health);
+            stream.SendNext(_unitsSpawned);
+        }
+        else
+        {
+            this.Health = (int)stream.ReceiveNext();
+            this._unitsSpawned = (List<Unit>)stream.ReceiveNext();
+
+        }
     }
 
     void CrystalNeutralized()
