@@ -94,24 +94,30 @@ namespace PUN_Network
             if (_entryView.IsMine)
             {
                 _playerReady = !_playerReady;
-                switch (_playerReady)
-                {
-                    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-                    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-                }
+                //ChangeEntryColor();
                 photonView.RPC("RPC_ChangeReady", RpcTarget.AllBufferedViaServer);
             }
 
         }
 
-        [PunRPC]
-        public void RPC_ChangeReady()
+        private void ChangeEntryColor()
         {
             switch (_playerReady)
             {
                 case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
                 case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
             }
+        }
+
+        [PunRPC]
+        public void RPC_ChangeReady()
+        {
+            ChangeEntryColor();
+            //switch (_playerReady)
+            //{
+            //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
+            //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+            //}
 
         }
 
