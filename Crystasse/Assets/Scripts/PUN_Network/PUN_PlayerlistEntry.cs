@@ -65,7 +65,7 @@ namespace PUN_Network
             Debug.Log($"{player.ActorNumber}");
             _entryView.ViewID = 999 + player.ActorNumber;
             _entryView.TransferOwnership(player);
-
+            ChangeEntryColor();
             //Debug.Log($"Update Entry ID: {player.UserId}");
             _playerID.text = player.UserId;
             _playerName.text = player.NickName;
