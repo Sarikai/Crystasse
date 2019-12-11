@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using PUN_Network;
 using UnityEngine.Experimental.PlayerLoop;
+using System.Linq;
 
 namespace PUN_Network
 {
@@ -220,6 +221,7 @@ namespace PUN_Network
             base.OnPlayerEnteredRoom(newPlayer);
             Debug.Log($"Called PlayerEnteredRoom");
             photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
+            _localRoom.Players = _localRoom.UpdatePlayers();
             Debug.Log($"A new player entered: {newPlayer.NickName}");
             if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
             {
@@ -282,6 +284,10 @@ namespace PUN_Network
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
+            foreach (Player player in _localRoom.Players)
+            {
+                Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
+            }
             photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, _localRoom.Players);
         }
 
