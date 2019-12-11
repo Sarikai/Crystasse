@@ -1,24 +1,25 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Agent : Photon.Pun.MonoBehaviourPun
+public abstract class Agent : MonoBehaviourPunCallbacks
 {
     public State CurrentState { get; set; }
 
-    protected void OnEnable()
+    public override void OnEnable()
     {
-        if(CurrentState != null)
+        if (CurrentState != null)
             StateMachine.AddState(CurrentState);
     }
 
-    protected void OnDisable()
+    public override void OnDisable()
     {
-        if(CurrentState != null)
+        if (CurrentState != null)
             StateMachine.RemoveState(CurrentState);
     }
 
-    protected void OnDestroy()
+    public void OnDestroy()
     {
         OnDisable();
     }
