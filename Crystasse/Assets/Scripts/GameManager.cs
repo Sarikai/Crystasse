@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     public Crystal[] crystals;
     public List<GameObject> ObjectsToDestroy { get; private set; }
-
+    private bool doUpdate = false;
 
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
@@ -34,22 +34,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        bases = new List<Crystal>();
-
-        foreach(var c in map._bases)
-        {
-            bases.Add(c.GetComponent<Crystal>());
-        }
-        var cList = new List<Crystal>();
-        foreach(var c in map._team1)
-        {
-            cList.Add(c.GetComponent<Crystal>());
-        }
-        foreach(var c in map._team2)
-        {
-            cList.Add(c.GetComponent<Crystal>());
-        }
-        crystals = cList.ToArray();
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
         _uiManager = GetComponent<UI_Manager>();
@@ -74,6 +58,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void LoadMap()
+    {
+        crystals = map.LoadMap(out bases);
+        doUpdate = true;
+    }
+
     private void Start()
     {
         if(crystals != null)
@@ -83,10 +73,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        StateMachine.Update();
+        if(doUpdate)
+        {
+            StateMachine.Update();
 
-        foreach(var c in crystals)
-            c.UpdateCrystal();
+            foreach(var c in crystals)
+                c.UpdateCrystal();
+        }
     }
 
     #endregion

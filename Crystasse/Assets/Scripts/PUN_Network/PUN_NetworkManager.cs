@@ -95,9 +95,10 @@ namespace PUN_Network
         private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
         {
             _currentScene = scene.buildIndex;
-            if (_currentScene == _levelScene)
+            if(_currentScene == _levelScene)
             {
                 _isGameLoaded = true;
+                GameManager.MasterManager.LoadMap();
                 //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
             }
         }
@@ -113,10 +114,10 @@ namespace PUN_Network
         {
             Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}");
             //base.OnRoomListUpdate(roomList);
-            if (roomList != null && roomList.Count > 0)
+            if(roomList != null && roomList.Count > 0)
             {
                 Debug.Log($"Rooms not null");
-                foreach (RoomInfo roomInfo in roomList)
+                foreach(RoomInfo roomInfo in roomList)
                 {
                     Debug.Log($"{roomInfo.ToString()}");
                     PUN_ServerlistEntry newLine = Instantiate(_uiManager?._serverEntryPrefab, _uiManager?._ServerList);
@@ -189,7 +190,7 @@ namespace PUN_Network
             _localRoom.Room = PhotonNetwork.CurrentRoom;
             _uiManager._RoomName.text = _localRoom.Room.Name;
             Debug.Log($"Joined Room");
-            if (_localRoom != null)
+            if(_localRoom != null)
             {
                 _localRoom.Players = _localRoom.UpdatePlayers();
                 _localRoom.PlayersInRoom = _localRoom.Players.Length;
@@ -198,7 +199,7 @@ namespace PUN_Network
                 //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
             }
 
-            if (startGame == true)
+            if(startGame == true)
             {
                 photonView.RPC("RPC_StartGame", RpcTarget.AllViaServer);
             }
@@ -223,15 +224,15 @@ namespace PUN_Network
             photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
             _localRoom.Players = _localRoom.UpdatePlayers();
             Debug.Log($"A new player entered: {newPlayer.NickName}");
-            if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
+            if(_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
             {
-                if (!PhotonNetwork.IsMasterClient)
+                if(!PhotonNetwork.IsMasterClient)
                     return;
                 PhotonNetwork.CurrentRoom.IsOpen = false;
             }
             else
             {
-                if (!PhotonNetwork.IsMasterClient)
+                if(!PhotonNetwork.IsMasterClient)
                     return;
                 PhotonNetwork.CurrentRoom.IsOpen = true;
             }
@@ -256,7 +257,7 @@ namespace PUN_Network
 
         public void UpdateRoomSettings()
         {
-            if (byte.TryParse(_uiManager._InputMaxPlayers.text, out byte maxPlayers))
+            if(byte.TryParse(_uiManager._InputMaxPlayers.text, out byte maxPlayers))
             {
                 _localRoom.Room.MaxPlayers = maxPlayers;
             }
@@ -277,14 +278,14 @@ namespace PUN_Network
         public void RPC_StartGame()
         {
             _isGameLoaded = true;
-            if (!PhotonNetwork.IsMasterClient)
+            if(!PhotonNetwork.IsMasterClient)
                 return;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(_levelScene);
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
-            foreach (Player player in _localRoom.Players)
+            foreach(Player player in _localRoom.Players)
             {
                 Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
             }
@@ -308,7 +309,7 @@ namespace PUN_Network
         public void RPC_SetCrystalViews(Player[] players)
         {
             Crystal randomCrystal;
-            foreach (Player player in players)
+            foreach(Player player in players)
             {
                 randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
                 randomCrystal.SetCrystalView(player);
