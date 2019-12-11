@@ -1,0 +1,9 @@
+{
+  "MaxHealth": 100,
+  "MaxUnitSpawned": 2,
+  "IsBase": false,
+  "IsSpawning": true,
+  "SpawnRate": 3,
+  "TeamID": 1,
+  "Range": 5
+}
