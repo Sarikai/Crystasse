@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private UI_Manager _uiManager;
     private PUN_NetworkManager _networkManager;
     private PhotonView _mainView;
+
+    public Map map;
     public List<Crystal> bases;
 
     public Crystal[] crystals;
@@ -32,6 +34,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        bases = new List<Crystal>();
+
+        foreach(var c in map._bases)
+        {
+            bases.Add(c.GetComponent<Crystal>());
+        }
+        var cList = new List<Crystal>();
+        foreach(var c in map._team1)
+        {
+            cList.Add(c.GetComponent<Crystal>());
+        }
+        foreach(var c in map._team2)
+        {
+            cList.Add(c.GetComponent<Crystal>());
+        }
+        crystals = cList.ToArray();
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
         _uiManager = GetComponent<UI_Manager>();
@@ -41,13 +59,13 @@ public class GameManager : MonoBehaviour
 
     protected void GameManagerSingleton()
     {
-        if (GameManager.MasterManager == null)
+        if(GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if (GameManager.MasterManager != this)
+            if(GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -58,8 +76,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (crystals != null)
-            foreach (var crystal in crystals)
+        if(crystals != null)
+            foreach(var crystal in crystals)
                 crystal.Init();
     }
 
@@ -67,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         StateMachine.Update();
 
-        foreach (var c in crystals)
+        foreach(var c in crystals)
             c.UpdateCrystal();
     }
 
