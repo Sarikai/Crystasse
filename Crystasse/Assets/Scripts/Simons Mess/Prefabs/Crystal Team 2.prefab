@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &724363642623189626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8023622119779401993}
+  - component: {fileID: 8403968820767463745}
+  - component: {fileID: 6624521478759293363}
+  - component: {fileID: -5072787464663263645}
+  m_Layer: 10
+  m_Name: Crystal Team 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8023622119779401993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724363642623189626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8403968820767463745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724363642623189626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b8b08b0ecab164594573041b874b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomMesh: {fileID: -5072787464663263645}
+  _prefabDatabase: {fileID: 11400000, guid: 21e7ac3ed81401b4bbcbd704a9de9b94, type: 2}
+  data: {fileID: 4900000, guid: 5bd8ea89c01c8914f9c09142c24b3da1, type: 3}
+  _data:
+    MaxHealth: 100
+    MaxUnitSpawned: 1
+    IsBase: 0
+    IsSpawning: 1
+    SpawnRate: 0.5
+    TeamID: 2
+    Range: 15
+  _health: 0
+  _unitData: {fileID: 11400000, guid: f7982a4b35d09a9439e4413afaa0ac8a, type: 2}
+--- !u!135 &6624521478759293363
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724363642623189626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5072787464663263645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724363642623189626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c9e945d2d684f489aa5ce76855284d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamMaterials:
+  - {fileID: 2100000, guid: 84a7dfcbe1f4aad4d9577290f0c4706d, type: 2}
+  - {fileID: 2100000, guid: f41ce273ead7a1745849ea4a37a04f91, type: 2}
+  - {fileID: 2100000, guid: aa4a9d0ec9800304fb57c5104ade9e22, type: 2}
+  _meshes:
+  - {fileID: -927199367670048503, guid: 46417f70e5c18b34c8e6af9c268adbdb, type: 3}
+  - {fileID: -927199367670048503, guid: 3b5a3bad8073c3d4ea7e6639c12b6dd6, type: 3}
+  - {fileID: -927199367670048503, guid: 78f0c363befdb5e4aa2a225be5e9e723, type: 3}
+  - {fileID: -927199367670048503, guid: a078aec1828671346b9080dbed975aa3, type: 3}
+  - {fileID: -927199367670048503, guid: ad8db36a553f84e4a99ce8e17e172c1b, type: 3}

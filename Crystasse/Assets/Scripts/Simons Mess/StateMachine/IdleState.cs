@@ -10,10 +10,11 @@ public class IdleState : State
     private float _moveSpeed;
     private float _timer = 0f;
 
-    public IdleState(Transform transform, float moveSpeed)
+    public IdleState(Unit agent, float moveSpeed)
     {
+        Agent = agent;
         Type = States.Idle;
-        Transform = transform;
+        Transform = Agent.transform;
         _moveSpeed = moveSpeed;
     }
 

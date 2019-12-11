@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    public Unit Agent { get; private set; }
     public Unit Target { get; private set; }
 
     public AttackState(Unit agent, Unit target)

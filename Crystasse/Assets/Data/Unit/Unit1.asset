@@ -19,4 +19,4 @@ MonoBehaviour:
   AttackPoints: 1
   BuildPoints: 10
   BuildSpeed: 2
-  MoveSpeed: 2.5
+  MoveSpeed: 5

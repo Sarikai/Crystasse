@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class State
 {
+    public Unit Agent { get; protected set; }
     public States Type { get; protected set; }
     public Substates Substate { get; protected set; }
     public bool Completed { get; protected set; }

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private PUN_NetworkManager _networkManager;
 
     public Crystal[] crystals;
+    public List<GameObject> ObjectsToDestroy { get; private set; }
 
 
     //Properties
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
         _uiManager = GetComponent<UI_Manager>();
         _networkManager = GetComponent<PUN_NetworkManager>();
@@ -59,6 +61,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         StateMachine.Update();
+
+        foreach(var c in crystals)
+            c.UpdateCrystal();
     }
 
     #endregion

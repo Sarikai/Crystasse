@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ConquerState : State
 {
-    public Unit Agent { get; private set; }
     public Crystal Target;
 
     public ConquerState(Unit agent, Crystal target)
     {
         Agent = agent;
         Target = target;
+        Type = States.Conquer;
     }
 
     protected override void Enter()

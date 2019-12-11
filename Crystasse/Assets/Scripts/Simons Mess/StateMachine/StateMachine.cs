@@ -1,37 +1,70 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class StateMachine
 {
-    private static readonly List<AttackState> _attackStates = new List<AttackState>();
-    private static readonly List<BuildState> _buildStates = new List<BuildState>();
-    private static readonly List<ConquerState> _conquerStates = new List<ConquerState>();
-    private static readonly List<IdleState> _idleStates = new List<IdleState>();
-    private static readonly List<MoveState> _moveStates = new List<MoveState>();
+    private static readonly List<State> _attackStates = new List<State>();
+    private static readonly List<State> _buildStates = new List<State>();
+    private static readonly List<State> _conquerStates = new List<State>();
+    private static readonly List<State> _idleStates = new List<State>();
+    private static readonly List<State> _moveStates = new List<State>();
 
-    public static List<AttackState> AttackStates => _attackStates;
-    public static List<BuildState> BuildStates => _buildStates;
-    public static List<ConquerState> ConquerStates => _conquerStates;
-    public static List<IdleState> IdleStates => _idleStates;
-    public static List<MoveState> MoveStates => _moveStates;
+    public static List<State> AttackStates => _attackStates;
+    public static List<State> BuildStates => _buildStates;
+    public static List<State> ConquerStates => _conquerStates;
+    public static List<State> IdleStates => _idleStates;
+    public static List<State> MoveStates => _moveStates;
+    private static State[] AllStatesWithoutIdle
+    {
+        get
+        {
+            List<State> ret = new List<State>();
+            ret.AddRange(_attackStates);
+            ret.AddRange(_buildStates);
+            ret.AddRange(_conquerStates);
+            ret.AddRange(_moveStates);
+
+            return ret.ToArray();
+        }
+    }
+    private static State[] AllStates
+    {
+        get
+        {
+            var ret = new List<State>(AllStatesWithoutIdle);
+            ret.AddRange(_idleStates);
+
+            return ret.ToArray();
+        }
+    }
 
     public static void Update()
     {
         UpdateStates();
+
+        CleanStates();
+    }
+
+    private static void CleanStates()
+    {
+        List<Unit> agentsToIdle = new List<Unit>();
+        var states = AllStatesWithoutIdle;
+
+        foreach(var state in states)
+            if(state.Completed)
+                agentsToIdle.Add(state.Agent);
+
+        foreach(var agent in agentsToIdle)
+            if(agent != null)
+                SwitchState(agent, new IdleState(agent, agent.MoveSpeed));
     }
 
     private static void UpdateStates()
     {
-        foreach(var state in _attackStates)
-            state.UpdateState();
-        foreach(var state in _buildStates)
-            state.UpdateState();
-        foreach(var state in _conquerStates)
-            state.UpdateState();
-        foreach(var state in _idleStates)
-            state.UpdateState();
-        foreach(var state in _moveStates)
+        var states = AllStates;
+        foreach(var state in states)
             state.UpdateState();
     }
 
@@ -39,8 +72,10 @@ public static class StateMachine
     {
         if(agent == null)
             return;
+
         if(agent.CurrentState != null)
             RemoveState(agent.CurrentState);
+
         agent.CurrentState = newState;
         AddState(newState);
     }
@@ -50,29 +85,24 @@ public static class StateMachine
         switch(state.Type)
         {
             case States.Idle:
-                var idle = state as IdleState;
-                if(IdleStates.Contains(idle))
-                    IdleStates.Remove(idle);
+                if(IdleStates.Contains(state))
+                    IdleStates.Remove(state);
                 break;
             case States.Build:
-                var build = state as BuildState;
-                if(BuildStates.Contains(build))
-                    BuildStates.Remove(build);
+                if(BuildStates.Contains(state))
+                    BuildStates.Remove(state);
                 break;
             case States.Attack:
-                var attack = state as AttackState;
-                if(AttackStates.Contains(attack))
-                    AttackStates.Remove(attack);
+                if(AttackStates.Contains(state))
+                    AttackStates.Remove(state);
                 break;
             case States.Conquer:
-                var conquer = state as ConquerState;
-                if(ConquerStates.Contains(conquer))
-                    ConquerStates.Remove(conquer);
+                if(ConquerStates.Contains(state))
+                    ConquerStates.Remove(state);
                 break;
             case States.Move:
-                var move = state as MoveState;
-                if(MoveStates.Contains(move))
-                    MoveStates.Remove(move);
+                if(MoveStates.Contains(state))
+                    MoveStates.Remove(state);
                 break;
         }
     }

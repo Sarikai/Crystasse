@@ -35,5 +35,6 @@ MonoBehaviour:
   - RPC_StartGame
   - SpawnUnit
   - Spawn
+  - Die
   DisableAutoOpenWizard: 1
   ShowSettings: 1

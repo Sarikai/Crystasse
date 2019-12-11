@@ -9,6 +9,8 @@ public class Unit : Agent
     [SerializeField]
     private UnitData _data;
     [SerializeField]
+    private byte id;
+    [SerializeField]
     private SphereCollider /*_collider,*/ _attackTrigger;
 
     public int ID { get; private set; }
@@ -33,6 +35,7 @@ public class Unit : Agent
 
     private void Awake()
     {
+        id = _data.TeamID;
         ID = _lastID;
         _lastID++;
 
@@ -43,7 +46,7 @@ public class Unit : Agent
 
     private void Start()
     {
-        StateMachine.SwitchState(this, new IdleState(transform, _data.MoveSpeed));
+        StateMachine.SwitchState(this, new IdleState(this, _data.MoveSpeed));
     }
 
     public void UpdateUnit()
@@ -63,11 +66,11 @@ public class Unit : Agent
     [Photon.Pun.PunRPC]
     private void Die()
     {
-        Destroy(gameObject);
+        if(this != null)
+            DestroyImmediate(gameObject);
     }
     public void SwitchState(State state)
     {
         CurrentState = state;
     }
-
 }

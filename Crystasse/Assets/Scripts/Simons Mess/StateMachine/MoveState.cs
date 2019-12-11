@@ -12,11 +12,12 @@ public class MoveState : State
 
     private float _timer = 0f;
 
-    public MoveState(float speed, Transform transform, float3 destination)
+    public MoveState(float speed, Unit agent, float3 destination)
     {
+        Agent = agent;
         Type = States.Move;
         Speed = speed;
-        Transform = transform;
+        Transform = Agent.transform;
         Destination = destination;
     }
 
