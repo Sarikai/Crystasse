@@ -98,7 +98,7 @@ namespace PUN_Network
             if (_currentScene == _levelScene)
             {
                 _isGameLoaded = true;
-                _photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
+                //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
             }
         }
 
