@@ -192,12 +192,13 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if(stream.IsWriting)
         {
             stream.SendNext(Health);
-            stream.SendNext(_unitsSpawned);
+            stream.SendNext(_unitsSpawned.ToArray());
         }
         else
         {
             this.Health = (int)stream.ReceiveNext();
-            this._unitsSpawned = (List<Unit>)stream.ReceiveNext();
+            this._unitsSpawned.Clear();
+            this._unitsSpawned.AddRange((Unit[])stream.ReceiveNext());
 
         }
     }

@@ -110,6 +110,7 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: f7982a4b35d09a9439e4413afaa0ac8a, type: 2}
   id: 0
   _attackTrigger: {fileID: 1001336803799442102}
+  _view: {fileID: 0}
 --- !u!135 &8749533807202364170
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,10 +155,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 3685436297416980732}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

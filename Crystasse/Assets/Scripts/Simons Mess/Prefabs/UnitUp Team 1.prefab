@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: -8423115882892883158}
   - component: {fileID: 3685436297416980732}
   m_Layer: 11
-  m_Name: Unit Team 1
+  m_Name: UnitUp Team 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: b198c5b4685df40479e6201dce1fb52b, type: 2}
   id: 0
   _attackTrigger: {fileID: 1001336803799442102}
+  _view: {fileID: 0}
 --- !u!135 &8749533807202364170
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,10 +155,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 3685436297416980732}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
