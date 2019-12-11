@@ -13,13 +13,12 @@ public class InputManager : MonoBehaviour
 
     Vector3 _selectionStart;
 
-    private void Awake()
-    {
-        _cam = Camera.main;
-    }
 
     private void Update()
     {
+        if(_cam == null)
+            _cam = FindObjectOfType<Camera>();
+
         MakeSelection();
 
         MoveCam(Time.deltaTime);
