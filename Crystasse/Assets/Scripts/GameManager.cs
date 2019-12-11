@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         doUpdate = true;
     }
 
-    private void Start()
+    public void StartInitCrystals()
     {
         if(crystals != null)
             foreach(var crystal in crystals)
