@@ -78,6 +78,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if (_data.IsBase)
             //TODO: In GM als Base eintragen
             ;
+        if (!_crystalView.IsMine) this.enabled = false;
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += () => _randomMesh.InstantiateMesh();
