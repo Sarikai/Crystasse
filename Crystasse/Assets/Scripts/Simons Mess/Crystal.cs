@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.Mathematics;
 using UnityEngine;
 using Photon.Pun;
 using System;
@@ -105,13 +104,14 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         while(_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
         {
-            _crystalView.RPC("Spawn", RpcTarget.AllViaServer, new float3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + (float3)transform.position);
+            var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
+            _crystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
         }
     }
 
     [PunRPC]
-    private void Spawn(float3 pos)
+    private void Spawn(Vector3 pos)
     {
         var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
 
