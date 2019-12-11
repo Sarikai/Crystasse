@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: _health
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8403968820767463745, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: _crystalView
+      value: 
+      objectReference: {fileID: 690329646387136930}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -84,3 +89,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d33b21d081d86a340b93110b1f3179e9, type: 3}
+--- !u!114 &690329646387136930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -232202647835457040, guid: d33b21d081d86a340b93110b1f3179e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8454250235429863506}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
