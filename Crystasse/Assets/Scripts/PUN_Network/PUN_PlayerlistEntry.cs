@@ -62,7 +62,10 @@ namespace PUN_Network
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
-            _entryView.ViewID = 999 - GameManager.MasterManager.NetworkManager.GetRoom.MyNumberInRoom;
+            Debug.Log($"{player.ActorNumber}");
+            if (player.ActorNumber <= 1)
+                _entryView.ViewID = 999 - player.ActorNumber;
+            else _entryView.ViewID = player.ActorNumber;
             _entryView.TransferOwnership(player);
 
             //Debug.Log($"Update Entry ID: {player.UserId}");
