@@ -62,6 +62,7 @@ namespace PUN_Network
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
+            _entryView.ViewID = GameManager.MasterManager.NetworkManager.GetRoom.MyNumberInRoom;
             _entryView.TransferOwnership(player);
 
             //Debug.Log($"Update Entry ID: {player.UserId}");
@@ -78,7 +79,7 @@ namespace PUN_Network
 
         public void OnPlayerEntryClicked()
         {
-            Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()}");
+            Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()} EntryViewId:{_entryView.ViewID}");
             //if (_playerID.text == _myID.ToString())
             //{
             //    Debug.Log($"Equals");
