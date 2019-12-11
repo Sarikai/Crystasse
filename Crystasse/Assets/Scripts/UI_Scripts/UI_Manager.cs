@@ -77,6 +77,9 @@ namespace CustomUI
         public TextMeshProUGUI _TimeRunning;       //Shows how long game is up
         public TextMeshProUGUI _RealTime;          //Shows the real time of reality
         public TextMeshProUGUI _SelectedUnitAmount;//Shows units selected with selection
+        public int _crystalNeutral = 0;
+        public int _crystalEnemy = 0;
+        public int _crystalOwned = 0;
 
         //GradientColors
         [Header("Gradients")]
@@ -297,7 +300,9 @@ namespace CustomUI
 
         public virtual void HUD_Update()
         {
-
+            _CrystalsEnemy.text = _crystalEnemy.ToString();
+            _CrystalsNeutral.text = _crystalNeutral.ToString();
+            _CrystalsOwned.text = _crystalOwned.ToString();
         }
 
         #endregion
