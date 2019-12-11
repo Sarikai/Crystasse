@@ -276,7 +276,7 @@ namespace CustomUI
 
         public virtual void OnButtonStartGameClicked()
         {
-            GameManager.MasterManager.NetworkManager.startGame = true;
+            GameManager.MasterManager.NetworkManager.RPC_StartGame();
         }
 
         public virtual void OnButtonStatsMenuClicked()

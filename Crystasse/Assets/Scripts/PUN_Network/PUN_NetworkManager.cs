@@ -8,6 +8,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using PUN_Network;
+using UnityEngine.Experimental.PlayerLoop;
 
 namespace PUN_Network
 {
@@ -57,7 +58,13 @@ namespace PUN_Network
             PhotonNetwork.ConnectUsingSettings();
         }
 
-
+        //public void Update()
+        //{
+        //    if (startGame == true)
+        //    {
+        //        photonView.RPC("RPC_StartGame", RpcTarget.AllViaServer);
+        //    }
+        //}
 
         public override void OnConnectedToMaster()
         {
@@ -264,7 +271,7 @@ namespace PUN_Network
         }
 
         [PunRPC]
-        private void RPC_StartGame()
+        public void RPC_StartGame()
         {
             _isGameLoaded = true;
             if (!PhotonNetwork.IsMasterClient)
