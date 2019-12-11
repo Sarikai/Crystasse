@@ -5,6 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using System;
 using Photon.Realtime;
+using System.Linq;
 
 [RequireComponent(typeof(SphereCollider))]
 public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
@@ -29,6 +30,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private PhotonView _crystalView;
     [SerializeField]
     private int _viewID = 100;
+
+    Player _ownerPlayer;
 
     private int isUpgraded = 0;
     private List<Unit> _unitsInRange = new List<Unit>();
@@ -78,7 +81,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if (_data.IsBase)
             //TODO: In GM als Base eintragen
             ;
-        if (!_crystalView.IsMine) this.enabled = false;
+
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += () => _randomMesh.InstantiateMesh();
@@ -107,6 +110,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             _crystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
+            _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _ownerPlayer, _unitsSpawned[_unitsSpawned.Count - 1]);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
         }
     }
@@ -117,6 +121,13 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
 
         _unitsSpawned.Add(unit);
+    }
+
+
+    [PunRPC]
+    public void RPC_SetUnitView(Player player, Unit unit)
+    {
+        unit._view.TransferOwnership(player);
     }
 
     public void Conquer(byte value, byte team)

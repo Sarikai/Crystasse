@@ -13,7 +13,7 @@ public class Unit : Agent
     [SerializeField]
     private SphereCollider /*_collider,*/ _attackTrigger;
     [SerializeField]
-    private Photon.Pun.PhotonView _view;
+    public Photon.Pun.PhotonView _view;
 
     public int ID { get; private set; }
     public byte TeamID => _data.TeamID;
@@ -55,13 +55,13 @@ public class Unit : Agent
 
     public void UpdateUnit()
     {
-        if(!CurrentState.Completed)
+        if (!CurrentState.Completed)
             CurrentState.UpdateState();
     }
 
     public void TakeDamage(byte value)
     {
-        if(value >= Health)
+        if (value >= Health)
             Die();
         else
             Health -= value;
@@ -70,7 +70,7 @@ public class Unit : Agent
     [Photon.Pun.PunRPC]
     private void Die()
     {
-        if(this != null)
+        if (this != null)
             DestroyImmediate(gameObject);
     }
     public void SwitchState(State state)
