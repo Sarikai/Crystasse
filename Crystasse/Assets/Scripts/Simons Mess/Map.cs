@@ -25,11 +25,11 @@ public class Map : ScriptableObject
 
         foreach(var c in _team1)
         {
-            list.Add(c.GetComponent<Crystal>());
+            list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
         }
         foreach(var c in _team2)
         {
-            list.Add(c.GetComponent<Crystal>());
+            list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
         }
 
         return list.ToArray();
