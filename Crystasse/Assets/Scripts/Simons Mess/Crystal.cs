@@ -119,15 +119,16 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private void Spawn(Vector3 pos)
     {
         var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
-        _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, unit);
         _unitsSpawned.Add(unit);
+        if (_unitsSpawned.Count > 0)
+            _crystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _unitsSpawned.Count - 1);
     }
 
 
     [PunRPC]
-    public void RPC_SetUnitView(Unit unit)
+    public void RPC_SetUnitView(int id)
     {
-        unit._view.TransferOwnership(_ownerPlayer);
+        _unitsSpawned[id]._view.TransferOwnership(_ownerPlayer);
     }
 
     public void Conquer(byte value, byte team)
@@ -192,13 +193,13 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(Health);
-            stream.SendNext(_unitsSpawned.ToArray());
+            //stream.SendNext(_unitsSpawned.ToArray());
         }
         else
         {
             this.Health = (int)stream.ReceiveNext();
-            this._unitsSpawned.Clear();
-            this._unitsSpawned.AddRange((Unit[])stream.ReceiveNext());
+            //this._unitsSpawned.Clear();
+            //this._unitsSpawned.AddRange((Unit[])stream.ReceiveNext());
 
         }
     }
