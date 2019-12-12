@@ -34,7 +34,7 @@ public class MoveState : State
 
     protected override void Stay()
     {
-        if(math.distancesq(Destination, Transform.position) <= 0.1f)
+        if (math.distancesq(Destination, Transform.position) <= 0.1f)
             Substate = Substates.Exit;
         else
             MoveTowardsDest();
@@ -47,7 +47,7 @@ public class MoveState : State
         _timer += Time.deltaTime;
         direction.y += math.sin(_timer);
 
-        if(_timer >= 2 * math.PI)
+        if (_timer >= 2 * math.PI)
             _timer = 0f;
 
         Transform.position += (Vector3)direction * Speed * Time.deltaTime;
