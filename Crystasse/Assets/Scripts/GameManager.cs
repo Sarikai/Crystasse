@@ -1,5 +1,6 @@
 ﻿using CustomUI;
 using Photon.Pun;
+using Photon.Realtime;
 using PUN_Network;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ public class GameManager : MonoBehaviour
     private PhotonView _mainView;
 
     public Map map;
-    public List<Crystal> bases;
-
+    public List<Crystal> basesList;
+    public Dictionary<byte, Player> teamToPlayerDic;
     public Crystal[] crystals;
     public List<GameObject> ObjectsToDestroy { get; private set; }
     [SerializeField]
@@ -44,13 +45,13 @@ public class GameManager : MonoBehaviour
 
     protected void GameManagerSingleton()
     {
-        if(GameManager.MasterManager == null)
+        if (GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if(GameManager.MasterManager != this)
+            if (GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -61,24 +62,24 @@ public class GameManager : MonoBehaviour
 
     public void LoadMap()
     {
-        crystals = map.LoadMap(out bases);
+        crystals = map.LoadMap(out basesList);
         doUpdate = true;
     }
 
     public void StartInitCrystals()
     {
-        if(crystals != null)
-            foreach(var crystal in crystals)
+        if (crystals != null)
+            foreach (var crystal in crystals)
                 crystal.Init();
     }
 
     private void Update()
     {
-        if(doUpdate)
+        if (doUpdate)
         {
             StateMachine.Update();
 
-            foreach(var c in crystals)
+            foreach (var c in crystals)
                 c.UpdateCrystal();
         }
     }

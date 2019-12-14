@@ -191,6 +191,7 @@ namespace PUN_Network
             base.OnJoinedRoom();
             _localRoom.Room = PhotonNetwork.CurrentRoom;
             _uiManager._RoomName.text = _localRoom.Room.Name;
+            GameManager.MasterManager.teamToPlayer
             Debug.Log($"Joined Room");
             if (_localRoom != null)
             {
@@ -318,9 +319,9 @@ namespace PUN_Network
             Crystal randomCrystal;
             foreach (Player player in players)
             {
-                randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
+                randomCrystal = GameManager.MasterManager.basesList[Random.Range(0, GameManager.MasterManager.basesList.Count)];
                 randomCrystal.SetCrystalView(player);
-                GameManager.MasterManager.bases.Remove(randomCrystal);
+                GameManager.MasterManager.basesList.Remove(randomCrystal);
             }
         }
 
