@@ -133,7 +133,6 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Conquer(byte value, byte team)
     {
-        Debug.Log("Conquer: " + value + " TID: " + team);
         if(TeamID != 0)
             Health -= value;
         else

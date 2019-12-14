@@ -6,10 +6,13 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class Map : ScriptableObject
 {
+    [Header("Area Constraints"), SerializeField]
+    public Area _playArea;
+
     [Header("Team 1"), SerializeField]
-    public GameObject[] _team1 = null;
+    public GameObject[] _crystalPrefabs = null;
     [Header("Team 2"), SerializeField]
-    public GameObject[] _team2 = null;
+    public GameObject[] _crystalPrefabs2 = null;
 
     [Header("Bases"), SerializeField]
     public GameObject[] _bases = new GameObject[2];
@@ -23,12 +26,12 @@ public class Map : ScriptableObject
 
         var list = new List<Crystal>();
 
-        foreach(var c in _team1)
+        foreach(var c in _crystalPrefabs)
         {
             if(_bases[0] != c && _bases[1] != c)
                 list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
         }
-        foreach(var c in _team2)
+        foreach(var c in _crystalPrefabs2)
         {
             if(_bases[0] != c && _bases[1] != c)
                 list.Add(GameObject.Instantiate(c).GetComponent<Crystal>());
