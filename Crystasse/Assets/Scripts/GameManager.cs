@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     private PhotonView _mainView;
 
     public Map map;
-    public List<Crystal> basesList;
-    public Dictionary<byte, Player> teamToPlayerDic;
+    public List<Crystal> bases;
+    public Dictionary<byte, Player> teamToPlayer = new Dictionary<byte, Player>();
     public Crystal[] crystals;
     public List<GameObject> ObjectsToDestroy { get; private set; }
     [SerializeField]
@@ -41,17 +41,31 @@ public class GameManager : MonoBehaviour
         _uiManager = GetComponent<UI_Manager>();
         _networkManager = GetComponent<PUN_NetworkManager>();
         _mainView = GetComponent<PhotonView>();
+
+        for(byte i = 0; i < byte.MaxValue; i++)
+            teamToPlayer.Add(i, null);
+    }
+
+    public void AddPlayer(Player player)
+    {
+        for(byte i = 1; i < teamToPlayer.Count; i++)
+            if(teamToPlayer[i] == null)
+            {
+                teamToPlayer[i] = player;
+                Debug.Log("Added player: " + player.NickName + " at teamID : " + i);
+                return;
+            }
     }
 
     protected void GameManagerSingleton()
     {
-        if (GameManager.MasterManager == null)
+        if(GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if (GameManager.MasterManager != this)
+            if(GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -62,24 +76,24 @@ public class GameManager : MonoBehaviour
 
     public void LoadMap()
     {
-        crystals = map.LoadMap(out basesList);
+        crystals = map.LoadMap(out bases);
         doUpdate = true;
     }
 
     public void StartInitCrystals()
     {
-        if (crystals != null)
-            foreach (var crystal in crystals)
+        if(crystals != null)
+            foreach(var crystal in crystals)
                 crystal.Init();
     }
 
     private void Update()
     {
-        if (doUpdate)
+        if(doUpdate)
         {
             StateMachine.Update();
 
-            foreach (var c in crystals)
+            foreach(var c in crystals)
                 c.UpdateCrystal();
         }
     }

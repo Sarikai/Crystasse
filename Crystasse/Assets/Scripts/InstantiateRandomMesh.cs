@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Crystal))]
@@ -25,10 +26,20 @@ public class InstantiateRandomMesh : MonoBehaviour
         if(_gameObject)
             Destroy(_gameObject);
         _gameObject = GameObject.Instantiate(_meshes[index], transform);
+        GetComponentInChildren<Transform>().localPosition = Vector3.zero;
+        _gameObject.transform.localPosition = Vector3.zero;
+    }
+
+    public void ChangeMaterial(PhotonView crystalView)
+    {
+        crystalView.RPC("RPC_ChangeMaterial", RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    public void RPC_ChangeMaterial()
+    {
         var meshRenderer = _gameObject.GetComponentInChildren<MeshRenderer>();
         meshRenderer.material = _teamMaterials[_crystal.TeamID];
-        meshRenderer.transform.localPosition = Vector3.zero;
-        _gameObject.transform.localPosition = Vector3.zero;
     }
 
     private void OnValidate()
