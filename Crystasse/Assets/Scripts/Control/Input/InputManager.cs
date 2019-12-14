@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.MasterManager.MainView.IsMine)
+        if(GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
             if(_cam == null)
                 _cam = FindObjectOfType<Camera>();

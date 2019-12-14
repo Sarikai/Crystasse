@@ -26,7 +26,7 @@ public class InstantiateRandomMesh : MonoBehaviour
         if(_gameObject)
             Destroy(_gameObject);
         _gameObject = GameObject.Instantiate(_meshes[index], transform);
-        GetComponentInChildren<Transform>().localPosition = Vector3.zero;
+        GetComponentInChildren<MeshRenderer>().transform.localPosition = Vector3.zero;
         _gameObject.transform.localPosition = Vector3.zero;
     }
 
