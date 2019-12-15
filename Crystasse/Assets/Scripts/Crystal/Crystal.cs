@@ -129,6 +129,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             //CrystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
+            Debug.Log("Player: " + GameManager.MasterManager.NetworkManager.GetLocalPlayer.ActorNumber);
             var unit = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
             _unitsSpawned.Add(unit);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);

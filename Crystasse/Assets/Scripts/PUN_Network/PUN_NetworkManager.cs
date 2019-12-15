@@ -105,7 +105,7 @@ namespace PUN_Network
                 _isGameLoaded = true;
                 GameManager.MasterManager.LoadMap();
                 _uiManager.Toggle(_uiManager._Background);
-                GameManager.MasterManager.StartInitCrystals();
+                //GameManager.MasterManager.StartInitCrystals();
                 //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
             }
         }
@@ -271,6 +271,7 @@ namespace PUN_Network
         public void OnStartGame()
         {
             _photonView.RPC("RPC_StartGame", RpcTarget.AllViaServer);
+            GameManager.MasterManager.StartInitCrystals();
         }
 
         public void UpdateRoomSettings()
