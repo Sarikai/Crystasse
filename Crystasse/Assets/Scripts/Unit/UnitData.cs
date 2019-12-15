@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Burst;
 
-[UnityEngine.CreateAssetMenu(), BurstCompile, System.Serializable]
+[UnityEngine.CreateAssetMenu(), System.Serializable]
 public class UnitData : ScriptableObject
 {
     [Header("Identification")]
