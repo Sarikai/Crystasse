@@ -271,7 +271,6 @@ namespace PUN_Network
         public void OnStartGame()
         {
             _photonView.RPC("RPC_StartGame", RpcTarget.AllViaServer);
-            GameManager.MasterManager.StartInitCrystals();
         }
 
         public void UpdateRoomSettings()
@@ -368,6 +367,7 @@ namespace PUN_Network
                 randomCrystal.SetCrystalView(player);
                 GameManager.MasterManager.bases.Remove(randomCrystal);
             }
+            GameManager.MasterManager.StartInitCrystals();
         }
 
         [PunRPC]
