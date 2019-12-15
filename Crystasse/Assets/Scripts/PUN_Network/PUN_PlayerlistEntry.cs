@@ -91,7 +91,7 @@ namespace PUN_Network
             //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
             //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
             //}
-            if (_entryView.IsMine)
+            if(_entryView.IsMine)
             {
                 _playerReady = !_playerReady;
                 //ChangeEntryColor();
@@ -102,11 +102,10 @@ namespace PUN_Network
 
         private void ChangeEntryColor()
         {
-            switch (_playerReady)
-            {
-                case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-                case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-            }
+            if(_playerReady)
+                _entryGradient.EffectGradient = _playerReadyGradient;
+            else
+                _entryGradient.EffectGradient = _playerNotReadyGradient;
         }
 
         [PunRPC]

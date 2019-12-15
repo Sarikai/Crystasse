@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     {
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
-        _uiManager = GetComponent<UI_Manager>();
-        _networkManager = GetComponent<PUN_NetworkManager>();
 
         for(byte i = 0; i < byte.MaxValue; i++)
             teamToPlayer.Add(i, null);
