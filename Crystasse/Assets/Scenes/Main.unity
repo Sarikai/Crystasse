@@ -150,46 +150,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6522640843784873806}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1792638683 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6522640842528190699, guid: 5bfb8007cb282844e854b25388730ffc,
-    type: 3}
-  m_PrefabInstance: {fileID: 6522640843784873806}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1792638685 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
     type: 3}
   m_PrefabInstance: {fileID: 6522640843784873806}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792638683}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b0e16eceddbc5a488aebd9687ea187a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1792638689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792638683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 3
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &2055271855
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +257,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _RoomCreateMenu
+      value: 
+      objectReference: {fileID: 322357772}
+    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _serverEntryPrefab
+      value: 
+      objectReference: {fileID: 150584815051776413, guid: ec64a2bcb19548744828a33489cd9a15,
+        type: 3}
+    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _playerEntryPrefab
+      value: 
+      objectReference: {fileID: 7529104264644827262, guid: cc7f4009d9004734dacf9de9353755c7,
+        type: 3}
+    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _PlayerList
+      value: 
+      objectReference: {fileID: 323681307}
+    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _ServerList
+      value: 
+      objectReference: {fileID: 1336138815}
     - target: {fileID: 6522640843001627565, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -680,33 +679,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnButtonLobbyToMainClicked
       objectReference: {fileID: 0}
-    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+    - target: {fileID: 7392041279215917536, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
-      propertyPath: _RoomCreateMenu
-      value: 
-      objectReference: {fileID: 322357772}
-    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: _serverEntryPrefab
-      value: 
-      objectReference: {fileID: 150584815051776413, guid: ec64a2bcb19548744828a33489cd9a15,
-        type: 3}
-    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: _playerEntryPrefab
-      value: 
-      objectReference: {fileID: 7529104264644827262, guid: cc7f4009d9004734dacf9de9353755c7,
-        type: 3}
-    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: _PlayerList
-      value: 
-      objectReference: {fileID: 323681307}
-    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: _ServerList
-      value: 
-      objectReference: {fileID: 1336138815}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153014589, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5821234637800787182, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: maxPlayers
@@ -717,14 +698,5 @@ PrefabInstance:
       propertyPath: _defaultSettings
       value: 
       objectReference: {fileID: 945999735}
-    - target: {fileID: 7392041279215917536, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: viewIdField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 153014589, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}
-      propertyPath: viewIdField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}

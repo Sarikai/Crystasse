@@ -26,6 +26,9 @@ namespace PUN_Network
         [SerializeField]
         Gradient _closedRoomGradient;
 
+        //
+        Room _relatedRoom;
+
         #endregion
 
         #region Methods
@@ -44,6 +47,7 @@ namespace PUN_Network
             _serverName.text = roomInfo.Name;
             _serverPlayers.text = roomInfo.PlayerCount.ToString();
             _serverMaxPlayers.text = roomInfo.MaxPlayers.ToString();
+            //_relatedRoom = roomInfo.
         }
 
         public void UpdateServerlistEntry(int serverID, string serverName, int players, int maxPlayers)
