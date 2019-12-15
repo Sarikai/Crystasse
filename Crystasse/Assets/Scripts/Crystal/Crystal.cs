@@ -97,7 +97,9 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         OnConquered += ChangeTeam;
         OnConquered += () => StartCoroutine(SpawnRoutine());
         GetComponent<SphereCollider>().radius = _data.Range;
-        StartCoroutine(SpawnRoutine());
+
+        if(_crystalView.IsMine)
+            StartCoroutine(SpawnRoutine());
     }
 
     public void UpdateCrystal()
