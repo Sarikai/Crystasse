@@ -251,9 +251,11 @@ namespace CustomUI
 
         public virtual void OnButtonJoinRoomClicked(String roomName)
         {
-            GameManager.MasterManager.NetworkManager.JoinRoom(roomName);
-            ToggleLobbyMenu();
-            ToggleRoomMenu();
+            if(GameManager.MasterManager.NetworkManager.JoinRoom(roomName))
+            {
+                ToggleLobbyMenu();
+                ToggleRoomMenu();
+            }
         }
 
         public virtual void OnButtonRoomToMainClicked()
