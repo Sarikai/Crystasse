@@ -114,7 +114,7 @@ namespace PUN_Network
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-            Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}");
+            Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}" + " Count: " + roomList.Count);
             //base.OnRoomListUpdate(roomList);
             if(roomList != null && roomList.Count > 0)
             {
