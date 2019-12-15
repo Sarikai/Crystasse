@@ -251,7 +251,10 @@ namespace CustomUI
 
         public virtual void OnButtonJoinRoomClicked(String roomName)
         {
-            if(GameManager.MasterManager.NetworkManager.JoinRoom(roomName))
+            var b = GameManager.MasterManager.NetworkManager.JoinRoom(roomName);
+
+            Debug.Log("Joined?: " + b);
+            if(b)
             {
                 ToggleLobbyMenu();
                 ToggleRoomMenu();
