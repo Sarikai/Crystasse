@@ -11,7 +11,7 @@ namespace PUN_Network
 {
 
     [RequireComponent(typeof(PhotonView))]
-    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks
+    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks//, IPunObservable
     {
         #region Variables / Properties
 
@@ -41,6 +41,7 @@ namespace PUN_Network
 
         private void Awake()
         {
+            //_entryView = GetComponent<PhotonView>();
             _entryGradient = this.GetComponent<UIGradient>();
             //if (int.TryParse(GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId, out int userID))
             //{
@@ -91,7 +92,7 @@ namespace PUN_Network
             //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
             //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
             //}
-            if(_entryView.IsMine)
+            if (_entryView.IsMine)
             {
                 _playerReady = !_playerReady;
                 //ChangeEntryColor();
@@ -102,7 +103,7 @@ namespace PUN_Network
 
         private void ChangeEntryColor()
         {
-            if(_playerReady)
+            if (_playerReady)
                 _entryGradient.EffectGradient = _playerReadyGradient;
             else
                 _entryGradient.EffectGradient = _playerNotReadyGradient;
@@ -119,6 +120,20 @@ namespace PUN_Network
             //}
 
         }
+
+        //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        //{
+        //    if (stream.IsWriting)
+        //    {
+        //        stream.SendNext(_entryGradient);
+        //        Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
+        //    }
+        //    else
+        //    {
+        //        this._entryGradient = (UIGradient)stream.ReceiveNext();
+        //        Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
+        //    }
+        //}
 
 
         #endregion

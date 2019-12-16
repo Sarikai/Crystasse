@@ -38,7 +38,7 @@ namespace PUN_Network
 
         public Player[] UpdatePlayers()
         {
-            return PhotonNetwork.PlayerList;
+            return _photonPlayers = PhotonNetwork.PlayerList;
         }
 
         #endregion

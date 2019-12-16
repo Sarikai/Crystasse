@@ -41,7 +41,7 @@ namespace PUN_Network
 
 
         //
-        public List<GameObject> _serverListEntries = new List<GameObject>();
+        public Dictionary<int, GameObject> _serverListEntries = new Dictionary<int, GameObject>();
         public Dictionary<Player, GameObject> _playerListEntries = new Dictionary<Player, GameObject>();
 
         #endregion
@@ -61,7 +61,7 @@ namespace PUN_Network
 
         private void Start()
         {
-            PhotonNetwork.OfflineMode = false;
+            //PhotonNetwork.OfflineMode = false;
             PhotonNetwork.ConnectUsingSettings();
         }
 
@@ -78,6 +78,7 @@ namespace PUN_Network
             base.OnConnectedToMaster();
             Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
+
             _localPlayer = PhotonNetwork.LocalPlayer;
             Debug.Log($"Local player ID: {_localPlayer.UserId}");
             JoinDefaultLobby();
@@ -100,7 +101,7 @@ namespace PUN_Network
         private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
         {
             _currentScene = scene.buildIndex;
-            if(_currentScene == _levelScene)
+            if (_currentScene == _levelScene)
             {
                 _isGameLoaded = true;
                 GameManager.MasterManager.LoadMap();
@@ -120,22 +121,24 @@ namespace PUN_Network
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
             Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}" + " Count: " + roomList.Count);
-            //base.OnRoomListUpdate(roomList);
-            ClearServerEntries();
-            if(roomList != null && roomList.Count > 0)
+            base.OnRoomListUpdate(roomList);
+            //ClearServerEntries();
+            if (roomList != null && roomList.Count > 0)
             {
                 Debug.Log($"Rooms not null");
-                foreach(RoomInfo roomInfo in roomList)
+                foreach (RoomInfo roomInfo in roomList)
                 {
-
-                    Debug.Log($"{roomInfo.ToString()}");
-                    PUN_ServerlistEntry newLine = Instantiate(_uiManager?._serverEntryPrefab, _uiManager?._ServerList);
-                    newLine.UpdateServerlistEntry(roomInfo);
-                    _serverListEntries.Add(newLine.gameObject);
+                    if (!_serverListEntries.ContainsKey(roomInfo.ID))
+                    {
+                        Debug.Log($"{roomInfo.ToString()}");
+                        PUN_ServerlistEntry newLine = Instantiate(_uiManager?._serverEntryPrefab, _uiManager?._ServerList);
+                        newLine.UpdateServerlistEntry(roomInfo);
+                        _serverListEntries.Add(roomInfo.ID, newLine.gameObject);
+                    }
                 }
             }
-
         }
+
 
         #endregion
 
@@ -200,16 +203,17 @@ namespace PUN_Network
             _localRoom.Room = PhotonNetwork.CurrentRoom;
             _uiManager._RoomName.text = _localRoom.Room.Name;
             Debug.Log($"Joined Room");
-            if(_localRoom != null)
+            if (_localRoom != null)
             {
+
                 _localRoom.Players = _localRoom.UpdatePlayers();
-                _localRoom.PlayersInRoom = _localRoom.Players.Length;
-                _localRoom.MyNumberInRoom = _localRoom.PlayersInRoom;
-                PhotonNetwork.NickName = _localRoom.MyNumberInRoom.ToString();
+                _localRoom.PlayersInRoom = _localRoom.Room.PlayerCount;
+                _localRoom.MyNumberInRoom = _localRoom.Room.PlayerCount;
+                PhotonNetwork.NickName = "Player" + _localRoom.MyNumberInRoom.ToString();
                 //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
             }
 
-            if(startGame == true)
+            if (startGame == true)
             {
                 photonView.RPC("RPC_StartGame", RpcTarget.AllViaServer);
             }
@@ -234,25 +238,38 @@ namespace PUN_Network
             photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
             _localRoom.Players = _localRoom.UpdatePlayers();
             Debug.Log($"A new player entered: {newPlayer.NickName}");
-            if(_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers)
+            if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers && PhotonNetwork.IsMasterClient)
             {
-                if(!PhotonNetwork.IsMasterClient)
-                    return;
+                //if (!PhotonNetwork.IsMasterClient)
+                //    return;
                 PhotonNetwork.CurrentRoom.IsOpen = false;
             }
             else
             {
-                if(!PhotonNetwork.IsMasterClient)
-                    return;
+                //if (!PhotonNetwork.IsMasterClient)
+                //    return;
                 PhotonNetwork.CurrentRoom.IsOpen = true;
             }
         }
 
         public void LeaveRoom()
         {
-            PhotonNetwork.LeaveRoom();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Dictionary<int, Player> players = PhotonNetwork.CurrentRoom.Players;
+                for (int i = 0; i < players.Count; i++)
+                {
+                    if (PhotonNetwork.CurrentRoom.MasterClientId != players[i].ActorNumber)
+                    {
+                        _photonView.RPC("RPC_RemovePlayerEntry", RpcTarget.Others, PhotonNetwork.LocalPlayer);
+                        _photonView.RPC("RPC_RemovePlayerEntry", RpcTarget.All, players[i]);
+                        PhotonNetwork.CloseConnection(players[i]);
+                    }
+                }
+            }
 
-            //_photonView.RPC("RPC_RemovePlayerEntry", RpcTarget.AllBuffered, _localPlayer);
+            _photonView.RPC("RPC_RemovePlayerEntry", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer);
+            PhotonNetwork.LeaveRoom();
             _localRoom.Room = null;
         }
 
@@ -275,7 +292,7 @@ namespace PUN_Network
 
         public void UpdateRoomSettings()
         {
-            if(byte.TryParse(_uiManager._InputMaxPlayers.text, out byte maxPlayers))
+            if (byte.TryParse(_uiManager._InputMaxPlayers.text, out byte maxPlayers))
             {
                 _localRoom.Room.MaxPlayers = maxPlayers;
             }
@@ -284,10 +301,10 @@ namespace PUN_Network
 
         private void ClearServerEntries()
         {
-            for(int i = 0; i < _serverListEntries.Count; i++)
+            for (int i = 0; i < _serverListEntries.Count; i++)
             {
                 GameObject entry = _serverListEntries[i];
-                _serverListEntries.Remove(entry);
+                _serverListEntries.Remove(i);
                 Destroy(entry);
             }
         }
@@ -326,7 +343,7 @@ namespace PUN_Network
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
-            if(!PhotonNetwork.IsMasterClient)
+            if (!PhotonNetwork.IsMasterClient)
                 return;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             //foreach (Player player in _localRoom.Players)
@@ -361,7 +378,7 @@ namespace PUN_Network
         public void RPC_SetCrystalViews(Player[] players)
         {
             Crystal randomCrystal;
-            foreach(Player player in players)
+            foreach (Player player in players)
             {
                 randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
                 randomCrystal.SetCrystalView(player);
