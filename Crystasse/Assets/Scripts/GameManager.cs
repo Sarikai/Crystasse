@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
                     Match m = Match.LoadMatch(matchPath.Value);
                     if (m != null)
                     {
-                        UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
+                        UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
                         //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
                         matchStats.UpdateEntry(m);
                         GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);

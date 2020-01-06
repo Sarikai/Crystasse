@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [Serializable]
-public class Stats : MonoBehaviour
+public class Stats
 {
 
 
@@ -85,6 +85,11 @@ public class Stats : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/stats.dat");
         bf.Serialize(file, s);
         file.Close();
+
+        BinaryFormatter clearbf = new BinaryFormatter();
+        FileStream clearfile = File.Create(Application.persistentDataPath + "/stats.dat");
+        clearbf.Serialize(clearfile, s);
+        clearfile.Close();
     }
 
     public void LoadStats()
