@@ -55,9 +55,16 @@ namespace CustomUI
             timer = false;
         }
 
-        string TimeFormatter(float actualTimer)
+
+        public string TimeFormatter()
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(this.time);
+            string formattedTime = string.Format("{0:00}:{1:00}:{2:00}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+            return formattedTime;
+        }
+        public string TimeFormatter(float actualTimer)
+        {
+            TimeSpan timeSpan = TimeSpan.FromSeconds(actualTimer);
             string formattedTime = string.Format("{0:00}:{1:00}:{2:00}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
             return formattedTime;
         }

@@ -21,6 +21,36 @@ public class Stats : MonoBehaviour
     #region Methods
 
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.O))
+        {
+            //UnityEngine.Random.Range(0, 6);
+            Stats newStat = new Stats()
+            {
+                destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
+                spawnedUnits = (uint)UnityEngine.Random.Range(0, 6),
+            };
+            Match.SaveMatch(newStat);
+            AutoSaveStats();
+        };
+
+        if (Input.GetKey(KeyCode.L))
+        {
+            Matches = new Dictionary<int, string>();
+            LoadStats();
+            if (Matches != null && Matches.Count > 0)
+            {
+                foreach (KeyValuePair<int, string> matchPath in Matches)
+                {
+                    Match.LoadMatch(matchPath.Value);
+                }
+            }
+
+        }
+
+    }
+
     public void IncrementSpawns()
     {
         spawnedUnits++;
@@ -64,6 +94,7 @@ public class Stats : MonoBehaviour
 
             spawnedUnits = s.spawnedUnits;
             destroyedUnits = s.destroyedUnits;
+            Matches = s.Matches;
         }
     }
 

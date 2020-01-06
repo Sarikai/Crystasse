@@ -43,6 +43,8 @@ namespace PUN_Network
         //
         public Dictionary<int, GameObject> _serverListEntries = new Dictionary<int, GameObject>();
         public Dictionary<Player, GameObject> _playerListEntries = new Dictionary<Player, GameObject>();
+        public Dictionary<Match, GameObject> _matchEntries = new Dictionary<Match, GameObject>();
+        public Stats MatchStats;
 
         #endregion
 
@@ -106,6 +108,10 @@ namespace PUN_Network
                 _isGameLoaded = true;
                 GameManager.MasterManager.LoadMap();
                 _uiManager.Toggle(_uiManager._Background);
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
+                }
                 //GameManager.MasterManager.StartInitCrystals();
                 //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
             }
@@ -355,6 +361,8 @@ namespace PUN_Network
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
+            MatchStats = new Stats();
+            _uiManager._uiTimer.timer = true;
             if (!PhotonNetwork.IsMasterClient)
                 return;
             PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -364,11 +372,12 @@ namespace PUN_Network
             //}
 
             //_uiManager._uiTimer.RPC_StartTimer();
-            _uiManager._uiTimer.timer = true;
 
             //SetCrystalViews(_localRoom.Players);
             //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.CurrentRoom.Players);
-            photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
+
+
+            //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
         }
 
         [PunRPC]

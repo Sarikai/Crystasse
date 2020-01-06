@@ -95,10 +95,9 @@ namespace CustomUI
         public GameObject _Background;
         public PUN_ServerlistEntry _serverEntryPrefab;
         public PUN_PlayerlistEntry _playerEntryPrefab;
-        public Match _matchLinePrefab;
+        public UI_StatEntry _matchLinePrefab;
 
         public UI_Timer _uiTimer;
-
 
         #endregion
 
@@ -305,7 +304,9 @@ namespace CustomUI
 
         public virtual void OnButtonStatsToMainClicked()
         {
-
+            ToggleStatsMenu();
+            //GameManager.MasterManager.ui
+            ToggleMainMenu();
         }
 
         public virtual void OnButtonExitAppClicked()
@@ -322,6 +323,16 @@ namespace CustomUI
         }
 
         #endregion
+
+        //void ClearMatchData()
+        //{
+        //    foreach (Match match in MatchList)
+        //    {
+        //        Match currentmatch = match;
+        //        MatchList.Remove(match);
+        //        currentmatch.
+        //    }
+        //}
 
         #endregion
     }

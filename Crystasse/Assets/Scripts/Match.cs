@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Match : MonoBehaviour
@@ -17,20 +16,24 @@ public class Match : MonoBehaviour
     public uint spawnedUnits;
     public uint destroyedUnits;
     public string date;
+    public string duration;
 
     private readonly string _filename = "Stats.txt";
-    List<Match> _matchLines = new List<Match>();
-
     #endregion
 
     #region Methods
 
 
-    public void SaveMatch(Stats matchStats)
+
+
+    public static void SaveMatch(Stats matchStats)
     {
         Match m = new Match();
         m.destroyedUnits = matchStats.destroyedUnits;
         m.spawnedUnits = matchStats.spawnedUnits;
+        m.date = DateTime.Today.ToString();
+        //m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter();
+        m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter(UnityEngine.Random.Range(0f, 3600f));
 
         BinaryFormatter bf = new BinaryFormatter();
         //string fileName = $"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}";
@@ -44,7 +47,7 @@ public class Match : MonoBehaviour
         }
     }
 
-    public void LoadMatch(String path)
+    public static void LoadMatch(String path)
     {
         if (File.Exists($"{Application.persistentDataPath}/{path}.txt"))
         {
@@ -53,14 +56,11 @@ public class Match : MonoBehaviour
             Match m = (Match)bf.Deserialize(file);
             file.Close();
 
-            UI_Stats matchStats = new UI_Stats()
-            {
-                spawnedUnits = m.spawnedUnits,
-                destroyedUnits = m.destroyedUnits,
-                date = File.GetCreationTime($"{Application.persistentDataPath}/{path}.txt").ToString()
-            };
+            UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
+            matchStats.UpdateEntry(m);
+            GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
 
-            _matchLines.Add(Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity));
+            //GameManager.MasterManager.UIManager.MatchList.Add(Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity));
         }
     }
 
