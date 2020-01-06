@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private UI_Manager _uiManager;
     [SerializeField]
     private PUN_NetworkManager _networkManager;
+    [SerializeField]
+    private InputManager _inputManager;
 
     public Map map;
     public List<Crystal> bases;
@@ -29,6 +31,8 @@ public class GameManager : MonoBehaviour
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
     public PUN_NetworkManager NetworkManager { get { return _networkManager; } set { _networkManager = value; } }
 
+    public InputManager InputManager { get { return _inputManager; } set { _inputManager = value; } }
+
     #endregion
 
     #region Methods
@@ -38,16 +42,17 @@ public class GameManager : MonoBehaviour
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
 
-        for(byte i = 0; i < byte.MaxValue; i++)
+        for (byte i = 0; i < byte.MaxValue; i++)
             teamToPlayer.Add(i, null);
     }
 
     public void AddPlayer(Player player)
     {
-        for(byte i = 1; i < teamToPlayer.Count; i++)
-            if(teamToPlayer[i] == null)
+        for (byte i = 1; i < teamToPlayer.Count; i++)
+            if (teamToPlayer[i] == null)
             {
                 teamToPlayer[i] = player;
+                _inputManager._myTeamID = i;
                 Debug.Log("Added player: " + player.NickName + " at teamID : " + i);
                 return;
             }
@@ -55,13 +60,13 @@ public class GameManager : MonoBehaviour
 
     protected void GameManagerSingleton()
     {
-        if(GameManager.MasterManager == null)
+        if (GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if(GameManager.MasterManager != this)
+            if (GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -78,18 +83,18 @@ public class GameManager : MonoBehaviour
 
     public void StartInitCrystals()
     {
-        if(crystals != null)
-            foreach(var crystal in crystals)
+        if (crystals != null)
+            foreach (var crystal in crystals)
                 crystal.Init();
     }
 
     private void Update()
     {
-        if(doUpdate)
+        if (doUpdate)
         {
             StateMachine.Update();
 
-            foreach(var c in crystals)
+            foreach (var c in crystals)
                 c.UpdateCrystal();
         }
     }

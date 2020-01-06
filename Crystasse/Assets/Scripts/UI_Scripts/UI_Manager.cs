@@ -95,6 +95,9 @@ namespace CustomUI
         public PUN_ServerlistEntry _serverEntryPrefab;
         public PUN_PlayerlistEntry _playerEntryPrefab;
 
+        public UI_Timer _uiTimer;
+
+
         #endregion
 
         #region Methods
@@ -254,7 +257,7 @@ namespace CustomUI
             var b = GameManager.MasterManager.NetworkManager.JoinRoom(roomName);
 
             Debug.Log("Joined?: " + b);
-            if(b)
+            if (b)
             {
                 ToggleLobbyMenu();
                 ToggleRoomMenu();

@@ -120,6 +120,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &195054725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 784343123, guid: 5bfb8007cb282844e854b25388730ffc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6522640843784873806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be889f01b5d84a4da682f1d53c78741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &322357772 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6522640842707417778, guid: 5bfb8007cb282844e854b25388730ffc,
@@ -156,10 +168,28 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6522640843784873806}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1856665335}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b0e16eceddbc5a488aebd9687ea187a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1856665335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6522640842528190699, guid: 5bfb8007cb282844e854b25388730ffc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6522640843784873806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1856665336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856665335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1723ae4b52bd8840993f6da391af476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2055271855
@@ -257,6 +287,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5821234637800787182, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: maxPlayers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: _RoomCreateMenu
@@ -284,6 +319,11 @@ PrefabInstance:
       propertyPath: _ServerList
       value: 
       objectReference: {fileID: 1336138815}
+    - target: {fileID: 403838235936940779, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _uiTimer
+      value: 
+      objectReference: {fileID: 1856665336}
     - target: {fileID: 6522640843001627565, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -688,15 +728,15 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5821234637800787182, guid: 5bfb8007cb282844e854b25388730ffc,
-        type: 3}
-      propertyPath: maxPlayers
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2026172365430669023, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: _defaultSettings
       value: 
       objectReference: {fileID: 945999735}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _inputManager
+      value: 
+      objectReference: {fileID: 195054725}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}

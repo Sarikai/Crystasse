@@ -325,6 +325,18 @@ namespace PUN_Network
             Destroy(entryToRemove);
         }
 
+        public void SetCrystalViews(Player[] players)
+        {
+            Crystal randomCrystal;
+            foreach (Player player in players)
+            {
+                randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
+                randomCrystal.SetCrystalView(player);
+                GameManager.MasterManager.bases.Remove(randomCrystal);
+            }
+            GameManager.MasterManager.StartInitCrystals();
+        }
+
         #endregion
 
         #region RPCs
@@ -350,7 +362,10 @@ namespace PUN_Network
             //{
             //    Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
             //}
-            photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, _localRoom.Players);
+            _uiManager._uiTimer.RPC_StartTimer();
+            SetCrystalViews(_localRoom.Players);
+            //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, _localRoom.Players);
+
         }
 
         [PunRPC]
