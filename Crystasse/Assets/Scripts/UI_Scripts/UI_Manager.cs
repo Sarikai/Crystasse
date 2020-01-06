@@ -334,6 +334,12 @@ namespace CustomUI
         //    }
         //}
 
+        public UI_StatEntry InstantiateLine()
+        {
+            UI_StatEntry obj = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
+            return obj;
+        }
+
         #endregion
     }
 }

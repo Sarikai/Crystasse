@@ -45,7 +45,13 @@ public class GameManager : MonoBehaviour
 
         for (byte i = 0; i < byte.MaxValue; i++)
             teamToPlayer.Add(i, null);
+
+        _RunningSessionStats = new Stats();
+        _RunningSessionStats.Matches = new Dictionary<int, string>();
+        Debug.Log($"GameManager Awake done");
     }
+
+
 
     public void AddPlayer(Player player)
     {
@@ -91,6 +97,42 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.O))
+        {
+            Debug.Log("Saving");
+            //UnityEngine.Random.Range(0, 6);
+            Stats newStat = new Stats()
+            {
+
+                destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
+                spawnedUnits = (uint)UnityEngine.Random.Range(0, 6),
+            };
+            Match.SaveMatch(newStat);
+            GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
+        };
+
+        if (Input.GetKey(KeyCode.L))
+        {
+            GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
+            GameManager.MasterManager._RunningSessionStats.LoadStats();
+            if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
+            {
+                foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
+                {
+                    Match m = Match.LoadMatch(matchPath.Value);
+                    if (m != null)
+                    {
+                        UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
+                        //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
+                        matchStats.UpdateEntry(m);
+                        GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
+                    }
+                }
+            }
+
+        }
+
+
         if (doUpdate)
         {
             StateMachine.Update();

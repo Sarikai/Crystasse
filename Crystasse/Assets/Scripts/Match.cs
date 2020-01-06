@@ -8,7 +8,8 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class Match : MonoBehaviour
+[Serializable]
+public class Match
 {
 
     #region Variables / Properties
@@ -18,7 +19,7 @@ public class Match : MonoBehaviour
     public string date;
     public string duration;
 
-    private readonly string _filename = "Stats.txt";
+    private readonly string _filename = "Stats.dat";
     #endregion
 
     #region Methods
@@ -36,32 +37,41 @@ public class Match : MonoBehaviour
         m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter(UnityEngine.Random.Range(0f, 3600f));
 
         BinaryFormatter bf = new BinaryFormatter();
-        //string fileName = $"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}";
-        string fileName = $"{DateTime.Now.ToString()}";
-        if (!File.Exists($"{Application.persistentDataPath}/{fileName}.txt"))
+        string fileName = $"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}";
+        Debug.Log(DateTime.Now.ToString());
+        Debug.Log($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}");
+        //string fileName = $"{DateTime.Now.ToString()}";
+        Debug.Log(!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"));
+        if (!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"))
         {
             GameManager.MasterManager._RunningSessionStats.Matches.Add(GameManager.MasterManager._RunningSessionStats.Matches.Count + 1, fileName);
-            FileStream file = File.Create($"{Application.persistentDataPath}/{fileName}.txt");
+            FileStream file = File.Create($"{Application.persistentDataPath}/{fileName}.dat");
             bf.Serialize(file, m);
             file.Close();
+            Debug.Log($"Match saved to {Application.persistentDataPath}/{fileName}.dat");
         }
     }
 
-    public static void LoadMatch(String path)
+    public static Match LoadMatch(String path)
     {
-        if (File.Exists($"{Application.persistentDataPath}/{path}.txt"))
+        if (File.Exists($"{Application.persistentDataPath}/{path}.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open($"{Application.persistentDataPath}/{path}.txt", FileMode.Open);
+            FileStream file = File.Open($"{Application.persistentDataPath}/{path}.dat", FileMode.Open);
             Match m = (Match)bf.Deserialize(file);
             file.Close();
 
-            UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
-            matchStats.UpdateEntry(m);
-            GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
+            //UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
+
+            //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
+            //matchStats.UpdateEntry(m);
+            //GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
 
             //GameManager.MasterManager.UIManager.MatchList.Add(Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity));
+            Debug.Log("Match returned");
+            return m;
         }
+        return null;
     }
 
     #endregion
