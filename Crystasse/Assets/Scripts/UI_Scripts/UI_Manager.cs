@@ -102,10 +102,10 @@ namespace CustomUI
 
         #region Methods
 
-        private void Awake()
-        {
-            _uiTimer.StartTimer();
-        }
+        //private void Awake()
+        //{
+        //    _uiTimer.StartTimer();
+        //}
 
         //All toggle functions
         #region Toggles
