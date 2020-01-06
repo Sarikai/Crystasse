@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> ObjectsToDestroy { get; private set; }
     [SerializeField]
     private bool doUpdate = false;
+    public Stats _RunningSessionStats;
 
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }

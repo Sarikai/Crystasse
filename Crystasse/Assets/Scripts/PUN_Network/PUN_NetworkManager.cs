@@ -383,6 +383,7 @@ namespace PUN_Network
             PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
             GameManager.MasterManager.AddPlayer(newPlayer);
             newLine.UpdatePlayerlistEntry(newPlayer);
+            _uiManager._PlayerName.text = newPlayer.NickName;
             _playerListEntries.Add(newPlayer, newLine.gameObject);
         }
 

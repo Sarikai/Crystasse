@@ -65,6 +65,7 @@ namespace CustomUI
         public TextMeshProUGUI _RoomName;          //Name of room player has joined
         public Transform _ServerList;
         public Transform _PlayerList;
+        public Transform _MatchList;
 
         //HUD 
         [Header("HUD")]
@@ -94,6 +95,7 @@ namespace CustomUI
         public GameObject _Background;
         public PUN_ServerlistEntry _serverEntryPrefab;
         public PUN_PlayerlistEntry _playerEntryPrefab;
+        public Match _matchLinePrefab;
 
         public UI_Timer _uiTimer;
 
@@ -297,7 +299,8 @@ namespace CustomUI
 
         public virtual void OnButtonStatsMenuClicked()
         {
-
+            ToggleMainMenu();
+            ToggleStatsMenu();
         }
 
         public virtual void OnButtonStatsToMainClicked()
