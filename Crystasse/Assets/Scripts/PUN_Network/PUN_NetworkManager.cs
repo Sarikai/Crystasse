@@ -363,9 +363,9 @@ namespace PUN_Network
             //    Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
             //}
             _uiManager._uiTimer.RPC_StartTimer();
-            SetCrystalViews(_localRoom.Players);
-            //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, _localRoom.Players);
-
+            //SetCrystalViews(_localRoom.Players);
+            //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.CurrentRoom.Players);
+            photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
         }
 
         [PunRPC]

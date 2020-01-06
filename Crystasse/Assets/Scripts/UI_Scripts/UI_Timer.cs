@@ -28,13 +28,16 @@ namespace CustomUI
                 minutes = ((int)(m / 60f)).ToString("00");
                 seconds = ((int)(s % 60f)).ToString("00");
                 GameManager.MasterManager.UIManager._TimeRunning.text = ($"{hours}:{minutes}:{seconds}");
+                Debug.Log($"{hours}:{minutes}:{seconds}");
             }
             yield break;
         }
 
         public void StartTimer()
         {
-            GameManager.MasterManager.NetworkManager.photonView.RPC("RPC_StartTimer", RpcTarget.AllViaServer);
+
+            StartCoroutine("TimerCoroutine");
+            //GameManager.MasterManager.NetworkManager.photonView.RPC("RPC_StartTimer", RpcTarget.AllViaServer);
         }
 
         [PunRPC]
