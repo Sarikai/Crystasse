@@ -108,6 +108,7 @@ namespace PUN_Network
                 _isGameLoaded = true;
                 GameManager.MasterManager.LoadMap();
                 _uiManager.Toggle(_uiManager._Background);
+                GameManager.MasterManager.SoundManager.IngameMusic();
                 if (PhotonNetwork.IsMasterClient)
                 {
                     photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private PUN_NetworkManager _networkManager;
     [SerializeField]
     private InputManager _inputManager;
+    [SerializeField]
+    private SoundManager _soundManager;
 
     public Map map;
     public List<Crystal> bases;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     public PUN_NetworkManager NetworkManager { get { return _networkManager; } set { _networkManager = value; } }
 
     public InputManager InputManager { get { return _inputManager; } set { _inputManager = value; } }
+    public SoundManager SoundManager { get { return _soundManager; } set { _soundManager = value; } }
 
     #endregion
 
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
 
         _RunningSessionStats = new Stats();
         _RunningSessionStats.Matches = new Dictionary<int, string>();
+        SoundManager.MenuMusic();
         Debug.Log($"GameManager Awake done");
     }
 
