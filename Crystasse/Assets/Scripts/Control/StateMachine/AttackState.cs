@@ -29,6 +29,7 @@ public class AttackState : State
 
     protected override void Stay()
     {
+        //TODO: Add animations via curve
         Target.TakeDamage(Agent.AttackPoints);
         Agent.TakeDamage(Target.AttackPoints);
     }
