@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
     public void IngameMusic()
     {
         _audioSource.clip = _audioClips[8];
-        _audioSource.volume = 0.5f;
+        _audioSource.volume = 0.25f;
     }
 
     public void FightMusic()

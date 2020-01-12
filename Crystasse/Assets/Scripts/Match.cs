@@ -41,7 +41,7 @@ public class Match
         Debug.Log(DateTime.Now.ToString());
         Debug.Log($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}");
         //string fileName = $"{DateTime.Now.ToString()}";
-        Debug.Log(!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"));
+        //Debug.Log(!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"));
         if (!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"))
         {
             GameManager.MasterManager._RunningSessionStats.Matches.Add(GameManager.MasterManager._RunningSessionStats.Matches.Count + 1, fileName);
