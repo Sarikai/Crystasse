@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SoundManager _soundManager;
 
-    public Map map;
+    //public Map map;
     public List<Crystal> bases;
     public Dictionary<byte, Player> teamToPlayer = new Dictionary<byte, Player>();
     public Crystal[] crystals;
@@ -87,11 +87,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void LoadMap()
-    {
-        crystals = map?.LoadMap(out bases);
-        doUpdate = true;
-    }
+    //public void LoadMap()
+    //{
+    //    crystals = map?.LoadMap(out bases);
+    //    doUpdate = true;
+    //}
 
     public void StartInitCrystals()
     {
