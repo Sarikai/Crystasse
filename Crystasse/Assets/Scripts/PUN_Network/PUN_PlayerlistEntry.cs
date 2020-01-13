@@ -59,6 +59,7 @@ namespace PUN_Network
             _playerTeam = 0;
         }
 
+        //TODO: clearing maybe?
         public void UpdatePlayerlistEntry(Player player)
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
@@ -74,11 +75,15 @@ namespace PUN_Network
             _playerTeam = 0;
         }
 
-        public void UpdatePlayerlistEntry(int playerID, string playerName, int players, int maxPlayers)
-        {
 
-        }
+        //TODO: remove?
+        //public void UpdatePlayerlistEntry(int playerID, string playerName, int players, int maxPlayers)
+        //{
 
+        //}
+
+
+        //TODO: restrict access or calls to master client only or player only
         public void OnPlayerEntryClicked()
         {
             Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()} EntryViewId:{_entryView.ViewID}");
@@ -125,7 +130,7 @@ namespace PUN_Network
         //{
         //    if (stream.IsWriting)
         //    {
-        //        stream.SendNext(_entryGradient);
+        //        stream.SendNext(_play);
         //        Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
         //    }
         //    else

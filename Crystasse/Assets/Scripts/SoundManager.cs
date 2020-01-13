@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    #region Variables / Properties
+
     public AudioClip[] _audioClips;
     public AudioSource _audioSource;
+
+    #endregion
+
+    #region Methods
 
     private void Start()
     {
@@ -30,11 +36,13 @@ public class SoundManager : MonoBehaviour
     public void IngameMusic()
     {
         _audioSource.clip = _audioClips[8];
-        _audioSource.volume = 0.5f;
+        _audioSource.volume = 0.25f;
     }
 
     public void FightMusic()
     {
         _audioSource.clip = _audioClips[1];
     }
+
+    #endregion
 }

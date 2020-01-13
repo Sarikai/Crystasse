@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        //TODO: check again if correct
         if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
             if (_cam == null)

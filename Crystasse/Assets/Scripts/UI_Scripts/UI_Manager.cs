@@ -5,7 +5,7 @@ using PUN_Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
+using System.Xml.Xsl;
 using TMPro;
 using UnityEngine;
 
@@ -102,11 +102,6 @@ namespace CustomUI
         #endregion
 
         #region Methods
-
-        //private void Awake()
-        //{
-        //    _uiTimer.StartTimer();
-        //}
 
         //All toggle functions
         #region Toggles
@@ -299,13 +294,14 @@ namespace CustomUI
         public virtual void OnButtonStatsMenuClicked()
         {
             ToggleMainMenu();
+            LoadStatistics();
             ToggleStatsMenu();
         }
 
         public virtual void OnButtonStatsToMainClicked()
         {
             ToggleStatsMenu();
-            //GameManager.MasterManager.ui
+            ClearStatEntries();
             ToggleMainMenu();
         }
 
@@ -324,21 +320,60 @@ namespace CustomUI
 
         #endregion
 
-        //void ClearMatchData()
-        //{
-        //    foreach (Match match in MatchList)
-        //    {
-        //        Match currentmatch = match;
-        //        MatchList.Remove(match);
-        //        currentmatch.
-        //    }
-        //}
+        //Other functions like menu lists, statistics, etc.
+        #region Others
 
-        public UI_StatEntry InstantiateLine()
+        //Statistics, Matchhistory
+        public UI_StatEntry LoadStatEntry()
         {
-            UI_StatEntry obj = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
-            return obj;
+            UI_StatEntry statEntry = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);
+            return statEntry;
         }
+
+        public void UnloadStatEntry(UI_StatEntry statEntry)
+        {
+            UI_StatEntry chosenEntry = statEntry;
+            GameManager.MasterManager._StatEntries.Remove(statEntry);
+            Debug.Log($"Stat entry removed from list");
+            Destroy(chosenEntry.gameObject);
+            Debug.Log($"Stat entry destroyed");
+        }
+
+
+        //TODO: Load overhaul, e.g. _matchEntries list, creating dictionary and load into GameManager Awake or Start
+        public void LoadStatistics()
+        {
+            GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
+            GameManager.MasterManager._RunningSessionStats.LoadStats();
+            if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
+            {
+                foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
+                {
+                    Match m = Match.LoadMatch(matchPath.Value);
+                    if (m != null)
+                    {
+                        UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
+                        //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
+                        matchStats.UpdateEntry(m);
+                        GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
+                    }
+                }
+            }
+        }
+
+        public void ClearStatEntries()
+        {
+            foreach (UI_StatEntry statEntry in GameManager.MasterManager._StatEntries)
+            {
+                UnloadStatEntry(statEntry);
+            }
+        }
+
+        //Playerlist
+
+        //Serverlist
+
+        #endregion
 
         #endregion
     }
