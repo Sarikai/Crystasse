@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Jobs;
-using Unity.Mathematics;
 
 public class MoveState : State
 {
     public float Speed;
-    public Transform Transform;
-    public float3 Destination;
+    public Rigidbody Rigidbody;
+    public Vector3 Destination;
 
     private float _timer = 0f;
 
-    public MoveState(float speed, Unit agent, float3 destination)
+    public MoveState(float speed, Unit agent, Vector3 destination)
     {
         Agent = agent;
         Type = States.Move;
         Speed = speed;
-        Transform = Agent.transform;
+        Rigidbody = Agent.Rigidbody;
         Destination = destination;
     }
 
@@ -34,7 +33,7 @@ public class MoveState : State
 
     protected override void Stay()
     {
-        if (math.distancesq(Destination, Transform.position) <= 0.1f)
+        if((Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f)
             Substate = Substates.Exit;
         else
             MoveTowardsDest();
@@ -42,14 +41,15 @@ public class MoveState : State
 
     private void MoveTowardsDest()
     {
-        float3 direction = math.normalize(Destination - (float3)Transform.position);
+        Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
 
         _timer += Time.deltaTime;
-        direction.y += math.sin(_timer);
 
-        if (_timer >= 2 * math.PI)
+        if(_timer >= 1)
             _timer = 0f;
 
-        Transform.position += (Vector3)direction * Speed * Time.deltaTime;
+        Agent.PlayMoveAnim(_timer);
+
+        Rigidbody.transform.position += direction * Speed * Time.deltaTime;
     }
 }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAnims : MonoBehaviour
+[System.Serializable]
+public class UnitAnims
 {
     public AnimationCurve MoveAnim = null;
     public AnimationCurve AttackAnim = null;

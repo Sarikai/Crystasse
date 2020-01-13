@@ -5,11 +5,6 @@ using UnityEngine;
 [UnityEngine.CreateAssetMenu(), System.Serializable]
 public class UnitData : ScriptableObject
 {
-    [Header("Identification")]
-    public int ID;
-    [Range(0, 255)]
-    public byte TeamID;
-
     [Header("Behaviour")]
     public float Range;
 

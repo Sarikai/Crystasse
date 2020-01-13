@@ -7,6 +7,7 @@ public class AttackState : State
 {
     public Unit Target { get; private set; }
 
+    float _curveX = 0;
     public AttackState(Unit agent, Unit target)
     {
         Type = States.Attack;
@@ -24,13 +25,21 @@ public class AttackState : State
 
     protected override void Exit()
     {
+        Target.TakeDamage(Agent.AttackPoints);
+        Agent.TakeDamage(Target.AttackPoints);
+        //TODO: Effects plz
         Completed = true;
     }
 
     protected override void Stay()
     {
-        //TODO: Add animations via curve
-        Target.TakeDamage(Agent.AttackPoints);
-        Agent.TakeDamage(Target.AttackPoints);
+        _curveX += Time.deltaTime;
+        if(_curveX >= 1)
+        {
+            _curveX = 0;
+            Substate = Substates.Exit;
+        }
+        else
+            Agent.PlayAttackAnim(Target.Rigidbody.position - Agent.Rigidbody.position, _curveX);
     }
 }
