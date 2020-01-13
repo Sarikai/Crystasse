@@ -113,7 +113,7 @@ namespace PUN_Network
                 GameManager.MasterManager.SoundManager.IngameMusic();
                 if(PhotonNetwork.IsMasterClient)
                 {
-                    photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
+                    //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
 
                     //TODO: this is trial and error
                     units.AddRange(FindObjectsOfType<Unit>());
