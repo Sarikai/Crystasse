@@ -130,7 +130,7 @@ namespace PUN_Network
         //{
         //    if (stream.IsWriting)
         //    {
-        //        stream.SendNext(_entryGradient);
+        //        stream.SendNext(_play);
         //        Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
         //    }
         //    else
