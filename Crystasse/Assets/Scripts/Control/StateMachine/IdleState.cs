@@ -31,11 +31,11 @@ public class IdleState : State
 
     protected override void Stay()
     {
-        _timer += Time.deltaTime;
+        //_timer += Time.deltaTime;
 
-        Transform.position += new Vector3(0f, 1f, 0f) * math.sin(_timer) * _moveSpeed * Time.deltaTime;
+        //if(_timer >= 2f)
+        //    _timer = 0f;
 
-        if(_timer >= 2f * math.PI)
-            _timer = 0f;
+        //Agent.PlayMoveAnim(_timer);
     }
 }

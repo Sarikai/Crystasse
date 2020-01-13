@@ -14,13 +14,14 @@ public class Unit : Agent
     [SerializeField]
     private Rigidbody _rb = null;
     [SerializeField]
-    private SphereCollider /*_collider,*/ _attackTrigger;
-    [SerializeField]
-    public Photon.Pun.PhotonView _view;
+    private SphereCollider /*_collider,*/ _attackTrigger = null;
+    //[SerializeField]
+    //public Photon.Pun.PhotonView _view;
     [SerializeField]
     private Transform _visualTrans = null;
     [SerializeField]
-    private UnitAnims _anims;
+    private UnitAnims _anims = null;
+    private float _timer;
 
     public byte TeamID => _teamID;
     public byte Health { get; private set; }
@@ -45,8 +46,8 @@ public class Unit : Agent
 
     private void Awake()
     {
-        _view = GetComponent<Photon.Pun.PhotonView>();
-        _view.ViewID = 1100 + id;
+        //_view = GetComponent<Photon.Pun.PhotonView>();
+        //_view.ViewID = 1100 + id;
 
         id++;
         Health = _data.HealthPoints;
@@ -57,6 +58,16 @@ public class Unit : Agent
     private void Start()
     {
         StateMachine.SwitchState(this, new IdleState(this, _data.MoveSpeed));
+    }
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if(_timer >= 2f)
+            _timer = 0f;
+
+        PlayMoveAnim(_timer);
     }
 
     public void UpdateUnit()
@@ -86,11 +97,16 @@ public class Unit : Agent
 
     public void PlayAttackAnim(Vector3 direction, float x)
     {
-        _rb.transform.position += direction * _anims.AttackAnim.Evaluate(x);
+        _rb.transform.position += direction * _anims.AttackAnim.Evaluate(x) * Time.deltaTime;
     }
 
     public void PlayMoveAnim(float x)
     {
-        _visualTrans.position += Vector3.up * _anims.AttackAnim.Evaluate(x);
+        var v = new Vector3(0, Constants.MAX_UNIT_DISPLACEMENT * _anims.MoveAnim.Evaluate(x), 0) * Time.deltaTime;
+
+        if(x <= 1f)
+            _visualTrans.position += v;
+        else if(x > 1f)
+            _visualTrans.position -= v;
     }
 }

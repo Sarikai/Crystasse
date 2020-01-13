@@ -43,12 +43,12 @@ public class MoveState : State
     {
         Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
 
-        _timer += Time.deltaTime;
+        //_timer += Time.deltaTime;
 
-        if(_timer >= 1)
-            _timer = 0f;
+        //if(_timer >= 2f)
+        //    _timer = 0f;
 
-        Agent.PlayMoveAnim(_timer);
+        //Agent.PlayMoveAnim(_timer);
 
         Rigidbody.transform.position += direction * Speed * Time.deltaTime;
     }

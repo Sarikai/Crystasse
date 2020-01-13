@@ -10,7 +10,7 @@ public static class Selection
 
     private static readonly List<Unit> _selected = new List<Unit>();
     private static SelectionData _data;
-    //private static readonly GameObject _sphereVisual;
+    private static readonly GameObject _sphereVisual;
 
     public static byte TeamID { get; set; }
     public static int PlaneLayer => _data.PlaneLayer;
@@ -22,36 +22,42 @@ public static class Selection
     {
         //TODO: Set owner team ID
         //TeamID = 1;
-        TeamID = GameManager.MasterManager.InputManager._myTeamID;
+        TeamID = 1/*GameManager.MasterManager.InputManager._myTeamID*/;
 
         var text = File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json");
         _data = JsonConvert.DeserializeObject<SelectionData>(text);
 
-        //_sphereVisual = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //_sphereVisual.name = "Selection Sphere Visual";
-        //_sphereVisual.GetComponent<SphereCollider>().radius = _data.SelectionRadius;
-        //_sphereVisual.GetComponent<SphereCollider>().isTrigger = true;
-        //_sphereVisual.SetActive(false);
+        _sphereVisual = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        _sphereVisual.name = "Selection Sphere Visual";
+        _sphereVisual.GetComponent<SphereCollider>().radius = _data.SelectionRadius;
+        _sphereVisual.GetComponent<SphereCollider>().isTrigger = true;
+        _sphereVisual.SetActive(false);
     }
 
     private static void AddSelection(Unit[] selection)
     {
-        if (selection != null && selection.Length >= 1)
+        if(selection != null && selection.Length >= 1)
+        {
+            foreach(var u in selection)
+            {
+                Debug.Log(u);
+            }
             _selected.AddRange(selection);
-        else if (selection.Length <= 0)
+        }
+        else if(selection.Length <= 0)
             _selected.Clear();
     }
 
     public static void CastSphereSelection(RaycastHit hit)
     {
-        //_sphereVisual.transform.position = hit.point;
-        //_sphereVisual.SetActive(true);
+        _sphereVisual.transform.position = hit.point;
+        _sphereVisual.SetActive(true);
 
         var hits = Physics.OverlapSphere(hit.point, _data.SelectionRadius, _data.SelectionLayer);
 
         List<Unit> sel = new List<Unit>();
-        foreach (var coll in hits)
-            if (coll.GetComponent<Unit>()?.TeamID == TeamID)
+        foreach(var coll in hits)
+            if(coll.GetComponent<Unit>()?.TeamID == TeamID)
             {
                 sel.Add(coll.GetComponent<Unit>());
             }
