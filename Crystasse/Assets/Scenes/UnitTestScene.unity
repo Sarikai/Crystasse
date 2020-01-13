@@ -530,7 +530,7 @@ PrefabInstance:
     - target: {fileID: 1483407682803765332, guid: afd0cabcb20688548b7b0b1ccf79b4d8,
         type: 3}
       propertyPath: viewIdField
-      value: 1
+      value: 555
       objectReference: {fileID: 0}
     - target: {fileID: 1483407682803765334, guid: afd0cabcb20688548b7b0b1ccf79b4d8,
         type: 3}
@@ -734,7 +734,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 5745235624836439145}
   - {fileID: 770172001763325251}
-  viewIdField: 2
+  viewIdField: 666
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &770172001763325251
