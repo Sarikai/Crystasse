@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4527915053360436, guid: 479208b3b4df173439a4cc82cee3153b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.20000005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4527915053360436, guid: 479208b3b4df173439a4cc82cee3153b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -379,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4527915053360436, guid: 479208b3b4df173439a4cc82cee3153b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.92
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4527915053360436, guid: 479208b3b4df173439a4cc82cee3153b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -513,7 +513,7 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1674652168
 PrefabInstance:
@@ -640,13 +640,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770172001763325254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0, z: -7.52}
+  m_LocalPosition: {x: -1.5, y: 0, z: 19.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 770172001948105587}
   - {fileID: 770172002169001107}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &770172001763325249
 MonoBehaviour:
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: b198c5b4685df40479e6201dce1fb52b, type: 2}
-  _teamID: 1
+  _teamID: 2
   _rb: {fileID: 770172001763325261}
   _attackTrigger: {fileID: 770172002169001104}
   _visualTrans: {fileID: 770172001948105587}
