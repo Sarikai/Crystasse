@@ -22,7 +22,7 @@ public static class Selection
     {
         //TODO: Set owner team ID
         //TeamID = 1;
-        TeamID = 1/*GameManager.MasterManager.InputManager._myTeamID*/;
+        TeamID = GameManager.MasterManager.InputManager._myTeamID;
 
         var text = File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json");
         _data = JsonConvert.DeserializeObject<SelectionData>(text);
