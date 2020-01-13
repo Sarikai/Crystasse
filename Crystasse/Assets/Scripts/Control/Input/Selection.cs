@@ -27,11 +27,11 @@ public static class Selection
         var text = File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json");
         _data = JsonConvert.DeserializeObject<SelectionData>(text);
 
-        _sphereVisual = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        _sphereVisual.name = "Selection Sphere Visual";
-        _sphereVisual.GetComponent<SphereCollider>().radius = _data.SelectionRadius;
-        _sphereVisual.GetComponent<SphereCollider>().isTrigger = true;
-        _sphereVisual.SetActive(false);
+        //_sphereVisual = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //_sphereVisual.name = "Selection Sphere Visual";
+        //_sphereVisual.GetComponent<SphereCollider>().radius = _data.SelectionRadius;
+        //_sphereVisual.GetComponent<SphereCollider>().isTrigger = true;
+        //_sphereVisual.SetActive(false);
     }
 
     private static void AddSelection(Unit[] selection)
@@ -50,8 +50,8 @@ public static class Selection
 
     public static void CastSphereSelection(RaycastHit hit)
     {
-        _sphereVisual.transform.position = hit.point;
-        _sphereVisual.SetActive(true);
+        //_sphereVisual.transform.position = hit.point;
+        //_sphereVisual.SetActive(true);
 
         var hits = Physics.OverlapSphere(hit.point, _data.SelectionRadius, _data.SelectionLayer);
 
