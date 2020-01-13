@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Photon.Pun;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField]
     Camera _cam;
@@ -13,7 +14,7 @@ public class InputManager : MonoBehaviour
 
     public Area _playArea { get; private set; }
 
-    public byte _myTeamID;
+    public byte _teamID;
 
     //Vector3 _selectionStart;
 
@@ -82,5 +83,17 @@ public class InputManager : MonoBehaviour
         //        //Selection.CastBoxSelection(_selectionStart, hit.point);
         //    }
         //}
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(_teamID);
+        }
+        else
+        {
+            _teamID = (byte)stream.ReceiveNext();
+        }
     }
 }

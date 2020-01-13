@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             if(teamToPlayer[i] == null)
             {
                 teamToPlayer[i] = player;
-                _inputManager._myTeamID = i;
+                _inputManager._teamID = i;
                 Debug.Log("Added player: " + player.NickName + " at teamID : " + i);
                 return;
             }
