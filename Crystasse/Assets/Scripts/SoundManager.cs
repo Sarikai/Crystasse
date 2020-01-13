@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    #region Variables / Properties
+
     public AudioClip[] _audioClips;
     public AudioSource _audioSource;
+
+    #endregion
+
+    #region Methods
 
     private void Start()
     {
@@ -37,4 +43,6 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource.clip = _audioClips[1];
     }
+
+    #endregion
 }

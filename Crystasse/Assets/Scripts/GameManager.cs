@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool doUpdate = false;
     public Stats _RunningSessionStats;
+    public List<UI_StatEntry> _StatEntries;
 
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }

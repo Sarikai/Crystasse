@@ -22,39 +22,6 @@ public class Stats
 
     #region Methods
 
-
-    //private void Update()
-    //{
-    //    if (Input.GetKey(KeyCode.O))
-    //    {
-    //        Debug.Log("Saving");
-    //        //UnityEngine.Random.Range(0, 6);
-    //        Stats newStat = new Stats()
-    //        {
-
-    //            destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
-    //            spawnedUnits = (uint)UnityEngine.Random.Range(0, 6),
-    //        };
-    //        Match.SaveMatch(newStat);
-    //        GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
-    //    };
-
-    //    if (Input.GetKey(KeyCode.L))
-    //    {
-    //        GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
-    //        GameManager.MasterManager._RunningSessionStats.LoadStats();
-    //        if (Matches != null && Matches.Count > 0)
-    //        {
-    //            foreach (KeyValuePair<int, string> matchPath in Matches)
-    //            {
-    //                Match.LoadMatch(matchPath.Value);
-    //            }
-    //        }
-
-    //    }
-
-    //}
-
     public void IncrementSpawns()
     {
         spawnedUnits++;
@@ -74,7 +41,6 @@ public class Stats
     {
         destroyedUnits = 0;
     }
-
 
     public void AutoSaveStats()
     {

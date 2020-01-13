@@ -24,9 +24,6 @@ public class Match
 
     #region Methods
 
-
-
-
     public static void SaveMatch(Stats matchStats)
     {
         Match m = new Match();
