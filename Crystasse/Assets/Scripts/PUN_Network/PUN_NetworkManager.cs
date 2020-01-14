@@ -113,6 +113,7 @@ namespace PUN_Network
                 GameManager.MasterManager.SoundManager.IngameMusic();
                 if(PhotonNetwork.IsMasterClient)
                 {
+                    //TODO: fix
                     //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
 
                     //TODO: this is trial and error
@@ -393,6 +394,7 @@ namespace PUN_Network
 
             //_uiManager._uiTimer.RPC_StartTimer();
 
+            //TODO: fix
             //SetCrystalViews(_localRoom.Players);
             //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.CurrentRoom.Players);
 
