@@ -16,6 +16,8 @@ public class Bridge : MonoBehaviour
     AnimationCurve _buildCurve = null;
     [SerializeField]
     private int _buildValue = 0;
+    [SerializeField]
+    private Crystal _startCrystal = null, _endCrystal = null;
 
     [SerializeField]
     Vector3 end;
@@ -35,11 +37,12 @@ public class Bridge : MonoBehaviour
     }
 
     float perc = 0;
+    //TODO: make beautiful
     private void Update()
     {
         Build(1);
         end = _buildCurve.Evaluate(PercentDone) * _lineEnd;
-        _line.SetPosition(1, /*Vector3.Lerp(_lineStart, _lineEnd, PercentDone)*/ end);
+        _line.SetPosition(1, end);
     }
 
     public void Build(byte value)
@@ -58,5 +61,18 @@ public class Bridge : MonoBehaviour
                 //OnBuilt.Invoke();
             }
         }
+    }
+
+    private void OnValidate()
+    {
+        if(_startCrystal != null)
+            _lineStart = _startCrystal.transform.position;
+        if(_endCrystal != null)
+            _lineEnd = _endCrystal.transform.position;
+
+
+        _line.SetPosition(0, _lineStart);
+
+        _line.SetPosition(1, _lineEnd);
     }
 }
