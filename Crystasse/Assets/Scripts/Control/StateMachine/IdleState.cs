@@ -31,11 +31,6 @@ public class IdleState : State
 
     protected override void Stay()
     {
-        //_timer += Time.deltaTime;
-
-        //if(_timer >= 2f)
-        //    _timer = 0f;
-
-        //Agent.PlayMoveAnim(_timer);
+        Agent.PlayMoveAnim(_timer);
     }
 }

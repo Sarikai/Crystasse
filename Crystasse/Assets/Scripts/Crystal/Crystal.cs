@@ -30,13 +30,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private PhotonView _crystalView;
     [SerializeField]
     private int _viewID = 100;
+    [SerializeField]
+    private byte _teamID;
 
     Player _ownerPlayer;
 
     private int isUpgraded = 0;
     private List<Unit> _unitsInRange = new List<Unit>();
 
-    public byte TeamID => _data.TeamID;
+    public byte TeamID => _teamID;
     public int Health
     {
         get => _health; private set
@@ -44,7 +46,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             _health = value;
             if(_health <= 0)
             {
-                _data.TeamID = 0;
+                _teamID = 0;
                 _health = 0;
             }
         }
@@ -149,6 +151,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void RPC_SetUnitView(int id)
     {
+        //TODO: fix
         //_unitsSpawned[id]._view.TransferOwnership(OwnerPlayer);
     }
 
@@ -163,7 +166,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             {
                 OwnerPlayer = PhotonNetwork.LocalPlayer;
                 Health = _data.MaxHealth;
-                _data.TeamID = team;
+                _teamID = team;
                 if(OnConquered != null)
                     OnConquered.Invoke();
             }
@@ -171,7 +174,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
         if(Health <= 0)
         {
-            _data.TeamID = 0;
+            _teamID = 0;
             ChangeTeam();
         }
     }

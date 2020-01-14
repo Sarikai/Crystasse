@@ -11,10 +11,10 @@ public struct CrystalData
     public bool IsBase;
     public bool IsSpawning;
     public float SpawnRate;
-    public byte TeamID;
+    //public byte TeamID;
     public float Range;
 
-    public CrystalData(int maxHealth, int maxUnitSpawned, float spawnRate, bool isBase, bool isSpawning, byte teamID, float range)
+    public CrystalData(int maxHealth, int maxUnitSpawned, float spawnRate, bool isBase, bool isSpawning, /*byte teamID,*/ float range)
     {
         MaxHealth = maxHealth;
         MaxUnitSpawned = maxUnitSpawned;
@@ -22,7 +22,7 @@ public struct CrystalData
         SpawnRate = spawnRate;
         IsBase = isBase;
         IsSpawning = isSpawning;
-        TeamID = teamID;
+        //TeamID = teamID;
         Range = range;
     }
 }

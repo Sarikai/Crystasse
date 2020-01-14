@@ -60,16 +60,6 @@ public class Unit : Agent
         StateMachine.SwitchState(this, new IdleState(this, _data.MoveSpeed));
     }
 
-    private void Update()
-    {
-        _timer += Time.deltaTime;
-
-        if(_timer >= 2f)
-            _timer = 0f;
-
-        PlayMoveAnim(_timer);
-    }
-
     public void UpdateUnit()
     {
         if(!CurrentState.Completed)
@@ -102,7 +92,12 @@ public class Unit : Agent
 
     public void PlayMoveAnim(float x)
     {
-        var v = new Vector3(0, Constants.MAX_UNIT_DISPLACEMENT * _anims.MoveAnim.Evaluate(x), 0) * Time.deltaTime;
+        _timer += Time.deltaTime;
+
+        if(_timer >= 2f)
+            _timer = 0f;
+
+        var v = new Vector3(0, Constants.MAX_UNIT_DISPLACEMENT * _anims.MoveAnim.Evaluate(_timer), 0) * Time.deltaTime;
 
         if(x <= 1f)
             _visualTrans.position += v;

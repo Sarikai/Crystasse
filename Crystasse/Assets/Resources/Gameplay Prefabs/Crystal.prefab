@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 62284570925883173}
   - component: {fileID: -232202647835457040}
   m_Layer: 10
-  m_Name: Crystal Team 1
+  m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,9 +55,11 @@ MonoBehaviour:
     IsBase: 0
     IsSpawning: 1
     SpawnRate: 3
-    TeamID: 1
     Range: 5
   _health: 0
+  _crystalView: {fileID: -232202647835457040}
+  _viewID: 100
+  _teamID: 0
 --- !u!135 &6624521478759293363
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -83,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c9e945d2d684f489aa5ce76855284d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _crystal: {fileID: 8403968820767463745}
   _teamMaterials:
   - {fileID: 2100000, guid: 84a7dfcbe1f4aad4d9577290f0c4706d, type: 2}
   - {fileID: 2100000, guid: f41ce273ead7a1745849ea4a37a04f91, type: 2}

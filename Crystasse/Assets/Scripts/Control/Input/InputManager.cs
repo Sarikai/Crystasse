@@ -34,6 +34,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //TODO: check again if correct
         //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
+            //TODO: Move to init
             if(_cam == null)
                 _cam = FindObjectOfType<Camera>();
 

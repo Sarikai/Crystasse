@@ -134,6 +134,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _buildValue: 0
+  _startCrystal: {fileID: 0}
+  _endCrystal: {fileID: 0}
   end: {x: 0, y: 0, z: 0}
   _lineStart: {x: 0, y: 0, z: 0}
   _lineEnd: {x: 12.64, y: 0, z: 7.9}

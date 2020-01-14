@@ -48,7 +48,7 @@ public class MoveState : State
         //if(_timer >= 2f)
         //    _timer = 0f;
 
-        //Agent.PlayMoveAnim(_timer);
+        Agent.PlayMoveAnim(_timer);
 
         Rigidbody.transform.position += direction * Speed * Time.deltaTime;
     }
