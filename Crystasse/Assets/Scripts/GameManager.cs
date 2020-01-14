@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
 
-        for(byte i = 0; i < byte.MaxValue; i++)
+        for (byte i = 0; i < byte.MaxValue; i++)
             teamToPlayer.Add(i, null);
 
         _RunningSessionStats = new Stats();
@@ -60,8 +60,8 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(Player player)
     {
-        for(byte i = 1; i < teamToPlayer.Count; i++)
-            if(teamToPlayer[i] == null)
+        for (byte i = 1; i < teamToPlayer.Count; i++)
+            if (teamToPlayer[i] == null)
             {
                 teamToPlayer[i] = player;
                 _inputManager._teamID = i;
@@ -72,13 +72,13 @@ public class GameManager : MonoBehaviour
 
     protected void GameManagerSingleton()
     {
-        if(GameManager.MasterManager == null)
+        if (GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if(GameManager.MasterManager != this)
+            if (GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -95,14 +95,14 @@ public class GameManager : MonoBehaviour
 
     public void StartInitCrystals()
     {
-        if(crystals != null)
-            foreach(var crystal in crystals)
+        if (crystals != null)
+            foreach (var crystal in crystals)
                 crystal.Init();
     }
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.O))
+        if (Input.GetKey(KeyCode.O))
         {
             Debug.Log("Saving");
             //UnityEngine.Random.Range(0, 6);
@@ -116,16 +116,16 @@ public class GameManager : MonoBehaviour
             GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
         };
 
-        if(Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.L))
         {
             GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
             GameManager.MasterManager._RunningSessionStats.LoadStats();
-            if(GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
+            if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
             {
-                foreach(KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
+                foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
                 {
                     Match m = Match.LoadMatch(matchPath.Value);
-                    if(m != null)
+                    if (m != null)
                     {
                         UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
                         //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
@@ -138,11 +138,11 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if(doUpdate)
+        if (doUpdate)
         {
             StateMachine.Update();
 
-            foreach(var c in crystals)
+            foreach (var c in crystals)
                 c.UpdateCrystal();
         }
     }
