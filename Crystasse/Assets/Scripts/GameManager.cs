@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public Stats _RunningSessionStats;
     public List<UI_StatEntry> _StatEntries;
 
+    public string _unitPrefabLocation;
+    public string _crystalPrefabLocation;
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
     public PUN_NetworkManager NetworkManager { get { return _networkManager; } set { _networkManager = value; } }

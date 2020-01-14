@@ -50,6 +50,7 @@ namespace PUN_Network
             //}
         }
 
+        //TODO: Überarbeiten Player anlegen
         public virtual void UpdatePlayerlistEntry()
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
