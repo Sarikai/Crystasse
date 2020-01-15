@@ -42,7 +42,7 @@ namespace PUN_Network
         public GameObject GetNetworkPlayer { get { return _networkPlayer; } }
         public Player GetLocalPlayer { get { return _localPlayer; } }
 
-        public PUN_CustomPlayer CustomPlayerPrefab { get => _customPlayer; set => _customPlayer = value; }
+        public PUN_CustomPlayer CustomPlayer { get => _customPlayer; set => _customPlayer = value; }
 
 
         //
@@ -123,7 +123,7 @@ namespace PUN_Network
                     //TODO: fix
                     //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
 
-                    //TODO: this is trial and error
+                    //TODO: Transfering UnitOwnership @sceneLoaded works, maybe outsource into func?
                     units.AddRange(FindObjectsOfType<Unit>());
                     for (int i = 0; i < units.Count; i++)
                     {
@@ -234,9 +234,10 @@ namespace PUN_Network
             //TODO: Testphase NetworkPlayer Datenstruktur
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
-            _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>(); 
-            _customPlayer.CrystalPrefab = null; 
-            _customPlayer.UnitPrefab = null;
+            _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
+            //_customPlayer.Init(); --> is called in its awake
+            //_customPlayer.CrystalPrefab = GameManager.MasterManager._crystalPrefabLocation; 
+            //_customPlayer.UnitPrefab = GameManager.MasterManager._unitPrefabLocation;
 
 
 

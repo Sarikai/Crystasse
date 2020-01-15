@@ -11,7 +11,7 @@ namespace PUN_Network
 {
 
     [RequireComponent(typeof(PhotonView))]
-    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks//, IPunObservable
+    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks//, IPunObservable //TODO: obeserveable for entry just sync the ready bool and let the update change the color
     {
         #region Variables / Properties
 

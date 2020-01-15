@@ -6,9 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using PUN_Network;
-using System.Linq;
 
 namespace PUN_Network
 {
@@ -52,9 +50,9 @@ namespace PUN_Network
 
         private void Awake()
         {
-
             GameManager.MasterManager.InputManager = GetComponent<InputManager>();
             _customPlayerView = GetComponent<PhotonView>();
+            InitCustomPlayer();
             //TODO: Init InputManager
         }
 
@@ -65,6 +63,10 @@ namespace PUN_Network
             _localPlayer = PhotonNetwork.LocalPlayer;
             //_nickName = _nickName;
         }
+
+
+
+
         #region RPCs
 
 
