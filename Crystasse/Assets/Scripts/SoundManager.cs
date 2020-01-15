@@ -6,8 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     #region Variables / Properties
 
-    public AudioClip[] _audioClips;
-    public AudioSource _audioSource;
+    public AudioClip[] _ambientClips;
+    public AudioSource _ambientAudioSource;
 
     #endregion
 
@@ -15,33 +15,33 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        _audioSource.loop = true;
-        _audioSource.Play();
+        _ambientAudioSource.loop = true;
+        _ambientAudioSource.Play();
         //_audioSource.volume = 100;
     }
 
     private void Update()
     {
-        if (!_audioSource.isPlaying)
+        if (!_ambientAudioSource.isPlaying)
         {
-            _audioSource.Play();
+            _ambientAudioSource.Play();
         }
     }
 
     public void MenuMusic()
     {
-        _audioSource.clip = _audioClips[2];
+        _ambientAudioSource.clip = _ambientClips[2];
     }
 
     public void IngameMusic()
     {
-        _audioSource.clip = _audioClips[8];
-        _audioSource.volume = 0.25f;
+        _ambientAudioSource.clip = _ambientClips[8];
+        _ambientAudioSource.volume = 0.25f;
     }
 
     public void FightMusic()
     {
-        _audioSource.clip = _audioClips[1];
+        _ambientAudioSource.clip = _ambientClips[1];
     }
 
     #endregion

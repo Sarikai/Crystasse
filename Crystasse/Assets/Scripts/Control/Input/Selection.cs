@@ -36,15 +36,15 @@ public static class Selection
 
     private static void AddSelection(Unit[] selection)
     {
-        if(selection != null && selection.Length >= 1)
+        if (selection != null && selection.Length >= 1)
         {
-            foreach(var u in selection)
+            foreach (var u in selection)
             {
                 Debug.Log(u);
             }
             _selected.AddRange(selection);
         }
-        else if(selection.Length <= 0)
+        else if (selection.Length <= 0)
             _selected.Clear();
     }
 
@@ -56,8 +56,8 @@ public static class Selection
         var hits = Physics.OverlapSphere(hit.point, _data.SelectionRadius, _data.SelectionLayer);
 
         List<Unit> sel = new List<Unit>();
-        foreach(var coll in hits)
-            if(coll.GetComponent<Unit>()?.TeamID == TeamID)
+        foreach (var coll in hits)
+            if (coll.GetComponent<Unit>()?.TeamID == TeamID)
             {
                 sel.Add(coll.GetComponent<Unit>());
             }

@@ -43,5 +43,6 @@ MonoBehaviour:
   - RPC_ChangeMaterial
   - RPC_RemovePlayerEntry
   - RPC_StartTimer
+  - NewSpawn
   DisableAutoOpenWizard: 1
   ShowSettings: 1

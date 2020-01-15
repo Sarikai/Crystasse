@@ -50,6 +50,7 @@ namespace PUN_Network
 
         private void Awake()
         {
+            DontDestroyOnLoad(this);
             GameManager.MasterManager.InputManager = GetComponent<InputManager>();
             _customPlayerView = GetComponent<PhotonView>();
             InitCustomPlayer();
@@ -61,6 +62,7 @@ namespace PUN_Network
             _crystalPrefab = GameManager.MasterManager._crystalPrefabLocation;
             _unitPrefab = GameManager.MasterManager._unitPrefabLocation;
             _localPlayer = PhotonNetwork.LocalPlayer;
+            GameManager.MasterManager.InputManager._teamID = _teamID;
             //_nickName = _nickName;
         }
 

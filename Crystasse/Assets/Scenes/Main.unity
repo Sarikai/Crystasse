@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8762dc774eded66439a9a6f5f5284f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioClips:
+  _ambientClips:
   - {fileID: 8300000, guid: 285429d354086f645ac16ebe4526c1ab, type: 3}
   - {fileID: 8300000, guid: 60841c6b37c840b478cbfaa93e25b9e4, type: 3}
   - {fileID: 8300000, guid: a1f094104a2edf547a1baba6f16a67bf, type: 3}
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ae78f4d307edd7a499678efe2be4c81b, type: 3}
   - {fileID: 8300000, guid: 20d7f9c8f72864c46b6a106ba8524562, type: 3}
   - {fileID: 8300000, guid: d541fb50a0884e14f949f003904d63df, type: 3}
-  _audioSource: {fileID: 1324293116}
+  _ambientAudioSource: {fileID: 1324293116}
 --- !u!82 &1324293116
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a1f094104a2edf547a1baba6f16a67bf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2220,6 +2220,12 @@ PrefabInstance:
       propertyPath: _ButtonStatsToMain
       value: 
       objectReference: {fileID: 862223738}
+    - target: {fileID: 1984187620457731656, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: _customPlayer
+      value: 
+      objectReference: {fileID: 1503126695070094613, guid: 3fb9055433bd14b44b701c36fa02ddd4,
+        type: 3}
     - target: {fileID: 2026172365430669023, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: _defaultSettings

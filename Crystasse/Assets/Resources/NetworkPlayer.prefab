@@ -82,13 +82,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d8bbce8988c254b8888b0289906c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crystalPrefab: {fileID: 0}
+  _crystalPrefab: 
   _nickName: New Enligthened
   _teamID: 0
   _actorNumber: 0
-  _unitPrefab: {fileID: 0}
+  _unitPrefab: 
   _matchSession:
     spawnedUnits: 0
     destroyedUnits: 0
     date: 
     duration: 
+  _customPlayerView: {fileID: 0}

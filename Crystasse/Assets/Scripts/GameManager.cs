@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public Stats _RunningSessionStats;
     public List<UI_StatEntry> _StatEntries;
 
-    public string _unitPrefabLocation;
+    public string _unitPrefabLocation = "Unit";
     public string _crystalPrefabLocation;
     //Properties
     public UI_Manager UIManager { get { return _uiManager; } set { _uiManager = value; } }
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             if (teamToPlayer[i] == null)
             {
                 teamToPlayer[i] = player;
-                _inputManager._teamID = i;
+                GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = i;
                 Debug.Log("Added player: " + player.NickName + " at teamID : " + i);
                 return;
             }

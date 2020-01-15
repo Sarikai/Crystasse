@@ -53,6 +53,7 @@ namespace PUN_Network
 
         //Additional things?
         public List<Unit> units;
+        public List<Crystal> crystals;
 
         #endregion
 
@@ -60,13 +61,14 @@ namespace PUN_Network
 
         private void Awake()
         {
-            Debug.Log("NetworkManager CalledAwake");
+            Debug.Log($"NetworkManager Awake started");
             //PhotonNetwork.OfflineMode = true;
             _uiManager = GameManager.MasterManager.UIManager;
             _localLobby = GetComponent<PUN_Lobby>();
             _localRoom = GetComponent<PUN_Room>();
             _defaultRoomSettings = GetComponent<PUN_RoomSettings>();
             _photonView = GetComponent<PhotonView>();
+            Debug.Log($"NetworkManager Awake end");
         }
 
         private void Start()
@@ -120,25 +122,40 @@ namespace PUN_Network
                 GameManager.MasterManager.SoundManager.IngameMusic();
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    //TODO: fix
+                    //TODO: Assigning crystal views to crystal and change owner
                     //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
-
-                    //TODO: Transfering UnitOwnership @sceneLoaded works, maybe outsource into func?
-                    units.AddRange(FindObjectsOfType<Unit>());
-                    for (int i = 0; i < units.Count; i++)
+                    crystals.AddRange(FindObjectsOfType<Crystal>());
+                    for (int i = 0; i < crystals.Count; i++)
                     {
                         for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
                         {
-                            if (units[i].TeamID == PhotonNetwork.PlayerList[p].ActorNumber)
+                            crystals[i].CrystalView.ViewID = 100 + i;
+                            if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
                             {
-                                units[i].photonView.TransferOwnership(PhotonNetwork.PlayerList[p].ActorNumber);
+                                crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
+                                crystals[i].Init();
+                                //TODO: Crystal observer script
                             }
                         }
 
+                        //TODO: Transfering UnitOwnership @sceneLoaded works, maybe outsource into func?
+                        //units.AddRange(FindObjectsOfType<Unit>());
+                        //for (int i = 0; i < units.Count; i++)
+                        //{
+                        //    for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
+                        //    {
+                        //        if (units[i].TeamID == PhotonNetwork.PlayerList[p].ActorNumber)
+                        //        {
+                        //            units[i].photonView.TransferOwnership(PhotonNetwork.PlayerList[p].ActorNumber);
+                        //        }
+                        //    }
+
                     }
+
                 }
                 //GameManager.MasterManager.StartInitCrystals();
                 //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
+
             }
         }
 
@@ -235,6 +252,7 @@ namespace PUN_Network
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
+            Debug.Log($"Custom player added {CustomPlayer}");
             //_customPlayer.Init(); --> is called in its awake
             //_customPlayer.CrystalPrefab = GameManager.MasterManager._crystalPrefabLocation; 
             //_customPlayer.UnitPrefab = GameManager.MasterManager._unitPrefabLocation;

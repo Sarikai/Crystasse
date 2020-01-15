@@ -65,7 +65,7 @@ namespace PUN_Network
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
-            Debug.Log($"{player.ActorNumber}");
+            //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
             _entryView.ViewID = 999 + player.ActorNumber;
             _entryView.TransferOwnership(player);
             ChangeEntryColor();
@@ -114,6 +114,7 @@ namespace PUN_Network
             else
                 _entryGradient.EffectGradient = _playerNotReadyGradient;
         }
+
 
         [PunRPC]
         public void RPC_ChangeReady()

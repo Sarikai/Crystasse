@@ -92,6 +92,11 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Init()
     {
+        Debug.Log($"Crystal Init called");
+        if (_crystalView.IsMine)
+        {
+            _teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
+        }
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += () => _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
@@ -100,6 +105,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         OnConquered += () => StartCoroutine(ReworkedSpawnRoutine());
         GetComponent<SphereCollider>().radius = _data.Range;
 
+        Debug.Log($"crystalview mine? {_crystalView.IsMine} &&  team mine? {IsMyTeam}");
         if (_crystalView.IsMine && IsMyTeam)
             StartCoroutine(ReworkedSpawnRoutine());
     }
@@ -275,8 +281,10 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private IEnumerator ReworkedSpawnRoutine()
     {
+        Debug.Log($"Started SpawnRoutine");
         while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && IsMyTeam /*&& _unitPrefab != null*/)
         {
+            Debug.Log($"Called Spanwloop");
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             var unit = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
             //TODO: think about spawned units stored, what happens on conquer with this spawned list does it contain enemy units aswell?
