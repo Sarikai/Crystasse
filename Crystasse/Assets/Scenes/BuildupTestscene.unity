@@ -179,7 +179,7 @@ MonoBehaviour:
   data: {fileID: 0}
   _data:
     MaxHealth: 100
-    MaxUnitSpawned: 2
+    MaxUnitSpawned: 3
     IsBase: 1
     IsSpawning: 1
     SpawnRate: 1
@@ -273,7 +273,7 @@ MonoBehaviour:
   data: {fileID: 0}
   _data:
     MaxHealth: 100
-    MaxUnitSpawned: 2
+    MaxUnitSpawned: 1
     IsBase: 1
     IsSpawning: 1
     SpawnRate: 1
@@ -461,7 +461,7 @@ MonoBehaviour:
   data: {fileID: 0}
   _data:
     MaxHealth: 100
-    MaxUnitSpawned: 2
+    MaxUnitSpawned: 4
     IsBase: 1
     IsSpawning: 1
     SpawnRate: 1
