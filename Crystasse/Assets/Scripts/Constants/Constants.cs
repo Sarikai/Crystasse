@@ -15,7 +15,9 @@ public static class Constants
     public static readonly string[] BASIC_UNIT_PREFAB_PATHS = new string[3]
     {
         null,
-        "Gameplay Prefabs/Unit Team 1",
-        "Gameplay Prefabs/Unit Team 2"
+        //"Gameplay Prefabs/Unit Team 1",
+        //"Gameplay Prefabs/Unit Team 2"
+       "Gameplay Prefabs/Unit Definitive Edition 01",
+       "Gameplay Prefabs/Unit Definitive Edition 02"
     };
 }

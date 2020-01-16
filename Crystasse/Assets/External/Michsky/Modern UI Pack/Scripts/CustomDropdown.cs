@@ -12,6 +12,7 @@ namespace Michsky.UI.ModernUIPack
         [Header("OBJECTS")]
         public GameObject triggerObject;
         public TextMeshProUGUI selectedText;
+        //TODO: set image of Unit
         public Image selectedImage;
         public Transform itemParent;
         public GameObject itemObject;
@@ -29,6 +30,7 @@ namespace Michsky.UI.ModernUIPack
         [SerializeField]
         public List<Item> dropdownItems = new List<Item>();
         private List<Item> imageList = new List<Item>();
+        //TODO: selectedIndex pick out
         public int selectedItemIndex = 0;
         [Space(10)]
 
@@ -153,7 +155,7 @@ namespace Michsky.UI.ModernUIPack
                 isOn = false;
             }
 
-            if(enableTrigger == true && isOn == false)
+            if (enableTrigger == true && isOn == false)
             {
                 triggerObject.SetActive(false);
             }

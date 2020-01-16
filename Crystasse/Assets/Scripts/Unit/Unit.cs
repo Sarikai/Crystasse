@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Jobs;
@@ -62,13 +63,13 @@ public class Unit : Agent
 
     public void UpdateUnit()
     {
-        if(!CurrentState.Completed)
+        if (!CurrentState.Completed)
             CurrentState.UpdateState();
     }
 
     public void TakeDamage(byte value)
     {
-        if(value >= Health)
+        if (value >= Health)
             Die();
         else
             Health -= value;
@@ -77,8 +78,11 @@ public class Unit : Agent
     [Photon.Pun.PunRPC]
     private void Die()
     {
-        if(this != null)
-            DestroyImmediate(gameObject);
+        //TODO: rework to photon.destroy
+        if (this != null)
+            PhotonNetwork.Destroy(gameObject);
+        //DestroyImmediate(gameObject);
+
     }
     public void SwitchState(State state)
     {
@@ -94,14 +98,21 @@ public class Unit : Agent
     {
         _timer += Time.deltaTime;
 
-        if(_timer >= 2f)
+        if (_timer >= 2f)
             _timer = 0f;
 
         var v = new Vector3(0, Constants.MAX_UNIT_DISPLACEMENT * _anims.MoveAnim.Evaluate(_timer), 0) * Time.deltaTime;
 
-        if(x <= 1f)
+        if (_timer <= 1f)
             _visualTrans.position += v;
-        else if(x > 1f)
+        else if (_timer > 1f)
             _visualTrans.position -= v;
+
+
+        //TODO: Rework this pls Simon der Timer wieder global wusste nicht mehr wo du das hingecoded hast hab mir den fix zum testen drüber gecoded
+        //if (x <= 1f)
+        //    _visualTrans.position += v;
+        //else if(x > 1f)
+        //    _visualTrans.position -= v;
     }
 }

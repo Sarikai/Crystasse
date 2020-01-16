@@ -9,9 +9,19 @@ public class UnitAttackTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Collision detected {other}");
         var enemy = other.GetComponent<Unit>();
 
-        if(enemy && enemy.TeamID != _owner.TeamID)
+        if (enemy && enemy.TeamID != _owner.TeamID)
+            StateMachine.SwitchState(_owner, new AttackState(_owner, enemy));
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log($"Collision detected {other}");
+        var enemy = other.GetComponent<Unit>();
+
+        if (enemy && enemy.TeamID != _owner.TeamID)
             StateMachine.SwitchState(_owner, new AttackState(_owner, enemy));
     }
 }

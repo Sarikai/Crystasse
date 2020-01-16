@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-
+        //TODO: get this variable true!!!
         if (doUpdate)
         {
             StateMachine.Update();
