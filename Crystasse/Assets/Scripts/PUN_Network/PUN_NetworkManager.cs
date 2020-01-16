@@ -52,8 +52,11 @@ namespace PUN_Network
         public Stats MatchStats;
 
         //Additional things?
-        public List<Unit> units;
-        public List<Crystal> crystals;
+        public List<Unit> units = new List<Unit>();
+        public List<Crystal> crystals = new List<Crystal>();
+        public List<Crystal> baseCrystals = new List<Crystal>();
+        public List<Crystal> unassignedBaseCrystals = new List<Crystal>();
+        public List<Player> unassignedPlayers = new List<Player>();
 
         #endregion
 
@@ -127,30 +130,47 @@ namespace PUN_Network
                     crystals.AddRange(FindObjectsOfType<Crystal>());
                     for (int i = 0; i < crystals.Count; i++)
                     {
-                        for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
-                        {
-                            crystals[i].CrystalView.ViewID = 100 + i;
-                            if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
-                            {
-                                crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
-                                crystals[i].Init();
-                                //TODO: Crystal observer script
-                            }
-                        }
-
-                        //TODO: Transfering UnitOwnership @sceneLoaded works, maybe outsource into func?
-                        //units.AddRange(FindObjectsOfType<Unit>());
-                        //for (int i = 0; i < units.Count; i++)
-                        //{
-                        //    for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
-                        //    {
-                        //        if (units[i].TeamID == PhotonNetwork.PlayerList[p].ActorNumber)
-                        //        {
-                        //            units[i].photonView.TransferOwnership(PhotonNetwork.PlayerList[p].ActorNumber);
-                        //        }
-                        //    }
-
+                        crystals[i].CrystalView.ViewID = 100 + i;
+                        if (crystals[i].Data.IsBase)
+                            baseCrystals.Add(crystals[i]);
                     }
+
+                    AssignStartCrystals();
+
+                    //foreach (Crystal crystal in crystals)
+                    //{
+                    //    if (crystal.Data.IsBase)
+                    //    {
+                    //        baseCrystal.Add(crystal);
+                    //    }
+                    //}
+
+                    //for (int i = 0; i < crystals.Count; i++)
+                    //{
+                    //    for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
+                    //    {
+                    //        crystals[i].CrystalView.ViewID = 100 + i;
+                    //        if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
+                    //        {
+                    //            crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
+                    //            crystals[i].Init();
+                    //            //TODO: Crystal observer script
+                    //        }
+                    //    }
+
+                    //    //TODO: Transfering UnitOwnership @sceneLoaded works, maybe outsource into func?
+                    //    //units.AddRange(FindObjectsOfType<Unit>());
+                    //    //for (int i = 0; i < units.Count; i++)
+                    //    //{
+                    //    //    for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
+                    //    //    {
+                    //    //        if (units[i].TeamID == PhotonNetwork.PlayerList[p].ActorNumber)
+                    //    //        {
+                    //    //            units[i].photonView.TransferOwnership(PhotonNetwork.PlayerList[p].ActorNumber);
+                    //    //        }
+                    //    //    }
+
+                    //}
 
                 }
                 //GameManager.MasterManager.StartInitCrystals();
@@ -400,6 +420,45 @@ namespace PUN_Network
             }
             GameManager.MasterManager.StartInitCrystals();
         }
+
+        public void AssignStartCrystals()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (PhotonNetwork.PlayerList.Length > 1)
+                    unassignedPlayers.AddRange(PhotonNetwork.PlayerList);
+                else
+                    unassignedPlayers.Add(PhotonNetwork.PlayerList[0]);
+
+                foreach (Player unassignedPlayer in unassignedPlayers)
+                {
+                    //Player player = unassignedPlayer;
+                    AssignRandomBaseCrystal(unassignedPlayer);
+                    //unassignedPlayers.Remove(unassignedPlayer);
+
+
+                    //if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
+                    ////        {
+                    ////            crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
+                    ////            crystals[i].Init();
+                    ////            //TODO: Crystal observer script
+                    ////        }
+                }
+            }
+        }
+
+        public void AssignRandomBaseCrystal(Player targetPlayer)
+        {
+            unassignedBaseCrystals = baseCrystals;
+            if (unassignedBaseCrystals != null && unassignedBaseCrystals[0] != null && unassignedBaseCrystals.Count >= 1)
+            {
+                int rndCrystal = Random.Range(0, unassignedBaseCrystals.Count);
+                unassignedBaseCrystals[rndCrystal].CrystalView.TransferOwnership(targetPlayer);
+                unassignedBaseCrystals[rndCrystal].Init();
+                unassignedBaseCrystals.RemoveAt(rndCrystal);
+            }
+        }
+
 
         #endregion
 
