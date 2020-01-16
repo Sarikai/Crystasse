@@ -51,8 +51,9 @@ namespace PUN_Network
         private void Awake()
         {
             DontDestroyOnLoad(this);
-            GameManager.MasterManager.InputManager = GetComponent<InputManager>();
             _customPlayerView = GetComponent<PhotonView>();
+            _customPlayerView.ViewID = Random.Range(1500, 1600);
+            GameManager.MasterManager.InputManager = GetComponent<InputManager>();
             InitCustomPlayer();
             //TODO: Init InputManager
         }
