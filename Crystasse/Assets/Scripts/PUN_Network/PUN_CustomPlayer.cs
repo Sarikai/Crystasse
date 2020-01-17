@@ -53,6 +53,7 @@ namespace PUN_Network
 
         private void Awake()
         {
+            Debug.Log($"CustomPlayerInstance awake");
             DontDestroyOnLoad(this);
             _customPlayerView = GetComponent<PhotonView>();
             _customPlayerView.ViewID = Random.Range(1500, 1600);
@@ -63,6 +64,7 @@ namespace PUN_Network
 
         private void InitCustomPlayer()
         {
+            Debug.Log($"CustomPlayer init called");
             _crystalPrefab = GameManager.MasterManager._crystalPrefabLocation;
             _unitPrefab = GameManager.MasterManager._unitPrefabLocation;
             _localPlayer = PhotonNetwork.LocalPlayer;
@@ -70,6 +72,7 @@ namespace PUN_Network
             //_nickName = _nickName;
 
             _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
+            Debug.Log($"Player entry instatiated");
             _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
             _playerlistEntry.UpdatePlayerlistEntry(this);
 
