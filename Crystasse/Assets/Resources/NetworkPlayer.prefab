@@ -93,3 +93,4 @@ MonoBehaviour:
     date: 
     duration: 
   _customPlayerView: {fileID: 0}
+  _playerlistEntry: {fileID: 0}

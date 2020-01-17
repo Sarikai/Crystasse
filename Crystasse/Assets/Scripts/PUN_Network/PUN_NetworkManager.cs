@@ -249,7 +249,7 @@ namespace PUN_Network
             base.OnCreatedRoom();
             Debug.Log($"Created Room");
 
-            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
+            //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
             //_localRoom.Room = PhotonNetwork.CurrentRoom;
             //_uiManager._RoomName.text = _localRoom.Room.Name;
             //Debug.Log($"Changed Roomname");
@@ -506,15 +506,15 @@ namespace PUN_Network
 
         }
 
-        [PunRPC]
-        public void RPC_AddPlayerEntry(Player newPlayer)
-        {
-            PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
-            GameManager.MasterManager.AddPlayer(newPlayer);
-            newLine.UpdatePlayerlistEntry(newPlayer);
-            _uiManager._PlayerName.text = newPlayer.NickName;
-            _playerListEntries.Add(newPlayer, newLine.gameObject);
-        }
+        //[PunRPC]
+        //public void RPC_AddPlayerEntry(Player newPlayer)
+        //{
+        //    PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
+        //    GameManager.MasterManager.AddPlayer(newPlayer);
+        //    newLine.UpdatePlayerlistEntry(newPlayer);
+        //    _uiManager._PlayerName.text = newPlayer.NickName;
+        //    _playerListEntries.Add(newPlayer, newLine.gameObject);
+        //}
 
         [PunRPC]
         public void RPC_RemovePlayerEntry(Player leavingPlayer)

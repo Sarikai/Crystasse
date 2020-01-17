@@ -11,7 +11,7 @@ namespace PUN_Network
 {
 
     [RequireComponent(typeof(PhotonView))]
-    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks//, IPunObservable //TODO: obeserveable for entry just sync the ready bool and let the update change the color
+    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks, IPunObservable //TODO: obeserveable for entry just sync the ready bool and let the update change the color
     {
         #region Variables / Properties
 
@@ -61,19 +61,19 @@ namespace PUN_Network
         }
 
         //TODO: clearing maybe?
-        public void UpdatePlayerlistEntry(Player player)
+        public void UpdatePlayerlistEntry(PUN_CustomPlayer player)
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
             //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
             _entryView.ViewID = 999 + player.ActorNumber;
-            _entryView.TransferOwnership(player);
+            _entryView.TransferOwnership(player.LocalPlayer);
             ChangeEntryColor();
             //Debug.Log($"Update Entry ID: {player.UserId}");
-            _playerID.text = player.UserId;
+            _playerID.text = player.LocalPlayer.UserId;
             _playerName.text = player.NickName;
             _playerReady = false;
-            _playerTeam = 0;
+            _playerTeam = player.TeamID;
         }
 
 
@@ -101,8 +101,8 @@ namespace PUN_Network
             if (_entryView.IsMine)
             {
                 _playerReady = !_playerReady;
-                //ChangeEntryColor();
-                photonView.RPC("RPC_ChangeReady", RpcTarget.AllBufferedViaServer);
+                ChangeEntryColor();
+                //photonView.RPC("RPC_ChangeReady", RpcTarget.AllBufferedViaServer);
             }
 
         }
@@ -116,32 +116,31 @@ namespace PUN_Network
         }
 
 
-        [PunRPC]
-        public void RPC_ChangeReady()
-        {
-            ChangeEntryColor();
-            //switch (_playerReady)
-            //{
-            //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-            //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-            //}
-
-        }
-
-        //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        //[PunRPC]
+        //public void RPC_ChangeReady()
         //{
-        //    if (stream.IsWriting)
-        //    {
-        //        stream.SendNext(_play);
-        //        Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
-        //    }
-        //    else
-        //    {
-        //        this._entryGradient = (UIGradient)stream.ReceiveNext();
-        //        Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
-        //    }
+        //    ChangeEntryColor();
+        //    //switch (_playerReady)
+        //    //{
+        //    //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
+        //    //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
+        //    //}
+
         //}
 
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(_entryGradient);
+                Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
+            }
+            else
+            {
+                this._entryGradient = (UIGradient)stream.ReceiveNext();
+                Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
+            }
+        }
 
         #endregion
     }
