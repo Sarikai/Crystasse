@@ -316,7 +316,7 @@ namespace PUN_Network
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
-            Debug.Log($"Called PlayerEnteredRoom");
+            //Debug.Log($"Called PlayerEnteredRoom");
             //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
             //_localRoom.Players = _localRoom.UpdatePlayers();
             Debug.Log($"A new player entered: {newPlayer.NickName}");

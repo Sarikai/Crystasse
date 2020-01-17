@@ -71,10 +71,11 @@ namespace PUN_Network
             GameManager.MasterManager.InputManager._teamID = _teamID;
             //_nickName = _nickName;
 
-            _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
-            Debug.Log($"Player entry instatiated");
-            _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-            _playerlistEntry.UpdatePlayerlistEntry(this);
+            //TODO: Outsorce from Init or its called double, maybe ownercheck?
+            //_playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
+            //Debug.Log($"Player entry instatiated");
+            //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+            //_playerlistEntry.UpdatePlayerlistEntry(this);
 
         }
 
