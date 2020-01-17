@@ -20,4 +20,9 @@ public static class Constants
        "Gameplay Prefabs/Unit Definitive Edition 01",
        "Gameplay Prefabs/Unit Definitive Edition 02"
     };
+
+    public static readonly string[] NETWORKED_UI_ELEMENTS = new string[1]
+    {
+        "UI Prefabs/PlayerContentLine"
+    };
 }

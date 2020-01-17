@@ -10,7 +10,7 @@ using PUN_Network;
 
 namespace PUN_Network
 {
-    [RequireComponent(typeof(PhotonView), typeof(InputManager))]
+    //[RequireComponent(typeof(PhotonView), typeof(InputManager))]
     public class PUN_CustomPlayer : MonoBehaviourPunCallbacks
     {
         #region Variables / Properties
@@ -33,6 +33,8 @@ namespace PUN_Network
         private Match _matchSession;                   //counts statistic of one match, be sure to clear after win/loss //TODO: new match
         [SerializeField]
         private PhotonView _customPlayerView;          //view that controls while ingame
+        [SerializeField]
+        private PUN_PlayerlistEntry _playerlistEntry;
 
 
         //Properties
@@ -43,6 +45,7 @@ namespace PUN_Network
         public string CrystalPrefab { get => _crystalPrefab; set => _crystalPrefab = value; }
         public string UnitPrefab { get => _unitPrefab; set => _unitPrefab = value; }
         public PhotonView CustomPlayerView { get => _customPlayerView; set => _customPlayerView = value; }
+        public PUN_PlayerlistEntry PlayerlistEntry { get => _playerlistEntry; set => _playerlistEntry = value; }
 
         #endregion
 
@@ -65,6 +68,9 @@ namespace PUN_Network
             _localPlayer = PhotonNetwork.LocalPlayer;
             GameManager.MasterManager.InputManager._teamID = _teamID;
             //_nickName = _nickName;
+
+            _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
+
         }
 
 

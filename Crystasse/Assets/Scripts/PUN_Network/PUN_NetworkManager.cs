@@ -268,7 +268,9 @@ namespace PUN_Network
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-            //TODO: Testphase NetworkPlayer Datenstruktur
+            Debug.Log($"Joined Room");
+
+            //TODO: Prüfen ob auf beiden Seiten instanziert wird!
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
@@ -283,7 +285,6 @@ namespace PUN_Network
 
             _localRoom.Room = PhotonNetwork.CurrentRoom;
             _uiManager._RoomName.text = _localRoom.Room.Name;
-            Debug.Log($"Joined Room");
             if (_localRoom != null)
             {
 
@@ -316,9 +317,10 @@ namespace PUN_Network
         {
             base.OnPlayerEnteredRoom(newPlayer);
             Debug.Log($"Called PlayerEnteredRoom");
-            photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
-            _localRoom.Players = _localRoom.UpdatePlayers();
+            //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
+            //_localRoom.Players = _localRoom.UpdatePlayers();
             Debug.Log($"A new player entered: {newPlayer.NickName}");
+            _localRoom.Players = _localRoom.UpdatePlayers();
             if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers && PhotonNetwork.IsMasterClient)
             {
                 //if (!PhotonNetwork.IsMasterClient)
