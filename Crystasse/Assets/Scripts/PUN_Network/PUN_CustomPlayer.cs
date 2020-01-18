@@ -99,6 +99,10 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager = GetComponent<InputManager>();
                 Debug.Log($"My Team ID { _teamID}");
                 GameManager.MasterManager.InputManager._teamID = _teamID;
+                _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
+                Debug.Log($"player entry instatiated");
+                _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+                _playerlistEntry.UpdatePlayerlistEntry(this);
             }
             //_nickName = _nickName;
 
