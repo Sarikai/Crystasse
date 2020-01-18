@@ -82,11 +82,12 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
                 Debug.Log($"player entry instatiated");
-                //CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllViaServer, player, this);
+                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllViaServer, _playerlistEntry.photonView.ViewID);
                 //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-                _playerlistEntry.UpdatePlayerlistEntry(this);
+                //_playerlistEntry.UpdatePlayerlistEntry(this);
             }
             //_nickName = _nickName;         
+            _playerlistEntry.UpdatePlayerlistEntry(this);
 
         }
 
@@ -103,16 +104,17 @@ namespace PUN_Network
 
         #region RPCs
 
-        //[PunRPC]
-        //public void RPC_InitPlayerlistEntry(Player newPlayer, PUN_CustomPlayer customPlayer)
-        //{
-
-        //    //newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-        //    GameManager.MasterManager.AddPlayer(newPlayer);
-        //    customPlayer.PlayerlistEntry.UpdatePlayerlistEntry(customPlayer);
-        //    //_uiManager._PlayerName.text = newPlayer.NickName;
-        //    GameManager.MasterManager.NetworkManager._playerListEntries.Add(newPlayer, customPlayer.PlayerlistEntry.gameObject);
-        //}
+        [PunRPC]
+        public void RPC_InitPlayerlistEntry(int viewID, Player player)
+        {
+            GameObject entryObject = PhotonView.Find(viewID).gameObject;
+            //newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+            PUN_PlayerlistEntry saveEntry = entryObject.GetComponent<PUN_PlayerlistEntry>();
+            //entryObject.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+            saveEntry.UpdatePlayerlistEntry(player);
+            //_uiManager._PlayerName.text = newPlayer.NickName;
+            GameManager.MasterManager.NetworkManager._playerListEntries.Add(player, saveEntry.gameObject);
+        }
 
         #endregion
 

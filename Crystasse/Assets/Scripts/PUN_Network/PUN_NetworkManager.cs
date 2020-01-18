@@ -138,45 +138,7 @@ namespace PUN_Network
 
                     AssignStartCrystals();
 
-                    //foreach (Crystal crystal in crystals)
-                    //{
-                    //    if (crystal.Data.IsBase)
-                    //    {
-                    //        baseCrystal.Add(crystal);
-                    //    }
-                    //}
-
-                    //for (int i = 0; i < crystals.Count; i++)
-                    //{
-                    //    for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
-                    //    {
-                    //        crystals[i].CrystalView.ViewID = 100 + i;
-                    //        if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
-                    //        {
-                    //            crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
-                    //            crystals[i].Init();
-                    //            //TODO: Crystal observer script
-                    //        }
-                    //    }
-
-                    //    //TODO: Transfering UnitOwnership @sceneLoaded works, maybe outsource into func?
-                    //    //units.AddRange(FindObjectsOfType<Unit>());
-                    //    //for (int i = 0; i < units.Count; i++)
-                    //    //{
-                    //    //    for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
-                    //    //    {
-                    //    //        if (units[i].TeamID == PhotonNetwork.PlayerList[p].ActorNumber)
-                    //    //        {
-                    //    //            units[i].photonView.TransferOwnership(PhotonNetwork.PlayerList[p].ActorNumber);
-                    //    //        }
-                    //    //    }
-
-                    //}
-
                 }
-                //GameManager.MasterManager.StartInitCrystals();
-                //_photonView.RPC("RPC_CreatePlayer", RpcTarget.AllViaServer);
-
             }
         }
 
@@ -249,11 +211,6 @@ namespace PUN_Network
         {
             base.OnCreatedRoom();
             Debug.Log($"Created Room");
-
-            //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, _localPlayer);
-            //_localRoom.Room = PhotonNetwork.CurrentRoom;
-            //_uiManager._RoomName.text = _localRoom.Room.Name;
-            //Debug.Log($"Changed Roomname");
         }
 
         public bool JoinRoom()
@@ -277,6 +234,7 @@ namespace PUN_Network
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
             Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
             _customPlayer.CustomPlayerView.RPC("PUN_InitCustomPlayer", RpcTarget.AllBufferedViaServer, GetLocalPlayer);
+            _customPlayer.PlayerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
             //_customPlayer.Init(); --> is called in its awake
             //_customPlayer.CrystalPrefab = GameManager.MasterManager._crystalPrefabLocation; 
             //_customPlayer.UnitPrefab = GameManager.MasterManager._unitPrefabLocation;
@@ -503,11 +461,11 @@ namespace PUN_Network
         //[PunRPC]
         //public void RPC_AddPlayerEntry(Player newPlayer)
         //{
-        //    PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
+        //    //PUN_PlayerlistEntry newLine = Instantiate(_uiManager?._playerEntryPrefab, _uiManager?._PlayerList);
         //    GameManager.MasterManager.AddPlayer(newPlayer);
-        //    newLine.UpdatePlayerlistEntry(newPlayer);
-        //    _uiManager._PlayerName.text = newPlayer.NickName;
-        //    _playerListEntries.Add(newPlayer, newLine.gameObject);
+        //    //newLine.UpdatePlayerlistEntry(newPlayer);
+        //    //_uiManager._PlayerName.text = newPlayer.NickName;
+        //    //_playerListEntries.Add(newPlayer, newLine.gameObject);
         //}
 
         [PunRPC]
