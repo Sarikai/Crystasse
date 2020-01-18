@@ -5,7 +5,7 @@ using System.IO;
 using Photon.Pun;
 using UnityEngine;
 
-public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
+public class InputManager : MonoBehaviourPunCallbacks/*, IPunObservable*/
 {
     [SerializeField]
     Camera _cam;
@@ -94,15 +94,15 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //}
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(_teamID);
-        }
-        else
-        {
-            _teamID = (byte)stream.ReceiveNext();
-        }
-    }
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    if (stream.IsWriting)
+    //    {
+    //        stream.SendNext(_teamID);
+    //    }
+    //    else
+    //    {
+    //        _teamID = (byte)stream.ReceiveNext();
+    //    }
+    //}
 }
