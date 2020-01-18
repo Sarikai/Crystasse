@@ -63,28 +63,6 @@ namespace PUN_Network
             //TODO: Init InputManager
         }
 
-        //private void InitCustomPlayer()
-        //{
-        //    Debug.Log($"CustomPlayer init called");
-        //    _crystalPrefab = GameManager.MasterManager._crystalPrefabLocation;
-        //    _unitPrefab = GameManager.MasterManager._unitPrefabLocation;
-        //    _localPlayer = PhotonNetwork.LocalPlayer;
-        //    Debug.Log($"Local Player Actor Number: {_localPlayer.ActorNumber}");
-        //    _teamID = (byte)(_localPlayer.ActorNumber /*+ 1*/);
-        //    GameManager.MasterManager.InputManager._teamID = _teamID;
-
-        //    if (IsMyCustomPlayer)
-        //        GameManager.MasterManager.InputManager = GetComponent<InputManager>();
-        //    //_nickName = _nickName;
-
-        //    //TODO: Outsorce from Init or its called double, maybe ownercheck?
-        //    //_playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
-        //    //Debug.Log($"Player entry instatiated");
-        //    //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-        //    //_playerlistEntry.UpdatePlayerlistEntry(this);
-
-        //}
-
         [PunRPC]
         private void PUN_InitCustomPlayer(Player player)
         {
@@ -103,16 +81,11 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
                 Debug.Log($"player entry instatiated");
-                _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-                _playerlistEntry.UpdatePlayerlistEntry(this);
+                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllViaServer);
+                //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+                //_playerlistEntry.UpdatePlayerlistEntry(this);
             }
-            //_nickName = _nickName;
-
-            //TODO: Outsorce from Init or its called double, maybe ownercheck?
-            //_playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
-            //Debug.Log($"Player entry instatiated");
-            //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-            //_playerlistEntry.UpdatePlayerlistEntry(this);
+            //_nickName = _nickName;         
 
         }
 
@@ -129,7 +102,12 @@ namespace PUN_Network
 
         #region RPCs
 
-
+        [PunRPC]
+        private void RPC_InitPlayerlistEntry()
+        {
+            _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+            _playerlistEntry.UpdatePlayerlistEntry(this);
+        }
 
         #endregion
 
