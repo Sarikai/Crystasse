@@ -56,6 +56,14 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                         StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point));
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.T) && Selection.Selected != null && Selection.Selected.Length > 0)
+            {
+                int inter = UnityEngine.Random.Range(0, Selection.Selected.Length);
+                Unit[] selectedUnits = Selection.Selected;
+
+                PhotonNetwork.Destroy(selectedUnits[inter].gameObject);
+            }
         }
     }
 
