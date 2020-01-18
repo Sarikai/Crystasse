@@ -87,7 +87,7 @@ namespace PUN_Network
                 //_playerlistEntry.UpdatePlayerlistEntry(this);
             }
             //_nickName = _nickName;         
-            _playerlistEntry.UpdatePlayerlistEntry(this);
+            //_playerlistEntry.UpdatePlayerlistEntry(this);
 
         }
 
