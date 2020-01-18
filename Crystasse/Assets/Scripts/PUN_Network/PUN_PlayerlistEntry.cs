@@ -11,7 +11,7 @@ namespace PUN_Network
 {
 
     [RequireComponent(typeof(PhotonView))]
-    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks, IPunObservable //TODO: obeserveable for entry just sync the ready bool and let the update change the color
+    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks/*, IPunObservable*/ //TODO: obeserveable for entry just sync the ready bool and let the update change the color
     {
         #region Variables / Properties
 
@@ -129,19 +129,19 @@ namespace PUN_Network
 
         //}
 
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(_entryGradient);
-                Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
-            }
-            else
-            {
-                this._entryGradient = (UIGradient)stream.ReceiveNext();
-                Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
-            }
-        }
+        //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        //{
+        //    if (stream.IsWriting)
+        //    {
+        //        stream.SendNext(_entryGradient);
+        //        Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
+        //    }
+        //    else
+        //    {
+        //        this._entryGradient = (UIGradient)stream.ReceiveNext();
+        //        Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
+        //    }
+        //}
 
         #endregion
     }
