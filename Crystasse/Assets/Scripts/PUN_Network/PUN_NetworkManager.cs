@@ -126,7 +126,7 @@ namespace PUN_Network
                 GameManager.MasterManager.DoUpdate = true;
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    //TODO: Assigning crystal views to crystal and change owner
+                    //TODO: [DONE] Assigning crystal views to crystal and change owner
                     //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
                     crystals.AddRange(FindObjectsOfType<Crystal>());
                     for (int i = 0; i < crystals.Count; i++)
@@ -445,7 +445,7 @@ namespace PUN_Network
                     ////        {
                     ////            crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
                     ////            crystals[i].Init();
-                    ////            //TODO: Crystal observer script
+                    ////            //TODO: Crystal TeamID PUN call change?
                     ////        }
                 }
             }
