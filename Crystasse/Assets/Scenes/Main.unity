@@ -156,18 +156,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &195054725 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 784343123, guid: 5bfb8007cb282844e854b25388730ffc,
-    type: 3}
-  m_PrefabInstance: {fileID: 6522640843784873806}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7be889f01b5d84a4da682f1d53c78741, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &322357772 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6522640842707417778, guid: 5bfb8007cb282844e854b25388730ffc,
@@ -2975,7 +2963,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _inputManager
       value: 
-      objectReference: {fileID: 195054725}
+      objectReference: {fileID: 0}
     - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: _soundManager
@@ -3225,13 +3213,14 @@ PrefabInstance:
         type: 3}
       propertyPath: ObservedComponents.Array.data[0]
       value: 
-      objectReference: {fileID: 195054725}
+      objectReference: {fileID: 0}
     - target: {fileID: 7392041279215917536, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: Synchronization
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 784343123, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5bfb8007cb282844e854b25388730ffc, type: 3}
 --- !u!1001 &8645962189309012498
 PrefabInstance:
