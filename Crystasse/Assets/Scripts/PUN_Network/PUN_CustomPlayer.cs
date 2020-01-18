@@ -94,6 +94,8 @@ namespace PUN_Network
             _localPlayer = player;
             Debug.Log($"Local Player Actor Number: {player.ActorNumber}");
             _teamID = (byte)(player.ActorNumber /*+ 1*/);
+            //TODO: check for remove
+            //_actorNumber = player.ActorNumber;
             if (IsMyCustomPlayer)
             {
                 GameManager.MasterManager.InputManager = GetComponent<InputManager>();

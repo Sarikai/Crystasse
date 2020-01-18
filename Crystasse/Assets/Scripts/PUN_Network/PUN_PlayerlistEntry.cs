@@ -66,7 +66,7 @@ namespace PUN_Network
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
             //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
-            _entryView.ViewID = 999 + player.ActorNumber;
+            //_entryView.ViewID = 999 + player.ActorNumber;
             _entryView.TransferOwnership(player.LocalPlayer);
             ChangeEntryColor();
             //Debug.Log($"Update Entry ID: {player.UserId}");
