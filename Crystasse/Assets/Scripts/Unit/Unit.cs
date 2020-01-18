@@ -78,7 +78,7 @@ public class Unit : Agent
     [Photon.Pun.PunRPC]
     private void Die()
     {
-        //TODO: rework to photon.destroy
+        //TODO: [DONE] rework to photon.destroy
         if (this != null)
             PhotonNetwork.Destroy(gameObject);
         //DestroyImmediate(gameObject);

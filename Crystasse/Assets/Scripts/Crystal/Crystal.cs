@@ -95,7 +95,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log($"Crystal Init called");
         if (_crystalView.IsMine)
         {
-            _teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
+            photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
+            //_teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
         }
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
@@ -151,6 +152,12 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         _unitsSpawned.Add(unit);
         if (_unitsSpawned.Count > 0)
             CrystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _unitsSpawned.Count - 1);
+    }
+
+    [PunRPC]
+    public void TransferTeamID()
+    {
+        _teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
     }
 
 
