@@ -68,6 +68,8 @@ namespace PUN_Network
             _crystalPrefab = GameManager.MasterManager._crystalPrefabLocation;
             _unitPrefab = GameManager.MasterManager._unitPrefabLocation;
             _localPlayer = PhotonNetwork.LocalPlayer;
+            Debug.Log($"Local Player Actor Number: {_localPlayer.ActorNumber}");
+            _teamID = (byte)(_localPlayer.ActorNumber /*+ 1*/);
             GameManager.MasterManager.InputManager._teamID = _teamID;
             //_nickName = _nickName;
 
