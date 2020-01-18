@@ -81,7 +81,7 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
                 Debug.Log($"player entry instatiated");
-                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllBufferedViaServer);
+                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllBufferedViaServer, _playerlistEntry);
                 //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
                 //_playerlistEntry.UpdatePlayerlistEntry(this);
             }
@@ -103,10 +103,10 @@ namespace PUN_Network
         #region RPCs
 
         [PunRPC]
-        private void RPC_InitPlayerlistEntry()
+        private void RPC_InitPlayerlistEntry(PUN_PlayerlistEntry newEntry)
         {
-            _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-            _playerlistEntry.UpdatePlayerlistEntry(this);
+            newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+            newEntry.UpdatePlayerlistEntry(this);
         }
 
         #endregion
