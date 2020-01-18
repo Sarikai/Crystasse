@@ -275,7 +275,7 @@ namespace PUN_Network
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
-            Debug.Log($"Custom player added {CustomPlayer}");
+            Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
             _customPlayer.CustomPlayerView.RPC("PUN_InitCustomPlayer", RpcTarget.AllBufferedViaServer, GetLocalPlayer);
             //_customPlayer.Init(); --> is called in its awake
             //_customPlayer.CrystalPrefab = GameManager.MasterManager._crystalPrefabLocation; 
