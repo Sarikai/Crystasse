@@ -287,7 +287,14 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             Debug.Log($"Called Spanwloop");
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
-            var unit = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
+            if (TeamID != 0)
+            {
+                var unit = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
+            }
+            else
+            {
+                var unit = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[1], pos, Quaternion.identity).GetComponent<Unit>();
+            }
             //TODO: think about spawned units stored, what happens on conquer with this spawned list does it contain enemy units aswell?
             //TODO: does this units list need to be synchronized?
             _unitsSpawned.Add(unit);
