@@ -56,7 +56,7 @@ namespace PUN_Network
             Debug.Log($"CustomPlayerInstance awake");
             DontDestroyOnLoad(this);
             _customPlayerView = GetComponent<PhotonView>();
-            _customPlayerView.ViewID = Random.Range(1500, 1600);
+            //_customPlayerView.ViewID = Random.Range(1500, 1600);
             GameManager.MasterManager.InputManager = GetComponent<InputManager>();
             //_customPlayerView.RPC("PUN_InitCustomPlayer", RpcTarget.AllViaServer, GameManager.MasterManager.NetworkManager.GetLocalPlayer);
             //InitCustomPlayer();
