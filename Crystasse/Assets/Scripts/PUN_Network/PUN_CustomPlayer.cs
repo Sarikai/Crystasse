@@ -56,6 +56,7 @@ namespace PUN_Network
             Debug.Log($"CustomPlayerInstance awake");
             DontDestroyOnLoad(this);
             _customPlayerView = GetComponent<PhotonView>();
+
             //_customPlayerView.ViewID = Random.Range(1500, 1600);
             //GameManager.MasterManager.InputManager = GetComponent<InputManager>();
             //_customPlayerView.RPC("PUN_InitCustomPlayer", RpcTarget.AllViaServer, GameManager.MasterManager.NetworkManager.GetLocalPlayer);
@@ -81,8 +82,8 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
                 Debug.Log($"player entry instatiated");
-                //CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllViaServer, PlayerlistEntry, this);
-                _playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+                //CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllViaServer, player, this);
+                //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
                 _playerlistEntry.UpdatePlayerlistEntry(this);
             }
             //_nickName = _nickName;         
@@ -102,16 +103,24 @@ namespace PUN_Network
 
         #region RPCs
 
-        [PunRPC]
-        public void RPC_InitPlayerlistEntry(PUN_PlayerlistEntry newEntry, PUN_CustomPlayer customPlayer)
-        {
-            newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-            newEntry.UpdatePlayerlistEntry(customPlayer);
-        }
+        //[PunRPC]
+        //public void RPC_InitPlayerlistEntry(Player newPlayer, PUN_CustomPlayer customPlayer)
+        //{
+
+        //    //newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
+        //    GameManager.MasterManager.AddPlayer(newPlayer);
+        //    customPlayer.PlayerlistEntry.UpdatePlayerlistEntry(customPlayer);
+        //    //_uiManager._PlayerName.text = newPlayer.NickName;
+        //    GameManager.MasterManager.NetworkManager._playerListEntries.Add(newPlayer, customPlayer.PlayerlistEntry.gameObject);
+        //}
 
         #endregion
-
 
         #endregion
     }
+
+
+
+
 }
+
