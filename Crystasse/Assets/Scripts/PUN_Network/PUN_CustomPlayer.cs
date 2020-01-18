@@ -116,7 +116,7 @@ namespace PUN_Network
             {
                 // Similar to PhotonView.IsMine
                 Debug.Log($"IsMyCustomPlayer: {CustomPlayerView.CreatorActorNr == LocalPlayer.ActorNumber}");
-                return (CustomPlayerView.CreatorActorNr == LocalPlayer.ActorNumber) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
+                return (CustomPlayerView.CreatorActorNr == PhotonNetwork.LocalPlayer.ActorNumber) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
             }
         }
 
