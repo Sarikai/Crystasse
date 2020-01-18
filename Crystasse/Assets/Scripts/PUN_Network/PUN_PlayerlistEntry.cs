@@ -67,10 +67,11 @@ namespace PUN_Network
             _entryView = GetComponent<PhotonView>();
             //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
             //_entryView.ViewID = 999 + player.ActorNumber;
-            _entryView.TransferOwnership(player.LocalPlayer);
+            //_entryView.TransferOwnership(player.LocalPlayer);
             ChangeEntryColor();
             //Debug.Log($"Update Entry ID: {player.UserId}");
-            _playerID.text = player.LocalPlayer.UserId;
+            //_playerID.text = player.LocalPlayer.UserId;
+            _playerID.text = _myID;
             _playerName.text = player.NickName;
             _playerReady = false;
             _playerTeam = player.TeamID;
