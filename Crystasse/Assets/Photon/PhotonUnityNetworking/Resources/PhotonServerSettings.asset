@@ -44,5 +44,6 @@ MonoBehaviour:
   - RPC_RemovePlayerEntry
   - RPC_StartTimer
   - NewSpawn
+  - TransferTeamID
   DisableAutoOpenWizard: 1
   ShowSettings: 1
