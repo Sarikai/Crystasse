@@ -134,11 +134,13 @@ namespace PUN_Network
             if (stream.IsWriting)
             {
                 stream.SendNext(_playerReady);
+                stream.SendNext(transform.parent);
                 Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
             }
             else
             {
                 this._playerReady = (bool)stream.ReceiveNext();
+                this.transform.parent = (Transform)stream.ReceiveNext();
                 Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
             }
         }
