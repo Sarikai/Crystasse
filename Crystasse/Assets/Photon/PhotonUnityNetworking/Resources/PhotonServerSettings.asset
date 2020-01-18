@@ -47,5 +47,6 @@ MonoBehaviour:
   - TransferTeamID
   - Init
   - PUN_InitCustomPlayer
+  - RPC_InitPlayerlistEntry
   DisableAutoOpenWizard: 1
   ShowSettings: 1
