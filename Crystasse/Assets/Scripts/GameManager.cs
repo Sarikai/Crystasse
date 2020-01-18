@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public InputManager InputManager { get { return _inputManager; } set { _inputManager = value; } }
     public SoundManager SoundManager { get { return _soundManager; } set { _soundManager = value; } }
 
+    public bool DoUpdate { get => doUpdate; set => doUpdate = value; }
+
     #endregion
 
     #region Methods
@@ -140,7 +142,7 @@ public class GameManager : MonoBehaviour
         }
 
         //TODO: get this variable true!!!
-        if (doUpdate)
+        if (DoUpdate)
         {
             StateMachine.Update();
 
