@@ -98,6 +98,7 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager = GetComponent<InputManager>();
                 _teamID = (byte)(player.ActorNumber /*+ 1*/);
                 Debug.Log($"My Team ID { _teamID}");
+                GameManager.MasterManager.InputManager._teamID = _teamID;
             }
             //_nickName = _nickName;
 
@@ -114,6 +115,7 @@ namespace PUN_Network
             get
             {
                 // Similar to PhotonView.IsMine
+                Debug.Log($"IsMyCustomPlayer: {CustomPlayerView.CreatorActorNr == LocalPlayer.ActorNumber}");
                 return (CustomPlayerView.CreatorActorNr == LocalPlayer.ActorNumber) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
             }
         }
