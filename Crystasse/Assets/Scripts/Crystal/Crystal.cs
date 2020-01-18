@@ -84,19 +84,19 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     public void Init(GameObject prefab)
     {
         _unitPrefab = prefab;
-
-        Init();
+        //Init();
+        photonView.RPC("Init", RpcTarget.AllViaServer);
     }
 
 
-
+    [PunRPC]
     public void Init()
     {
         Debug.Log($"Crystal Init called");
         if (_crystalView.IsMine)
         {
-            photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
-            //_teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
+            //photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
+            _teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
         }
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];

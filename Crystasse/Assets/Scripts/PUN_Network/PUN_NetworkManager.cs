@@ -457,7 +457,8 @@ namespace PUN_Network
             {
                 int rndCrystal = Random.Range(0, unassignedBaseCrystals.Count);
                 unassignedBaseCrystals[rndCrystal].CrystalView.TransferOwnership(targetPlayer);
-                unassignedBaseCrystals[rndCrystal].Init();
+                //unassignedBaseCrystals[rndCrystal].Init();
+                unassignedBaseCrystals[rndCrystal].photonView.RPC("Init", RpcTarget.AllViaServer);
                 unassignedBaseCrystals.RemoveAt(rndCrystal);
             }
         }
