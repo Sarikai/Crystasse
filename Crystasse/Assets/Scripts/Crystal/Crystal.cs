@@ -282,7 +282,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private IEnumerator ReworkedSpawnRoutine()
     {
         Debug.Log($"Started SpawnRoutine");
-        while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && IsMyTeam /*&& _unitPrefab != null*/)
+        Debug.Log($"{_data.IsSpawning} && {_unitsSpawned.Count < _data.MaxUnitSpawned} && {TeamID != 0} && {IsMyTeam}");
+        while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && /*TeamID != 0 &&*/ IsMyTeam /*&& _unitPrefab != null*/)
         {
             Debug.Log($"Called Spanwloop");
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
