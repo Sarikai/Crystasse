@@ -123,6 +123,7 @@ namespace PUN_Network
                 //GameManager.MasterManager.LoadMap();
                 _uiManager.Toggle(_uiManager._Background);
                 GameManager.MasterManager.SoundManager.IngameMusic();
+                GameManager.MasterManager.DoUpdate = true;
                 if (PhotonNetwork.IsMasterClient)
                 {
                     //TODO: Assigning crystal views to crystal and change owner
