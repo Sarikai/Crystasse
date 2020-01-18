@@ -93,10 +93,10 @@ namespace PUN_Network
             _unitPrefab = GameManager.MasterManager._unitPrefabLocation;
             _localPlayer = player;
             Debug.Log($"Local Player Actor Number: {player.ActorNumber}");
+            _teamID = (byte)(player.ActorNumber /*+ 1*/);
             if (IsMyCustomPlayer)
             {
                 GameManager.MasterManager.InputManager = GetComponent<InputManager>();
-                _teamID = (byte)(player.ActorNumber /*+ 1*/);
                 Debug.Log($"My Team ID { _teamID}");
                 GameManager.MasterManager.InputManager._teamID = _teamID;
             }
