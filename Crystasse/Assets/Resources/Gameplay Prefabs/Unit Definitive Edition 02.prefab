@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6532750278456127726}
   - component: {fileID: 6532750278456127727}
   - component: {fileID: 2279916261795191237}
+  - component: {fileID: 5654724659576304948}
   m_Layer: 11
   m_Name: Unit Definitive Edition 02
   m_TagString: Untagged
@@ -187,6 +188,19 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &5654724659576304948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6532750278456127722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31286942e1cbcd64fb8380749f30645c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: {fileID: 6532750278456127725}
 --- !u!1 &6532750278587306301
 GameObject:
   m_ObjectHideFlags: 0

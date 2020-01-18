@@ -69,6 +69,7 @@ public class Unit : Agent
 
     public void TakeDamage(byte value)
     {
+        Debug.Log($"Yes I take damage");
         if (value >= Health)
             Die();
         else
