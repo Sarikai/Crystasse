@@ -78,6 +78,29 @@ namespace PUN_Network
             _playerTeam = player.TeamID;
         }
 
+        public void UpdatePlayerlistEntry(Player player)
+        {
+            _myID = PhotonNetwork.LocalPlayer.UserId;
+            _entryView = GetComponent<PhotonView>();
+            //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
+            //_entryView.ViewID = 999 + player.ActorNumber;
+            //_entryView.TransferOwnership(player.LocalPlayer);
+            ChangeEntryColor();
+            //Debug.Log($"Update Entry ID: {player.UserId}");
+            //_playerID.text = player.LocalPlayer.UserId;
+            _playerID.text = _myID;
+            _playerName.text = player.NickName;
+            _playerReady = false;
+
+            foreach (KeyValuePair<byte, Player> kvp in GameManager.MasterManager.teamToPlayer)
+            {
+                if (kvp.Value == player)
+                {
+                    _playerTeam = kvp.Key;
+                }
+            }
+        }
+
 
         //TODO: remove?
         //public void UpdatePlayerlistEntry(int playerID, string playerName, int players, int maxPlayers)
