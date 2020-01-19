@@ -112,16 +112,29 @@ namespace Michsky.UI.ModernUIPack
 
         public void ChangeDropdownInfo(int itemIndex)
         {
+            GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
+            GameManager.MasterManager.InputManager._teamID = (byte)(itemIndex + 1);
+            GameManager.MasterManager.NetworkManager.CustomPlayer.PlayerlistEntry.PlayerTeam = (itemIndex + 1);
+            selectedImage.sprite = dropdownItems[itemIndex].itemIcon;
+            selectedText.text = dropdownItems[itemIndex].itemName;
+            selectedItemIndex = itemIndex;
+            Selection.TeamID = (byte)(itemIndex + 1);
+
+            // dropdownItems[itemIndex].OnItemSelection.Invoke();
+        }
+
+        public void ChangeDropdownInfoChecked(int itemIndex)
+        {
             if (GameManager.MasterManager.NetworkManager.CustomPlayer.IsMyCustomPlayer)
             {
-
-                GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
-                GameManager.MasterManager.InputManager._teamID = (byte)(itemIndex + 1);
-                GameManager.MasterManager.NetworkManager.CustomPlayer.PlayerlistEntry.PlayerTeam = (itemIndex + 1);
-                selectedImage.sprite = dropdownItems[itemIndex].itemIcon;
-                selectedText.text = dropdownItems[itemIndex].itemName;
-                selectedItemIndex = itemIndex;
-                Selection.TeamID = (byte)(itemIndex + 1);
+                ChangeDropdownInfo(itemIndex);
+                //GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
+                //GameManager.MasterManager.InputManager._teamID = (byte)(itemIndex + 1);
+                //GameManager.MasterManager.NetworkManager.CustomPlayer.PlayerlistEntry.PlayerTeam = (itemIndex + 1);
+                //selectedImage.sprite = dropdownItems[itemIndex].itemIcon;
+                //selectedText.text = dropdownItems[itemIndex].itemName;
+                //selectedItemIndex = itemIndex;
+                //Selection.TeamID = (byte)(itemIndex + 1);
             }
             // dropdownItems[itemIndex].OnItemSelection.Invoke();
         }

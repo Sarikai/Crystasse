@@ -891,12 +891,12 @@ MonoBehaviour:
   animationType: 0
   dropdownItems:
   - itemName: Team 1
-    itemIcon: {fileID: 21300000, guid: 44ebd8e6f42cae445ab4b22f0a9b48a0, type: 3}
+    itemIcon: {fileID: 21300000, guid: e54982e9f2dd09f4192bc5b010e94a54, type: 3}
     OnItemSelection:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8530268969701536023}
-          m_MethodName: ChangeDropdownInfo
+          m_MethodName: ChangeDropdownInfoChecked
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -912,7 +912,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8530268969701536023}
-          m_MethodName: ChangeDropdownInfo
+          m_MethodName: ChangeDropdownInfoChecked
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -928,7 +928,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8530268969701536023}
-          m_MethodName: ChangeDropdownInfo
+          m_MethodName: ChangeDropdownInfoChecked
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -944,7 +944,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8530268969701536023}
-          m_MethodName: ChangeDropdownInfo
+          m_MethodName: ChangeDropdownInfoChecked
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
