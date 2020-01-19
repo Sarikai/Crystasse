@@ -69,7 +69,7 @@ namespace PUN_Network
             //}
         }
 
-        //TODO: Überarbeiten Player anlegen
+        //TODO: [DONE] Überarbeiten Player anlegen
         public virtual void UpdatePlayerlistEntry()
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
@@ -79,17 +79,11 @@ namespace PUN_Network
             PlayerTeam = 0;
         }
 
-        //TODO: clearing maybe?
         public void UpdatePlayerlistEntry(PUN_CustomPlayer player)
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
-            //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
-            //_entryView.ViewID = 999 + player.ActorNumber;
-            //_entryView.TransferOwnership(player.LocalPlayer);
             ChangeEntryColor();
-            //Debug.Log($"Update Entry ID: {player.UserId}");
-            //_playerID.text = player.LocalPlayer.UserId;
             _playerID.text = _myID;
             _playerName.text = player.NickName;
             PlayerReady = false;
@@ -100,12 +94,7 @@ namespace PUN_Network
         {
             _myID = PhotonNetwork.LocalPlayer.UserId;
             _entryView = GetComponent<PhotonView>();
-            //Debug.Log($"Actor Number in entry Update: {player.ActorNumber}");
-            //_entryView.ViewID = 999 + player.ActorNumber;
-            //_entryView.TransferOwnership(player.LocalPlayer);
             ChangeEntryColor();
-            //Debug.Log($"Update Entry ID: {player.UserId}");
-            //_playerID.text = player.LocalPlayer.UserId;
             _playerID.text = _myID;
             _playerName.text = player.NickName;
             PlayerReady = false;
@@ -119,35 +108,16 @@ namespace PUN_Network
             }
         }
 
-
-        //TODO: remove?
-        //public void UpdatePlayerlistEntry(int playerID, string playerName, int players, int maxPlayers)
-        //{
-
-        //}
-
-
         //TODO: restrict access or calls to master client only or player only
         public void OnPlayerEntryClicked()
         {
             Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()} EntryViewId:{_entryView.ViewID}");
-            //if (_playerID.text == _myID.ToString())
-            //{
-            //    Debug.Log($"Equals");
-            //    _playerReady = !_playerReady;
-            //}
-            //switch (_playerReady)
-            //{
-            //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-            //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-            //}
+
             if (_entryView.IsMine)
             {
                 PlayerReady = !PlayerReady;
-                ChangeEntryColor();
-                //photonView.RPC("RPC_ChangeReady", RpcTarget.AllBufferedViaServer);
+                //ChangeEntryColor();
             }
-
         }
 
         private void ChangeEntryColor()
@@ -158,18 +128,6 @@ namespace PUN_Network
                 _entryGradient.EffectGradient = _playerNotReadyGradient;
         }
 
-
-        //[PunRPC]
-        //public void RPC_ChangeReady()
-        //{
-        //    ChangeEntryColor();
-        //    //switch (_playerReady)
-        //    //{
-        //    //    case true: _entryGradient.EffectGradient = _playerReadyGradient; break;
-        //    //    case false: _entryGradient.EffectGradient = _playerNotReadyGradient; break;
-        //    //}
-
-        //}
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
