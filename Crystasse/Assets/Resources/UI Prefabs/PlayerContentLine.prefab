@@ -256,7 +256,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _entryView: {fileID: 0}
-  _dropDown: {fileID: 0}
+  _dropDown: {fileID: 8530268969701536023}
 --- !u!114 &798748200117853583
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -228,7 +228,7 @@ namespace PUN_Network
             base.OnJoinedRoom();
             Debug.Log($"Joined Room");
 
-            //TODO: Prüfen ob auf beiden Seiten instanziert wird!
+            //TODO: [DONE] Prüfen ob auf beiden Seiten instanziert wird!
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();

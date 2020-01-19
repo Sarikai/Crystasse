@@ -12,7 +12,7 @@ namespace PUN_Network
 {
 
     [RequireComponent(typeof(PhotonView))]
-    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks, IPunObservable //TODO: obeserveable for entry just sync the ready bool and let the update change the color
+    public class PUN_PlayerlistEntry : MonoBehaviourPunCallbacks, IPunObservable //TODO: [DONE] obeserveable for entry just sync the ready bool and let the update change the color
     {
         #region Variables / Properties
 
@@ -40,18 +40,9 @@ namespace PUN_Network
 
         public bool PlayerReady { get => _playerReady; set { _playerReady = value; ChangeEntryColor(); } }
 
-        public int PlayerTeam
-        {
-            get
-            {
-                GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)_playerTeam;
-                return _playerTeam;
-            }
-            set
-            {
-                _playerTeam = _dropDown.selectedItemIndex;
-            }
-        }
+        public int PlayerTeam { get => _playerTeam; set => _playerTeam = value; }
+
+
 
         #endregion
 
@@ -69,7 +60,7 @@ namespace PUN_Network
             //}
         }
 
-        //TODO: [DONE] Überarbeiten Player anlegen
+        //TODO: [DONE] Überarbeiten Player anlegen, 
         public virtual void UpdatePlayerlistEntry()
         {
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
@@ -99,6 +90,7 @@ namespace PUN_Network
             _playerName.text = player.NickName;
             PlayerReady = false;
 
+            //TODO: Setzen und removen der kvp bei Teamänderung
             foreach (KeyValuePair<byte, Player> kvp in GameManager.MasterManager.teamToPlayer)
             {
                 if (kvp.Value == player)
@@ -108,7 +100,7 @@ namespace PUN_Network
             }
         }
 
-        //TODO: restrict access or calls to master client only or player only
+        //TODO: [DONE] restrict access or calls to master client only or player only
         public void OnPlayerEntryClicked()
         {
             Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()} EntryViewId:{_entryView.ViewID}");
