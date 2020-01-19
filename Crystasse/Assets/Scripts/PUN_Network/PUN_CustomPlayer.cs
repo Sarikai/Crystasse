@@ -82,7 +82,7 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
                 Debug.Log($"player entry instatiated");
-                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllBufferedViaServer, _playerlistEntry.photonView.ViewID, player);
+                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllBufferedViaServer, CustomPlayerView.ViewID, _playerlistEntry.photonView.ViewID, player);
                 //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
                 //_playerlistEntry.UpdatePlayerlistEntry(this);
             }
@@ -105,13 +105,15 @@ namespace PUN_Network
         #region RPCs
 
         [PunRPC]
-        public void RPC_InitPlayerlistEntry(int viewID, Player player)
+        public void RPC_InitPlayerlistEntry(int CustomPlayerViewID, int EntryViewID, Player player)
         {
-            GameObject entryObject = PhotonView.Find(viewID).gameObject;
+            PUN_PlayerlistEntry entryObject = PhotonView.Find(EntryViewID).gameObject.GetComponent<PUN_PlayerlistEntry>();
+            PUN_CustomPlayer customPlayerObject = PhotonView.Find(CustomPlayerViewID).gameObject.GetComponent<PUN_CustomPlayer>();
             Debug.Log($"Name of GO {entryObject.name}");
             //newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
             /*PUN_PlayerlistEntry saveEntry = */
-            entryObject.GetComponent<PUN_PlayerlistEntry>().UpdatePlayerlistEntry(player);
+            entryObject.UpdatePlayerlistEntry(player);
+            customPlayerObject.PlayerlistEntry = entryObject;
             //entryObject.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
             //saveEntry.UpdatePlayerlistEntry(player);
             //_uiManager._PlayerName.text = newPlayer.NickName;
