@@ -119,6 +119,7 @@ namespace Michsky.UI.ModernUIPack
                 selectedImage.sprite = dropdownItems[itemIndex].itemIcon;
                 selectedText.text = dropdownItems[itemIndex].itemName;
                 selectedItemIndex = itemIndex;
+                Selection.TeamID = (byte)(itemIndex + 1);
             }
             // dropdownItems[itemIndex].OnItemSelection.Invoke();
         }
