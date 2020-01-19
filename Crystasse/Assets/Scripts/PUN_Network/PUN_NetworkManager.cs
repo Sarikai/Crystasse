@@ -234,7 +234,7 @@ namespace PUN_Network
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
             Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
             _customPlayer.CustomPlayerView.RPC("PUN_InitCustomPlayer", RpcTarget.AllBufferedViaServer, GetLocalPlayer);
-            _customPlayer.PlayerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
+            //_customPlayer.PlayerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
             //_customPlayer.Init(); --> is called in its awake
             //_customPlayer.CrystalPrefab = GameManager.MasterManager._crystalPrefabLocation; 
             //_customPlayer.UnitPrefab = GameManager.MasterManager._unitPrefabLocation;

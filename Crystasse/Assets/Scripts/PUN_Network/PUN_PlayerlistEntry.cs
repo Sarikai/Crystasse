@@ -43,7 +43,7 @@ namespace PUN_Network
         {
             //_entryView = GetComponent<PhotonView>();
             _entryGradient = this.GetComponent<UIGradient>();
-            transform.parent = GameManager.MasterManager.UIManager._PlayerList;
+            transform.SetParent(GameManager.MasterManager.UIManager._PlayerList);
             //if (int.TryParse(GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId, out int userID))
             //{
             //    _myID = userID;
