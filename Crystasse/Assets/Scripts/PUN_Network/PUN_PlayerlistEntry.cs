@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Michsky.UI.ModernUIPack;
 using UnityEngine.UI.Michsky.UI.ModernUIPack;
 
 namespace PUN_Network
@@ -34,8 +35,23 @@ namespace PUN_Network
         Gradient _playerNotReadyGradient;
         [SerializeField]
         public PhotonView _entryView;
+        [SerializeField]
+        CustomDropdown _dropDown;
 
         public bool PlayerReady { get => _playerReady; set { _playerReady = value; ChangeEntryColor(); } }
+
+        public int PlayerTeam
+        {
+            get
+            {
+                GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)_playerTeam;
+                return _playerTeam;
+            }
+            set
+            {
+                _playerTeam = _dropDown.selectedItemIndex;
+            }
+        }
 
         #endregion
 
@@ -60,7 +76,7 @@ namespace PUN_Network
             _playerID.text = "0";
             _playerName.text = "I am a testplayer";
             PlayerReady = false;
-            _playerTeam = 0;
+            PlayerTeam = 0;
         }
 
         //TODO: clearing maybe?
@@ -77,7 +93,7 @@ namespace PUN_Network
             _playerID.text = _myID;
             _playerName.text = player.NickName;
             PlayerReady = false;
-            _playerTeam = player.TeamID;
+            PlayerTeam = player.TeamID;
         }
 
         public void UpdatePlayerlistEntry(Player player)
@@ -98,7 +114,7 @@ namespace PUN_Network
             {
                 if (kvp.Value == player)
                 {
-                    _playerTeam = kvp.Key;
+                    PlayerTeam = kvp.Key;
                 }
             }
         }
@@ -160,12 +176,12 @@ namespace PUN_Network
             if (stream.IsWriting)
             {
                 stream.SendNext(PlayerReady);
-                Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
+                Debug.Log($"LocalClient sending ready {GetComponent<PhotonView>().ViewID}");
             }
             else
             {
                 this.PlayerReady = (bool)stream.ReceiveNext();
-                Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
+                Debug.Log($"RemoteClient receiving ready { GetComponent<PhotonView>().ViewID}");
             }
         }
 

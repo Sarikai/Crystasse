@@ -11,7 +11,7 @@ using PUN_Network;
 namespace PUN_Network
 {
     //[RequireComponent(typeof(PhotonView), typeof(InputManager))]
-    public class PUN_CustomPlayer : MonoBehaviourPunCallbacks
+    public class PUN_CustomPlayer : MonoBehaviourPunCallbacks, IPunObservable
     {
         #region Variables / Properties
 
@@ -73,6 +73,7 @@ namespace PUN_Network
             _localPlayer = player;
             Debug.Log($"Local Player Actor Number: {player.ActorNumber}");
             _teamID = (byte)(player.ActorNumber /*+ 1*/);
+            _actorNumber = player.ActorNumber;
             //TODO: check for remove
             //_actorNumber = player.ActorNumber;
             if (IsMyCustomPlayer)
@@ -118,6 +119,20 @@ namespace PUN_Network
             //saveEntry.UpdatePlayerlistEntry(player);
             //_uiManager._PlayerName.text = newPlayer.NickName;
             GameManager.MasterManager.NetworkManager._playerListEntries.Add(player, entryObject.GetComponent<PUN_PlayerlistEntry>().gameObject);
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(TeamID);
+                Debug.Log($"LocalClient sending teamID {GetComponent<PhotonView>().ViewID}");
+            }
+            else
+            {
+                this.TeamID = (byte)stream.ReceiveNext();
+                Debug.Log($"LocalClient receiving teamID {GetComponent<PhotonView>().ViewID}");
+            }
         }
 
         #endregion
