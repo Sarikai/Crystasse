@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 using Photon.Pun;
+using PUN_Network;
 
 namespace Michsky.UI.ModernUIPack
 {
@@ -125,7 +126,7 @@ namespace Michsky.UI.ModernUIPack
 
         public void ChangeDropdownInfoChecked(int itemIndex)
         {
-            if (GameManager.MasterManager.NetworkManager.CustomPlayer.IsMyCustomPlayer)
+            if (GetComponentInParent<PUN_CustomPlayer>().IsMyCustomPlayer)
             {
                 ChangeDropdownInfo(itemIndex);
                 //GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
