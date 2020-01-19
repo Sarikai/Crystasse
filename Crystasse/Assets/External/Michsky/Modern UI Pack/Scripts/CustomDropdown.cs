@@ -127,7 +127,7 @@ namespace Michsky.UI.ModernUIPack
         public void ChangeDropdownInfoChecked(int itemIndex)
         {
 
-            if (GetComponentInParent<PUN_CustomPlayer>().IsMyCustomPlayer)
+            if (GetReliantCustomPlayer().IsMyCustomPlayer)
             {
                 ChangeDropdownInfo(itemIndex);
                 //GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
@@ -139,6 +139,18 @@ namespace Michsky.UI.ModernUIPack
                 //Selection.TeamID = (byte)(itemIndex + 1);
             }
             // dropdownItems[itemIndex].OnItemSelection.Invoke();
+        }
+
+        public PUN_CustomPlayer GetReliantCustomPlayer()
+        {
+            foreach (KeyValuePair<PUN_CustomPlayer, GameObject> kvp in GameManager.MasterManager.NetworkManager._playerListEntries)
+            {
+                if (kvp.Value == this.GetComponentInParent<PUN_PlayerlistEntry>().gameObject)
+                {
+                    return kvp.Key;
+                }
+            }
+            return null;
         }
 
         public void Animate()
