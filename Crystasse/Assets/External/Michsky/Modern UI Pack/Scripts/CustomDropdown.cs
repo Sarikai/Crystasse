@@ -114,6 +114,7 @@ namespace Michsky.UI.ModernUIPack
         {
             if (GameManager.MasterManager.NetworkManager.CustomPlayer.IsMyCustomPlayer)
             {
+
                 GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
                 GameManager.MasterManager.InputManager._teamID = (byte)(itemIndex + 1);
                 GameManager.MasterManager.NetworkManager.CustomPlayer.PlayerlistEntry.PlayerTeam = (itemIndex + 1);
@@ -179,7 +180,7 @@ namespace Michsky.UI.ModernUIPack
 
             if (stream.IsWriting)
             {
-                stream.SendNext(selectedImage.sprite);
+                //stream.SendNext(selectedImage.sprite);
                 stream.SendNext(selectedText.text);
                 stream.SendNext(selectedItemIndex);
 
@@ -187,7 +188,7 @@ namespace Michsky.UI.ModernUIPack
             }
             else
             {
-                this.selectedImage.sprite = (Sprite)stream.ReceiveNext();
+                //this.selectedImage.sprite = (Sprite)stream.ReceiveNext();
                 this.selectedText.text = (string)stream.ReceiveNext();
                 this.selectedItemIndex = (int)stream.ReceiveNext();
                 //Debug.Log($"LocalClient receiving dropDownInfo {GetComponent<PhotonView>().ViewID}");
