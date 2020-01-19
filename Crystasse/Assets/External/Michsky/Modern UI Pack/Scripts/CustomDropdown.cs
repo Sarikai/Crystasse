@@ -126,6 +126,7 @@ namespace Michsky.UI.ModernUIPack
 
         public void ChangeDropdownInfoChecked(int itemIndex)
         {
+            Debug.Log($"{GameManager.MasterManager.NetworkManager._playerListEntries.Count}");
             if (GetComponentInParent<PUN_CustomPlayer>().IsMyCustomPlayer)
             {
                 ChangeDropdownInfo(itemIndex);

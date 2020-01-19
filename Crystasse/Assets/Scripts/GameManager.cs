@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"{GameManager.MasterManager.NetworkManager._playerListEntries.Count}");
         if (Input.GetKey(KeyCode.O))
         {
             Debug.Log("Saving");
