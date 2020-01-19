@@ -82,7 +82,7 @@ namespace PUN_Network
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
                 Debug.Log($"player entry instatiated");
-                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllViaServer, _playerlistEntry.photonView.ViewID, player);
+                CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllBufferedViaServer, _playerlistEntry.photonView.ViewID, player);
                 //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
                 //_playerlistEntry.UpdatePlayerlistEntry(this);
             }
@@ -110,11 +110,12 @@ namespace PUN_Network
             GameObject entryObject = PhotonView.Find(viewID).gameObject;
             Debug.Log($"Name of GO {entryObject.name}");
             //newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-            PUN_PlayerlistEntry saveEntry = entryObject.GetComponent<PUN_PlayerlistEntry>();
+            /*PUN_PlayerlistEntry saveEntry = */
+            entryObject.GetComponent<PUN_PlayerlistEntry>().UpdatePlayerlistEntry(player);
             //entryObject.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
-            saveEntry.UpdatePlayerlistEntry(player);
+            //saveEntry.UpdatePlayerlistEntry(player);
             //_uiManager._PlayerName.text = newPlayer.NickName;
-            GameManager.MasterManager.NetworkManager._playerListEntries.Add(player, saveEntry.gameObject);
+            GameManager.MasterManager.NetworkManager._playerListEntries.Add(player, entryObject.GetComponent<PUN_PlayerlistEntry>().gameObject);
         }
 
         #endregion

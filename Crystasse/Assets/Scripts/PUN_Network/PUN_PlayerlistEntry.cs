@@ -35,6 +35,8 @@ namespace PUN_Network
         [SerializeField]
         public PhotonView _entryView;
 
+        public bool PlayerReady { get => _playerReady; set { _playerReady = value; ChangeEntryColor(); } }
+
         #endregion
 
         #region Methods
@@ -57,7 +59,7 @@ namespace PUN_Network
             _myID = GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId;
             _playerID.text = "0";
             _playerName.text = "I am a testplayer";
-            _playerReady = false;
+            PlayerReady = false;
             _playerTeam = 0;
         }
 
@@ -74,7 +76,7 @@ namespace PUN_Network
             //_playerID.text = player.LocalPlayer.UserId;
             _playerID.text = _myID;
             _playerName.text = player.NickName;
-            _playerReady = false;
+            PlayerReady = false;
             _playerTeam = player.TeamID;
         }
 
@@ -90,7 +92,7 @@ namespace PUN_Network
             //_playerID.text = player.LocalPlayer.UserId;
             _playerID.text = _myID;
             _playerName.text = player.NickName;
-            _playerReady = false;
+            PlayerReady = false;
 
             foreach (KeyValuePair<byte, Player> kvp in GameManager.MasterManager.teamToPlayer)
             {
@@ -125,7 +127,7 @@ namespace PUN_Network
             //}
             if (_entryView.IsMine)
             {
-                _playerReady = !_playerReady;
+                PlayerReady = !PlayerReady;
                 ChangeEntryColor();
                 //photonView.RPC("RPC_ChangeReady", RpcTarget.AllBufferedViaServer);
             }
@@ -134,7 +136,7 @@ namespace PUN_Network
 
         private void ChangeEntryColor()
         {
-            if (_playerReady)
+            if (PlayerReady)
                 _entryGradient.EffectGradient = _playerReadyGradient;
             else
                 _entryGradient.EffectGradient = _playerNotReadyGradient;
@@ -157,12 +159,12 @@ namespace PUN_Network
         {
             if (stream.IsWriting)
             {
-                stream.SendNext(_playerReady);
+                stream.SendNext(PlayerReady);
                 Debug.Log($"LocalClient {GetComponent<PhotonView>().ViewID}");
             }
             else
             {
-                this._playerReady = (bool)stream.ReceiveNext();
+                this.PlayerReady = (bool)stream.ReceiveNext();
                 Debug.Log($"RemoteClient { GetComponent<PhotonView>().ViewID}");
             }
         }
