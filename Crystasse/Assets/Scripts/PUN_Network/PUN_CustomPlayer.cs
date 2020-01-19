@@ -118,7 +118,9 @@ namespace PUN_Network
             //entryObject.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
             //saveEntry.UpdatePlayerlistEntry(player);
             //_uiManager._PlayerName.text = newPlayer.NickName;
-            GameManager.MasterManager.NetworkManager._playerListEntries.Add(player, entryObject.GetComponent<PUN_PlayerlistEntry>().gameObject);
+            //GameManager.MasterManager.NetworkManager._playerListEntries.Add(player, entryObject.GetComponent<PUN_PlayerlistEntry>().gameObject);
+            GameManager.MasterManager.NetworkManager._playerListEntries.Add(customPlayerObject, entryObject.GetComponent<PUN_PlayerlistEntry>().gameObject);
+
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

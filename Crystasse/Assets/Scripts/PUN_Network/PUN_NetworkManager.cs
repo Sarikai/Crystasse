@@ -47,7 +47,7 @@ namespace PUN_Network
 
         //
         public Dictionary<int, GameObject> _serverListEntries = new Dictionary<int, GameObject>();
-        public Dictionary<Player, GameObject> _playerListEntries = new Dictionary<Player, GameObject>();
+        public Dictionary<PUN_CustomPlayer, GameObject> _playerListEntries = new Dictionary<PUN_CustomPlayer, GameObject>();
         public Dictionary<Match, GameObject> _matchEntries = new Dictionary<Match, GameObject>();
         public Stats MatchStats;
 
@@ -366,9 +366,10 @@ namespace PUN_Network
 
         private void RemovePlayerEntry(Player leavingPlayer)
         {
-            GameObject entryToRemove = _playerListEntries[leavingPlayer];
-            _playerListEntries.Remove(leavingPlayer);
-            Destroy(entryToRemove);
+            //TODO: change?
+            //GameObject entryToRemove = _playerListEntries[leavingPlayer];
+            //_playerListEntries.Remove(leavingPlayer);
+            //Destroy(entryToRemove);
         }
 
         public void SetCrystalViews(Player[] players)
