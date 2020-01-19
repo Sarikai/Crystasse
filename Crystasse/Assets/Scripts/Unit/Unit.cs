@@ -67,6 +67,7 @@ public class Unit : Agent
         Health = _data.HealthPoints;
         BuildPoints = _data.BuildPoints;
         _attackTrigger.radius = _data.Range;
+        UnitView = GetComponent<PhotonView>();
     }
 
     private void Start()
