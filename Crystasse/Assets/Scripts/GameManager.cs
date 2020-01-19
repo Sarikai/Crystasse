@@ -112,7 +112,6 @@ public class GameManager : MonoBehaviour
             //UnityEngine.Random.Range(0, 6);
             Stats newStat = new Stats()
             {
-
                 destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
                 spawnedUnits = (uint)UnityEngine.Random.Range(0, 6),
             };
@@ -141,7 +140,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        //TODO: get this variable true!!!
+        //TODO: [DONE] get this variable true!!!
         if (DoUpdate)
         {
             StateMachine.Update();

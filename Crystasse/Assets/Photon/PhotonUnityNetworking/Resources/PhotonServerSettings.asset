@@ -48,5 +48,6 @@ MonoBehaviour:
   - Init
   - PUN_InitCustomPlayer
   - RPC_InitPlayerlistEntry
+  - RPC_UpdatePlayerlistEntry
   DisableAutoOpenWizard: 1
   ShowSettings: 1

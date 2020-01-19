@@ -39,15 +39,7 @@ namespace PUN_Network
 
         //Properties
         public int ActorNumber { get => _actorNumber; set => _actorNumber = value; }
-        public byte TeamID
-        {
-            get => _teamID;
-            set
-            {
-                //GetComponentInChildren<PUN_PlayerlistEntry>().PlayerTeam = value;
-                _teamID = value;
-            }
-        }
+        public byte TeamID { get => _teamID; set => _teamID = value; }
         public string NickName { get => _nickName; set => _nickName = value; }
         public Player LocalPlayer { get => _localPlayer; set => _localPlayer = value; }
         public string CrystalPrefab { get => _crystalPrefab; set => _crystalPrefab = value; }
