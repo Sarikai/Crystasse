@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Jobs;
 
@@ -23,6 +24,7 @@ public class Unit : Agent
     [SerializeField]
     private UnitAnims _anims = null;
     private float _timer;
+    PhotonView _unitView;
 
     public byte TeamID => _teamID;
     public byte Health { get; private set; }
@@ -31,6 +33,17 @@ public class Unit : Agent
     public float MoveSpeed => _data.MoveSpeed;
 
     public Rigidbody Rigidbody => _rb;
+
+    public PhotonView UnitView { get => _unitView; set => _unitView = value; }
+
+    public bool IsMyUnit
+    {
+        get
+        {
+            Debug.Log($"IsMyUnit: {UnitView.CreatorActorNr == PhotonNetwork.LocalPlayer.ActorNumber}");
+            return (UnitView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
+        }
+    }
 
     public byte BuildingPoints
     {
@@ -70,13 +83,13 @@ public class Unit : Agent
     public void TakeDamage(byte value)
     {
         Debug.Log($"Yes I take damage");
-        if (value >= Health)
+        if (value >= Health && IsMyUnit)
             Die();
         else
             Health -= value;
     }
 
-    [Photon.Pun.PunRPC]
+
     private void Die()
     {
         //TODO: [DONE] rework to photon.destroy
