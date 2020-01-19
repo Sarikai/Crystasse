@@ -176,20 +176,21 @@ namespace Michsky.UI.ModernUIPack
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
+
             if (stream.IsWriting)
             {
                 stream.SendNext(selectedImage.sprite);
                 stream.SendNext(selectedText.text);
                 stream.SendNext(selectedItemIndex);
 
-                Debug.Log($"LocalClient sending dropDownInfo {GetComponent<PhotonView>().ViewID}");
+                //Debug.Log($"LocalClient sending dropDownInfo {GetComponent<PhotonView>().ViewID}");
             }
             else
             {
                 this.selectedImage.sprite = (Sprite)stream.ReceiveNext();
                 this.selectedText.text = (string)stream.ReceiveNext();
                 this.selectedItemIndex = (int)stream.ReceiveNext();
-                Debug.Log($"LocalClient receiving dropDownInfo {GetComponent<PhotonView>().ViewID}");
+                //Debug.Log($"LocalClient receiving dropDownInfo {GetComponent<PhotonView>().ViewID}");
             }
         }
     }
