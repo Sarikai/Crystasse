@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using Photon.Pun;
 
 namespace Michsky.UI.ModernUIPack
 {
-    public class CustomDropdown : MonoBehaviour
+    public class CustomDropdown : MonoBehaviour, IPunObservable
     {
         [Header("OBJECTS")]
         public GameObject triggerObject;
@@ -170,6 +171,25 @@ namespace Michsky.UI.ModernUIPack
             else if (enableTrigger == true && isOn == true)
             {
                 triggerObject.SetActive(true);
+            }
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(selectedImage.sprite);
+                stream.SendNext(selectedText.text);
+                stream.SendNext(selectedItemIndex);
+
+                Debug.Log($"LocalClient sending dropDownInfo {GetComponent<PhotonView>().ViewID}");
+            }
+            else
+            {
+                this.selectedImage.sprite = (Sprite)stream.ReceiveNext();
+                this.selectedText.text = (string)stream.ReceiveNext();
+                this.selectedItemIndex = (int)stream.ReceiveNext();
+                Debug.Log($"LocalClient receiving dropDownInfo {GetComponent<PhotonView>().ViewID}");
             }
         }
     }
