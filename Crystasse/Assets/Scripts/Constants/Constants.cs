@@ -29,9 +29,28 @@ public static class Constants
         "UI_Prefabs/PlayerContentLine"
     };
 
-    public static readonly string[] UNIT_ICONS = new string[1]
+    public static readonly string[] UNIT_ICONS = new string[20]
     {
-        "UI_Icons/Unit01"
+        "UI_Icons/Unit01",
+        "UI_Icons/Unit02",
+        "UI_Icons/Unit03",
+        "UI_Icons/Unit04",
+        "UI_Icons/Unit05",
+        "UI_Icons/Unit06",
+        "UI_Icons/Unit07",
+        "UI_Icons/Unit08",
+        "UI_Icons/Unit09",
+        "UI_Icons/Unit10",
+        "UI_Icons/Unit11",
+        "UI_Icons/Unit12",
+        "UI_Icons/Unit13",
+        "UI_Icons/Unit14",
+        "UI_Icons/Unit15",
+        "UI_Icons/Unit16",
+        "UI_Icons/Unit17",
+        "UI_Icons/Unit18",
+        "UI_Icons/Unit19",
+        "UI_Icons/Unit20",
     };
 
 }

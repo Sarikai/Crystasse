@@ -890,7 +890,7 @@ MonoBehaviour:
   invokeAtStart: 0
   animationType: 0
   dropdownItems:
-  - itemName: Team 1
+  - itemName: Ignis 01
     itemIcon: {fileID: 21300000, guid: e54982e9f2dd09f4192bc5b010e94a54, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -906,8 +906,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Team 2
-    itemIcon: {fileID: 21300000, guid: 1c1bef4b40e990c42aed6432ebd324ef, type: 3}
+  - itemName: Ignis 02
+    itemIcon: {fileID: 21300000, guid: 275a76862e2d20643b478acb24ba2bed, type: 3}
     OnItemSelection:
       m_PersistentCalls:
         m_Calls:
@@ -922,8 +922,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Team 3
-    itemIcon: {fileID: 21300000, guid: 65a1928224b8541439b433a52ea9c3d9, type: 3}
+  - itemName: Ignis 03
+    itemIcon: {fileID: 21300000, guid: cd8196d36c1588c42a16bb35d6356674, type: 3}
     OnItemSelection:
       m_PersistentCalls:
         m_Calls:
@@ -938,8 +938,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Team 4
-    itemIcon: {fileID: 21300000, guid: 7d891b18332e2174a97d6f6588bca6ca, type: 3}
+  - itemName: Himawari
+    itemIcon: {fileID: 21300000, guid: dedd74c7518bb6b429d2287d02db6007, type: 3}
     OnItemSelection:
       m_PersistentCalls:
         m_Calls:
@@ -950,6 +950,262 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 05
+    itemIcon: {fileID: 21300000, guid: 3f202456757dab942931a4fa4bed1f03, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 06
+    itemIcon: {fileID: 21300000, guid: 96a09b3c4d55b2b438db19da64ba7bea, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 07
+    itemIcon: {fileID: 21300000, guid: d352dd2ed386d1749abaf42cbb9fe6f0, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 08
+    itemIcon: {fileID: 21300000, guid: e142695e15985bf4896101aa5b765e42, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Zenca
+    itemIcon: {fileID: 21300000, guid: 888be8a2bdd82b44ea1ddf784e8bad92, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 10
+    itemIcon: {fileID: 21300000, guid: 59b5e719fd0cc5c48b1c524e19ecfcec, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 9
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 11
+    itemIcon: {fileID: 21300000, guid: f9ff1133f81e92944a490751058c9b9e, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 12
+    itemIcon: {fileID: 21300000, guid: 7e7990cdab5bb7141b585f4da557e5e2, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 11
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 13
+    itemIcon: {fileID: 21300000, guid: 4424db0b0c683794b80b3a8be4e6ab06, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 12
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 14
+    itemIcon: {fileID: 21300000, guid: 120122dad690e63468812bd8c6c99e11, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 13
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ezassins
+    itemIcon: {fileID: 21300000, guid: 9a0af7212335e634d981adc7410647a1, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 14
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 16
+    itemIcon: {fileID: 21300000, guid: e67101420fb3a3f4ead1150adec28868, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 15
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 17
+    itemIcon: {fileID: 21300000, guid: 30b9adc9a96a38245869ea485c125226, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 16
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 18
+    itemIcon: {fileID: 21300000, guid: 9c5fcc491ff01a647b7d45efcec93a15, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 17
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 19
+    itemIcon: {fileID: 21300000, guid: aba6f9be24b92e44dbfa4be353b5df02, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 18
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemName: Ignis 20
+    itemIcon: {fileID: 21300000, guid: b183e0596e7ab8f48a8dbcd0183ff4d1, type: 3}
+    OnItemSelection:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8530268969701536023}
+          m_MethodName: ChangeDropdownInfoChecked
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 19
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

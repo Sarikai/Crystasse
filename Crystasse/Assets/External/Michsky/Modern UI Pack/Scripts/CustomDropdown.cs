@@ -29,13 +29,13 @@ namespace Michsky.UI.ModernUIPack
         public bool invokeAtStart = false;
         public AnimationType animationType;
 
-        [Space(10)]
+        [Space(20)]
         [SerializeField]
         public List<Item> dropdownItems = new List<Item>();
         private List<Item> imageList = new List<Item>();
         //TODO: selectedIndex pick out
         public int selectedItemIndex = 0;
-        [Space(10)]
+        [Space(20)]
 
         private Animator dropdownAnimator;
         private TextMeshProUGUI setItemText;
