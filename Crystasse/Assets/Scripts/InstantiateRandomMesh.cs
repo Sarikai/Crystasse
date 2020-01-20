@@ -24,21 +24,22 @@ public class InstantiateRandomMesh : MonoBehaviour
             Destroy(_gameObject);
         _gameObject = GameObject.Instantiate(_meshes[index], transform);
         _crystal.CrystalMeshRenderer = _gameObject.GetComponentInChildren<MeshRenderer>();
+        _crystal.CrystalRenderer = _gameObject.GetComponentInChildren<Renderer>();
         _crystal.CrystalMeshRenderer.transform.localPosition = Vector3.zero;
         //GetComponentInChildren<MeshRenderer>().transform.localPosition = Vector3.zero;
         _gameObject.transform.localPosition = Vector3.zero;
     }
 
-    public void ChangeMaterial(PhotonView crystalView)
-    {
-        crystalView.RPC("RPC_ChangeMaterial", RpcTarget.AllViaServer);
-    }
+    //public void ChangeMaterial(PhotonView crystalView)
+    //{
+    //    crystalView.RPC("RPC_ChangeMaterial", RpcTarget.AllViaServer);
+    //}
 
-    [PunRPC]
-    public void RPC_ChangeMaterial()
-    {
-        //TODO: Material Resources Path in constants und ResourceLoad()
-    }
+    //[PunRPC]
+    //public void RPC_ChangeMaterial()
+    //{
+    //    //TODO: Material Resources Path in constants und ResourceLoad()
+    //}
 
     private void OnValidate()
     {

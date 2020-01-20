@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     public List<Crystal> bases;
     public Dictionary<byte, Player> teamToPlayer = new Dictionary<byte, Player>();
     public Crystal[] crystals;
+
+    [SerializeField]
+    Material[] crystalMaterials;
+
     public List<GameObject> ObjectsToDestroy { get; private set; }
     [SerializeField]
     private bool doUpdate = false;
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
     public SoundManager SoundManager { get { return _soundManager; } set { _soundManager = value; } }
 
     public bool DoUpdate { get => doUpdate; set => doUpdate = value; }
+    public Material[] CrystalMaterials { get => crystalMaterials; set => crystalMaterials = value; }
 
     #endregion
 
@@ -56,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         _RunningSessionStats = new Stats();
         _RunningSessionStats.Matches = new Dictionary<int, string>();
-        SoundManager.MenuMusic();
+        //SoundManager.MenuMusic();
         Debug.Log($"GameManager Awake done");
     }
 

@@ -38,6 +38,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     Player _ownerPlayer;
     [SerializeField]
     MeshRenderer _crystalMeshRenderer;
+    [SerializeField]
+    Renderer _crystalRenderer;
     public MeshRenderer CrystalMeshRenderer { get => _crystalMeshRenderer; set => _crystalMeshRenderer = value; }
 
     private int isUpgraded = 0;
@@ -82,6 +84,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
+
     public void SetCrystalView(Player player)
     {
         CrystalView.TransferOwnership(player);
@@ -103,6 +106,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             //photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
             _teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
+            GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[_teamID];
         }
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
@@ -186,13 +190,16 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             Debug.Log($"ConquerElse");
             Health += value;
+            //GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
             if (Health >= _data.MaxHealth)
             {
                 //TODO: Change HUD data of Crystals owned here
-                //TODO: Assign attacking Team ID instead of localPlayer
+                //TODO: [DONE] Assign attacking Team ID instead of localPlayer
                 OwnerPlayer = GetPlayerOfTeam(team);
                 Health = _data.MaxHealth;
                 _teamID = team;
+                GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
+                //_crystalMeshRenderer.material = GameManager.MasterManager.CrystalMaterials[team - 1];
                 if (OnConquered != null)
                     OnConquered.Invoke();
             }
@@ -207,12 +214,42 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void ChangeTeam()
     {
-        _randomMesh.ChangeMaterial(_crystalView);
+        if (_teamID > 0)
+        {
+            //_crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[_teamID];
+            //_crystalMeshRenderer.GetComponent<Material>() = GameManager.MasterManager.CrystalMaterials[_teamID];
+            GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[_teamID];
+            Debug.Log("Changed material to team");
+        }
+
+        else
+        {
+            //_crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[0];
+            //_crystalMeshRenderer.GetComponent<Renderer>().material = GameManager.MasterManager.CrystalMaterials[0];
+            GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
+            Debug.Log("Changed material to standard");
+        }
+    }
+
+
+    public void RPC_ChangeTeam()
+    {
+        if (_teamID > 0)
+        {
+            _crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[_teamID];
+            Debug.Log("Changed material to team");
+        }
+
+        else
+        {
+            _crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[0];
+            Debug.Log("Changed material to standard");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Crystal Trigger Enter called by {other}");
+        //Debug.Log($"Crystal Trigger Enter called by {other}");
         var unit = other.GetComponentInParent<Unit>();
 
         if (unit != null)
@@ -228,14 +265,14 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         //Debug.Log($"Collider: {other}");
         var unit = other.GetComponentInParent<Unit>();
-        Debug.Log($"Crystal Trigger Stay called by {other} Checkresult{unit != null} && {unit.TeamID != TeamID} && {unit.CurrentState?.Type == States.Idle}");
+        //Debug.Log($"Crystal Trigger Stay called by {other} Checkresult{unit != null} && {unit.TeamID != TeamID} && {unit.CurrentState?.Type == States.Idle}");
         if (unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
             StateMachine.SwitchState(unit, new ConquerState(unit, this));
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log($"Crystal Trigger Exit called by {other}");
+        //Debug.Log($"Crystal Trigger Exit called by {other}");
         if (other.GetComponentInParent<Unit>()?.TeamID == TeamID)
             _unitsInRange.Remove(other.GetComponentInParent<Unit>());
     }
@@ -342,6 +379,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             return (this.TeamID == GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
         }
     }
+
+    public Renderer CrystalRenderer { get => _crystalRenderer; set => _crystalRenderer = value; }
 
     public Player GetPlayerOfTeam(int teamID)
     {

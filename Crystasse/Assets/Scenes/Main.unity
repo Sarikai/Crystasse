@@ -2966,6 +2966,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
+      propertyPath: crystalMaterials.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
       propertyPath: _inputManager
       value: 
       objectReference: {fileID: 0}
@@ -2974,6 +2979,111 @@ PrefabInstance:
       propertyPath: _soundManager
       value: 
       objectReference: {fileID: 1324293115}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 041e8c23cd81f514e887806c66fc7a45, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3643f67d62172cd4e8dcb96c78ff8dd5, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 96040138b7cb4164aa907fddf8a3a3d5, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a6051e5ed0b45f4c9e0e850407bd9b8, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 91eadf97eea3f6c4581f12e18acaf472, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0fb9da3fde9db4448a95ae21cda2752, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f7575756aa1d064cbf72baa3dc09586, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: 96040138b7cb4164aa907fddf8a3a3d5, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: 219f28042b6649c4ab4ea5b04b51272c, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[9]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1699617961cc4094da797793470b249c, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[10]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f80770e333e1c749baa43643ed08a52, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[11]
+      value: 
+      objectReference: {fileID: 2100000, guid: 67b036c927f14ff408484cb321b8340a, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[12]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a6051e5ed0b45f4c9e0e850407bd9b8, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[13]
+      value: 
+      objectReference: {fileID: 2100000, guid: 342b98fbb7d496c4db4e16a0f696ed13, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[14]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1e86737e8f81b41418cd87074fed53cd, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[15]
+      value: 
+      objectReference: {fileID: 2100000, guid: d5638f364d140c14bb97c27bd31e7d0f, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[16]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1e5fb1d038998fd45ab93529b3df9f4d, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[17]
+      value: 
+      objectReference: {fileID: 2100000, guid: 55bbe7b47ea3c9843ae138f5c0b0ac82, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[18]
+      value: 
+      objectReference: {fileID: 2100000, guid: 828e09c266519af4a94267cfede86e0c, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[19]
+      value: 
+      objectReference: {fileID: 2100000, guid: aac4e888ecb4d364a96190e06b6c648f, type: 2}
+    - target: {fileID: 6522640843001627562, guid: 5bfb8007cb282844e854b25388730ffc,
+        type: 3}
+      propertyPath: crystalMaterials.Array.data[20]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1e5fb1d038998fd45ab93529b3df9f4d, type: 2}
     - target: {fileID: 6522640843001627565, guid: 5bfb8007cb282844e854b25388730ffc,
         type: 3}
       propertyPath: m_LocalPosition.x
