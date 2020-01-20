@@ -112,7 +112,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += () => _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += _unitsSpawned.Clear;
-        OnConquered += ChangeTeam;
+        //OnConquered += ChangeTeam;
         OnConquered += () => StartCoroutine(ReworkedSpawnRoutine());
         GetComponent<SphereCollider>().radius = _data.Range;
 
@@ -208,42 +208,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if (Health <= 0)
         {
             _teamID = 0;
-            ChangeTeam();
-        }
-    }
-
-    private void ChangeTeam()
-    {
-        if (_teamID > 0)
-        {
-            //_crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[_teamID];
-            //_crystalMeshRenderer.GetComponent<Material>() = GameManager.MasterManager.CrystalMaterials[_teamID];
-            GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[_teamID];
-            Debug.Log("Changed material to team");
-        }
-
-        else
-        {
-            //_crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[0];
-            //_crystalMeshRenderer.GetComponent<Renderer>().material = GameManager.MasterManager.CrystalMaterials[0];
             GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
-            Debug.Log("Changed material to standard");
-        }
-    }
-
-
-    public void RPC_ChangeTeam()
-    {
-        if (_teamID > 0)
-        {
-            _crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[_teamID];
-            Debug.Log("Changed material to team");
-        }
-
-        else
-        {
-            _crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[0];
-            Debug.Log("Changed material to standard");
         }
     }
 
