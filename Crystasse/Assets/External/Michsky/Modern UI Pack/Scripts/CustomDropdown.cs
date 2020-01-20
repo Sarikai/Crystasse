@@ -115,7 +115,8 @@ namespace Michsky.UI.ModernUIPack
         public void ChangeDropdownInfo(int itemIndex)
         {
             GameManager.MasterManager.teamToPlayer[(byte)(selectedItemIndex + 1)] = null;
-            GameManager.MasterManager.teamToPlayer[(byte)(itemIndex + 1)] = PhotonNetwork.LocalPlayer;
+            GameManager.MasterManager.teamToPlayer[(byte)(itemIndex + 1)] = GetReliantCustomPlayer().photonView.Owner;
+            Debug.Log($"GetReliantCustomPlayer().photonView.Owner: {GetReliantCustomPlayer().photonView.Owner}");
             GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
             GameManager.MasterManager.InputManager._teamID = (byte)(itemIndex + 1);
             GameManager.MasterManager.NetworkManager.CustomPlayer.PlayerlistEntry.PlayerTeam = (itemIndex + 1);
