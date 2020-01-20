@@ -954,7 +954,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Igniculus 05
+  - itemName: Yellow Star
     itemIcon: {fileID: 21300000, guid: 3f202456757dab942931a4fa4bed1f03, type: 3}
     OnItemSelection:
       m_PersistentCalls:

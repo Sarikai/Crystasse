@@ -28,12 +28,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private List<Unit> _unitsSpawned = new List<Unit>();
     [SerializeField]
     private PhotonView _crystalView;
-    [SerializeField]
-    private int _viewID = 100;
+    //[SerializeField]
+    //private int _viewID = 100;
     [SerializeField]
     private byte _teamID;
 
     Player _ownerPlayer;
+    [SerializeField]
+    MeshRenderer _crystalMeshRenderer;
+    public MeshRenderer CrystalMeshRenderer { get => _crystalMeshRenderer; set => _crystalMeshRenderer = value; }
 
     private int isUpgraded = 0;
     private List<Unit> _unitsInRange = new List<Unit>();
@@ -71,7 +74,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Awake()
     {
-        CrystalView.ViewID = _viewID;
+        //CrystalView.ViewID = _viewID;
+        _crystalView = GetComponent<PhotonView>();
     }
 
 
@@ -170,10 +174,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Conquer(byte value, byte team)
     {
+        Debug.Log($"Entered conquer AP:{value}, AttackingTeam: {team}, ownTeam {TeamID}");
         if (TeamID != 0)
+        {
+            Debug.Log($"Conquer");
             Health -= value;
+        }
         else
         {
+            Debug.Log($"ConquerElse");
             Health += value;
             if (Health >= _data.MaxHealth)
             {
@@ -199,6 +208,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Crystal Trigger Enter called by {other}");
         var unit = other.GetComponent<Unit>();
 
         if (unit != null)
@@ -212,13 +222,16 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnTriggerStay(Collider other)
     {
-        var unit = other.GetComponent<Unit>();
+        //Debug.Log($"Collider: {other}");
+        var unit = other.GetComponentInParent<Unit>();
+        Debug.Log($"Crystal Trigger Stay called by {other} Checkresult{unit != null} && {unit.TeamID != TeamID} && {unit.CurrentState.Type == States.Idle}");
         if (unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
             StateMachine.SwitchState(unit, new ConquerState(unit, this));
     }
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log($"Crystal Trigger Exit called by {other}");
         if (other.GetComponent<Unit>()?.TeamID == TeamID)
             _unitsInRange.Remove(other.GetComponent<Unit>());
     }
@@ -322,6 +335,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             return (this.TeamID == GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
         }
     }
+
 
     #endregion
 }

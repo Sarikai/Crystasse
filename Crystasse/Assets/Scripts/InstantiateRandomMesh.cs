@@ -9,10 +9,7 @@ public class InstantiateRandomMesh : MonoBehaviour
     [SerializeField]
     Crystal _crystal;
     [SerializeField]
-    Material[] _teamMaterials = null;
-    [SerializeField]
     GameObject[] _meshes = null;
-
     GameObject _gameObject;
 
     private void Awake()
@@ -23,10 +20,12 @@ public class InstantiateRandomMesh : MonoBehaviour
     public void InstantiateMesh()
     {
         var index = Random.Range(0, _meshes.Length);
-        if(_gameObject)
+        if (_gameObject)
             Destroy(_gameObject);
         _gameObject = GameObject.Instantiate(_meshes[index], transform);
-        GetComponentInChildren<MeshRenderer>().transform.localPosition = Vector3.zero;
+        _crystal.CrystalMeshRenderer = _gameObject.GetComponentInChildren<MeshRenderer>();
+        _crystal.CrystalMeshRenderer.transform.localPosition = Vector3.zero;
+        //GetComponentInChildren<MeshRenderer>().transform.localPosition = Vector3.zero;
         _gameObject.transform.localPosition = Vector3.zero;
     }
 
@@ -38,8 +37,7 @@ public class InstantiateRandomMesh : MonoBehaviour
     [PunRPC]
     public void RPC_ChangeMaterial()
     {
-        var meshRenderer = _gameObject.GetComponentInChildren<MeshRenderer>();
-        meshRenderer.material = _teamMaterials[_crystal.TeamID];
+        //TODO: Material Resources Path in constants und ResourceLoad()
     }
 
     private void OnValidate()

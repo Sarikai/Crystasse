@@ -65,7 +65,7 @@ namespace PUN_Network
         }
 
         [PunRPC]
-        private void PUN_InitCustomPlayer(Player player)
+        private void RPC_InitCustomPlayer(Player player)
         {
             Debug.Log($"PUN_CustomPlayer init called");
             _crystalPrefab = GameManager.MasterManager._crystalPrefabLocation;

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 803b1f2f5c772814ea4998269f6352c2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -137,6 +137,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal R
+      objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
@@ -513,6 +518,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal C
+      objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
@@ -913,6 +923,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal L
       objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1087,6 +1102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal L
+      objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
@@ -1366,6 +1386,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal Base
       objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1457,6 +1482,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
@@ -1690,7 +1720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &929740459
 Transform:
   m_ObjectHideFlags: 0
@@ -2796,6 +2826,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal R
       objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2887,6 +2922,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal C
+      objectReference: {fileID: 0}
+    - target: {fileID: 724363642623189626, guid: d33b21d081d86a340b93110b1f3179e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023622119779401993, guid: d33b21d081d86a340b93110b1f3179e9,
         type: 3}
@@ -3105,7 +3145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1854650095
 Transform:
   m_ObjectHideFlags: 0
@@ -3359,3 +3399,77 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137078194}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &7061486992818555893
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7061486992091332538, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: viewIdField
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332539, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332543, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: m_Name
+      value: Master Crystal
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cbc76025b9de83b44a0b3c3d5f429f1b, type: 3}
