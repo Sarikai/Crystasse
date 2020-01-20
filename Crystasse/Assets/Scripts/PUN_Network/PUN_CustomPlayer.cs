@@ -67,11 +67,11 @@ namespace PUN_Network
         [PunRPC]
         private void RPC_InitCustomPlayer(Player player)
         {
-            Debug.Log($"PUN_CustomPlayer init called");
+            //Debug.Log($"PUN_CustomPlayer init called");
             _crystalPrefab = GameManager.MasterManager._crystalPrefabLocation;
             _unitPrefab = GameManager.MasterManager._unitPrefabLocation;
             _localPlayer = player;
-            Debug.Log($"Local Player Actor Number: {player.ActorNumber}");
+            //Debug.Log($"Local Player Actor Number: {player.ActorNumber}");
             _teamID = (byte)(player.ActorNumber /*+ 1*/);
             _actorNumber = player.ActorNumber;
             //TODO: check for remove
@@ -79,10 +79,10 @@ namespace PUN_Network
             if (IsMyCustomPlayer)
             {
                 GameManager.MasterManager.InputManager = GetComponent<InputManager>();
-                Debug.Log($"My Team ID { _teamID}");
+                //Debug.Log($"My Team ID { _teamID}");
                 GameManager.MasterManager.InputManager._teamID = _teamID;
                 _playerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
-                Debug.Log($"player entry instatiated");
+                //Debug.Log($"PlayerEntry instatiated");
                 CustomPlayerView.RPC("RPC_InitPlayerlistEntry", RpcTarget.AllBufferedViaServer, CustomPlayerView.ViewID, _playerlistEntry.photonView.ViewID, player);
                 //_playerlistEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
                 //_playerlistEntry.UpdatePlayerlistEntry(this);
@@ -110,7 +110,7 @@ namespace PUN_Network
         {
             PUN_PlayerlistEntry entryObject = PhotonView.Find(EntryViewID).gameObject.GetComponent<PUN_PlayerlistEntry>();
             PUN_CustomPlayer customPlayerObject = PhotonView.Find(CustomPlayerViewID).gameObject.GetComponent<PUN_CustomPlayer>();
-            Debug.Log($"Name of GO {entryObject.name}");
+            //Debug.Log($"Name of GO {entryObject.name}");
             //newEntry.transform.SetParent(GameManager.MasterManager.UIManager._PlayerList.transform);
             /*PUN_PlayerlistEntry saveEntry = */
             entryObject.UpdatePlayerlistEntry(player);

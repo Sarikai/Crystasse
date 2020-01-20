@@ -232,7 +232,7 @@ namespace PUN_Network
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
-            Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
+            //Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
             _customPlayer.CustomPlayerView.RPC("RPC_InitCustomPlayer", RpcTarget.AllBufferedViaServer, GetLocalPlayer);
             //_customPlayer.PlayerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
             //_customPlayer.Init(); --> is called in its awake
@@ -312,7 +312,6 @@ namespace PUN_Network
             }
             else
             {
-
                 _photonView.RPC("RPC_RemovePlayerEntry", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer);
                 PhotonNetwork.LeaveRoom();
                 _localRoom.Room = null;
@@ -366,10 +365,10 @@ namespace PUN_Network
 
         private void RemovePlayerEntry(Player leavingPlayer)
         {
-            //TODO: change?
-            //GameObject entryToRemove = _playerListEntries[leavingPlayer];
-            //_playerListEntries.Remove(leavingPlayer);
-            //Destroy(entryToRemove);
+            //TODO: Test if change worked!
+            GameObject entryToRemove = _playerListEntries[GetNetworkPlayerReference(leavingPlayer)];
+            _playerListEntries.Remove(GetNetworkPlayerReference(leavingPlayer));
+            Destroy(entryToRemove);
         }
 
         public void SetCrystalViews(Player[] players)
@@ -401,11 +400,11 @@ namespace PUN_Network
 
 
                     //if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
-                    ////        {
-                    ////            crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
-                    ////            crystals[i].Init();
-                    ////            //TODO: Crystal TeamID PUN call change?
-                    ////        }
+                    //       {
+                    //           crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
+                    //           crystals[i].Init();
+                    //      }
+                    //TODO: [DONE] Crystal TeamID PUN call change?
                 }
             }
         }
@@ -421,6 +420,17 @@ namespace PUN_Network
                 unassignedBaseCrystals[rndCrystal].photonView.RPC("Init", RpcTarget.AllViaServer);
                 unassignedBaseCrystals.RemoveAt(rndCrystal);
             }
+        }
+
+        public PUN_CustomPlayer GetNetworkPlayerReference(Player punPlayer)
+        {
+            PUN_CustomPlayer[] checkingPlayers = FindObjectsOfType<PUN_CustomPlayer>();
+            foreach (PUN_CustomPlayer checkingPlayer in checkingPlayers)
+            {
+                if (checkingPlayer.ActorNumber == punPlayer.ActorNumber)
+                    return checkingPlayer;
+            }
+            return null;
         }
 
 
