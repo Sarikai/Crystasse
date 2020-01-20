@@ -90,7 +90,7 @@ namespace PUN_Network
             _playerName.text = player.NickName;
             PlayerReady = false;
 
-            //TODO: Setzen und removen der kvp bei Teamänderung
+            //TODO: [DONE?] Setzen und removen der kvp bei Teamänderung
             foreach (KeyValuePair<byte, Player> kvp in GameManager.MasterManager.teamToPlayer)
             {
                 if (kvp.Value == player)
@@ -120,6 +120,20 @@ namespace PUN_Network
                 _entryGradient.EffectGradient = _playerNotReadyGradient;
         }
 
+
+        [PunRPC]
+        public void RPC_ChangeIcon(int itemIndex)
+        {
+            if (Constants.UNIT_ICONS.Length > itemIndex)
+            {
+                _dropDown.selectedImage.sprite = Resources.Load<Sprite>(Constants.UNIT_ICONS[itemIndex]);
+            }
+            else
+            {
+                Debug.Log("UnitIcon does not exist!");
+                _dropDown.selectedImage.sprite = Resources.Load<Sprite>(Constants.UNIT_ICONS[0]);
+            }
+        }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {

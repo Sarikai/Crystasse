@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using TMPro;
 using Photon.Pun;
 using PUN_Network;
+using System.Linq;
 
 namespace Michsky.UI.ModernUIPack
 {
@@ -130,6 +131,16 @@ namespace Michsky.UI.ModernUIPack
             if (GetReliantCustomPlayer().IsMyCustomPlayer)
             {
                 ChangeDropdownInfo(itemIndex);
+                GetReliantCustomPlayer().PlayerlistEntry.photonView.RPC("RPC_ChangeIcon", RpcTarget.AllBufferedViaServer, itemIndex);
+                //if (Constants.UNIT_ICONS.Length > itemIndex)
+                //{
+                //    selectedImage.sprite = Resources.Load<Sprite>(Constants.UNIT_ICONS[itemIndex]);
+                //}
+                //else
+                //{
+                //    Debug.Log("UnitIcon does not exist!");
+                //    selectedImage.sprite = Resources.Load<Sprite>(Constants.UNIT_ICONS[0]);
+                //}
                 //GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = (byte)(itemIndex + 1);
                 //GameManager.MasterManager.InputManager._teamID = (byte)(itemIndex + 1);
                 //GameManager.MasterManager.NetworkManager.CustomPlayer.PlayerlistEntry.PlayerTeam = (itemIndex + 1);

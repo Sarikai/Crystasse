@@ -97,7 +97,7 @@ namespace PUN_Network
             get
             {
                 // Similar to PhotonView.IsMine
-                Debug.Log($"IsMyCustomPlayer: {CustomPlayerView.CreatorActorNr == LocalPlayer.ActorNumber}");
+                //Debug.Log($"IsMyCustomPlayer: {CustomPlayerView.CreatorActorNr == LocalPlayer.ActorNumber}");
                 return (CustomPlayerView.CreatorActorNr == PhotonNetwork.LocalPlayer.ActorNumber) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
             }
         }

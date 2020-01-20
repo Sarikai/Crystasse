@@ -9,6 +9,7 @@ public static class Constants
     private static readonly string DATA_PATH = Application.dataPath + "/DATA";
     public static readonly string CRYSTALDATA_PATH = DATA_PATH + "/Crystal";
     public static readonly string SELECTIONDATA_PATH = DATA_PATH + "/Selection";
+
     /// <summary>
     /// Use the TeamID to geht the basic unit prefab path
     /// </summary>
@@ -25,6 +26,12 @@ public static class Constants
 
     public static readonly string[] NETWORKED_UI_ELEMENTS = new string[1]
     {
-        "UI Prefabs/PlayerContentLine"
+        "UI_Prefabs/PlayerContentLine"
     };
+
+    public static readonly string[] UNIT_ICONS = new string[1]
+    {
+        "UI_Icons/Unit01"
+    };
+
 }
