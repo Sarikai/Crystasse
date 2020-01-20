@@ -136,13 +136,15 @@ namespace PUN_Network
                             baseCrystals.Add(crystals[i]);
                     }
 
-                    AssignStartCrystals();
-                    //TODO: Init all other crystals
+                    AssignStartCrystals(); //Assigning bases
+
+                    //TODO: [DONE] Init all other crystals
                     if (crystals != null && crystals.Count >= 1)
                     {
                         foreach (Crystal crystalToInit in crystals)
                         {
-                            crystalToInit.CrystalView.RPC("Init", RpcTarget.AllViaServer);
+                            if (!crystalToInit.Data.IsBase)
+                                crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer);
                         }
                     }
                 }
@@ -427,7 +429,7 @@ namespace PUN_Network
                 unassignedBaseCrystals[rndCrystal].CrystalView.TransferOwnership(targetPlayer);
                 Debug.Log($"Transferred {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID}");
                 //unassignedBaseCrystals[rndCrystal].Init();
-                unassignedBaseCrystals[rndCrystal].photonView.RPC("Init", RpcTarget.AllViaServer);
+                unassignedBaseCrystals[rndCrystal].photonView.RPC("RPC_InitCrystal", RpcTarget.AllViaServer);
                 unassignedBaseCrystals.RemoveAt(rndCrystal);
             }
         }

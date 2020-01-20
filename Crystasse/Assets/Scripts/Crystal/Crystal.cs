@@ -99,9 +99,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
 
     [PunRPC]
-    public void Init()
+    public void RPC_InitCrystal()
     {
-        Debug.Log($"Crystal Init called {_viewID}");
         if (_crystalView.IsMine)
         {
             //photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
@@ -112,12 +111,34 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += () => _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += _unitsSpawned.Clear;
+        OnConquered += SetSpawningTrue;
         //OnConquered += ChangeTeam;
         OnConquered += () => StartCoroutine(ReworkedSpawnRoutine());
         GetComponent<SphereCollider>().radius = _data.Range;
 
         Debug.Log($"crystalview mine? {_crystalView.IsMine} &&  team mine? {IsMyTeam}");
         if (_crystalView.IsMine && IsMyTeam)
+            StartCoroutine(ReworkedSpawnRoutine());
+    }
+    public void SetSpawningTrue()
+    {
+        _data.IsSpawning = true;
+    }
+
+    [PunRPC]
+    public void RPC_InitSceneCrystal()
+    {
+        GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
+        Health = _data.MaxHealth;
+        _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
+        OnConquered += () => _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
+        OnConquered += _unitsSpawned.Clear;
+        //OnConquered += ChangeTeam; //Exfunc of GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[_teamID];
+        OnConquered += () => StartCoroutine(ReworkedSpawnRoutine());
+        GetComponent<SphereCollider>().radius = _data.Range;
+
+        Debug.Log($"crystalview mine? {_crystalView.IsMine} &&  team mine? {IsMyTeam}");
+        if (_crystalView.ViewID == 0 && _crystalView.IsSceneView)
             StartCoroutine(ReworkedSpawnRoutine());
     }
 
@@ -184,6 +205,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if (TeamID != 0)
         {
             Debug.Log($"Conquer");
+            _data.IsSpawning = false;
             Health -= value;
         }
         else
@@ -329,8 +351,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
-            //TODO: think about spawned units stored, what happens on conquer with this spawned list does it contain enemy units aswell?
-            //TODO: does this units list need to be synchronized?
+            //TODO: think about spawned units stored, what happens on conquer with this spawned list (it's erased but units still exist) does it contain enemy units aswell (no does not)?
+
             _unitsSpawned.Add(unit);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
         }

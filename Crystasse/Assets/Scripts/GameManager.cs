@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         _RunningSessionStats = new Stats();
         _RunningSessionStats.Matches = new Dictionary<int, string>();
-        //SoundManager.MenuMusic();
+        SoundManager.MenuMusic();
         Debug.Log($"GameManager Awake done");
     }
 
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         if (crystals != null)
             foreach (var crystal in crystals)
-                crystal.Init();
+                crystal.RPC_InitCrystal();
     }
 
     private void Update()
