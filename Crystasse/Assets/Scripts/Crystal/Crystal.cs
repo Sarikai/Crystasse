@@ -209,7 +209,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"Crystal Trigger Enter called by {other}");
-        var unit = other.GetComponent<Unit>();
+        var unit = other.GetComponentInParent<Unit>();
 
         if (unit != null)
         {
@@ -224,7 +224,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         //Debug.Log($"Collider: {other}");
         var unit = other.GetComponentInParent<Unit>();
-        Debug.Log($"Crystal Trigger Stay called by {other} Checkresult{unit != null} && {unit.TeamID != TeamID} && {unit.CurrentState.Type == States.Idle}");
+        Debug.Log($"Crystal Trigger Stay called by {other} Checkresult{unit != null} && {unit.TeamID != TeamID} && {unit.CurrentState?.Type == States.Idle}");
         if (unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
             StateMachine.SwitchState(unit, new ConquerState(unit, this));
     }
@@ -232,8 +232,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private void OnTriggerExit(Collider other)
     {
         Debug.Log($"Crystal Trigger Exit called by {other}");
-        if (other.GetComponent<Unit>()?.TeamID == TeamID)
-            _unitsInRange.Remove(other.GetComponent<Unit>());
+        if (other.GetComponentInParent<Unit>()?.TeamID == TeamID)
+            _unitsInRange.Remove(other.GetComponentInParent<Unit>());
     }
 
     private void OnValidate()
