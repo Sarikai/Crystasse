@@ -188,7 +188,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             if (Health >= _data.MaxHealth)
             {
                 //TODO: Change HUD data of Crystals owned here
-                OwnerPlayer = PhotonNetwork.LocalPlayer;
+                //TODO: Assign attacking Team ID instead of localPlayer
+                OwnerPlayer = GameManager.MasterManager.teamToPlayer[team];
                 Health = _data.MaxHealth;
                 _teamID = team;
                 if (OnConquered != null)
