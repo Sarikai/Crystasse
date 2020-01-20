@@ -6,6 +6,7 @@ using Photon.Pun;
 using System;
 using Photon.Realtime;
 using System.Linq;
+using PUN_Network;
 
 [RequireComponent(typeof(SphereCollider))]
 public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
@@ -189,7 +190,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             {
                 //TODO: Change HUD data of Crystals owned here
                 //TODO: Assign attacking Team ID instead of localPlayer
-                OwnerPlayer = GameManager.MasterManager.teamToPlayer[team];
+                OwnerPlayer = GetPlayerOfTeam(team);
                 Health = _data.MaxHealth;
                 _teamID = team;
                 if (OnConquered != null)
@@ -340,6 +341,17 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             // Similar to PhotonView.IsMine
             return (this.TeamID == GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
         }
+    }
+
+    public Player GetPlayerOfTeam(int teamID)
+    {
+        PUN_CustomPlayer[] actualNetworkPlayers = FindObjectsOfType<PUN_CustomPlayer>();
+        foreach (PUN_CustomPlayer networkPlayer in actualNetworkPlayers)
+        {
+            if (networkPlayer.TeamID == teamID)
+                return networkPlayer.LocalPlayer;
+        }
+        return null;
     }
 
 
