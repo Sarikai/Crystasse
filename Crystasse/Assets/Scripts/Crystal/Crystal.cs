@@ -29,8 +29,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     private List<Unit> _unitsSpawned = new List<Unit>();
     [SerializeField]
     private PhotonView _crystalView;
-    //[SerializeField]
-    //private int _viewID = 100;
+    [SerializeField]
+    private int _viewID = 100;
     [SerializeField]
     private byte _teamID;
 
@@ -75,7 +75,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Awake()
     {
-        //CrystalView.ViewID = _viewID;
+        CrystalView.ViewID = _viewID;
         _crystalView = GetComponent<PhotonView>();
     }
 
