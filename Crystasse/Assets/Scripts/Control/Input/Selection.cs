@@ -23,7 +23,7 @@ public static class Selection
         //TODO: Set owner team ID
         //TeamID = 1;
         TeamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
-        Debug.Log($"Selection Team: {TeamID}");
+        //Debug.Log($"Selection Team: {TeamID}");
 
         var text = File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json");
         _data = JsonConvert.DeserializeObject<SelectionData>(text);

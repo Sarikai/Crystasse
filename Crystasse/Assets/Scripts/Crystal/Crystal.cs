@@ -25,6 +25,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     //[SerializeField]
     //private UnitData _unitData = null;
     private GameObject _unitPrefab;
+    [SerializeField]
     private List<Unit> _unitsSpawned = new List<Unit>();
     [SerializeField]
     private PhotonView _crystalView;
@@ -186,6 +187,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             Health += value;
             if (Health >= _data.MaxHealth)
             {
+                //TODO: Change HUD data of Crystals owned here
                 OwnerPlayer = PhotonNetwork.LocalPlayer;
                 Health = _data.MaxHealth;
                 _teamID = team;
@@ -302,7 +304,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log($"{_data.IsSpawning} && {_unitsSpawned.Count < _data.MaxUnitSpawned} && {TeamID != 0} && {IsMyTeam}");
         while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && IsMyTeam /*&& _unitPrefab != null*/)
         {
-            Debug.Log($"Called Spanwloop");
+            //Debug.Log($"Called Spanwloop");
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             Unit unit;
 
@@ -310,12 +312,14 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             {
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
+                GameManager.MasterManager.NetworkManager.MatchStats.IncrementSpawns();
             }
             else
             {
                 Debug.Log("Unit does not exist!");
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[1], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
+                GameManager.MasterManager.NetworkManager.MatchStats.IncrementSpawns();
             }
 
 
@@ -325,6 +329,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             _unitsSpawned.Add(unit);
             yield return new WaitForSecondsRealtime(_data.SpawnRate);
         }
+        yield break;
     }
 
     public bool IsMyTeam
