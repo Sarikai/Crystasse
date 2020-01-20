@@ -137,7 +137,6 @@ namespace PUN_Network
                     }
 
                     AssignStartCrystals();
-
                 }
             }
         }
@@ -387,6 +386,7 @@ namespace PUN_Network
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                Debug.Log($"Playerlist>1? {PhotonNetwork.PlayerList.Length > 1}");
                 if (PhotonNetwork.PlayerList.Length > 1)
                     unassignedPlayers.AddRange(PhotonNetwork.PlayerList);
                 else
@@ -415,7 +415,9 @@ namespace PUN_Network
             if (unassignedBaseCrystals != null && unassignedBaseCrystals[0] != null && unassignedBaseCrystals.Count >= 1)
             {
                 int rndCrystal = Random.Range(0, unassignedBaseCrystals.Count);
+                Debug.Log($"Transferring {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID} to {targetPlayer.ActorNumber}");
                 unassignedBaseCrystals[rndCrystal].CrystalView.TransferOwnership(targetPlayer);
+                Debug.Log($"Transferred {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID}");
                 //unassignedBaseCrystals[rndCrystal].Init();
                 unassignedBaseCrystals[rndCrystal].photonView.RPC("Init", RpcTarget.AllViaServer);
                 unassignedBaseCrystals.RemoveAt(rndCrystal);
