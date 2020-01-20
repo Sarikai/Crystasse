@@ -126,8 +126,9 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void RPC_InitSceneCrystal(Crystal crystalToInit)
+    public void RPC_InitSceneCrystal(int crystalID)
     {
+        Crystal crystalToInit = PhotonView.Find(crystalID).GetComponent<Crystal>();
         crystalToInit.GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
         crystalToInit.Health = crystalToInit._data.MaxHealth;
         crystalToInit._unitPrefab = crystalToInit._prefabDatabase[TeamID, isUpgraded];
