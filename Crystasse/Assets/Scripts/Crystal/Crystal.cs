@@ -75,8 +75,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Awake()
     {
-        CrystalView.ViewID = _viewID;
         _crystalView = GetComponent<PhotonView>();
+        _crystalView.ViewID = _viewID;
     }
 
 
