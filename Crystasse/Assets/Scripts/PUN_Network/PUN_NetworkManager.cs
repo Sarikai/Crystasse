@@ -131,7 +131,7 @@ namespace PUN_Network
                     crystals.AddRange(FindObjectsOfType<Crystal>());
                     for (int i = 0; i < crystals.Count; i++)
                     {
-                        crystals[i].CrystalView.ViewID = 100 + i;
+                        //crystals[i].CrystalView.ViewID = 100 + i;
                         if (crystals[i].Data.IsBase)
                             baseCrystals.Add(crystals[i]);
                     }
