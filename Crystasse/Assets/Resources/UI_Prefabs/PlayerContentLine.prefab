@@ -890,7 +890,7 @@ MonoBehaviour:
   invokeAtStart: 0
   animationType: 0
   dropdownItems:
-  - itemName: Ignis 01
+  - itemName: Igniculus 01
     itemIcon: {fileID: 21300000, guid: e54982e9f2dd09f4192bc5b010e94a54, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -906,7 +906,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 02
+  - itemName: Akiko
     itemIcon: {fileID: 21300000, guid: 275a76862e2d20643b478acb24ba2bed, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -922,7 +922,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 03
+  - itemName: Igniculus 03
     itemIcon: {fileID: 21300000, guid: cd8196d36c1588c42a16bb35d6356674, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -954,7 +954,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 05
+  - itemName: Igniculus 05
     itemIcon: {fileID: 21300000, guid: 3f202456757dab942931a4fa4bed1f03, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -970,7 +970,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 06
+  - itemName: Igniculus 06
     itemIcon: {fileID: 21300000, guid: 96a09b3c4d55b2b438db19da64ba7bea, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -986,7 +986,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 07
+  - itemName: Igniculus 07
     itemIcon: {fileID: 21300000, guid: d352dd2ed386d1749abaf42cbb9fe6f0, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1002,7 +1002,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 08
+  - itemName: Igniculus 08
     itemIcon: {fileID: 21300000, guid: e142695e15985bf4896101aa5b765e42, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1018,7 +1018,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Zenca
+  - itemName: God Emperor Zenca
     itemIcon: {fileID: 21300000, guid: 888be8a2bdd82b44ea1ddf784e8bad92, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1034,7 +1034,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 10
+  - itemName: Igniculus 10
     itemIcon: {fileID: 21300000, guid: 59b5e719fd0cc5c48b1c524e19ecfcec, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1050,7 +1050,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 11
+  - itemName: Igniculus 11
     itemIcon: {fileID: 21300000, guid: f9ff1133f81e92944a490751058c9b9e, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1066,7 +1066,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 12
+  - itemName: Igniculus 12
     itemIcon: {fileID: 21300000, guid: 7e7990cdab5bb7141b585f4da557e5e2, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1082,7 +1082,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ignis 13
+  - itemName: Igniculus 13
     itemIcon: {fileID: 21300000, guid: 4424db0b0c683794b80b3a8be4e6ab06, type: 3}
     OnItemSelection:
       m_PersistentCalls:
@@ -1114,7 +1114,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: Ezassins
+  - itemName: Piltovians
     itemIcon: {fileID: 21300000, guid: 9a0af7212335e634d981adc7410647a1, type: 3}
     OnItemSelection:
       m_PersistentCalls:

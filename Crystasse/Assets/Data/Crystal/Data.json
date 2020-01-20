@@ -1,8 +1,8 @@
 {
-  "MaxHealth": 100,
-  "MaxUnitSpawned": 2,
-  "IsBase": false,
-  "IsSpawning": true,
-  "SpawnRate": 3,
-  "Range": 5
+  "MaxHealth": 100, //HP as int
+  "MaxUnitSpawned": 2, //How many units as int
+  "IsBase": false, //MainBase checkable as bool
+  "IsSpawning": true, //Spawn enabling as bool
+  "SpawnRate": 1, //SpawnRate (seconds before next unit)
+  "Range": 5 //Range for checking of enemies
 }

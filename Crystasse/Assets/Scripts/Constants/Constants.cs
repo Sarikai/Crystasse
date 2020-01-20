@@ -13,15 +13,29 @@ public static class Constants
     /// <summary>
     /// Use the TeamID to geht the basic unit prefab path
     /// </summary>
-    public static readonly string[] BASIC_UNIT_PREFAB_PATHS = new string[5]
+    public static readonly string[] BASIC_UNIT_PREFAB_PATHS = new string[21]
     {
         null,
-        //"Gameplay Prefabs/Unit Team 1",
-        //"Gameplay Prefabs/Unit Team 2"
-       "Gameplay Prefabs/Unit Definitive Edition 01",
-       "Gameplay Prefabs/Unit Definitive Edition 02",
-       "Gameplay Prefabs/Unit Definitive Edition 03",
-       "Gameplay Prefabs/Unit Definitive Edition 04",
+       "Level_Objects/Unit_Prefabs/Unit 001",
+       "Level_Objects/Unit_Prefabs/Unit 002",
+       "Level_Objects/Unit_Prefabs/Unit 003",
+       "Level_Objects/Unit_Prefabs/Unit 004",
+       "Level_Objects/Unit_Prefabs/Unit 005",
+       "Level_Objects/Unit_Prefabs/Unit 006",
+       "Level_Objects/Unit_Prefabs/Unit 007",
+       "Level_Objects/Unit_Prefabs/Unit 008",
+       "Level_Objects/Unit_Prefabs/Unit 009",
+       "Level_Objects/Unit_Prefabs/Unit 010",
+       "Level_Objects/Unit_Prefabs/Unit 011",
+       "Level_Objects/Unit_Prefabs/Unit 012",
+       "Level_Objects/Unit_Prefabs/Unit 013",
+       "Level_Objects/Unit_Prefabs/Unit 014",
+       "Level_Objects/Unit_Prefabs/Unit 015",
+       "Level_Objects/Unit_Prefabs/Unit 016",
+       "Level_Objects/Unit_Prefabs/Unit 017",
+       "Level_Objects/Unit_Prefabs/Unit 018",
+       "Level_Objects/Unit_Prefabs/Unit 019",
+       "Level_Objects/Unit_Prefabs/Unit 020"
     };
 
     public static readonly string[] NETWORKED_UI_ELEMENTS = new string[1]
