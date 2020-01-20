@@ -374,7 +374,7 @@ namespace PUN_Network
 
         private void RemovePlayerEntry(Player leavingPlayer)
         {
-            //TODO: Test if change worked!
+            //TODO:  Test if change worked!
             GameObject entryToRemove = _playerListEntries[GetNetworkPlayerReference(leavingPlayer)];
             _playerListEntries.Remove(GetNetworkPlayerReference(leavingPlayer));
             Destroy(entryToRemove);
