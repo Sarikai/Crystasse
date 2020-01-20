@@ -137,6 +137,14 @@ namespace PUN_Network
                     }
 
                     AssignStartCrystals();
+                    //TODO: Init all other crystals
+                    if (crystals != null && crystals.Count >= 1)
+                    {
+                        foreach (Crystal crystalToInit in crystals)
+                        {
+                            crystalToInit.CrystalView.RPC("Init", RpcTarget.AllViaServer);
+                        }
+                    }
                 }
             }
         }

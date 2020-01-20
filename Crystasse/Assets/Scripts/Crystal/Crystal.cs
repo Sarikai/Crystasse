@@ -101,7 +101,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void Init()
     {
-        Debug.Log($"Crystal Init called");
+        Debug.Log($"Crystal Init called {_viewID}");
         if (_crystalView.IsMine)
         {
             //photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
@@ -200,6 +200,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
                 _teamID = team;
                 GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
                 //_crystalMeshRenderer.material = GameManager.MasterManager.CrystalMaterials[team - 1];
+                Debug.Log($"Conquered null? {OnConquered == null}");
                 if (OnConquered != null)
                     OnConquered.Invoke();
             }
