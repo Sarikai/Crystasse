@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     Camera _cam;
     [SerializeField]
-    float _camSpeed = 5f;
+    float _camSpeed = 5f, _camRotSpeed = 10f;
 
     private Crystal selCrystal;
 
@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
             RaycastHit hit;
 
-            MoveCam(Time.deltaTime);
+            MoveCam(Time.deltaTime * _camSpeed);
 
             if(Input.GetMouseButtonDown(0))
             {
@@ -104,16 +104,20 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private bool RayCastToMouse(int layerMask, out RaycastHit hit) => Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, layerMask);
 
-    private void MoveCam(float dt)
+    private void MoveCam(float speed)
     {
         if(Input.GetKey(KeyCode.A))
-            _cam.transform.position += Vector3.left * _camSpeed * dt;
+            _cam.transform.position += Vector3.left * speed;
         if(Input.GetKey(KeyCode.D))
-            _cam.transform.position += Vector3.right * _camSpeed * dt;
+            _cam.transform.position += Vector3.right * speed;
         if(Input.GetKey(KeyCode.W))
-            _cam.transform.position += Vector3.forward * _camSpeed * dt;
+            _cam.transform.position += Vector3.forward * speed;
         if(Input.GetKey(KeyCode.S))
-            _cam.transform.position += Vector3.back * _camSpeed * dt;
+            _cam.transform.position += Vector3.back * speed;
+        if(Input.GetKey(KeyCode.Q))
+            _cam.transform.Rotate(-Vector3.up * Time.deltaTime * _camRotSpeed);
+        else if(Input.GetKey(KeyCode.E))
+            _cam.transform.Rotate(Vector3.up * Time.deltaTime * _camRotSpeed);
     }
 
     private IEnumerator BoxSelectionRoutine()
