@@ -99,7 +99,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
 
     [PunRPC]
-    public void RPC_InitCrystal()
+    public void RPC_InitBaseCrystal()
     {
         if (_crystalView.IsMine)
         {
