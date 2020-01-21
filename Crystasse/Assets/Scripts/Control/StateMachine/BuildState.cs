@@ -8,6 +8,11 @@ public class BuildState : State
     public Bridge Target;
     private float _timer = 0f;
 
+    public BuildState(Unit agent, Bridge target)
+    {
+        Agent = agent;
+        Target = target;
+    }
 
     protected override void Enter()
     {

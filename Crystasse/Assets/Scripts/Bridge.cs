@@ -14,6 +14,8 @@ public class Bridge : MonoBehaviour
     private LineRenderer _line = null;
     [SerializeField]
     private OffMeshLink _offLink = null;
+    [SerializeField]
+    private MeshRenderer _renderer = null;
 
     [SerializeField]
     private int _maxBuildValue = 0;
@@ -37,17 +39,23 @@ public class Bridge : MonoBehaviour
     private void Awake()
     {
         //OnBuilt += () => _line.enabled = true;
+        _line.enabled = false;
         _line.SetPosition(0, _lineStart);
+        _offLink.activated = false;
         end = _lineStart;
+
+        BridgeList.Add(this);
     }
+
+    public bool ConnectsTo(Crystal c) => (_startCrystal == c || _endCrystal == c);
+
+    public void Show(bool value) => _renderer.enabled = value;
 
     float perc = 0;
     //TODO: make beautiful
     private void Update()
     {
         Build(1);
-        end = _buildCurve.Evaluate(PercentDone) * _lineEnd;
-        _line.SetPosition(1, end);
     }
 
     public void Build(byte value)
@@ -65,6 +73,8 @@ public class Bridge : MonoBehaviour
                 _buildValue = _maxBuildValue;
                 //OnBuilt.Invoke();
             }
+            end = _buildCurve.Evaluate(PercentDone) * _lineEnd;
+            _line.SetPosition(1, end);
         }
     }
 
