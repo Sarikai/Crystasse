@@ -181,6 +181,12 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     public void Conquer(byte value, byte team)
     {
         //Debug.Log($"Entered conquer AP:{value}, AttackingTeam: {team}, ownTeam {TeamID}");
+        if (!IsMyTeam && _data.IsBase)
+        {
+            GameManager.MasterManager.NetworkManager.EndOfGame();
+        }
+
+
         if (TeamID != 0)
         {
             //Debug.Log($"Conquer");
@@ -341,6 +347,8 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             {
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
+
+                GameManager.MasterManager.NetworkManager.CustomPlayer.MatchSession.IncrementSpawns();
                 GameManager.MasterManager.NetworkManager.SessionStats.IncrementSpawns();
             }
             else

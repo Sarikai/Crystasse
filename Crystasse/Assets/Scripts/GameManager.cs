@@ -1,4 +1,5 @@
 ﻿using CustomUI;
+using JetBrains.Annotations;
 using Photon.Pun;
 using Photon.Realtime;
 using PUN_Network;
@@ -116,39 +117,19 @@ public class GameManager : MonoBehaviour
             UIManager.ToggleIngameMenu();
         }
 
-        if (Input.GetKey(KeyCode.O))
-        {
-            Debug.Log("Saving");
-            //UnityEngine.Random.Range(0, 6);
-            Stats newStat = new Stats()
-            {
-                destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
-                spawnedUnits = (uint)UnityEngine.Random.Range(0, 6),
-            };
-            Match.SaveMatch(newStat);
-            GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
-        };
+        //if (Input.GetKey(KeyCode.O))
+        //{
+        //    Debug.Log("Saving");
+        //    //UnityEngine.Random.Range(0, 6);
+        //    Stats newStat = new Stats()
+        //    {
+        //        destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
+        //        spawnedUnits = (uint)UnityEngine.Random.Range(0, 6),
+        //    };
+        //    Match.SaveMatch(newStat);
+        //    GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
+        //};
 
-        if (Input.GetKey(KeyCode.L))
-        {
-            GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
-            GameManager.MasterManager._RunningSessionStats.LoadStats();
-            if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
-            {
-                foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
-                {
-                    Match m = Match.LoadMatch(matchPath.Value);
-                    if (m != null)
-                    {
-                        UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
-                        //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
-                        matchStats.UpdateEntry(m);
-                        GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
-                    }
-                }
-            }
-
-        }
 
         //TODO: [DONE] get this variable true!!!
         if (DoUpdate)
@@ -157,6 +138,29 @@ public class GameManager : MonoBehaviour
 
             foreach (var c in crystals)
                 c.UpdateCrystal();
+        }
+
+
+
+    }
+
+    public void LoadStats()
+    {
+        GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
+        GameManager.MasterManager._RunningSessionStats.LoadStats();
+        if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
+        {
+            foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
+            {
+                Match m = Match.LoadMatch(matchPath.Value);
+                if (m != null)
+                {
+                    UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
+                    //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
+                    matchStats.UpdateEntry(m);
+                    GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
+                }
+            }
         }
     }
 

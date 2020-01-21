@@ -473,6 +473,11 @@ namespace PUN_Network
             return null;
         }
 
+        public void EndOfGame()
+        {
+            Match.SaveMatch(CustomPlayer.MatchSession)
+        }
+
 
         #endregion
 

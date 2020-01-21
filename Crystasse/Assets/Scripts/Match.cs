@@ -34,14 +34,14 @@ public class Match
         destroyedUnits++;
     }
 
-    public static void SaveMatch(Stats matchStats)
+    public static void SaveMatch(Match matchStats)
     {
         Match m = new Match();
         m.destroyedUnits = matchStats.destroyedUnits;
         m.spawnedUnits = matchStats.spawnedUnits;
         m.date = DateTime.Today.ToString();
-        //m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter();
-        m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter(UnityEngine.Random.Range(0f, 3600f));
+        m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter();
+        //m.duration = GameManager.MasterManager.UIManager._uiTimer.TimeFormatter(UnityEngine.Random.Range(0f, 3600f));
 
         BinaryFormatter bf = new BinaryFormatter();
         string fileName = $"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}";
