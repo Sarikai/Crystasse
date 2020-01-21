@@ -95,7 +95,7 @@ namespace CustomUI
 
         //Others
         [Header("Others")]
-        public GameObject _Background;
+        //public GameObject _Background;
         public PUN_ServerlistEntry _serverEntryPrefab;
         public PUN_PlayerlistEntry _playerEntryPrefab;
         public UI_StatEntry _matchLinePrefab;

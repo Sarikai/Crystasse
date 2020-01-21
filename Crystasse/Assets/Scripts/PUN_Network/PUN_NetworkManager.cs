@@ -125,7 +125,7 @@ namespace PUN_Network
                 _isGameLoaded = true;
                 //PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity);
                 //GameManager.MasterManager.LoadMap();
-                _uiManager.Toggle(_uiManager._Background);
+                //_uiManager.Toggle(_uiManager._Background);
                 GameManager.MasterManager.SoundManager.IngameMusic();
                 GameManager.MasterManager.DoUpdate = true;
                 _mapData = FindObjectOfType<MapData>().GetComponent<MapData>();
