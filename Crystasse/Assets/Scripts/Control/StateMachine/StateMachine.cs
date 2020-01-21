@@ -52,56 +52,60 @@ public static class StateMachine
         List<Unit> agentsToIdle = new List<Unit>();
         var states = AllStatesWithoutIdle;
 
-        foreach (var state in states)
-            if (state.Completed)
+        foreach(var state in states)
+            if(state.Completed)
                 agentsToIdle.Add(state.Agent);
 
-        foreach (var agent in agentsToIdle)
-            if (agent != null)
+        foreach(var agent in agentsToIdle)
+            if(agent != null)
                 SwitchState(agent, new IdleState(agent, agent.MoveSpeed));
     }
 
     private static void UpdateStates()
     {
         var states = AllStates;
-        foreach (var state in states)
-            state.UpdateState();
+        if(states != null)
+            foreach(var state in states)
+                if(state != null)
+                    state.UpdateState();
     }
 
     public static void SwitchState(Agent agent, State newState)
     {
-        if (agent == null)
+        Debug.Log($" agent {agent}, newstate {newState}");
+        if(agent == null)
             return;
 
-        if (agent.CurrentState != null)
+        if(agent.CurrentState != null)
             RemoveState(agent.CurrentState);
 
         agent.CurrentState = newState;
+        Debug.Log(agent.CurrentState);
         AddState(newState);
     }
 
     public static void RemoveState(State state)
     {
-        switch (state.Type)
+        switch(state.Type)
         {
             case States.Idle:
-                if (IdleStates.Contains(state))
+                if(IdleStates.Contains(state))
                     IdleStates.Remove(state);
                 break;
             case States.Build:
-                if (BuildStates.Contains(state))
+                if(BuildStates.Contains(state))
                     BuildStates.Remove(state);
                 break;
             case States.Attack:
-                if (AttackStates.Contains(state))
+                if(AttackStates.Contains(state))
                     AttackStates.Remove(state);
                 break;
             case States.Conquer:
-                if (ConquerStates.Contains(state))
+                if(ConquerStates.Contains(state))
                     ConquerStates.Remove(state);
                 break;
             case States.Move:
-                if (MoveStates.Contains(state))
+                if(MoveStates.Contains(state))
                     MoveStates.Remove(state);
                 break;
         }
@@ -109,7 +113,8 @@ public static class StateMachine
 
     public static void AddState(State state)
     {
-        switch (state.Type)
+        Debug.Log(state);
+        switch(state.Type)
         {
             case States.Idle:
                 var idle = state as IdleState;
@@ -118,6 +123,7 @@ public static class StateMachine
             case States.Build:
                 var build = state as BuildState;
                 BuildStates.Add(build);
+                Debug.Log("Added build");
                 break;
             case States.Attack:
                 var attack = state as AttackState;

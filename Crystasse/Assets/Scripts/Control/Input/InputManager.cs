@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     public Area _playArea { get; private set; }
 
     public byte _teamID;
+    private List<Bridge> _shownBridges = new List<Bridge>();
 
     Vector3 _selectionStart;
     //private void Start()
@@ -43,7 +44,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //TODO: check again if photonView check is correct or still needed
         //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
-            if (_cam == null)
+            if(_cam == null)
             {
                 //Debug.LogError("No Cam on inputmanager");
                 _cam = FindObjectOfType<Camera>();
@@ -54,34 +55,57 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
             MoveCam(Time.deltaTime * _camSpeed);
 
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                List<Crystal> crystals = new List<Crystal>(GameManager.MasterManager.NetworkManager.MapData.Crystals);
+                crystals.AddRange(GameManager.MasterManager.NetworkManager.MapData.Bases);
+
+                List<Bridge> bridges = new List<Bridge>();
+                foreach(var c in crystals)
+                    if(c.IsMyTeam)
+                        bridges.AddRange(BridgeList.GetBridges(c));
+
+                foreach(var b in bridges)
+                    b.Show(true);
+                _shownBridges = bridges;
+            }
+
+            if(Input.GetKeyUp(KeyCode.F))
+            {
+                foreach(var b in _shownBridges)
+                    b.Show(false);
+            }
+
             if(Input.GetMouseButtonDown(0))
             {
-                if(RayCastToMouse(Selection.SelectionLayer, out hit))
-                {
-                    var crystals = Selection.CastSphereSelectionCrystal(hit);
-                    foreach(var c in crystals)
-                    {
-                        if(c != null)
-                        {
-                            _selCrystals.Add(c);
-                            Debug.Log(_selCrystals);
-                            var bridges = BridgeList.GetBridges(c);
+                //if(RayCastToMouse(Selection.SelectionLayer, out hit))
+                //{
+                //    var crystals = Selection.CastSphereSelectionCrystal(hit);
+                //    foreach(var c in crystals)
+                //    {
+                //        if(c != null)
+                //        {
+                //            _selCrystals.Add(c);
+                //            Debug.Log(_selCrystals);
+                //            var bridges = BridgeList.GetBridges(c);
 
-                            foreach(var b in bridges)
-                            {
-                                Debug.Log(b);
-                                b.Show(true);
-                            }
-                        }
-                    }
-                }
-                else if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
+                //            foreach(var b in bridges)
+                //            {
+                //                Debug.Log(b);
+                //                b.Show(true);
+                //            }
+                //        }
+                //    }
+                //}
+                if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
                 {
-                    var bridge = hit.collider.GetComponentInChildren<Bridge>();
+                    var bridge = hit.collider.GetComponentInParent<Bridge>();
                     if(bridge != null)
                         foreach(var unit in Selection.Selected)
                             if(unit != null)
+                            {
                                 StateMachine.SwitchState(unit, new BuildState(unit, bridge));
+                            }
                 }
                 else if(RayCastToMouse(Selection.PlaneLayer, out hit))
                 {

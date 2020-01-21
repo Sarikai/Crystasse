@@ -145,7 +145,7 @@ MonoBehaviour:
   _offLink: {fileID: 4572917045503238739}
   _renderer: {fileID: 3795371852709699017}
   _collider: {fileID: 3755976195026846172}
-  _maxBuildValue: 500
+  _maxBuildValue: 30
   _buildCurve:
     serializedVersion: 2
     m_Curve:
