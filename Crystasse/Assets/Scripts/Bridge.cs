@@ -2,13 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Bridge : MonoBehaviour
 {
     private event Action OnBuilt;
 
     [SerializeField]
+    private GameObject _capsule = null;
+    [SerializeField]
     private LineRenderer _line = null;
+    [SerializeField]
+    private OffMeshLink _offLink = null;
 
     [SerializeField]
     private int _maxBuildValue = 0;
@@ -70,9 +75,21 @@ public class Bridge : MonoBehaviour
         if(_endCrystal != null)
             _lineEnd = _endCrystal.transform.position;
 
-
         _line.SetPosition(0, _lineStart);
 
         _line.SetPosition(1, _lineEnd);
+
+        if(_startCrystal != null && _endCrystal != null)
+        {
+            _offLink.startTransform = _startCrystal.transform;
+            _offLink.endTransform = _endCrystal.transform;
+
+            var lineDir = _lineEnd - _lineStart;
+
+            _capsule.transform.position = _startCrystal.transform.position + lineDir * 0.5f;
+            _capsule.transform.LookAt(_endCrystal.transform);
+            _capsule.transform.Rotate(new Vector3(90, 0, 0));
+            _capsule.transform.localScale = new Vector3(6f, lineDir.magnitude * 0.5f, 0.1f);
+        }
     }
 }

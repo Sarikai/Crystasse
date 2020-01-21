@@ -83,7 +83,8 @@ public class Unit : Agent
 
     public void TakeDamage(byte value)
     {
-        Debug.Log($"Yes I take damage");
+        Debug.Log($"Yes I {gameObject} take damage");
+        //TODO: Check if check needed, could reduce problem if not
         if (value >= Health && IsMyUnit)
             Die();
         else

@@ -52,5 +52,8 @@ MonoBehaviour:
   - ChangeIcon
   - RPC_ChangeIcon
   - RPC_InitCustomPlayer
+  - RPC_Init
+  - RPC_InitCrystal
+  - RPC_InitSceneCrystal
   DisableAutoOpenWizard: 1
   ShowSettings: 1

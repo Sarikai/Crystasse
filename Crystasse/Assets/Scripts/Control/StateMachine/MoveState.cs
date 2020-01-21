@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Jobs;
 
 public class MoveState : State
@@ -11,6 +12,8 @@ public class MoveState : State
 
     private float _timer = 0f;
 
+    public NavMeshAgent MeshAgent;
+
     public MoveState(float speed, Unit agent, Vector3 destination)
     {
         Agent = agent;
@@ -19,10 +22,19 @@ public class MoveState : State
         Rigidbody = Agent.Rigidbody;
         Destination = destination;
     }
+    public MoveState(float speed, Unit agent, Vector3 destination, NavMeshAgent meshAgent)
+    {
+        Agent = agent;
+        Type = States.Move;
+        Speed = speed;
+        MeshAgent = meshAgent;
+        Destination = destination;
+    }
 
     protected override void Enter()
     {
         Substate = Substates.Stay;
+        MeshAgent.SetDestination(Destination);
         Stay();
     }
 
@@ -33,7 +45,7 @@ public class MoveState : State
 
     protected override void Stay()
     {
-        if((Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f)
+        if(MeshAgent.pathStatus == NavMeshPathStatus.PathComplete || (Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f)
             Substate = Substates.Exit;
         else
             MoveTowardsDest();
@@ -41,15 +53,18 @@ public class MoveState : State
 
     private void MoveTowardsDest()
     {
-        Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
-
-        //_timer += Time.deltaTime;
-
-        //if(_timer >= 2f)
-        //    _timer = 0f;
-
         Agent.PlayMoveAnim(_timer);
+        if(MeshAgent == null)
+        {
+            Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
 
-        Rigidbody.transform.position += direction * Speed * Time.deltaTime;
+            //_timer += Time.deltaTime;
+
+            //if(_timer >= 2f)
+            //    _timer = 0f;
+
+
+            Rigidbody.transform.position += direction * Speed * Time.deltaTime;
+        }
     }
 }
