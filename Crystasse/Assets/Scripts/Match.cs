@@ -36,6 +36,7 @@ public class Match
 
     public static void SaveMatch(Match matchStats)
     {
+        Debug.Log("SaveMatch Called");
         Match m = new Match();
         m.destroyedUnits = matchStats.destroyedUnits;
         m.spawnedUnits = matchStats.spawnedUnits;
@@ -57,6 +58,7 @@ public class Match
             file.Close();
             // Debug.Log($"Match saved to {Application.persistentDataPath}/{fileName}.dat");
         }
+        GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
     }
 
     public static Match LoadMatch(String path)
