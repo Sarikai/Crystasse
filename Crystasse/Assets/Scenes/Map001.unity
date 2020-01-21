@@ -5223,6 +5223,26 @@ PrefabInstance:
       propertyPath: _viewID
       value: 101
       objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.IsBase
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.IsSpawning
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.MaxUnitSpawned
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7061486992091332538, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
         type: 3}
       propertyPath: viewIdField
@@ -7108,6 +7128,26 @@ PrefabInstance:
         type: 3}
       propertyPath: _viewID
       value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.IsBase
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.IsSpawning
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+        type: 3}
+      propertyPath: _data.MaxUnitSpawned
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7061486992091332538, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
         type: 3}
