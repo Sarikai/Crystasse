@@ -20,11 +20,6 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     private List<Bridge> _shownBridges = new List<Bridge>();
 
     Vector3 _selectionStart;
-    //private void Start()
-    //{
-    //    //TODO: Remove
-    //    Init(new Area(new Vector2(-1000000000, -1000000000), new Vector2(1000000000, 1000000000)), FindObjectOfType<Camera>());
-    //}
 
     public void Init(Area area)
     {
@@ -35,103 +30,69 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         _playArea = area;
         _cam = cam;
-        if(_cam == null)
-            Debug.LogError("No Cam on inputmanager");
     }
 
     private void Update()
     {
-        //TODO: check again if photonView check is correct or still needed
-        //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
+        if(_cam == null)
+            return;
+
+        RaycastHit hit;
+
+        MoveCam(Time.deltaTime * _camSpeed);
+
+        if(Input.GetKeyDown(KeyCode.F))
         {
-            if(_cam == null)
+            List<Crystal> crystals = new List<Crystal>(GameManager.MasterManager.NetworkManager.MapData.Crystals);
+            crystals.AddRange(GameManager.MasterManager.NetworkManager.MapData.Bases);
+
+            List<Bridge> bridges = new List<Bridge>();
+            foreach(var c in crystals)
+                if(c.IsMyTeam)
+                    bridges.AddRange(BridgeList.GetBridges(c));
+
+            foreach(var b in bridges)
+                b.Show(true);
+            _shownBridges = bridges;
+        }
+
+        if(Input.GetKeyUp(KeyCode.F))
+        {
+            foreach(var b in _shownBridges)
+                b.Show(false);
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
             {
-                //Debug.LogError("No Cam on inputmanager");
-                _cam = FindObjectOfType<Camera>();
-                return;
+                var bridge = hit.collider.GetComponentInParent<Bridge>();
+                if(bridge != null)
+                    foreach(var unit in Selection.Selected)
+                        if(unit != null)
+                            StateMachine.SwitchState(unit, new BuildState(unit, bridge));
             }
-
-            RaycastHit hit;
-
-            MoveCam(Time.deltaTime * _camSpeed);
-
-            if(Input.GetKeyDown(KeyCode.F))
+            else if(RayCastToMouse(Selection.PlaneLayer, out hit))
             {
-                List<Crystal> crystals = new List<Crystal>(GameManager.MasterManager.NetworkManager.MapData.Crystals);
-                crystals.AddRange(GameManager.MasterManager.NetworkManager.MapData.Bases);
-
                 List<Bridge> bridges = new List<Bridge>();
-                foreach(var c in crystals)
-                    if(c.IsMyTeam)
-                        bridges.AddRange(BridgeList.GetBridges(c));
+                foreach(var crystal in _selCrystals)
+                    bridges = BridgeList.GetBridges(crystal);
 
                 foreach(var b in bridges)
-                    b.Show(true);
-                _shownBridges = bridges;
-            }
-
-            if(Input.GetKeyUp(KeyCode.F))
-            {
-                foreach(var b in _shownBridges)
                     b.Show(false);
+
+                _selCrystals.Clear();
+
+                Selection.CastSphereSelection(hit);
             }
+        }
 
-            if(Input.GetMouseButtonDown(0))
-            {
-                //if(RayCastToMouse(Selection.SelectionLayer, out hit))
-                //{
-                //    var crystals = Selection.CastSphereSelectionCrystal(hit);
-                //    foreach(var c in crystals)
-                //    {
-                //        if(c != null)
-                //        {
-                //            _selCrystals.Add(c);
-                //            Debug.Log(_selCrystals);
-                //            var bridges = BridgeList.GetBridges(c);
-
-                //            foreach(var b in bridges)
-                //            {
-                //                Debug.Log(b);
-                //                b.Show(true);
-                //            }
-                //        }
-                //    }
-                //}
-                if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
-                {
-                    var bridge = hit.collider.GetComponentInParent<Bridge>();
-                    if(bridge != null)
-                        foreach(var unit in Selection.Selected)
-                            if(unit != null)
-                            {
-                                StateMachine.SwitchState(unit, new BuildState(unit, bridge));
-                            }
-                }
-                else if(RayCastToMouse(Selection.PlaneLayer, out hit))
-                {
-                    List<Bridge> bridges = new List<Bridge>();
-                    foreach(var crystal in _selCrystals)
-                        bridges = BridgeList.GetBridges(crystal);
-
-                    foreach(var b in bridges)
-                        b.Show(false);
-
-                    _selCrystals.Clear();
-
-                    Selection.CastSphereSelection(hit);
-
-                    //StopCoroutine(BoxSelectionRoutine());
-                    //StartCoroutine(BoxSelectionRoutine());
-                }
-            }
-
-            if(Input.GetMouseButtonDown(1) && Selection.HasValidSelection
-           && RayCastToMouse(Selection.PlaneLayer, out hit))
-            {
-                foreach(var unit in Selection.Selected)
-                    if(unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
-                        StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.MeshAgent));
-            }
+        if(Input.GetMouseButtonDown(1) && Selection.HasValidSelection
+       && RayCastToMouse(Selection.PlaneLayer, out hit))
+        {
+            foreach(var unit in Selection.Selected)
+                if(unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
+                    StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.MeshAgent));
         }
     }
 

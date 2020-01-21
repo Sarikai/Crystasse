@@ -9,7 +9,6 @@ public class UnitAttackTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log($"Trigger detected {other}");
         var enemy = other.GetComponent<Unit>();
 
         if(enemy && enemy.TeamID != _owner.TeamID)
@@ -18,7 +17,6 @@ public class UnitAttackTrigger : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Collision detected {collision.collider}");
         var enemy = collision.collider.GetComponent<Unit>();
 
         if(enemy && enemy.TeamID != _owner.TeamID)

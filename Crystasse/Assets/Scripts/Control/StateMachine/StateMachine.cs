@@ -72,7 +72,6 @@ public static class StateMachine
 
     public static void SwitchState(Agent agent, State newState)
     {
-        Debug.Log($" agent {agent}, newstate {newState}");
         if(agent == null)
             return;
 
@@ -80,7 +79,6 @@ public static class StateMachine
             RemoveState(agent.CurrentState);
 
         agent.CurrentState = newState;
-        Debug.Log(agent.CurrentState);
         AddState(newState);
     }
 
@@ -113,7 +111,6 @@ public static class StateMachine
 
     public static void AddState(State state)
     {
-        Debug.Log(state);
         switch(state.Type)
         {
             case States.Idle:
@@ -123,7 +120,6 @@ public static class StateMachine
             case States.Build:
                 var build = state as BuildState;
                 BuildStates.Add(build);
-                Debug.Log("Added build");
                 break;
             case States.Attack:
                 var attack = state as AttackState;

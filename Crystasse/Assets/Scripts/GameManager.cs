@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SoundManager _soundManager;
 
-    //public Map map;
     public List<Crystal> bases;
     public Dictionary<byte, Player> teamToPlayer = new Dictionary<byte, Player>();
     public Crystal[] crystals;
@@ -56,38 +55,36 @@ public class GameManager : MonoBehaviour
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
 
-        for (byte i = 0; i < byte.MaxValue; i++)
+        for(byte i = 0; i < byte.MaxValue; i++)
             teamToPlayer.Add(i, null);
 
         _RunningSessionStats = new Stats();
         _RunningSessionStats.Matches = new Dictionary<int, string>();
         SoundManager.MenuMusic();
-        Debug.Log($"GameManager Awake done");
     }
 
 
 
     public void AddPlayer(Player player)
     {
-        for (byte i = 1; i < teamToPlayer.Count; i++)
-            if (teamToPlayer[i] == null)
+        for(byte i = 1; i < teamToPlayer.Count; i++)
+            if(teamToPlayer[i] == null)
             {
                 teamToPlayer[i] = player;
                 GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = i;
-                Debug.Log("Added player: " + player.NickName + " at teamID : " + i);
                 return;
             }
     }
 
     protected void GameManagerSingleton()
     {
-        if (GameManager.MasterManager == null)
+        if(GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if (GameManager.MasterManager != this)
+            if(GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -96,30 +93,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    //public void LoadMap()
-    //{
-    //    crystals = map?.LoadMap(out bases);
-    //    doUpdate = true;
-    //}
-
-    //public void StartInitCrystals()
-    //{
-    //    if (crystals != null)
-    //        foreach (var crystal in crystals)
-    //            crystal.RPC_InitBaseCrystal();
-    //}
-
     private void Update()
     {
-        if (NetworkManager._isGameLoaded && Input.GetKeyDown(UIManager._escapeKey))
+        if(NetworkManager._isGameLoaded && Input.GetKeyDown(UIManager._escapeKey))
         {
             UIManager.ToggleIngameMenu();
         }
 
-        if (Input.GetKey(KeyCode.O))
+        if(Input.GetKey(KeyCode.O))
         {
-            Debug.Log("Saving");
-            //UnityEngine.Random.Range(0, 6);
             Stats newStat = new Stats()
             {
                 destroyedUnits = (uint)UnityEngine.Random.Range(0, 6),
@@ -129,19 +111,19 @@ public class GameManager : MonoBehaviour
             GameManager.MasterManager._RunningSessionStats.AutoSaveStats();
         };
 
-        if (Input.GetKey(KeyCode.L))
+        if(Input.GetKey(KeyCode.L))
         {
             GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
             GameManager.MasterManager._RunningSessionStats.LoadStats();
-            if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
+            if(GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
             {
-                foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
+                foreach(KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
                 {
                     Match m = Match.LoadMatch(matchPath.Value);
-                    if (m != null)
+                    if(m != null)
                     {
                         UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
-                        //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
+
                         matchStats.UpdateEntry(m);
                         GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
                     }
@@ -151,11 +133,11 @@ public class GameManager : MonoBehaviour
         }
 
         //TODO: [DONE] get this variable true!!!
-        if (DoUpdate)
+        if(DoUpdate)
         {
             StateMachine.Update();
 
-            foreach (var c in crystals)
+            foreach(var c in crystals)
                 c.UpdateCrystal();
         }
     }

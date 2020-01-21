@@ -39,7 +39,6 @@ public class Bridge : MonoBehaviour
 
     private void Awake()
     {
-        //_line.enabled = false;
         _line.SetPosition(0, _lineStart);
         _line.SetPosition(1, _lineStart);
         _offLink.activated = false;
@@ -62,7 +61,6 @@ public class Bridge : MonoBehaviour
     }
     public void Build(int value)
     {
-        Debug.Log(value);
         if(_buildValue < _maxBuildValue)
         {
             _buildValue += value;

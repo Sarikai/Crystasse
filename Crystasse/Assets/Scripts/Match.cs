@@ -45,17 +45,17 @@ public class Match
 
         BinaryFormatter bf = new BinaryFormatter();
         string fileName = $"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}";
-        Debug.Log(DateTime.Now.ToString());
-        Debug.Log($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}");
+        // Debug.Log(DateTime.Now.ToString());
+        // Debug.Log($"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}");
         //string fileName = $"{DateTime.Now.ToString()}";
-        //Debug.Log(!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"));
+        //// Debug.Log(!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"));
         if (!File.Exists($"{Application.persistentDataPath}/{fileName}.dat"))
         {
             GameManager.MasterManager._RunningSessionStats.Matches.Add(GameManager.MasterManager._RunningSessionStats.Matches.Count + 1, fileName);
             FileStream file = File.Create($"{Application.persistentDataPath}/{fileName}.dat");
             bf.Serialize(file, m);
             file.Close();
-            Debug.Log($"Match saved to {Application.persistentDataPath}/{fileName}.dat");
+            // Debug.Log($"Match saved to {Application.persistentDataPath}/{fileName}.dat");
         }
     }
 
@@ -75,7 +75,7 @@ public class Match
             //GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
 
             //GameManager.MasterManager.UIManager.MatchList.Add(Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity));
-            Debug.Log("Match returned");
+            // Debug.Log("Match returned");
             return m;
         }
         return null;
