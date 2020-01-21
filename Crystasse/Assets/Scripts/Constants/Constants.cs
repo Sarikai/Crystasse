@@ -2,7 +2,7 @@
 
 public static class Constants
 {
-    public const float MAX_UNIT_DISPLACEMENT = 10f;
+    public const float MAX_UNIT_DISPLACEMENT = 5;
     public const int MAX_UNIT_PER_PARTITION = 200;
     public const int UNITCOUNT_FOR_UPGRADE = 10;
 
