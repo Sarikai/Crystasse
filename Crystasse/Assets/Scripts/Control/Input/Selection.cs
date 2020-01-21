@@ -21,6 +21,11 @@ public static class Selection
 
     static Selection()
     {
+<<<<<<< HEAD
+=======
+        //TODO: [DONE/SHOULD BE] Set owner team ID
+        //TeamID = 1;
+>>>>>>> WednesdayRebuilding
         TeamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
         //Debug.Log($"Selection Team: {TeamID}");
 
