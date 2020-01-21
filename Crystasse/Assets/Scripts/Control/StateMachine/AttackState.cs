@@ -27,8 +27,9 @@ public class AttackState : State
     {
         Debug.Log("Taking damage?");
         Target.TakeDamage(Agent.AttackPoints);
-        Agent.TakeDamage(Target.AttackPoints);
-        //TODO: Effects plz
+        //TODO: removed mutual assured destruction for the better I guess
+        //Agent.TakeDamage(Target.AttackPoints);
+        //TODO: explosion effects here would be nice
         Completed = true;
     }
 
