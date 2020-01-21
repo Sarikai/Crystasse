@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     Camera _cam;
     [SerializeField]
-    float _camSpeed = 50f, _camRotSpeed = 60f;
+    float _camSpeed = 50f, _camRotSpeed = 60f, _scrollSpeed = 100f;
 
     private Crystal selCrystal;
 
@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         _playArea = area;
         _cam = cam;
-        if (_cam == null)
+        if(_cam == null)
             Debug.LogError("No Cam on inputmanager");
     }
 
@@ -54,49 +54,53 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
             MoveCam(Time.deltaTime * _camSpeed);
 
-            if (Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0))
             {
-                if (RayCastToMouse(Selection.CrystalLayer, out hit))
+                if(RayCastToMouse(Selection.CrystalLayer, out hit))
                 {
-                    var c = hit.collider.GetComponent<Crystal>();
-                    if (c != null)
+                    var c = hit.collider.GetComponentInChildren<Crystal>();
+                    if(c != null)
                     {
                         selCrystal = c;
+                        Debug.Log(selCrystal);
                         var bridges = BridgeList.GetBridges(c);
 
-                        foreach (var b in bridges)
+                        foreach(var b in bridges)
+                        {
+                            Debug.Log(b);
                             b.Show(true);
+                        }
                     }
                 }
-                else if (RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
+                else if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
                 {
-                    var bridge = hit.collider.GetComponent<Bridge>();
-                    if (bridge != null)
-                        foreach (var unit in Selection.Selected)
-                            if (unit != null)
+                    var bridge = hit.collider.GetComponentInChildren<Bridge>();
+                    if(bridge != null)
+                        foreach(var unit in Selection.Selected)
+                            if(unit != null)
                                 StateMachine.SwitchState(unit, new BuildState(unit, bridge));
                 }
-                else if (RayCastToMouse(Selection.PlaneLayer, out hit))
+                else if(RayCastToMouse(Selection.PlaneLayer, out hit))
                 {
                     var bridges = BridgeList.GetBridges(selCrystal);
 
-                    foreach (var b in bridges)
+                    foreach(var b in bridges)
                         b.Show(false);
 
                     selCrystal = null;
 
                     Selection.CastSphereSelection(hit);
 
-                    StopCoroutine(BoxSelectionRoutine());
-                    StartCoroutine(BoxSelectionRoutine());
+                    //StopCoroutine(BoxSelectionRoutine());
+                    //StartCoroutine(BoxSelectionRoutine());
                 }
             }
 
-            if (Input.GetMouseButtonDown(1) && Selection.HasValidSelection
+            if(Input.GetMouseButtonDown(1) && Selection.HasValidSelection
            && RayCastToMouse(Selection.PlaneLayer, out hit))
             {
-                foreach (var unit in Selection.Selected)
-                    if (unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
+                foreach(var unit in Selection.Selected)
+                    if(unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
                         StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.MeshAgent));
             }
         }
@@ -108,25 +112,29 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         var camTrans = _cam.transform;
 
-        if (Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A))
             camTrans.position -= camTrans.right * speed;
-        if (Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D))
             camTrans.position += camTrans.right * speed;
-        if (Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.W))
             camTrans.position += new Vector3(camTrans.forward.x, 0, camTrans.forward.z) * speed;
-        if (Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.S))
             camTrans.position -= new Vector3(camTrans.forward.x, 0, camTrans.forward.z) * speed;
-        if (Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(KeyCode.Q))
             camTrans.eulerAngles -= Vector3.up * Time.deltaTime * _camRotSpeed;
-        else if (Input.GetKey(KeyCode.E))
+        else if(Input.GetKey(KeyCode.E))
             camTrans.eulerAngles += Vector3.up * Time.deltaTime * _camRotSpeed;
+        if(Input.mouseScrollDelta.y > 0.1f && camTrans.position.y > 10f)
+            camTrans.position += camTrans.forward * Time.deltaTime * _scrollSpeed;
+        if(Input.mouseScrollDelta.y < -0.1f && camTrans.position.y < 80f)
+            camTrans.position -= camTrans.forward * Time.deltaTime * _scrollSpeed;
     }
 
     private IEnumerator BoxSelectionRoutine()
     {
         _selectionStart = Input.mousePosition;
 
-        while (!Input.GetMouseButtonUp(0))
+        while(!Input.GetMouseButtonUp(0))
             yield return new WaitForEndOfFrame();
 
         Selection.CastBoxSelection(_selectionStart, Input.mousePosition);
@@ -134,7 +142,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
+        if(stream.IsWriting)
             stream.SendNext(_teamID);
         else
             _teamID = (byte)stream.ReceiveNext();
