@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SoundManager _soundManager;
 
-    //public Map map;
     public List<Crystal> bases;
     public Dictionary<byte, Player> teamToPlayer = new Dictionary<byte, Player>();
     public Crystal[] crystals;
@@ -57,38 +56,36 @@ public class GameManager : MonoBehaviour
         ObjectsToDestroy = new List<GameObject>();
         GameManagerSingleton();
 
-        for (byte i = 0; i < byte.MaxValue; i++)
+        for(byte i = 0; i < byte.MaxValue; i++)
             teamToPlayer.Add(i, null);
 
         _RunningSessionStats = new Stats();
         _RunningSessionStats.Matches = new Dictionary<int, string>();
         SoundManager.MenuMusic();
-        Debug.Log($"GameManager Awake done");
     }
 
 
 
     public void AddPlayer(Player player)
     {
-        for (byte i = 1; i < teamToPlayer.Count; i++)
-            if (teamToPlayer[i] == null)
+        for(byte i = 1; i < teamToPlayer.Count; i++)
+            if(teamToPlayer[i] == null)
             {
                 teamToPlayer[i] = player;
                 GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID = i;
-                Debug.Log("Added player: " + player.NickName + " at teamID : " + i);
                 return;
             }
     }
 
     protected void GameManagerSingleton()
     {
-        if (GameManager.MasterManager == null)
+        if(GameManager.MasterManager == null)
         {
             GameManager.MasterManager = this;
         }
         else
         {
-            if (GameManager.MasterManager != this)
+            if(GameManager.MasterManager != this)
             {
                 Destroy(GameManager.MasterManager.gameObject);
                 GameManager.MasterManager = this;
@@ -97,22 +94,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    //public void LoadMap()
-    //{
-    //    crystals = map?.LoadMap(out bases);
-    //    doUpdate = true;
-    //}
-
-    //public void StartInitCrystals()
-    //{
-    //    if (crystals != null)
-    //        foreach (var crystal in crystals)
-    //            crystal.RPC_InitBaseCrystal();
-    //}
-
     private void Update()
     {
-        if (NetworkManager._isGameLoaded && Input.GetKeyDown(UIManager._escapeKey))
+        if(NetworkManager._isGameLoaded && Input.GetKeyDown(UIManager._escapeKey))
         {
             UIManager.ToggleIngameMenu();
         }
@@ -132,11 +116,11 @@ public class GameManager : MonoBehaviour
 
 
         //TODO: [DONE] get this variable true!!!
-        if (DoUpdate)
+        if(DoUpdate)
         {
             StateMachine.Update();
 
-            foreach (var c in crystals)
+            foreach(var c in crystals)
                 c.UpdateCrystal();
         }
 

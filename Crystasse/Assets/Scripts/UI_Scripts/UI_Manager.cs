@@ -263,8 +263,8 @@ namespace CustomUI
         {
             var b = GameManager.MasterManager.NetworkManager.JoinRoom(roomName);
 
-            Debug.Log("Joined?: " + b);
-            if (b)
+            // Debug.Log("Joined?: " + b);
+            if(b)
             {
                 ToggleLobbyMenu();
                 ToggleRoomMenu();
@@ -324,7 +324,6 @@ namespace CustomUI
         public virtual void OnButtonExitAppClicked()
         {
             Application.Quit();
-            Debug.Log("App Quit");
         }
 
 
@@ -340,15 +339,15 @@ namespace CustomUI
             crystalsToCheck.AddRange(mapData.Bases);
             crystalsToCheck.AddRange(mapData.Crystals);
 
-            foreach (Crystal crystal in crystalsToCheck)
+            foreach(Crystal crystal in crystalsToCheck)
             {
-                if (crystal.IsNeutral)
+                if(crystal.IsNeutral)
                 {
                     _crystalNeutral++;
                 }
                 else
                 {
-                    if (crystal.IsMyTeam)
+                    if(crystal.IsMyTeam)
                     {
                         _crystalOwned++;
                     }
@@ -378,9 +377,7 @@ namespace CustomUI
         {
             UI_StatEntry chosenEntry = statEntry;
             GameManager.MasterManager._StatEntries.Remove(statEntry);
-            Debug.Log($"Stat entry removed from list");
             Destroy(chosenEntry.gameObject);
-            Debug.Log($"Stat entry destroyed");
         }
 
 
@@ -389,15 +386,15 @@ namespace CustomUI
         {
             GameManager.MasterManager._RunningSessionStats.Matches = new Dictionary<int, string>();
             GameManager.MasterManager._RunningSessionStats.LoadStats();
-            if (GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
+            if(GameManager.MasterManager._RunningSessionStats.Matches != null && GameManager.MasterManager._RunningSessionStats.Matches.Count > 0)
             {
-                foreach (KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
+                foreach(KeyValuePair<int, string> matchPath in GameManager.MasterManager._RunningSessionStats.Matches)
                 {
                     Match m = Match.LoadMatch(matchPath.Value);
-                    if (m != null)
+                    if(m != null)
                     {
                         UI_StatEntry matchStats = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.position, Quaternion.identity, GameManager.MasterManager.UIManager._MatchList);
-                        //UI_StatEntry matchStats = GameManager.MasterManager.UIManager.InstantiateLine();
+
                         matchStats.UpdateEntry(m);
                         GameManager.MasterManager.NetworkManager._matchEntries.Add(m, matchStats.gameObject);
                     }
@@ -407,7 +404,7 @@ namespace CustomUI
 
         public void ClearStatEntries()
         {
-            foreach (UI_StatEntry statEntry in GameManager.MasterManager._StatEntries)
+            foreach(UI_StatEntry statEntry in GameManager.MasterManager._StatEntries)
             {
                 UnloadStatEntry(statEntry);
             }

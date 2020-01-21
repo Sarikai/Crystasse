@@ -32,21 +32,11 @@ public static class Selection
 
     static Selection()
     {
-        //TODO: [DONE/SHOULD BE] Set owner team ID
-        //TeamID = 1;
         TeamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
-        ////Debug.Log($"Selection Team: {TeamID}");
-
-        //var text = File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json");
-        // = JsonConvert.DeserializeObject<SelectionData>(text);
     }
 
     private static void AddSelection(Unit[] selection)
     {
-        foreach(var u in selection)
-        {
-            Debug.Log(u);
-        }
         if(selection != null && selection.Length >= 1)
             _selected.AddRange(selection);
         else if(selection.Length <= 0)
@@ -83,7 +73,6 @@ public static class Selection
         return sel.ToArray();
     }
 
-    //TODO: this 
     public static void CastBoxSelection(Vector3 pos1, Vector3 pos2)
     {
         var halfExtents = (pos1 - pos2) * 0.5f;
@@ -98,8 +87,6 @@ public static class Selection
             if(unit != null && unit.TeamID == TeamID)
                 sel.Add(unit);
         }
-
-        //_selected.Clear();
         AddSelection(sel.ToArray());
     }
 }

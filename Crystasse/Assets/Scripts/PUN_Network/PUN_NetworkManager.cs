@@ -67,7 +67,7 @@ namespace PUN_Network
 
         private void Awake()
         {
-            Debug.Log($"NetworkManager Awake started");
+            // Debug.Log($"NetworkManager Awake started");
             //PhotonNetwork.OfflineMode = true;
             _uiManager = GameManager.MasterManager.UIManager;
             _localLobby = GetComponent<PUN_Lobby>();
@@ -75,7 +75,7 @@ namespace PUN_Network
             _defaultRoomSettings = GetComponent<PUN_RoomSettings>();
             _photonView = GetComponent<PhotonView>();
             _photonView.ViewID = 1;
-            Debug.Log($"NetworkManager Awake end");
+            // Debug.Log($"NetworkManager Awake end");
         }
 
         private void Start()
@@ -95,11 +95,11 @@ namespace PUN_Network
         public override void OnConnectedToMaster()
         {
             base.OnConnectedToMaster();
-            Debug.Log($"Player connected to Photon-Master-Server");
+            // Debug.Log($"Player connected to Photon-Master-Server");
             PhotonNetwork.AutomaticallySyncScene = true;
 
             _localPlayer = PhotonNetwork.LocalPlayer;
-            Debug.Log($"Local player ID: {_localPlayer.UserId}");
+            // Debug.Log($"Local player ID: {_localPlayer.UserId}");
             JoinDefaultLobby();
         }
 
@@ -172,17 +172,17 @@ namespace PUN_Network
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-            Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}" + " Count: " + roomList.Count);
+            // Debug.Log($"RoomUpdate called / Roomlist null: {roomList == null}" + " Count: " + roomList.Count);
             base.OnRoomListUpdate(roomList);
             //ClearServerEntries();
             if (roomList != null && roomList.Count > 0)
             {
-                Debug.Log($"Rooms not null");
+                // Debug.Log($"Rooms not null");
                 foreach (RoomInfo roomInfo in roomList)
                 {
                     if (!_serverListEntries.ContainsKey(roomInfo.ID))
                     {
-                        Debug.Log($"{roomInfo.ToString()}");
+                        // Debug.Log($"{roomInfo.ToString()}");
                         PUN_ServerlistEntry newLine = Instantiate(_uiManager?._serverEntryPrefab, _uiManager?._ServerList);
                         newLine.UpdateServerlistEntry(roomInfo);
                         _serverListEntries.Add(roomInfo.ID, newLine.gameObject);
@@ -231,7 +231,7 @@ namespace PUN_Network
         public override void OnCreatedRoom()
         {
             base.OnCreatedRoom();
-            Debug.Log($"Created Room");
+            // Debug.Log($"Created Room");
         }
 
         public bool JoinRoom()
@@ -247,13 +247,13 @@ namespace PUN_Network
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-            Debug.Log($"Joined Room");
+            // Debug.Log($"Joined Room");
 
             //TODO: [DONE] Prüfen ob auf beiden Seiten instanziert wird!
             //1 - Instanzieren des NetworkPlayers
             //2 - Init (Zuweisung: _crystalPrefab, _localPlayer->PUN Player, _nickName, _teamID, _actorNumber, _unitPrefab,_matchSession,_customPlayerView;
             _customPlayer = PhotonNetwork.Instantiate(_customPlayerPref, Vector3.zero, Quaternion.identity)?.GetComponent<PUN_CustomPlayer>();
-            //Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
+            //// Debug.Log($"Custom player added {CustomPlayer}/n Owner: {CustomPlayer.CustomPlayerView.Owner}");
             _customPlayer.CustomPlayerView.RPC("RPC_InitCustomPlayer", RpcTarget.AllBufferedViaServer, GetLocalPlayer);
             //_customPlayer.PlayerlistEntry = PhotonNetwork.Instantiate(Constants.NETWORKED_UI_ELEMENTS[0], Vector3.zero, Quaternion.identity)?.GetComponent<PUN_PlayerlistEntry>();
             //_customPlayer.Init(); --> is called in its awake
@@ -285,22 +285,22 @@ namespace PUN_Network
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
             base.OnCreateRoomFailed(returnCode, message);
-            Debug.Log($"Roomcreation failed, name must already exist");
+            // Debug.Log($"Roomcreation failed, name must already exist");
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
             base.OnJoinRoomFailed(returnCode, message);
-            Debug.Log($"Failed to join, room did not exist");
+            // Debug.Log($"Failed to join, room did not exist");
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
-            //Debug.Log($"Called PlayerEnteredRoom");
+            //// Debug.Log($"Called PlayerEnteredRoom");
             //photonView.RPC("RPC_AddPlayerEntry", RpcTarget.AllBufferedViaServer, newPlayer);
             //_localRoom.Players = _localRoom.UpdatePlayers();
-            Debug.Log($"A new player entered: {newPlayer.NickName}");
+            // Debug.Log($"A new player entered: {newPlayer.NickName}");
             _localRoom.Players = _localRoom.UpdatePlayers();
             if (_localRoom.PlayersInRoom == _localRoom.GetRoomActiveSettings.MaxPlayers && PhotonNetwork.IsMasterClient)
             {
@@ -345,7 +345,7 @@ namespace PUN_Network
         {
             base.OnPlayerLeftRoom(otherPlayer);
             RemovePlayerEntry(otherPlayer);
-            Debug.Log($"{otherPlayer.NickName} has left the room");
+            // Debug.Log($"{otherPlayer.NickName} has left the room");
         }
 
         public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
@@ -425,7 +425,7 @@ namespace PUN_Network
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log($"Playerlist>1? {PhotonNetwork.PlayerList.Length > 1}");
+                // Debug.Log($"Playerlist>1? {PhotonNetwork.PlayerList.Length > 1}");
                 if (PhotonNetwork.PlayerList.Length > 1)
                     unassignedPlayers.AddRange(PhotonNetwork.PlayerList);
                 else
@@ -441,9 +441,9 @@ namespace PUN_Network
             if (unassignedBaseCrystals != null && unassignedBaseCrystals.Count >= 1 && unassignedBaseCrystals[0] != null)
             {
                 int rndCrystal = Random.Range(0, unassignedBaseCrystals.Count);
-                Debug.Log($"Transferring {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID} to {targetPlayer.ActorNumber}");
+                // Debug.Log($"Transferring {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID} to {targetPlayer.ActorNumber}");
                 unassignedBaseCrystals[rndCrystal].CrystalView.TransferOwnership(targetPlayer);
-                Debug.Log($"Transferred {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID}");
+                // Debug.Log($"Transferred {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID}");
                 //unassignedBaseCrystals[rndCrystal].Init();
                 unassignedBaseCrystals[rndCrystal].photonView.RPC("RPC_InitBaseCrystal", RpcTarget.AllViaServer);
                 unassignedBaseCrystals.RemoveAt(rndCrystal);
@@ -504,7 +504,7 @@ namespace PUN_Network
             PhotonNetwork.CurrentRoom.IsOpen = false;
             //foreach (Player player in _localRoom.Players)
             //{
-            //    Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
+            //    // Debug.Log($"Ich bin {player.NickName} Count {_localRoom.Players.Length}");
             //}
         }
 

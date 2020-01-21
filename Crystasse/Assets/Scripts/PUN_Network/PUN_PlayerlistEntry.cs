@@ -56,7 +56,7 @@ namespace PUN_Network
             //if (int.TryParse(GameManager.MasterManager.NetworkManager.GetLocalPlayer.UserId, out int userID))
             //{
             //    _myID = userID;
-            //    Debug.Log($"Parse ok");
+            //    // Debug.Log($"Parse ok");
             //}
         }
 
@@ -103,7 +103,7 @@ namespace PUN_Network
         //TODO: [DONE] restrict access or calls to master client only or player only
         public void OnPlayerEntryClicked()
         {
-            Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()} EntryViewId:{_entryView.ViewID}");
+            // Debug.Log($"Entry Clicked. PlayerIdText: {_playerID.text} My Id: {_myID.ToString()} EntryViewId:{_entryView.ViewID}");
 
             if (_entryView.IsMine)
             {
@@ -130,7 +130,7 @@ namespace PUN_Network
             }
             else
             {
-                Debug.Log("UnitIcon does not exist!");
+                // Debug.Log("UnitIcon does not exist!");
                 _dropDown.selectedImage.sprite = Resources.Load<Sprite>(Constants.UNIT_ICONS[0]);
             }
         }
@@ -140,12 +140,12 @@ namespace PUN_Network
             if (stream.IsWriting)
             {
                 stream.SendNext(PlayerReady);
-                Debug.Log($"LocalClient sending ready {GetComponent<PhotonView>().ViewID}");
+                // Debug.Log($"LocalClient sending ready {GetComponent<PhotonView>().ViewID}");
             }
             else
             {
                 this.PlayerReady = (bool)stream.ReceiveNext();
-                Debug.Log($"RemoteClient receiving ready { GetComponent<PhotonView>().ViewID}");
+                // Debug.Log($"RemoteClient receiving ready { GetComponent<PhotonView>().ViewID}");
             }
         }
 
