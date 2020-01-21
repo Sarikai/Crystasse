@@ -1,10 +1,12 @@
-﻿using ExitGames.Client.Photon;
+﻿
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using PUN_Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml.Xsl;
 using TMPro;
 using UnityEngine;
@@ -311,12 +313,6 @@ namespace CustomUI
             Debug.Log("App Quit");
         }
 
-        public virtual void HUD_Update()
-        {
-            _CrystalsEnemy.text = _crystalEnemy.ToString();
-            _CrystalsNeutral.text = _crystalNeutral.ToString();
-            _CrystalsOwned.text = _crystalOwned.ToString();
-        }
 
         #endregion
 
@@ -324,6 +320,40 @@ namespace CustomUI
         #region Others
 
         //Statistics, Matchhistory
+        public virtual void HUD_Init(MapData mapData)
+        {
+            List<Crystal> crystalsToCheck = new List<Crystal>();
+            crystalsToCheck.AddRange(mapData.Bases);
+            crystalsToCheck.AddRange(mapData.Crystals);
+
+            foreach (Crystal crystal in crystalsToCheck)
+            {
+                if (crystal.IsNeutral)
+                {
+                    _crystalNeutral++;
+                }
+                else
+                {
+                    if (crystal.IsMyTeam)
+                    {
+                        _crystalOwned++;
+                    }
+                    else
+                    {
+                        _crystalEnemy++;
+                    }
+                }
+            }
+            HUD_Update();
+        }
+
+        public virtual void HUD_Update()
+        {
+            _CrystalsEnemy.text = _crystalEnemy.ToString();
+            _CrystalsNeutral.text = _crystalNeutral.ToString();
+            _CrystalsOwned.text = _crystalOwned.ToString();
+        }
+
         public UI_StatEntry LoadStatEntry()
         {
             UI_StatEntry statEntry = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);

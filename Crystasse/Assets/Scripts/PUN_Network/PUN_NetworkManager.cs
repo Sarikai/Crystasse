@@ -129,6 +129,8 @@ namespace PUN_Network
                 GameManager.MasterManager.DoUpdate = true;
                 _mapData = FindObjectOfType<MapData>().GetComponent<MapData>();
                 GameManager.MasterManager.InputManager.Init(_mapData.GameArea, _mapData.Camera);
+
+
                 if (PhotonNetwork.IsMasterClient)
                 {
                     //TODO: [DONE] Assigning crystal views to crystal and change owner
@@ -144,7 +146,6 @@ namespace PUN_Network
 
                     AssignStartCrystals(); //Assigning bases
                     StartMapInit();
-
                     //TODO: Init all other crystals in RPC && get List before
                     //if (crystals != null && crystals.Count >= 1)
                     //{
@@ -154,6 +155,7 @@ namespace PUN_Network
                     //crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer/*, crystalToInit.CrystalView.ViewID*/);
                     //}
                     //}
+                    _photonView.RPC("RPC_HUD_Init", RpcTarget.All);
                 }
             }
         }
@@ -513,6 +515,12 @@ namespace PUN_Network
         //}
 
         [PunRPC]
+        public void RPC_HUD_Init()
+        {
+            GameManager.MasterManager.UIManager.HUD_Init(_mapData);
+        }
+
+        [PunRPC]
         public void RPC_RemovePlayerEntry(Player leavingPlayer)
         {
             RemovePlayerEntry(leavingPlayer);
@@ -531,11 +539,7 @@ namespace PUN_Network
         //    GameManager.MasterManager.StartInitCrystals();
         //}
 
-        [PunRPC]
-        public void RPC_SetUnitView(Player player, Unit unit)
-        {
-            //unit._view.TransferOwnership(player);
-        }
+
 
         #endregion
 

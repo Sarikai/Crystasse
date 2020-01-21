@@ -154,23 +154,13 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //private IEnumerator SpawnRoutine()
-    //{
-    //    while(_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
-    //    {
-    //        var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
-    //        CrystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
 
-    //        yield return new WaitForSecondsRealtime(_data.SpawnRate);
-    //    }
-    //}
 
     private IEnumerator SpawnRoutine()
     {
         while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
         {
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
-            //CrystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
             Debug.Log("Player: " + GameManager.MasterManager.NetworkManager.GetLocalPlayer.ActorNumber);
             var unit = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
             _unitsSpawned.Add(unit);
@@ -178,14 +168,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    [PunRPC]
-    private void Spawn(Vector3 pos)
-    {
-        var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
-        _unitsSpawned.Add(unit);
-        if (_unitsSpawned.Count > 0)
-            CrystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _unitsSpawned.Count - 1);
-    }
+
 
     [PunRPC]
     public void TransferTeamID()
@@ -194,12 +177,6 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     }
 
 
-    [PunRPC]
-    public void RPC_SetUnitView(int id)
-    {
-        //TODO: remove? Rework Function to transfer ownership (if crystal.teamid == my.teamid)
-        //_unitsSpawned[id]._view.TransferOwnership(OwnerPlayer);
-    }
 
     public void Conquer(byte value, byte team)
     {
@@ -225,6 +202,16 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
                 GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
                 //_crystalMeshRenderer.material = GameManager.MasterManager.CrystalMaterials[team - 1];
                 Debug.Log($"Conquered null? {OnConquered == null}");
+
+                if (IsMyTeam)
+                {
+                    CrystalConqueredSelf();
+                }
+                else
+                {
+                    CrystalConqueredEnemy();
+                }
+
                 if (OnConquered != null)
                     OnConquered.Invoke();
             }
@@ -233,6 +220,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         if (Health <= 0)
         {
             _teamID = 0;
+            CrystalNeutralized(team);
             GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
         }
     }
@@ -300,9 +288,19 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     }
 
 
-    void CrystalNeutralized()
+    void CrystalNeutralized(byte team)
     {
-
+        if (team == GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID)
+        {
+            GameManager.MasterManager.UIManager._crystalNeutral++;
+            GameManager.MasterManager.UIManager._crystalEnemy--;
+        }
+        else
+        {
+            GameManager.MasterManager.UIManager._crystalNeutral++;
+            GameManager.MasterManager.UIManager._crystalOwned--;
+        }
+        GameManager.MasterManager.UIManager.HUD_Update();
     }
 
     void CrystalConqueredSelf()
@@ -310,6 +308,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
         GameManager.MasterManager.UIManager._crystalNeutral--;
         GameManager.MasterManager.UIManager._crystalOwned++;
+        GameManager.MasterManager.UIManager.HUD_Update();
 
     }
 
@@ -317,6 +316,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         GameManager.MasterManager.UIManager._crystalNeutral--;
         GameManager.MasterManager.UIManager._crystalEnemy++;
+        GameManager.MasterManager.UIManager.HUD_Update();
     }
 
 
@@ -367,6 +367,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         {
             // Similar to PhotonView.IsMine
             return (this.TeamID == GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
+        }
+    }
+
+    public bool IsNeutral
+    {
+        get
+        {
+            // Similar to PhotonView.IsMine
+            return (this.TeamID == 0) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
         }
     }
 

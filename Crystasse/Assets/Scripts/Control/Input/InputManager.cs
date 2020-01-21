@@ -43,7 +43,6 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //TODO: check again if photonView check is correct or still needed
         //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
-            //TODO: OnSceneLoaded check maybe?
             if (_cam == null)
             {
                 //Debug.LogError("No Cam on inputmanager");
