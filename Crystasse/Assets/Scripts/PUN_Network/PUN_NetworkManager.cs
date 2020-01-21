@@ -388,17 +388,17 @@ namespace PUN_Network
             Destroy(entryToRemove);
         }
 
-        public void SetCrystalViews(Player[] players)
-        {
-            Crystal randomCrystal;
-            foreach (Player player in players)
-            {
-                randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
-                randomCrystal.SetCrystalView(player);
-                GameManager.MasterManager.bases.Remove(randomCrystal);
-            }
-            GameManager.MasterManager.StartInitCrystals();
-        }
+        //public void SetCrystalViews(Player[] players)
+        //{
+        //    Crystal randomCrystal;
+        //    foreach (Player player in players)
+        //    {
+        //        randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
+        //        randomCrystal.SetCrystalView(player);
+        //        GameManager.MasterManager.bases.Remove(randomCrystal);
+        //    }
+        //    GameManager.MasterManager.StartInitCrystals();
+        //}
 
         public void AssignStartCrystals()
         {
@@ -439,7 +439,7 @@ namespace PUN_Network
                 unassignedBaseCrystals[rndCrystal].CrystalView.TransferOwnership(targetPlayer);
                 Debug.Log($"Transferred {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID}");
                 //unassignedBaseCrystals[rndCrystal].Init();
-                unassignedBaseCrystals[rndCrystal].photonView.RPC("RPC_InitCrystal", RpcTarget.AllViaServer);
+                unassignedBaseCrystals[rndCrystal].photonView.RPC("RPC_InitBaseCrystal", RpcTarget.AllViaServer);
                 unassignedBaseCrystals.RemoveAt(rndCrystal);
             }
         }
@@ -519,18 +519,18 @@ namespace PUN_Network
             RemovePlayerEntry(leavingPlayer);
         }
 
-        [PunRPC]
-        public void RPC_SetCrystalViews(Player[] players)
-        {
-            Crystal randomCrystal;
-            foreach (Player player in players)
-            {
-                randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
-                randomCrystal.SetCrystalView(player);
-                GameManager.MasterManager.bases.Remove(randomCrystal);
-            }
-            GameManager.MasterManager.StartInitCrystals();
-        }
+        //[PunRPC]
+        //public void RPC_SetCrystalViews(Player[] players)
+        //{
+        //    Crystal randomCrystal;
+        //    foreach (Player player in players)
+        //    {
+        //        randomCrystal = GameManager.MasterManager.bases[Random.Range(0, GameManager.MasterManager.bases.Count)];
+        //        randomCrystal.SetCrystalView(player);
+        //        GameManager.MasterManager.bases.Remove(randomCrystal);
+        //    }
+        //    GameManager.MasterManager.StartInitCrystals();
+        //}
 
         [PunRPC]
         public void RPC_SetUnitView(Player player, Unit unit)

@@ -102,12 +102,12 @@ public class GameManager : MonoBehaviour
     //    doUpdate = true;
     //}
 
-    public void StartInitCrystals()
-    {
-        if (crystals != null)
-            foreach (var crystal in crystals)
-                crystal.RPC_InitCrystal();
-    }
+    //public void StartInitCrystals()
+    //{
+    //    if (crystals != null)
+    //        foreach (var crystal in crystals)
+    //            crystal.RPC_InitBaseCrystal();
+    //}
 
     private void Update()
     {
