@@ -54,9 +54,9 @@ namespace PUN_Network
 
         //Additional things?
         public List<Unit> units = new List<Unit>();
-        public List<Crystal> crystals = new List<Crystal>();
-        public List<Crystal> baseCrystals = new List<Crystal>();
-        //public List<Crystal> unassignedBaseCrystals = new List<Crystal>();
+        //public List<Crystal> crystals = new List<Crystal>();
+        //public List<Crystal> baseCrystals = new List<Crystal>();
+        public List<Crystal> unassignedBaseCrystals = new List<Crystal>();
         public List<Player> unassignedPlayers = new List<Player>();
 
         private MapData _mapData;
@@ -135,12 +135,12 @@ namespace PUN_Network
                     //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
                     //crystals.AddRange(FindObjectsOfType<Crystal>());
 
-                    for (int i = 0; i < crystals.Count; i++)
-                    {
-                        //crystals[i].CrystalView.ViewID = 100 + i;
-                        if (crystals[i].Data.IsBase)
-                            baseCrystals.Add(crystals[i]);
-                    }
+                    //for (int i = 0; i < crystals.Count; i++)
+                    //{
+                    //    //crystals[i].CrystalView.ViewID = 100 + i;
+                    //    if (crystals[i].Data.IsBase)
+                    //        baseCrystals.Add(crystals[i]);
+                    //}
 
                     AssignStartCrystals(); //Assigning bases
                     StartMapInit();
@@ -428,8 +428,7 @@ namespace PUN_Network
 
         public void AssignRandomBaseCrystal(Player targetPlayer)
         {
-            //TODO: Change somehow if players would be able to join a running game
-            List<Crystal> unassignedBaseCrystals = new List<Crystal>();
+            //List<Crystal> unassignedBaseCrystals = new List<Crystal>();
             unassignedBaseCrystals.AddRange(_mapData.Bases);
 
             if (unassignedBaseCrystals != null && unassignedBaseCrystals.Count >= 1 && unassignedBaseCrystals[0] != null)
@@ -446,9 +445,9 @@ namespace PUN_Network
 
         public void StartMapInit()
         {
-            if (crystals != null && crystals.Count >= 1)
+            if (_mapData.Crystals != null && _mapData.Crystals.Length >= 1)
             {
-                foreach (Crystal crystalToInit in crystals)
+                foreach (Crystal crystalToInit in _mapData.Crystals)
                 {
                     if (!crystalToInit.Data.IsBase)
                         crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer/*, crystalToInit.CrystalView.ViewID*/);
