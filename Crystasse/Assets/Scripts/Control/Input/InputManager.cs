@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     Camera _cam;
     [SerializeField]
-    float _camSpeed = 5f, _camRotSpeed = 10f;
+    float _camSpeed = 50f, _camRotSpeed = 60f;
 
     private Crystal selCrystal;
 
@@ -106,18 +106,19 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void MoveCam(float speed)
     {
+        var t = _cam.transform;
         if(Input.GetKey(KeyCode.A))
-            _cam.transform.position += Vector3.left * speed;
+            t.position -= t.right * speed;
         if(Input.GetKey(KeyCode.D))
-            _cam.transform.position += Vector3.right * speed;
+            t.position += t.right * speed;
         if(Input.GetKey(KeyCode.W))
-            _cam.transform.position += Vector3.forward * speed;
+            t.position += Vector3.forward * speed;
         if(Input.GetKey(KeyCode.S))
-            _cam.transform.position += Vector3.back * speed;
+            t.position += Vector3.back * speed;
         if(Input.GetKey(KeyCode.Q))
-            _cam.transform.Rotate(-Vector3.up * Time.deltaTime * _camRotSpeed);
+            t.eulerAngles -= Vector3.up * Time.deltaTime * _camRotSpeed;
         else if(Input.GetKey(KeyCode.E))
-            _cam.transform.Rotate(Vector3.up * Time.deltaTime * _camRotSpeed);
+            t.eulerAngles += Vector3.up * Time.deltaTime * _camRotSpeed;
     }
 
     private IEnumerator BoxSelectionRoutine()

@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam: {fileID: 0}
   _camSpeed: 5
+  _camRotSpeed: 10
   _teamID: 0
 --- !u!114 &1503126695070094613
 MonoBehaviour:
