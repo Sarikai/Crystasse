@@ -144,7 +144,7 @@ namespace PUN_Network
                         foreach (Crystal crystalToInit in crystals)
                         {
                             if (!crystalToInit.Data.IsBase)
-                                crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer, crystalToInit.CrystalView.ViewID);
+                                crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer/*, crystalToInit.CrystalView.ViewID*/);
                         }
                     }
                 }

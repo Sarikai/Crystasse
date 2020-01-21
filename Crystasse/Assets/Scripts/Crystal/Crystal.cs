@@ -126,20 +126,20 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void RPC_InitSceneCrystal(int crystalID)
+    public void RPC_InitSceneCrystal(/*int crystalID*/)
     {
-        Crystal crystalToInit = PhotonView.Find(crystalID).GetComponent<Crystal>();
-        crystalToInit.GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
-        crystalToInit.Health = crystalToInit._data.MaxHealth;
-        crystalToInit._unitPrefab = crystalToInit._prefabDatabase[TeamID, isUpgraded];
-        crystalToInit.OnConquered += () => crystalToInit._unitPrefab = crystalToInit._prefabDatabase[TeamID, isUpgraded];
-        crystalToInit.OnConquered += crystalToInit._unitsSpawned.Clear;
+        //Crystal crystalToInit = PhotonView.Find(crystalID).GetComponent<Crystal>();
+        GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
+        Health = _data.MaxHealth;
+        _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
+        OnConquered += () => _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
+        OnConquered += _unitsSpawned.Clear;
         //OnConquered += ChangeTeam; //Exfunc of GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[_teamID];
-        crystalToInit.OnConquered += () => crystalToInit.StartCoroutine(ReworkedSpawnRoutine());
-        crystalToInit.GetComponent<SphereCollider>().radius = crystalToInit._data.Range;
+        OnConquered += () => StartCoroutine(ReworkedSpawnRoutine());
+        GetComponent<SphereCollider>().radius = _data.Range;
 
-        if (crystalToInit._crystalView.ViewID == 0 && crystalToInit._crystalView.IsSceneView)
-            crystalToInit.StartCoroutine(ReworkedSpawnRoutine());
+        if (_crystalView.ViewID == 0 && _crystalView.IsSceneView)
+            StartCoroutine(ReworkedSpawnRoutine());
     }
 
     public void UpdateCrystal()
