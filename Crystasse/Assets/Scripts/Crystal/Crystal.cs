@@ -126,14 +126,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void RPC_InitSceneCrystal(/*int crystalID*/)
+    public void RPC_InitSceneCrystal()
     {
-        //Crystal crystalToInit = PhotonView.Find(crystalID).GetComponent<Crystal>();
+        _teamID = 0;
         GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
         Health = _data.MaxHealth;
         _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += () => _unitPrefab = _prefabDatabase[TeamID, isUpgraded];
         OnConquered += _unitsSpawned.Clear;
+        OnConquered += SetSpawningTrue;
         //OnConquered += ChangeTeam; //Exfunc of GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[_teamID];
         OnConquered += () => StartCoroutine(ReworkedSpawnRoutine());
         GetComponent<SphereCollider>().radius = _data.Range;
