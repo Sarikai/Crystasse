@@ -106,19 +106,20 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void MoveCam(float speed)
     {
-        var t = _cam.transform;
+        var camTrans = _cam.transform;
+
         if(Input.GetKey(KeyCode.A))
-            t.position -= t.right * speed;
+            camTrans.position -= camTrans.right * speed;
         if(Input.GetKey(KeyCode.D))
-            t.position += t.right * speed;
+            camTrans.position += camTrans.right * speed;
         if(Input.GetKey(KeyCode.W))
-            t.position += Vector3.forward * speed;
+            camTrans.position += new Vector3(camTrans.forward.x, 0, camTrans.forward.z) * speed;
         if(Input.GetKey(KeyCode.S))
-            t.position += Vector3.back * speed;
+            camTrans.position -= new Vector3(camTrans.forward.x, 0, camTrans.forward.z) * speed;
         if(Input.GetKey(KeyCode.Q))
-            t.eulerAngles -= Vector3.up * Time.deltaTime * _camRotSpeed;
+            camTrans.eulerAngles -= Vector3.up * Time.deltaTime * _camRotSpeed;
         else if(Input.GetKey(KeyCode.E))
-            t.eulerAngles += Vector3.up * Time.deltaTime * _camRotSpeed;
+            camTrans.eulerAngles += Vector3.up * Time.deltaTime * _camRotSpeed;
     }
 
     private IEnumerator BoxSelectionRoutine()
