@@ -517,7 +517,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Start
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1947784663}
     - target: {fileID: 4572917045503238739, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: m_End
@@ -527,7 +527,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _startCrystal
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1947784664}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _lineStart.z
@@ -1283,7 +1283,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Start
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1478152103}
     - target: {fileID: 4572917045503238739, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: m_End
@@ -1293,7 +1293,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _startCrystal
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1478152104}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _lineStart.z
@@ -1633,7 +1633,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Start
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1947784663}
     - target: {fileID: 4572917045503238739, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: m_End
@@ -1643,7 +1643,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _startCrystal
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1947784664}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _lineStart.z
@@ -2482,7 +2482,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Start
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1478152103}
     - target: {fileID: 4572917045503238739, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: m_End
@@ -2492,7 +2492,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _startCrystal
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1478152104}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _lineStart.z
@@ -3252,7 +3252,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_End
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1478152103}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _startCrystal
@@ -3272,7 +3272,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _endCrystal
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1478152104}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _lineEnd.x
@@ -4598,7 +4598,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Start
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1947784663}
     - target: {fileID: 4572917045503238739, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: m_End
@@ -4613,7 +4613,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _startCrystal
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1947784664}
     - target: {fileID: 6580614257658295618, guid: 027bc79560e4c754a883ebc143f92bc5,
         type: 3}
       propertyPath: _lineStart.z
@@ -5071,6 +5071,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1478152102}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1478152104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1478152102}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b8b08b0ecab164594573041b874b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1489770760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6798,6 +6810,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1947784662}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1947784664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7061486992091332536, guid: cbc76025b9de83b44a0b3c3d5f429f1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1947784662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b8b08b0ecab164594573041b874b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1966874304
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
             if(_cam == null)
             {
                 Debug.LogError("No Cam on inputmanager");
+                _cam = FindObjectOfType<Camera>();
                 return;
             }
 
