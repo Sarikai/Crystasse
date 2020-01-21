@@ -6333,6 +6333,17 @@ MonoBehaviour:
   Bases:
   - {fileID: 1947784664}
   - {fileID: 1478152104}
+  Crystals:
+  - {fileID: 1230952447}
+  - {fileID: 1946227193}
+  - {fileID: 859127508}
+  - {fileID: 1542418430}
+  - {fileID: 902129665}
+  - {fileID: 1578127339}
+  - {fileID: 88301697}
+  - {fileID: 172524122}
+  - {fileID: 1988182823}
+  - {fileID: 563879577}
   GameArea:
     Min: {x: -100, y: -100}
     Max: {x: 100, y: 100}
