@@ -38,10 +38,10 @@ public static class Selection
 
     private static void AddSelection(Unit[] selection)
     {
-        //foreach(var u in selection)
-        //{
-        //    Debug.Log(u);
-        //}
+        foreach(var u in selection)
+        {
+            Debug.Log(u);
+        }
         if(selection != null && selection.Length >= 1)
             _selected.AddRange(selection);
         else if(selection.Length <= 0)

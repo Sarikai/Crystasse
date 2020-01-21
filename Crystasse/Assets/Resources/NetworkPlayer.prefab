@@ -71,6 +71,7 @@ MonoBehaviour:
   _cam: {fileID: 0}
   _camSpeed: 50
   _camRotSpeed: 60
+  _scrollSpeed: 150
   _teamID: 0
 --- !u!114 &1503126695070094613
 MonoBehaviour:
