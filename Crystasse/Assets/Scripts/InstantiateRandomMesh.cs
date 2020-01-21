@@ -38,7 +38,7 @@ public class InstantiateRandomMesh : MonoBehaviour
     //[PunRPC]
     //public void RPC_ChangeMaterial()
     //{
-    //    //TODO: Material Resources Path in constants und ResourceLoad()
+    //    //TODO: [DONE] Material Resources Path in constants und ResourceLoad()
     //}
 
     private void OnValidate()

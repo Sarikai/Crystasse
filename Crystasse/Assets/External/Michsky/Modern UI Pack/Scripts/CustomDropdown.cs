@@ -15,7 +15,7 @@ namespace Michsky.UI.ModernUIPack
         [Header("OBJECTS")]
         public GameObject triggerObject;
         public TextMeshProUGUI selectedText;
-        //TODO: set image of Unit
+        //TODO: [DONE] set image of Unit
         public Image selectedImage;
         public Transform itemParent;
         public GameObject itemObject;
@@ -33,7 +33,7 @@ namespace Michsky.UI.ModernUIPack
         [SerializeField]
         public List<Item> dropdownItems = new List<Item>();
         private List<Item> imageList = new List<Item>();
-        //TODO: selectedIndex pick out
+        //TODO: [DONE] selectedIndex pick out
         public int selectedItemIndex = 0;
         [Space(20)]
 

@@ -85,7 +85,7 @@ public class Unit : Agent
     {
         Debug.Log($"Yes I {gameObject} take damage");
         //TODO: Check if check needed, could reduce problem if not
-        if (value >= Health && IsMyUnit)
+        if (value >= Health /*&& IsMyUnit*/)
             Die();
         else
             Health -= value;
