@@ -21,19 +21,11 @@ public static class Selection
 
     static Selection()
     {
-        //TODO: Set owner team ID
-        //TeamID = 1;
         TeamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
         //Debug.Log($"Selection Team: {TeamID}");
 
         var text = File.ReadAllText(Constants.SELECTIONDATA_PATH + "/Data.json");
         _data = JsonConvert.DeserializeObject<SelectionData>(text);
-
-        //_sphereVisual = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //_sphereVisual.name = "Selection Sphere Visual";
-        //_sphereVisual.GetComponent<SphereCollider>().radius = _data.SelectionRadius;
-        //_sphereVisual.GetComponent<SphereCollider>().isTrigger = true;
-        //_sphereVisual.SetActive(false);
     }
 
     private static void AddSelection(Unit[] selection)

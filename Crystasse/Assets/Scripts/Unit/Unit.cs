@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Jobs;
 
 [RequireComponent(typeof(Rigidbody), typeof(Photon.Pun.PhotonView))]
 public class Unit : Agent
 {
     private static int id = 0;
+    [SerializeField]
+    private NavMeshAgent _meshAgent = null;
     [SerializeField]
     private UnitData _data;
     [SerializeField]
@@ -31,6 +34,7 @@ public class Unit : Agent
     public byte AttackPoints => _data.AttackPoints;
     public byte BuildPoints { get; private set; }
     public float MoveSpeed => _data.MoveSpeed;
+    public NavMeshAgent MeshAgent => _meshAgent;
 
     public Rigidbody Rigidbody => _rb;
 

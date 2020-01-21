@@ -23,7 +23,8 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     int bridgeLayer = 31;
     private void Start()
     {
-        Init(new Area(new Vector2(-1000000000, -1000000000), new Vector2(1000000000, 1000000000)));
+        //TODO: Remove
+        Init(new Area(new Vector2(-1000000000, -1000000000), new Vector2(1000000000, 1000000000)), FindObjectOfType<Camera>());
     }
 
     public void Init(Area area)
@@ -31,15 +32,24 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         _playArea = area;
     }
 
+    public void Init(Area area, Camera cam)
+    {
+        _playArea = area;
+        _cam = cam;
+        if(_cam == null)
+            Debug.LogError("No Cam on inputmanager");
+    }
 
     private void Update()
     {
         //TODO: check again if photonView check is correct or still needed
         //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
-            //TODO: Move to init
             if(_cam == null)
-                _cam = FindObjectOfType<Camera>();
+            {
+                Debug.LogError("No Cam on inputmanager");
+                return;
+            }
 
             //MakeSelection();
 
@@ -91,7 +101,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 foreach(var unit in Selection.Selected)
                 {
                     if(unit != null)
-                        StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.GetComponent<UnityEngine.AI.NavMeshAgent>()));
+                        StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.MeshAgent));
                 }
             }
 
@@ -132,6 +142,11 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //        //Selection.CastBoxSelection(_selectionStart, hit.point);
         //    }
         //}
+    }
+
+    private /*IEnumerator*/ void BoxSelectionRoutine()
+    {
+
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

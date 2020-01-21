@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3adfaf8094a3114fa119d3274e8bca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshAgent: {fileID: 3887469513427666939}
   _data: {fileID: 11400000, guid: b198c5b4685df40479e6201dce1fb52b, type: 2}
   _teamID: 12
   _rb: {fileID: 1997392058396214436}

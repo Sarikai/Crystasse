@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomMesh: {fileID: 7061486992091332542}
   _prefabDatabase: {fileID: 11400000, guid: 21e7ac3ed81401b4bbcbd704a9de9b94, type: 2}
-  data: {fileID: 0}
+  data: {fileID: 4900000, guid: 57391f0c948ef704eb152017f9aa6242, type: 3}
   _data:
     MaxHealth: 0
     MaxUnitSpawned: 0
@@ -79,10 +79,12 @@ MonoBehaviour:
     SpawnRate: 0
     Range: 0
   _health: 0
+  _unitsSpawned: []
   _crystalView: {fileID: 0}
   _viewID: 100
   _teamID: 0
   _crystalMeshRenderer: {fileID: 0}
+  _crystalRenderer: {fileID: 0}
 --- !u!114 &7061486992091332542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,14 +98,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crystal: {fileID: 7061486992091332536}
-  _teamMaterials: []
   _meshes:
   - {fileID: -927199367670048503, guid: 46417f70e5c18b34c8e6af9c268adbdb, type: 3}
   - {fileID: -927199367670048503, guid: 3b5a3bad8073c3d4ea7e6639c12b6dd6, type: 3}
   - {fileID: -927199367670048503, guid: 78f0c363befdb5e4aa2a225be5e9e723, type: 3}
   - {fileID: -927199367670048503, guid: a078aec1828671346b9080dbed975aa3, type: 3}
   - {fileID: -927199367670048503, guid: ad8db36a553f84e4a99ce8e17e172c1b, type: 3}
-  testMaterial: {fileID: 2100000, guid: 3e5192fcd2807d24ca2346752a1067ca, type: 2}
 --- !u!135 &7061486992091332537
 SphereCollider:
   m_ObjectHideFlags: 0

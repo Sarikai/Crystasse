@@ -17,7 +17,7 @@ public class AttackState : State
 
     protected override void Enter()
     {
-        if (Target.Health > 0)
+        if(Target.Health > 0)
             Substate = Substates.Stay;
         else
             Substate = Substates.Exit;
@@ -27,7 +27,7 @@ public class AttackState : State
     {
         Debug.Log("Taking damage?");
         Target.TakeDamage(Agent.AttackPoints);
-        //TODO: removed mutual assured destruction for the better I guess
+        // removed mutual assured destruction for the better I guess
         //Agent.TakeDamage(Target.AttackPoints);
         //TODO: explosion effects here would be nice
         Completed = true;
@@ -36,7 +36,7 @@ public class AttackState : State
     protected override void Stay()
     {
         _curveX += Time.deltaTime;
-        if (_curveX >= 1)
+        if(_curveX >= 1)
         {
             _curveX = 0;
             Substate = Substates.Exit;
