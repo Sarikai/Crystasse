@@ -378,6 +378,7 @@ namespace PUN_Network
             //TODO:  Test if change worked!
             GameObject entryToRemove = _playerListEntries[GetNetworkPlayerReference(leavingPlayer)];
             _playerListEntries.Remove(GetNetworkPlayerReference(leavingPlayer));
+            /*PhotonNetwork.*/
             Destroy(entryToRemove);
         }
 
