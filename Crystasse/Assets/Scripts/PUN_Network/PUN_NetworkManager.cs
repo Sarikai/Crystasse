@@ -128,7 +128,7 @@ namespace PUN_Network
                 GameManager.MasterManager.SoundManager.IngameMusic();
                 GameManager.MasterManager.DoUpdate = true;
                 _mapData = FindObjectOfType<MapData>().GetComponent<MapData>();
-
+                GameManager.MasterManager.InputManager.Init(_mapData.GameArea, _mapData.Camera);
                 if (PhotonNetwork.IsMasterClient)
                 {
                     //TODO: [DONE] Assigning crystal views to crystal and change owner

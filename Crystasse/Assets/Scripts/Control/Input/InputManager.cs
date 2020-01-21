@@ -19,11 +19,11 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     public byte _teamID;
 
     Vector3 _selectionStart;
-    private void Start()
-    {
-        //TODO: Remove
-        Init(new Area(new Vector2(-1000000000, -1000000000), new Vector2(1000000000, 1000000000)), FindObjectOfType<Camera>());
-    }
+    //private void Start()
+    //{
+    //    //TODO: Remove
+    //    Init(new Area(new Vector2(-1000000000, -1000000000), new Vector2(1000000000, 1000000000)), FindObjectOfType<Camera>());
+    //}
 
     public void Init(Area area)
     {
@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         _playArea = area;
         _cam = cam;
-        if(_cam == null)
+        if (_cam == null)
             Debug.LogError("No Cam on inputmanager");
     }
 
@@ -43,9 +43,10 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //TODO: check again if photonView check is correct or still needed
         //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
-            if(_cam == null)
+            //TODO: OnSceneLoaded check maybe?
+            if (_cam == null)
             {
-                Debug.LogError("No Cam on inputmanager");
+                //Debug.LogError("No Cam on inputmanager");
                 _cam = FindObjectOfType<Camera>();
                 return;
             }
@@ -54,33 +55,33 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
             MoveCam(Time.deltaTime * _camSpeed);
 
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                if(RayCastToMouse(Selection.CrystalLayer, out hit))
+                if (RayCastToMouse(Selection.CrystalLayer, out hit))
                 {
                     var c = hit.collider.GetComponent<Crystal>();
-                    if(c != null)
+                    if (c != null)
                     {
                         selCrystal = c;
                         var bridges = BridgeList.GetBridges(c);
 
-                        foreach(var b in bridges)
+                        foreach (var b in bridges)
                             b.Show(true);
                     }
                 }
-                else if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
+                else if (RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
                 {
                     var bridge = hit.collider.GetComponent<Bridge>();
-                    if(bridge != null)
-                        foreach(var unit in Selection.Selected)
-                            if(unit != null)
+                    if (bridge != null)
+                        foreach (var unit in Selection.Selected)
+                            if (unit != null)
                                 StateMachine.SwitchState(unit, new BuildState(unit, bridge));
                 }
-                else if(RayCastToMouse(Selection.PlaneLayer, out hit))
+                else if (RayCastToMouse(Selection.PlaneLayer, out hit))
                 {
                     var bridges = BridgeList.GetBridges(selCrystal);
 
-                    foreach(var b in bridges)
+                    foreach (var b in bridges)
                         b.Show(false);
 
                     selCrystal = null;
@@ -92,11 +93,11 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if(Input.GetMouseButtonDown(1) && Selection.HasValidSelection
+            if (Input.GetMouseButtonDown(1) && Selection.HasValidSelection
            && RayCastToMouse(Selection.PlaneLayer, out hit))
             {
-                foreach(var unit in Selection.Selected)
-                    if(unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
+                foreach (var unit in Selection.Selected)
+                    if (unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
                         StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.MeshAgent));
             }
         }
@@ -108,17 +109,17 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         var camTrans = _cam.transform;
 
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
             camTrans.position -= camTrans.right * speed;
-        if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
             camTrans.position += camTrans.right * speed;
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
             camTrans.position += new Vector3(camTrans.forward.x, 0, camTrans.forward.z) * speed;
-        if(Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
             camTrans.position -= new Vector3(camTrans.forward.x, 0, camTrans.forward.z) * speed;
-        if(Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
             camTrans.eulerAngles -= Vector3.up * Time.deltaTime * _camRotSpeed;
-        else if(Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E))
             camTrans.eulerAngles += Vector3.up * Time.deltaTime * _camRotSpeed;
     }
 
@@ -126,7 +127,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         _selectionStart = Input.mousePosition;
 
-        while(!Input.GetMouseButtonUp(0))
+        while (!Input.GetMouseButtonUp(0))
             yield return new WaitForEndOfFrame();
 
         Selection.CastBoxSelection(_selectionStart, Input.mousePosition);
@@ -134,7 +135,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        if (stream.IsWriting)
             stream.SendNext(_teamID);
         else
             _teamID = (byte)stream.ReceiveNext();
