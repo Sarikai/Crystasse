@@ -51,7 +51,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         get => _health; private set
         {
             _health = value;
-            if (_health <= 0)
+            if(_health <= 0)
             {
                 _teamID = 0;
                 _health = 0;
@@ -102,7 +102,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     public void Init()
     {
         Debug.Log($"Crystal Init called");
-        if (_crystalView.IsMine)
+        if(_crystalView.IsMine)
         {
             //photonView.RPC("TransferTeamID", RpcTarget.AllViaServer);
             _teamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
@@ -117,16 +117,16 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         GetComponent<SphereCollider>().radius = _data.Range;
 
         Debug.Log($"crystalview mine? {_crystalView.IsMine} &&  team mine? {IsMyTeam}");
-        if (_crystalView.IsMine && IsMyTeam)
+        if(_crystalView.IsMine && IsMyTeam)
             StartCoroutine(ReworkedSpawnRoutine());
     }
 
     public void UpdateCrystal()
     {
-        if (_unitsInRange.Count >= Constants.UNITCOUNT_FOR_UPGRADE)
+        if(_unitsInRange.Count >= Constants.UNITCOUNT_FOR_UPGRADE)
         {
             isUpgraded = 1;
-            for (int i = 0; i < _unitsInRange.Count; i++)
+            for(int i = 0; i < _unitsInRange.Count; i++)
                 _unitsInRange[i].TakeDamage(_unitsInRange[i].Health);
         }
     }
@@ -144,7 +144,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private IEnumerator SpawnRoutine()
     {
-        while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
+        while(_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && _unitPrefab != null)
         {
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             //CrystalView.RPC("Spawn", RpcTarget.AllViaServer, pos);
@@ -160,7 +160,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         var unit = Instantiate(_unitPrefab, pos, Quaternion.identity).GetComponent<Unit>();
         _unitsSpawned.Add(unit);
-        if (_unitsSpawned.Count > 0)
+        if(_unitsSpawned.Count > 0)
             CrystalView.RPC("RPC_SetUnitView", RpcTarget.AllViaServer, _unitsSpawned.Count - 1);
     }
 
@@ -181,7 +181,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     public void Conquer(byte value, byte team)
     {
         Debug.Log($"Entered conquer AP:{value}, AttackingTeam: {team}, ownTeam {TeamID}");
-        if (TeamID != 0)
+        if(TeamID != 0)
         {
             Debug.Log($"Conquer");
             Health -= value;
@@ -191,7 +191,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log($"ConquerElse");
             Health += value;
             //GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
-            if (Health >= _data.MaxHealth)
+            if(Health >= _data.MaxHealth)
             {
                 //TODO: Change HUD data of Crystals owned here
                 //TODO: [DONE] Assign attacking Team ID instead of localPlayer
@@ -200,12 +200,12 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
                 _teamID = team;
                 GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
                 //_crystalMeshRenderer.material = GameManager.MasterManager.CrystalMaterials[team - 1];
-                if (OnConquered != null)
+                if(OnConquered != null)
                     OnConquered.Invoke();
             }
         }
 
-        if (Health <= 0)
+        if(Health <= 0)
         {
             _teamID = 0;
             ChangeTeam();
@@ -214,7 +214,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     private void ChangeTeam()
     {
-        if (_teamID > 0)
+        if(_teamID > 0)
         {
             //_crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[_teamID];
             //_crystalMeshRenderer.GetComponent<Material>() = GameManager.MasterManager.CrystalMaterials[_teamID];
@@ -234,7 +234,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void RPC_ChangeTeam()
     {
-        if (_teamID > 0)
+        if(_teamID > 0)
         {
             _crystalMeshRenderer.materials[0] = GameManager.MasterManager.CrystalMaterials[_teamID];
             Debug.Log("Changed material to team");
@@ -252,9 +252,9 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log($"Crystal Trigger Enter called by {other}");
         var unit = other.GetComponentInParent<Unit>();
 
-        if (unit != null)
+        if(unit != null)
         {
-            if (unit.TeamID == TeamID)
+            if(unit.TeamID == TeamID)
                 _unitsInRange.Add(unit);
             else
                 StateMachine.SwitchState(unit, new ConquerState(unit, this));
@@ -266,26 +266,26 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log($"Collider: {other}");
         var unit = other.GetComponentInParent<Unit>();
         //Debug.Log($"Crystal Trigger Stay called by {other} Checkresult{unit != null} && {unit.TeamID != TeamID} && {unit.CurrentState?.Type == States.Idle}");
-        if (unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
+        if(unit != null && unit.TeamID != TeamID && unit.CurrentState.Type == States.Idle)
             StateMachine.SwitchState(unit, new ConquerState(unit, this));
     }
 
     private void OnTriggerExit(Collider other)
     {
         //Debug.Log($"Crystal Trigger Exit called by {other}");
-        if (other.GetComponentInParent<Unit>()?.TeamID == TeamID)
+        if(other.GetComponentInParent<Unit>()?.TeamID == TeamID)
             _unitsInRange.Remove(other.GetComponentInParent<Unit>());
     }
 
     private void OnValidate()
     {
-        if (data != null)
+        if(data != null && string.IsNullOrWhiteSpace(data.text) && data.text.Equals(string.Empty))
             _data = JsonUtility.FromJson<CrystalData>(data.text);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
+        if(stream.IsWriting)
         {
             stream.SendNext(Health);
             stream.SendNext(_unitsSpawned.Count);
@@ -341,13 +341,13 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     {
         Debug.Log($"Started SpawnRoutine");
         Debug.Log($"{_data.IsSpawning} && {_unitsSpawned.Count < _data.MaxUnitSpawned} && {TeamID != 0} && {IsMyTeam}");
-        while (_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && IsMyTeam /*&& _unitPrefab != null*/)
+        while(_data.IsSpawning && _unitsSpawned.Count < _data.MaxUnitSpawned && TeamID != 0 && IsMyTeam /*&& _unitPrefab != null*/)
         {
             //Debug.Log($"Called Spanwloop");
             var pos = new Vector3(UnityEngine.Random.Range(-4f, 4.1f), 0, UnityEngine.Random.Range(-4f, 4.1f)) + transform.position;
             Unit unit;
 
-            if (Constants.BASIC_UNIT_PREFAB_PATHS.Length > TeamID && Constants.BASIC_UNIT_PREFAB_PATHS[TeamID] != null)
+            if(Constants.BASIC_UNIT_PREFAB_PATHS.Length > TeamID && Constants.BASIC_UNIT_PREFAB_PATHS[TeamID] != null)
             {
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
@@ -385,9 +385,9 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     public Player GetPlayerOfTeam(int teamID)
     {
         PUN_CustomPlayer[] actualNetworkPlayers = FindObjectsOfType<PUN_CustomPlayer>();
-        foreach (PUN_CustomPlayer networkPlayer in actualNetworkPlayers)
+        foreach(PUN_CustomPlayer networkPlayer in actualNetworkPlayers)
         {
-            if (networkPlayer.TeamID == teamID)
+            if(networkPlayer.TeamID == teamID)
                 return networkPlayer.LocalPlayer;
         }
         return null;
