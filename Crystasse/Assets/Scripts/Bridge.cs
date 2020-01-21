@@ -14,6 +14,8 @@ public class Bridge : MonoBehaviour
     private OffMeshLink _offLink = null;
     [SerializeField]
     private MeshRenderer _renderer = null;
+    [SerializeField]
+    private Collider _collider = null;
 
     [SerializeField]
     private int _maxBuildValue = 0;
@@ -46,7 +48,11 @@ public class Bridge : MonoBehaviour
 
     public bool ConnectsTo(Crystal c) => (_startCrystal == c || _endCrystal == c);
 
-    public void Show(bool value) => _renderer.enabled = value;
+    public void Show(bool value)
+    {
+        _collider.enabled = value;
+        _renderer.enabled = value;
+    }
 
     //private void Update()
     //{

@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     float _camSpeed = 50f, _camRotSpeed = 60f, _scrollSpeed = 100f;
 
-    private Crystal selCrystal;
+    private List<Crystal> _selCrystals = new List<Crystal>();
 
     public Area _playArea { get; private set; }
 
@@ -56,19 +56,22 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
             if(Input.GetMouseButtonDown(0))
             {
-                if(RayCastToMouse(Selection.CrystalLayer, out hit))
+                if(RayCastToMouse(Selection.SelectionLayer, out hit))
                 {
-                    var c = hit.collider.GetComponentInChildren<Crystal>();
-                    if(c != null)
+                    var crystals = Selection.CastSphereSelectionCrystal(hit);
+                    foreach(var c in crystals)
                     {
-                        selCrystal = c;
-                        Debug.Log(selCrystal);
-                        var bridges = BridgeList.GetBridges(c);
-
-                        foreach(var b in bridges)
+                        if(c != null)
                         {
-                            Debug.Log(b);
-                            b.Show(true);
+                            _selCrystals.Add(c);
+                            Debug.Log(_selCrystals);
+                            var bridges = BridgeList.GetBridges(c);
+
+                            foreach(var b in bridges)
+                            {
+                                Debug.Log(b);
+                                b.Show(true);
+                            }
                         }
                     }
                 }
@@ -82,12 +85,14 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else if(RayCastToMouse(Selection.PlaneLayer, out hit))
                 {
-                    var bridges = BridgeList.GetBridges(selCrystal);
+                    List<Bridge> bridges = new List<Bridge>();
+                    foreach(var crystal in _selCrystals)
+                        bridges = BridgeList.GetBridges(crystal);
 
                     foreach(var b in bridges)
                         b.Show(false);
 
-                    selCrystal = null;
+                    _selCrystals.Clear();
 
                     Selection.CastSphereSelection(hit);
 
