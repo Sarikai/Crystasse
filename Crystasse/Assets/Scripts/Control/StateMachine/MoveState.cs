@@ -21,6 +21,8 @@ public class MoveState : State
         Speed = speed;
         Rigidbody = Agent.Rigidbody;
         Destination = destination;
+        //TODO: NavMesh Agent use it this way?
+        MeshAgent = agent.GetComponent<NavMeshAgent>();
     }
     public MoveState(float speed, Unit agent, Vector3 destination, NavMeshAgent meshAgent)
     {
@@ -45,7 +47,7 @@ public class MoveState : State
 
     protected override void Stay()
     {
-        if(MeshAgent.pathStatus == NavMeshPathStatus.PathComplete || (Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f)
+        if (MeshAgent.pathStatus == NavMeshPathStatus.PathComplete || (Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f)
             Substate = Substates.Exit;
         else
             MoveTowardsDest();
@@ -54,7 +56,7 @@ public class MoveState : State
     private void MoveTowardsDest()
     {
         Agent.PlayMoveAnim(_timer);
-        if(MeshAgent == null)
+        if (MeshAgent == null)
         {
             Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
 

@@ -423,7 +423,7 @@ namespace PUN_Network
         public void AssignRandomBaseCrystal(Player targetPlayer)
         {
             unassignedBaseCrystals = baseCrystals;
-            if (unassignedBaseCrystals != null && unassignedBaseCrystals[0] != null && unassignedBaseCrystals.Count >= 1)
+            if (unassignedBaseCrystals != null && unassignedBaseCrystals.Count >= 1 && unassignedBaseCrystals[0] != null)
             {
                 int rndCrystal = Random.Range(0, unassignedBaseCrystals.Count);
                 Debug.Log($"Transferring {unassignedBaseCrystals[rndCrystal].CrystalView} ID: {unassignedBaseCrystals[rndCrystal].CrystalView.ViewID} to {targetPlayer.ActorNumber}");
