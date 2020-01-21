@@ -12,6 +12,7 @@ public class BuildState : State
     {
         Agent = agent;
         Target = target;
+        Type = States.Build;
     }
 
     protected override void Enter()

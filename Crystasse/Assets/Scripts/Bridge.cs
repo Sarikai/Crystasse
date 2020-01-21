@@ -29,6 +29,7 @@ public class Bridge : MonoBehaviour
     [SerializeField]
     Vector3 end;
     private byte _teamID = 0;
+    private Vector3 _linedir;
 
     public byte TeamID { get => _teamID; set => _teamID = value; }
     public float PercentDone => (float)_buildValue / (float)_maxBuildValue;
@@ -38,11 +39,12 @@ public class Bridge : MonoBehaviour
 
     private void Awake()
     {
-        _line.enabled = false;
+        //_line.enabled = false;
         _line.SetPosition(0, _lineStart);
+        _line.SetPosition(1, _lineStart);
         _offLink.activated = false;
         end = _lineStart;
-
+        _linedir = (_lineEnd - _lineStart);
         BridgeList.Add(this);
     }
 
@@ -54,26 +56,21 @@ public class Bridge : MonoBehaviour
         _renderer.enabled = value;
     }
 
-    //private void Update()
-    //{
-    //    Build(1);
-    //}
-
     public void Build(byte value)
     {
         Build((int)value);
     }
     public void Build(int value)
     {
+        Debug.Log(value);
         if(_buildValue < _maxBuildValue)
         {
             _buildValue += value;
 
-            if(_buildValue >= _maxBuildValue)
-            {
+            if(_buildValue > _maxBuildValue)
                 _buildValue = _maxBuildValue;
-            }
-            end = _buildCurve.Evaluate(PercentDone) * _lineEnd;
+
+            end = _lineStart + _buildCurve.Evaluate(PercentDone) * _linedir;
             _line.SetPosition(1, end);
         }
     }
