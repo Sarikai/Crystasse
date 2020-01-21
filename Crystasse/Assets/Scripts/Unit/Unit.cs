@@ -92,7 +92,7 @@ public class Unit : Agent
     public void TakeDamage(byte value)
     {
         //TODO: Check if check needed, could reduce problem if not
-        if(value >= Health && !IsMyUnit)
+        if (value >= Health && IsMyUnit)
             Die();
         else
             Health -= value;
