@@ -283,6 +283,7 @@ namespace CustomUI
         {
             GameManager.MasterManager.NetworkManager.LeaveRoom();
             GameManager.MasterManager.NetworkManager.JoinDefaultLobby();
+            ToggleHUD();
             ToggleRoomMenu();
             ToggleLobbyMenu();
         }
