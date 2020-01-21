@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class Bridge : MonoBehaviour
 {
-    private event Action OnBuilt;
-
     [SerializeField]
     private GameObject _capsule = null;
     [SerializeField]
@@ -38,7 +36,6 @@ public class Bridge : MonoBehaviour
 
     private void Awake()
     {
-        //OnBuilt += () => _line.enabled = true;
         _line.enabled = false;
         _line.SetPosition(0, _lineStart);
         _offLink.activated = false;
@@ -51,12 +48,10 @@ public class Bridge : MonoBehaviour
 
     public void Show(bool value) => _renderer.enabled = value;
 
-    float perc = 0;
-    //TODO: make beautiful
-    private void Update()
-    {
-        Build(1);
-    }
+    //private void Update()
+    //{
+    //    Build(1);
+    //}
 
     public void Build(byte value)
     {
@@ -71,7 +66,6 @@ public class Bridge : MonoBehaviour
             if(_buildValue >= _maxBuildValue)
             {
                 _buildValue = _maxBuildValue;
-                //OnBuilt.Invoke();
             }
             end = _buildCurve.Evaluate(PercentDone) * _lineEnd;
             _line.SetPosition(1, end);
