@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public byte _teamID;
 
-    //Vector3 _selectionStart;
+    Vector3 _selectionStart;
     int crystalLayer = 31;
     int bridgeLayer = 31;
     private void Start()
@@ -91,6 +91,8 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                     selCrystal = null;
 
                     Selection.CastSphereSelection(hit);
+
+                    StartCoroutine(BoxSelectionRoutine());
                 }
             }
 
@@ -144,9 +146,14 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //}
     }
 
-    private /*IEnumerator*/ void BoxSelectionRoutine()
+    private IEnumerator BoxSelectionRoutine()
     {
+        _selectionStart = Input.mousePosition;
 
+        while(!Input.GetMouseButtonUp(0))
+            yield return new WaitForEndOfFrame();
+
+        Selection.CastBoxSelection(_selectionStart, Input.mousePosition);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

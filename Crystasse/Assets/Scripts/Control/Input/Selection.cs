@@ -21,11 +21,6 @@ public static class Selection
 
     static Selection()
     {
-<<<<<<< HEAD
-=======
-        //TODO: [DONE/SHOULD BE] Set owner team ID
-        //TeamID = 1;
->>>>>>> WednesdayRebuilding
         TeamID = GameManager.MasterManager.NetworkManager.CustomPlayer.TeamID;
         //Debug.Log($"Selection Team: {TeamID}");
 
@@ -66,21 +61,22 @@ public static class Selection
     }
 
     //TODO: this 
-    //public static void CastBoxSelection(Vector3 pos1, Vector3 pos2)
-    //{
-    //    var halfExtents = (pos1 - pos2) * 0.5f;
-    //    var center = pos1 + halfExtents;
+    public static void CastBoxSelection(Vector3 pos1, Vector3 pos2)
+    {
+        var halfExtents = (pos1 - pos2) * 0.5f;
+        var center = pos1 + halfExtents;
 
-    //    var hits = Physics.OverlapBox(center, halfExtents, Quaternion.identity, _data.SelectionLayer);
+        var hits = Physics.OverlapBox(center, halfExtents, Quaternion.identity, _data.SelectionLayer);
 
-    //    List<Unit> sel = new List<Unit>();
-    //    foreach(var coll in hits)
-    //        if(coll.GetComponent<Unit>()?.TeamID == TeamID)
-    //        {
-    //            sel.Add(coll.GetComponent<Unit>());
-    //        }
+        List<Unit> sel = new List<Unit>();
+        foreach(var coll in hits)
+        {
+            var unit = coll.GetComponent<Unit>();
+            if(unit != null && unit.TeamID == TeamID)
+                sel.Add(unit);
+        }
 
-    //    //_selected.Clear();
-    //    AddSelection(sel.ToArray());
-    //}
+        //_selected.Clear();
+        AddSelection(sel.ToArray());
+    }
 }
