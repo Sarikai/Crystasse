@@ -128,6 +128,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void RPC_InitSceneCrystal()
     {
+        Debug.Log($"Init of this Crystal {CrystalView.ViewID} called");
         _teamID = 0;
         GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[0];
         Health = _data.MaxHealth;
