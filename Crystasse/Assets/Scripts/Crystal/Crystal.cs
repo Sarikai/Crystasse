@@ -180,16 +180,16 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Conquer(byte value, byte team)
     {
-        Debug.Log($"Entered conquer AP:{value}, AttackingTeam: {team}, ownTeam {TeamID}");
+        //Debug.Log($"Entered conquer AP:{value}, AttackingTeam: {team}, ownTeam {TeamID}");
         if (TeamID != 0)
         {
-            Debug.Log($"Conquer");
+            //Debug.Log($"Conquer");
             _data.IsSpawning = false;
             Health -= value;
         }
         else
         {
-            Debug.Log($"ConquerElse");
+            //Debug.Log($"ConquerElse");
             Health += value;
             //GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
             if (Health >= _data.MaxHealth)
@@ -201,7 +201,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
                 _teamID = team;
                 GetComponentInChildren<MeshRenderer>().material = GameManager.MasterManager.CrystalMaterials[team];
                 //_crystalMeshRenderer.material = GameManager.MasterManager.CrystalMaterials[team - 1];
-                Debug.Log($"Conquered null? {OnConquered == null}");
+                //Debug.Log($"Conquered null? {OnConquered == null}");
 
                 if (IsMyTeam)
                 {
@@ -345,7 +345,7 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                Debug.Log("Unit does not exist!");
+                //Debug.Log("Unit does not exist!");
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[1], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
                 GameManager.MasterManager.NetworkManager.MatchStats.IncrementSpawns();

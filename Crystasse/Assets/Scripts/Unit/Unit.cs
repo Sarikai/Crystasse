@@ -54,7 +54,7 @@ public class Unit : Agent
         get
         {
             byte value;
-            if(BuildPoints >= _data.BuildSpeed)
+            if (BuildPoints >= _data.BuildSpeed)
             {
                 value = (byte)_data.BuildSpeed;
                 BuildPoints -= value;
@@ -90,13 +90,13 @@ public class Unit : Agent
 
     public void UpdateUnit()
     {
-        if(!CurrentState.Completed)
+        if (!CurrentState.Completed)
             CurrentState.UpdateState();
     }
 
     public void TakeDamage(byte value)
     {
-        Debug.Log($"Yes I {gameObject} take damage");
+        Debug.Log($"Yes I {gameObject} take damage, Die complete? { value >= Health && IsMyUnit}");
         //TODO: Check if check needed, could reduce problem if not
         if (value >= Health /*&& IsMyUnit*/)
             Die();
@@ -108,7 +108,7 @@ public class Unit : Agent
     private void Die()
     {
         //TODO: [DONE] rework to photon.destroy
-        if(this != null)
+        if (this != null)
             PhotonNetwork.Destroy(gameObject);
         //DestroyImmediate(gameObject);
 
@@ -127,14 +127,14 @@ public class Unit : Agent
     {
         _timer += Time.deltaTime;
 
-        if(_timer >= 2f)
+        if (_timer >= 2f)
             _timer = 0f;
 
         var v = new Vector3(0, Constants.MAX_UNIT_DISPLACEMENT * _anims.MoveAnim.Evaluate(_timer), 0) * Time.deltaTime;
 
-        if(_timer <= 1f)
+        if (_timer <= 1f)
             _visualTrans.position += v;
-        else if(_timer > 1f)
+        else if (_timer > 1f)
             _visualTrans.position -= v;
 
 
