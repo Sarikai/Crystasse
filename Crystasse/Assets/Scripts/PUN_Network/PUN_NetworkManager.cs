@@ -138,15 +138,16 @@ namespace PUN_Network
 
                     AssignStartCrystals(); //Assigning bases
 
-                    //TODO: [DONE] Init all other crystals
-                    if (crystals != null && crystals.Count >= 1)
-                    {
-                        foreach (Crystal crystalToInit in crystals)
-                        {
-                            if (!crystalToInit.Data.IsBase)
-                                crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer/*, crystalToInit.CrystalView.ViewID*/);
-                        }
-                    }
+
+                    //TODO: Init all other crystals in RPC && get List before
+                    //if (crystals != null && crystals.Count >= 1)
+                    //{
+                    //foreach (Crystal crystalToInit in crystals)
+                    //{
+                    //if (!crystalToInit.Data.IsBase)
+                    //crystalToInit.CrystalView.RPC("RPC_InitSceneCrystal", RpcTarget.AllViaServer/*, crystalToInit.CrystalView.ViewID*/);
+                    //}
+                    //}
                 }
             }
         }
