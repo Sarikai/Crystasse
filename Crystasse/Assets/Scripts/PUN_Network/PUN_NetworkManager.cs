@@ -74,6 +74,7 @@ namespace PUN_Network
             _localRoom = GetComponent<PUN_Room>();
             _defaultRoomSettings = GetComponent<PUN_RoomSettings>();
             _photonView = GetComponent<PhotonView>();
+            _photonView.ViewID = 1;
             Debug.Log($"NetworkManager Awake end");
         }
 
