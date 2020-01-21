@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 6666786034347619331}
   - component: {fileID: 6666786034347619330}
   - component: {fileID: 6666786034347619333}
+  - component: {fileID: 3451493747258268458}
   m_Layer: 11
   m_Name: Unit 007
   m_TagString: Untagged
@@ -262,6 +263,28 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!195 &3451493747258268458
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6666786034347619332}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &6666786032461593720
 PrefabInstance:
   m_ObjectHideFlags: 0
