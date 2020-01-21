@@ -12,12 +12,15 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     float _camSpeed = 5f;
 
+    private Crystal selCrystal;
+
     public Area _playArea { get; private set; }
 
     public byte _teamID;
 
     //Vector3 _selectionStart;
-
+    int crystalLayer = 31;
+    int bridgeLayer = 31;
     private void Start()
     {
         Init(new Area(new Vector2(-1000000000, -1000000000), new Vector2(1000000000, 1000000000)));
@@ -35,7 +38,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         //if (GameManager.MasterManager.NetworkManager.photonView.IsMine)
         {
             //TODO: Move to init
-            if (_cam == null)
+            if(_cam == null)
                 _cam = FindObjectOfType<Camera>();
 
             //MakeSelection();
@@ -44,20 +47,55 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
             MoveCam(Time.deltaTime);
 
-            if (Input.GetMouseButtonDown(0) && (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, Selection.PlaneLayer)))
-                Selection.CastSphereSelection(hit);
-
-            if (Input.GetMouseButtonDown(1) && Selection.Selected != null && Selection.Selected.Length > 0
-           && (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, Selection.PlaneLayer)))
+            if(Input.GetMouseButtonDown(0))
             {
-                foreach (var unit in Selection.Selected)
+                if(RayCastToMouse(crystalLayer, out hit))
                 {
-                    if (unit != null)
-                        StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point));
+                    var c = hit.collider.GetComponent<Crystal>();
+                    if(c != null)
+                    {
+                        selCrystal = c;
+                        var bridges = BridgeList.GetBridges(c);
+
+                        foreach(var b in bridges)
+                            b.Show(true);
+                    }
+                }
+                else if(RayCastToMouse(bridgeLayer, out hit) && Selection.HasValidSelection)
+                {
+                    var bridge = hit.collider.GetComponent<Bridge>();
+                    if(bridge != null)
+                        foreach(var unit in Selection.Selected)
+                        {
+                            if(unit != null)
+                                StateMachine.SwitchState(unit, new BuildState(unit, bridge));
+                        }
+                }
+                else if(RayCastToMouse(Selection.PlaneLayer, out hit))
+                {
+                    var bridges = BridgeList.GetBridges(selCrystal);
+
+                    foreach(var b in bridges)
+                        b.Show(false);
+
+                    selCrystal = null;
+
+                    Selection.CastSphereSelection(hit);
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.T) && Selection.Selected != null && Selection.Selected.Length > 0)
+
+            if(Input.GetMouseButtonDown(1) && Selection.HasValidSelection
+           && RayCastToMouse(Selection.PlaneLayer, out hit))
+            {
+                foreach(var unit in Selection.Selected)
+                {
+                    if(unit != null)
+                        StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.GetComponent<UnityEngine.AI.NavMeshAgent>()));
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.T) && Selection.Selected != null && Selection.Selected.Length > 0)
             {
                 int inter = UnityEngine.Random.Range(0, Selection.Selected.Length);
                 Unit[] selectedUnits = Selection.Selected;
@@ -67,21 +105,23 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    private bool RayCastToMouse(int layerMask, out RaycastHit hit) => Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, layerMask);
+
     private void MoveCam(float dt)
     {
-        if (Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A))
             _cam.transform.position += Vector3.left * _camSpeed * dt;
-        if (Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D))
             _cam.transform.position += Vector3.right * _camSpeed * dt;
-        if (Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.W))
             _cam.transform.position += Vector3.forward * _camSpeed * dt;
-        if (Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.S))
             _cam.transform.position += Vector3.back * _camSpeed * dt;
     }
 
     private void MakeSelection()
     {
-        if (Input.GetMouseButtonDown(0) && (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000, Selection.PlaneLayer)))
+        if(Input.GetMouseButtonDown(0) && (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000, Selection.PlaneLayer)))
             Selection.CastSphereSelection(hit);
 
         //_selectionStart = hit.point;
@@ -96,7 +136,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
+        if(stream.IsWriting)
         {
             stream.SendNext(_teamID);
         }
