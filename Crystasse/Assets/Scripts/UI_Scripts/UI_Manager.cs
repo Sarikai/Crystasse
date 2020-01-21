@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+﻿
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using PUN_Network;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.Xml.Xsl;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace CustomUI
 {
@@ -48,6 +49,8 @@ namespace CustomUI
         public GameObject _ButtonStatsMenu;        //Open statistics menu
         public GameObject _ButtonStatsToMain;      //Leave statistics to main menu
         public GameObject _ButtonExitApp;          //Close game
+        public GameObject _ButtonResume;
+        public GameObject _ButtonGameLeave;
 
         //InputFields for data needed
         [Header("Input Fields")]
@@ -96,8 +99,10 @@ namespace CustomUI
         public PUN_ServerlistEntry _serverEntryPrefab;
         public PUN_PlayerlistEntry _playerEntryPrefab;
         public UI_StatEntry _matchLinePrefab;
-
         public UI_Timer _uiTimer;
+
+        [Header("KeyBindings")]
+        public KeyCode _escapeKey;
 
         #endregion
 
@@ -155,6 +160,7 @@ namespace CustomUI
 
         public void ToggleIngameMenu()
         {
+            Toggle(_MultiplayerMenu);
             Toggle(_IngameMenu);
         }
 
@@ -281,6 +287,15 @@ namespace CustomUI
             ToggleLobbyMenu();
         }
 
+        public virtual void OnButtonGameLeaveClicked()
+        {
+            GameManager.MasterManager.NetworkManager.LeaveRoom();
+            GameManager.MasterManager.NetworkManager._isGameLoaded = false;
+            SceneManager.LoadScene(0);
+            ToggleIngameMenu();
+            ToggleMainMenu();
+        }
+
         public virtual void OnButtonRoomSettingsClicked()
         {
             ToggleRoomSetupMenu();
@@ -311,12 +326,6 @@ namespace CustomUI
             Debug.Log("App Quit");
         }
 
-        public virtual void HUD_Update()
-        {
-            _CrystalsEnemy.text = _crystalEnemy.ToString();
-            _CrystalsNeutral.text = _crystalNeutral.ToString();
-            _CrystalsOwned.text = _crystalOwned.ToString();
-        }
 
         #endregion
 
@@ -324,6 +333,40 @@ namespace CustomUI
         #region Others
 
         //Statistics, Matchhistory
+        public virtual void HUD_Init(MapData mapData)
+        {
+            List<Crystal> crystalsToCheck = new List<Crystal>();
+            crystalsToCheck.AddRange(mapData.Bases);
+            crystalsToCheck.AddRange(mapData.Crystals);
+
+            foreach (Crystal crystal in crystalsToCheck)
+            {
+                if (crystal.IsNeutral)
+                {
+                    _crystalNeutral++;
+                }
+                else
+                {
+                    if (crystal.IsMyTeam)
+                    {
+                        _crystalOwned++;
+                    }
+                    else
+                    {
+                        _crystalEnemy++;
+                    }
+                }
+            }
+            HUD_Update();
+        }
+
+        public virtual void HUD_Update()
+        {
+            _CrystalsEnemy.text = _crystalEnemy.ToString();
+            _CrystalsNeutral.text = _crystalNeutral.ToString();
+            _CrystalsOwned.text = _crystalOwned.ToString();
+        }
+
         public UI_StatEntry LoadStatEntry()
         {
             UI_StatEntry statEntry = Instantiate(GameManager.MasterManager.UIManager._matchLinePrefab, GameManager.MasterManager.UIManager._MatchList.transform.position, Quaternion.identity);

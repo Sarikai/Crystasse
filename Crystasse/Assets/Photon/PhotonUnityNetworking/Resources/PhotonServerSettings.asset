@@ -56,5 +56,6 @@ MonoBehaviour:
   - RPC_InitCrystal
   - RPC_InitSceneCrystal
   - RPC_InitBaseCrystal
+  - RPC_HUD_Init
   DisableAutoOpenWizard: 1
   ShowSettings: 1
