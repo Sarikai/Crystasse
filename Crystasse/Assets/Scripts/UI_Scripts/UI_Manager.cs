@@ -6,7 +6,6 @@ using PUN_Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Xml.Xsl;
 using TMPro;
 using UnityEngine;
@@ -98,8 +97,10 @@ namespace CustomUI
         public PUN_ServerlistEntry _serverEntryPrefab;
         public PUN_PlayerlistEntry _playerEntryPrefab;
         public UI_StatEntry _matchLinePrefab;
-
         public UI_Timer _uiTimer;
+
+        [Header("KeyBindings")]
+        public KeyCode _escapeKey;
 
         #endregion
 
@@ -157,6 +158,7 @@ namespace CustomUI
 
         public void ToggleIngameMenu()
         {
+            Toggle(_MultiplayerMenu);
             Toggle(_IngameMenu);
         }
 

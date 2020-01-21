@@ -111,6 +111,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkManager._isGameLoaded && Input.GetKeyDown(UIManager._escapeKey))
+        {
+            UIManager.ToggleIngameMenu();
+        }
+
         if (Input.GetKey(KeyCode.O))
         {
             Debug.Log("Saving");
