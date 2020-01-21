@@ -475,7 +475,7 @@ namespace PUN_Network
 
         public void EndOfGame()
         {
-            Match.SaveMatch(CustomPlayer.MatchSession)
+            Match.SaveMatch(CustomPlayer.MatchSession);
         }
 
 
