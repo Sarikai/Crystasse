@@ -10,6 +10,8 @@ public static class Selection
 
     private static readonly List<Unit> _selected = new List<Unit>();
     private static SelectionData _data;
+    const int crystalLayer = 1 << 12;
+    const int bridgeLayer = 1 << 13;
     private static readonly GameObject _sphereVisual;
 
     public static byte TeamID { get; set; }
@@ -18,6 +20,10 @@ public static class Selection
 
     public static Unit[] Selected => _selected.ToArray();
     public static bool HasValidSelection => Selected != null && Selected.Length > 0;
+
+    public static int BridgeLayer => bridgeLayer;
+
+    public static int CrystalLayer => crystalLayer;
 
     static Selection()
     {

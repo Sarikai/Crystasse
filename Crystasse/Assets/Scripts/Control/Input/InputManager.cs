@@ -19,8 +19,6 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     public byte _teamID;
 
     Vector3 _selectionStart;
-    int crystalLayer = 31;
-    int bridgeLayer = 31;
     private void Start()
     {
         //TODO: Remove
@@ -52,15 +50,13 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 return;
             }
 
-            //MakeSelection();
-
             RaycastHit hit;
 
             MoveCam(Time.deltaTime);
 
             if(Input.GetMouseButtonDown(0))
             {
-                if(RayCastToMouse(crystalLayer, out hit))
+                if(RayCastToMouse(Selection.CrystalLayer, out hit))
                 {
                     var c = hit.collider.GetComponent<Crystal>();
                     if(c != null)
@@ -72,15 +68,13 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                             b.Show(true);
                     }
                 }
-                else if(RayCastToMouse(bridgeLayer, out hit) && Selection.HasValidSelection)
+                else if(RayCastToMouse(Selection.BridgeLayer, out hit) && Selection.HasValidSelection)
                 {
                     var bridge = hit.collider.GetComponent<Bridge>();
                     if(bridge != null)
                         foreach(var unit in Selection.Selected)
-                        {
                             if(unit != null)
                                 StateMachine.SwitchState(unit, new BuildState(unit, bridge));
-                        }
                 }
                 else if(RayCastToMouse(Selection.PlaneLayer, out hit))
                 {
@@ -93,27 +87,17 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
                     Selection.CastSphereSelection(hit);
 
+                    StopCoroutine(BoxSelectionRoutine());
                     StartCoroutine(BoxSelectionRoutine());
                 }
             }
-
 
             if(Input.GetMouseButtonDown(1) && Selection.HasValidSelection
            && RayCastToMouse(Selection.PlaneLayer, out hit))
             {
                 foreach(var unit in Selection.Selected)
-                {
-                    if(unit != null)
+                    if(unit != null && !unit.MeshAgent.Raycast(hit.point, out _))
                         StateMachine.SwitchState(unit, new MoveState(unit.MoveSpeed, unit, hit.point, unit.MeshAgent));
-                }
-            }
-
-            if(Input.GetKeyDown(KeyCode.T) && Selection.Selected != null && Selection.Selected.Length > 0)
-            {
-                int inter = UnityEngine.Random.Range(0, Selection.Selected.Length);
-                Unit[] selectedUnits = Selection.Selected;
-
-                PhotonNetwork.Destroy(selectedUnits[inter].gameObject);
             }
         }
     }
@@ -132,21 +116,6 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
             _cam.transform.position += Vector3.back * _camSpeed * dt;
     }
 
-    private void MakeSelection()
-    {
-        if(Input.GetMouseButtonDown(0) && (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000, Selection.PlaneLayer)))
-            Selection.CastSphereSelection(hit);
-
-        //_selectionStart = hit.point;
-        //else if(Input.GetMouseButtonUp(0))
-        //{
-        //    if(Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000, Selection.PlaneLayer))
-        //    {
-        //        //Selection.CastBoxSelection(_selectionStart, hit.point);
-        //    }
-        //}
-    }
-
     private IEnumerator BoxSelectionRoutine()
     {
         _selectionStart = Input.mousePosition;
@@ -160,12 +129,8 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if(stream.IsWriting)
-        {
             stream.SendNext(_teamID);
-        }
         else
-        {
             _teamID = (byte)stream.ReceiveNext();
-        }
     }
 }

@@ -45,7 +45,7 @@ public class MoveState : State
 
     protected override void Stay()
     {
-        if(MeshAgent.pathStatus == NavMeshPathStatus.PathComplete || (Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f)
+        if(MeshAgent.pathStatus == NavMeshPathStatus.PathComplete /*|| (Destination - Rigidbody.transform.position).sqrMagnitude <= 0.1f*/)
             Substate = Substates.Exit;
         else
             MoveTowardsDest();
@@ -54,17 +54,17 @@ public class MoveState : State
     private void MoveTowardsDest()
     {
         Agent.PlayMoveAnim(_timer);
-        if(MeshAgent == null)
-        {
-            Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
+        //if(MeshAgent == null)
+        //{
+        //    Vector3 direction = (Destination - Rigidbody.transform.position).normalized;
 
-            //_timer += Time.deltaTime;
+        //    //_timer += Time.deltaTime;
 
-            //if(_timer >= 2f)
-            //    _timer = 0f;
+        //    //if(_timer >= 2f)
+        //    //    _timer = 0f;
 
 
-            Rigidbody.transform.position += direction * Speed * Time.deltaTime;
-        }
+        //    Rigidbody.transform.position += direction * Speed * Time.deltaTime;
+        //}
     }
 }
