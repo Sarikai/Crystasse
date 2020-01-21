@@ -158,6 +158,8 @@ namespace PUN_Network
                     _photonView.RPC("RPC_HUD_Init", RpcTarget.All);
                 }
             }
+            else
+                _isGameLoaded = false;
         }
 
         #region LobbyMethods
@@ -334,6 +336,8 @@ namespace PUN_Network
                 PhotonNetwork.LeaveRoom();
                 _localRoom.Room = null;
             }
+
+            SceneManager.LoadScene(0);
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)

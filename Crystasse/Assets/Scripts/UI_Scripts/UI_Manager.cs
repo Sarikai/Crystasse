@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Xml.Xsl;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace CustomUI
 {
@@ -49,6 +49,8 @@ namespace CustomUI
         public GameObject _ButtonStatsMenu;        //Open statistics menu
         public GameObject _ButtonStatsToMain;      //Leave statistics to main menu
         public GameObject _ButtonExitApp;          //Close game
+        public GameObject _ButtonResume;
+        public GameObject _ButtonGameLeave;
 
         //InputFields for data needed
         [Header("Input Fields")]
@@ -283,6 +285,15 @@ namespace CustomUI
             GameManager.MasterManager.NetworkManager.JoinDefaultLobby();
             ToggleRoomMenu();
             ToggleLobbyMenu();
+        }
+
+        public virtual void OnButtonGameLeaveClicked()
+        {
+            GameManager.MasterManager.NetworkManager.LeaveRoom();
+            GameManager.MasterManager.NetworkManager._isGameLoaded = false;
+            SceneManager.LoadScene(0);
+            ToggleIngameMenu();
+            ToggleMainMenu();
         }
 
         public virtual void OnButtonRoomSettingsClicked()
