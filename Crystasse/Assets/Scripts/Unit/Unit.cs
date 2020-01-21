@@ -81,6 +81,7 @@ public class Unit : Agent
         BuildPoints = _data.BuildPoints;
         _attackTrigger.radius = _data.Range;
         UnitView = GetComponent<PhotonView>();
+        MeshAgent.speed = _data.MoveSpeed;
     }
 
     private void Start()
@@ -98,7 +99,7 @@ public class Unit : Agent
     {
         Debug.Log($"Yes I {gameObject} take damage");
         //TODO: Check if check needed, could reduce problem if not
-        if (value >= Health /*&& IsMyUnit*/)
+        if(value >= Health /*&& IsMyUnit*/)
             Die();
         else
             Health -= value;
