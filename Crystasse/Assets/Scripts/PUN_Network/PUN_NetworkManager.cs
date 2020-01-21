@@ -43,6 +43,7 @@ namespace PUN_Network
         public Player GetLocalPlayer { get { return _localPlayer; } }
 
         public PUN_CustomPlayer CustomPlayer { get => _customPlayer; set => _customPlayer = value; }
+        public MapData MapData { get => _mapData; set => _mapData = value; }
 
 
         //
@@ -55,8 +56,10 @@ namespace PUN_Network
         public List<Unit> units = new List<Unit>();
         public List<Crystal> crystals = new List<Crystal>();
         public List<Crystal> baseCrystals = new List<Crystal>();
-        public List<Crystal> unassignedBaseCrystals = new List<Crystal>();
+        //public List<Crystal> unassignedBaseCrystals = new List<Crystal>();
         public List<Player> unassignedPlayers = new List<Player>();
+
+        private MapData _mapData;
 
         #endregion
 
@@ -124,11 +127,14 @@ namespace PUN_Network
                 _uiManager.Toggle(_uiManager._Background);
                 GameManager.MasterManager.SoundManager.IngameMusic();
                 GameManager.MasterManager.DoUpdate = true;
+                _mapData = FindObjectOfType<MapData>().GetComponent<MapData>();
+
                 if (PhotonNetwork.IsMasterClient)
                 {
                     //TODO: [DONE] Assigning crystal views to crystal and change owner
                     //photonView.RPC("RPC_SetCrystalViews", RpcTarget.AllViaServer, PhotonNetwork.PlayerList);
-                    crystals.AddRange(FindObjectsOfType<Crystal>());
+                    //crystals.AddRange(FindObjectsOfType<Crystal>());
+
                     for (int i = 0; i < crystals.Count; i++)
                     {
                         //crystals[i].CrystalView.ViewID = 100 + i;
@@ -398,32 +404,34 @@ namespace PUN_Network
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log($"Playerlist>1? {PhotonNetwork.PlayerList.Length > 1}");
-                if (PhotonNetwork.PlayerList.Length > 1)
-                    unassignedPlayers.AddRange(PhotonNetwork.PlayerList);
-                else
-                    unassignedPlayers.Add(PhotonNetwork.PlayerList[0]);
+                CreateUnassignedPlayerList();
 
                 foreach (Player unassignedPlayer in unassignedPlayers)
                 {
-                    //Player player = unassignedPlayer;
                     AssignRandomBaseCrystal(unassignedPlayer);
-                    //unassignedPlayers.Remove(unassignedPlayer);
-
-
-                    //if (crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == 0 || crystals[i].Data.IsBase && crystals[i].CrystalView.OwnerActorNr == p - 1)
-                    //       {
-                    //           crystals[i].CrystalView.TransferOwnership(PhotonNetwork.PlayerList[p]);
-                    //           crystals[i].Init();
-                    //      }
                     //TODO: [DONE] Crystal TeamID PUN call change?
                 }
             }
         }
 
+        public void CreateUnassignedPlayerList()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.Log($"Playerlist>1? {PhotonNetwork.PlayerList.Length > 1}");
+                if (PhotonNetwork.PlayerList.Length > 1)
+                    unassignedPlayers.AddRange(PhotonNetwork.PlayerList);
+                else
+                    unassignedPlayers.Add(PhotonNetwork.PlayerList[0]);
+            }
+        }
+
         public void AssignRandomBaseCrystal(Player targetPlayer)
         {
-            unassignedBaseCrystals = baseCrystals;
+            //TODO: Change somehow if players would be able to join a running game
+            List<Crystal> unassignedBaseCrystals = new List<Crystal>();
+            unassignedBaseCrystals.AddRange(_mapData.Bases);
+
             if (unassignedBaseCrystals != null && unassignedBaseCrystals.Count >= 1 && unassignedBaseCrystals[0] != null)
             {
                 int rndCrystal = Random.Range(0, unassignedBaseCrystals.Count);
