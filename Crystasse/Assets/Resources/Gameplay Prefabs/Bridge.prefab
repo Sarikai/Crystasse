@@ -143,6 +143,7 @@ MonoBehaviour:
   _capsule: {fileID: 2271487850561141250}
   _line: {fileID: 6580614257658295629}
   _offLink: {fileID: 4572917045503238739}
+  _renderer: {fileID: 0}
   _maxBuildValue: 500
   _buildCurve:
     serializedVersion: 2
