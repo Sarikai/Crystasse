@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class MapData : MonoBehaviour
 {
-    public Bridge[] Bridges = null;
     public Area GameArea;
+    public int MaxPlayer = 2;
     [Header("Team 1")]
     public Camera CameraT1 = null;
     public Crystal BaseT1 = null;
-    public Crystal[] CrystalsT1 = null;
     [Header("Team 2")]
     public Camera CameraT2 = null;
     public Crystal BaseT2 = null;
-    public Crystal[] CrystalsT2 = null;
-
 }
