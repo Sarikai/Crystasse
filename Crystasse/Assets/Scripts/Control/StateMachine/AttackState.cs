@@ -26,9 +26,9 @@ public class AttackState : State
     protected override void Exit()
     {
         Debug.Log("Taking damage?");
-        Target.TakeDamage(Agent.AttackPoints);
+        //Target.TakeDamage(Agent.AttackPoints);
         // removed mutual assured destruction for the better I guess
-        //Agent.TakeDamage(Target.AttackPoints);
+        Agent.TakeDamage(Target.AttackPoints);
         //TODO: explosion effects here would be nice
         Completed = true;
     }
