@@ -44,7 +44,7 @@ public class Unit : Agent
     {
         get
         {
-            Debug.Log($"IsMyUnit: {UnitView.CreatorActorNr == PhotonNetwork.LocalPlayer.ActorNumber}");
+            Debug.Log($"IsMyUnit: {UnitView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber}");
             return (UnitView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber) /*|| (PhotonNetwork.IsMasterClient && !this.IsOwnerActive)*/;
         }
     }
@@ -97,9 +97,9 @@ public class Unit : Agent
 
     public void TakeDamage(byte value)
     {
-        Debug.Log($"Yes I {gameObject} take damage, Die complete? { value >= Health && IsMyUnit}");
+        Debug.Log($"Yes I {gameObject} ViedID {UnitView.ViewID} take damage, Die complete? { value >= Health && IsMyUnit}");
         //TODO: Check if check needed, could reduce problem if not
-        if (value >= Health && IsMyUnit)
+        if (value >= Health && !IsMyUnit)
             Die();
         else
             Health -= value;
@@ -110,9 +110,12 @@ public class Unit : Agent
     {
         //TODO: [DONE] rework to photon.destroy
         if (this != null)
+        {
+            GameManager.MasterManager.NetworkManager.SessionStats.IncrementKills();
+            GameManager.MasterManager.NetworkManager.CustomPlayer.MatchSession.IncrementDestroyed();
             PhotonNetwork.Destroy(gameObject);
-        //DestroyImmediate(gameObject);
-
+            //DestroyImmediate(gameObject);
+        }
     }
     public void SwitchState(State state)
     {

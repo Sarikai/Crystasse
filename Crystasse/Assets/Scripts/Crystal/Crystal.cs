@@ -341,14 +341,15 @@ public class Crystal : MonoBehaviourPunCallbacks, IPunObservable
             {
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[TeamID], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
-                GameManager.MasterManager.NetworkManager.MatchStats.IncrementSpawns();
+                GameManager.MasterManager.NetworkManager.SessionStats.IncrementSpawns();
             }
             else
             {
                 //Debug.Log("Unit does not exist!");
                 var u = PhotonNetwork.Instantiate(Constants.BASIC_UNIT_PREFAB_PATHS[1], pos, Quaternion.identity).GetComponent<Unit>();
                 unit = u;
-                GameManager.MasterManager.NetworkManager.MatchStats.IncrementSpawns();
+                GameManager.MasterManager.NetworkManager.SessionStats.IncrementSpawns();
+                GameManager.MasterManager.NetworkManager.CustomPlayer.MatchSession.IncrementSpawns();
             }
 
 

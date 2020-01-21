@@ -50,7 +50,7 @@ namespace PUN_Network
         public Dictionary<int, GameObject> _serverListEntries = new Dictionary<int, GameObject>();
         public Dictionary<PUN_CustomPlayer, GameObject> _playerListEntries = new Dictionary<PUN_CustomPlayer, GameObject>();
         public Dictionary<Match, GameObject> _matchEntries = new Dictionary<Match, GameObject>();
-        public Stats MatchStats;
+        public Stats SessionStats;
 
         //Additional things?
         public List<Unit> units = new List<Unit>();
@@ -492,7 +492,7 @@ namespace PUN_Network
             _uiManager.ToggleRoomMenu();
             _uiManager.ToggleMultiplayerMenu();
             _uiManager.ToggleHUD();
-            MatchStats = new Stats();
+            SessionStats = new Stats();
             _uiManager._uiTimer.timer = true;
             if (!PhotonNetwork.IsMasterClient)
                 return;

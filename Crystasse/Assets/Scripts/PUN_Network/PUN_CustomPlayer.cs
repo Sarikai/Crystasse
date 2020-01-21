@@ -46,6 +46,7 @@ namespace PUN_Network
         public string UnitPrefab { get => _unitPrefab; set => _unitPrefab = value; }
         public PhotonView CustomPlayerView { get => _customPlayerView; set => _customPlayerView = value; }
         public PUN_PlayerlistEntry PlayerlistEntry { get => _playerlistEntry; set => _playerlistEntry = value; }
+        public Match MatchSession { get => _matchSession; private set => _matchSession = value; }
 
         #endregion
 

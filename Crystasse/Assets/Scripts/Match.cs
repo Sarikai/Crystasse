@@ -24,6 +24,16 @@ public class Match
 
     #region Methods
 
+    public void IncrementSpawns()
+    {
+        spawnedUnits++;
+    }
+
+    public void IncrementDestroyed()
+    {
+        destroyedUnits++;
+    }
+
     public static void SaveMatch(Stats matchStats)
     {
         Match m = new Match();
