@@ -43,6 +43,8 @@ public class Bridge : MonoBehaviour
         _line.SetPosition(0, _lineStart);
         _offLink.activated = false;
         end = _lineStart;
+
+        BridgeList.Add(this);
     }
 
     public bool ConnectsTo(Crystal c) => (_startCrystal == c || _endCrystal == c);
