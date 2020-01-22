@@ -31,8 +31,31 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
+  - Die
+  - RPC_AddPlayerEntry
+  - RPC_ChangeReady
+  - RPC_CreatePlayer
+  - RPC_StartGame
+  - Spawn
+  - SpawnUnit
+  - RPC_SetCrystalViews
+  - RPC_SetUnitView
+  - RPC_ChangeMaterial
+  - RPC_RemovePlayerEntry
+  - RPC_StartTimer
+  - NewSpawn
+  - TransferTeamID
+  - Init
+  - PUN_InitCustomPlayer
+  - RPC_InitPlayerlistEntry
+  - RPC_UpdatePlayerlistEntry
+  - ChangeIcon
+  - RPC_ChangeIcon
+  - RPC_InitCustomPlayer
+  - RPC_Init
+  - RPC_InitCrystal
+  - RPC_InitSceneCrystal
+  - RPC_InitBaseCrystal
+  - RPC_HUD_Init
   DisableAutoOpenWizard: 1
   ShowSettings: 1
